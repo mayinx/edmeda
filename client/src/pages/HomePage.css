@@ -1,0 +1,5 @@
+.App__HomePage .TeaserImage {
+  border-radius: 100%;
+  align-self: center;
+  border: 10px solid #3b857e;
+}

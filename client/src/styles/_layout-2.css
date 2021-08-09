@@ -1,0 +1,59 @@
+/* HOLY GRAIL USING CSS GRID */
+
+/* set up your html as follows: */
+
+/*
+<div class="App">
+  <header>Header</header>
+  <div class="left-sidebar">Left Sidebar</div>
+  <main> Main Content</main>
+  <div class="right-sidebar">Right Sidebar</div>
+  <footer>Footer</footer>
+</div>
+*/
+
+.App {
+  display: grid;
+  grid-template: auto 1fr auto / auto 1fr auto;
+
+  width: 100%;
+  height: 100vh;
+}
+
+header {
+  padding: 1rem;
+  grid-column: 1 / 4;
+  color: var(--header-font-color);
+  background-color: var(--header-bg-color);
+}
+
+.left-sidebar {
+  grid-column: 1 / 2;
+  color: var(--left-sb-font-color);
+  background-color: var(--left-sb-bg-color);
+  padding: 1rem;
+}
+
+main {
+  grid-column: 2 / 3;
+
+  color: var(--main-font-color);
+  background-color: var(--main-bg-color);
+
+  padding: 1rem;
+}
+
+.right-sidebar {
+  grid-column: 3 / 4;
+  color: var(--right-sb-font-color);
+  background-color: var(--right-sb-bg-color);
+  padding: 1rem;
+}
+
+footer {
+  grid-column: 1 / 4;
+  padding: 2rem;
+  text-align: center;
+  color: var(--footer-font-color);
+  background-color: var(--footer-bg-color);
+}

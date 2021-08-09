@@ -1,0 +1,101 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  font-family: "News Cycle";
+  letter-spacing: 3px;
+  /* to prevent scrolling of the body - we just want scrolling in the main container  */
+  height: 100%;
+  overflow: hidden;
+  color: var(--page-font-color);
+}
+
+p {
+  padding: 1em;
+}
+
+:root {
+  /* CSS HEX */
+  --primary-color: #57a2e5; /* header */
+  --secondary-color: #dae8e6; /* main */
+  --tertiary-color: #3b857e; /* footer */
+  --quaternary-color: #00609d; /* main font color */
+  --quinary-color: #00c4f1; /* hover bg nav item */
+  --senary-color: #9dc6e0;
+
+  /* quaternary, quinary, senary, septenary, octonary, nonary */
+
+  --header-height-mobile: 75px;
+
+  --page-bg-color: var(--secondary-color);
+  --page-font-color: var(--quaternary-color);
+  --hover-font-color: #eee;
+
+  /* HEADER */
+  --header-bg-color: var(--primary-color);
+  --header-font-color: var(--page-font-color);
+  --header-border-bottom-color: var(--secondary-color);
+
+  /* LEFT SIDEBAR */
+  /* --left-sb-bg-color: #40798cff;
+  --left-sb-font-color: var(--page-font-color); */
+
+  /* MAIN */
+  --main-bg-color: var(--secondary-color);
+  --main-font-color: var(--page-font-color);
+
+  /* RIGHT SIDEBAR */
+  /* --right-sb-bg-color: #70a9a1ff;
+  --right-sb-font-color: var(--page-font-color); */
+
+  /* FOOTER*/
+  --footer-bg-color: var(--tertiary-color);
+  --footer-font-color: var(--hover-font-color);
+
+  /* MAIN NAV */
+  --nav-item-link-color: var(--page-font-color);
+  --nav-item-hover-bg-color: var(--quinary-color);
+  --nav-item-hover-border-color: #6b8fdb;
+  --nav-item-hover-font-color: var(--hover-font-color);
+
+  --form-inputs-bg-color: #f5f5f5;
+  --form-inputs-color: var(--page-font-color);
+  --form-inputs-border-color: #e7e7e7;
+
+  --form-inputs-focus-bg-color: #f0f0f0;
+  --form-inputs-focus-border-color: #00bcd4;
+
+  /* question cards */
+  --card-bg-color: #fff;
+  --question-card-answer-bg-color: var(--form-inputs-bg-color);
+  --question-card-bookmark-icon-color: var(--page-font-color);
+  --question-card-bookmarked-bookmark-icon-color: var(--secondary-color);
+  --question-card-bookmark-icon-bg-color: var(--card-bg-color);
+  --question-card-bookmark-icon-hover-color: var(--secondary-color);
+  --question-card-toggle-answer-btn-hover-font-color: var(--secondary-color);
+  /* --question-card-toggle-answer-btn-hover-bg-color: var(--secondary-color); */
+  --question-card-toggle-answer-btn-hover-border-color: var(--tertiary-color);
+  --question-card-answer-overlay-bg-color: #e7e7e7;
+}
+
+[data-theme="dark"] {
+  --primary-color: #3f3f3f;
+
+  --secondary-color: #999999;
+  --tertiary-color: #cccccc;
+  --quinary-color: #fff;
+  --senary-color: #e5eaf5;
+
+  /* question cards */
+  --card-bg-color: #3f3f3f;
+
+  /* form */
+  --form-inputs-bg-color: var(--tertiary-color);
+  --form-inputs-focus-bg-color: var(--secondary-color);
+}

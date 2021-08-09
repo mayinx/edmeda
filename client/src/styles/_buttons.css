@@ -1,0 +1,125 @@
+.btn {
+  padding: 14px 28px;
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+  color: white;
+  text-decoration: none; /* in case we use anchor tag instead of button tag  */
+
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  display: inline-block;
+  text-align: center;
+  align-items: flex-start;
+}
+
+.green {
+  background-color: #04aa6d;
+} /* Green */
+.green:hover {
+  background-color: #46a049;
+}
+
+.blue {
+  background-color: #2196f3;
+} /* Blue */
+.blue:hover {
+  background: #0b7dda;
+}
+
+.orange {
+  background-color: #ff9800;
+} /* Orange */
+.orange:hover {
+  background: #e68a00;
+}
+
+.red {
+  background-color: #f44336;
+} /* Red */
+.red:hover {
+  background: #da190b;
+}
+
+.gray {
+  background-color: #e7e7e7;
+  color: black;
+}
+.gray:hover {
+  background: #ddd;
+}
+
+.black {
+  background-color: #5f5c5c;
+  color: white;
+}
+.black:hover {
+  background: #000;
+}
+
+.btn.rounded {
+  border-radius: 6px;
+}
+
+.btn.outlined {
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+}
+
+/* Green */
+.btn.outlined.green {
+  border-color: #04aa6d;
+  color: green;
+}
+
+.btn.outlined.green:hover {
+  background-color: #04aa6d;
+  color: white;
+}
+
+/* Blue */
+.btn.outlined.blue {
+  border-color: #2196f3;
+  color: dodgerblue;
+}
+
+.btn.outlined.blue:hover {
+  background: #2196f3;
+  color: white;
+}
+
+/* Orange */
+.btn.outlined.orange {
+  border-color: #ff9800;
+  color: orange;
+}
+
+.btn.outlined.orange:hover {
+  background: #ff9800;
+  color: white;
+}
+
+/* Red */
+.btn.outlined.red {
+  border-color: #f44336;
+  color: red;
+}
+
+.btn.outlined.red:hover {
+  background: #f44336;
+  color: white;
+}
+
+/* Gray */
+.btn.outlined.gray {
+  border-color: #e7e7e7;
+  color: black;
+}
+
+.btn.outlined.gray:hover {
+  background: #e7e7e7;
+}

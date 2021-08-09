@@ -17,7 +17,7 @@ Easy peasy lemon squeeze starter template for your next MERN-app. The resulting 
 - Create an `/.env`-file (or use the existing `.env.template`-file afte rremoving the `template`-appendix) and set a `PORT` and an `MONGO_URI` that specifies your (local or remote) database-uri - e.g.like this:
 
   ```
-  MONGO_URI = mongodb+srv://<User>:<PW>@cluster0.aa5hb.mongodb.net/blog-api?retryWrites=true&w=majority
+  MONGO_URI = mongodb+srv://<User>:<PW>@cluster0.aa5hb.mongodb.net/edmeda?retryWrites=true&w=majority
   PORT = 4000
   ```
 

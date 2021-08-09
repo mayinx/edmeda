@@ -63,7 +63,7 @@ if (process.env.NODE_ENV === "production") {
 const { MONGO_URI, PORT } = process.env;
 
 mongoose
-  // .connect("mongodb://localhost:27017/blog-api", {
+  // .connect("mongodb://localhost:27017/edmeda", {
   .connect(MONGO_URI, {
     useUnifiedTopology: true,
     useNewUrlParser: true,

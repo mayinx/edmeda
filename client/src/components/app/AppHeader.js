@@ -1,12 +1,27 @@
-import { Switch, Route, NavLink } from "react-router-dom";
+import {
+  Switch,
+  Route,
+  NavLink,
+  Link,
+  useRouteMatch,
+  useHistory,
+} from "react-router-dom";
+import Modal from "../modal/Modal.js";
+import NewCommunityModalPage from "../../pages/NewCommunityModalPage.js";
+
 // import BrandLogo from "../../assets/2973980108_ed69085414_o.jpg";
-import { FaBeer } from "react-icons/fa";
 import { BsGrid3X3Gap } from "react-icons/bs";
-import { BsGrid3X3GapFill } from "react-icons/bs";
 import { FaPlus } from "react-icons/fa";
 import { FaUserAlt } from "react-icons/fa";
 
 export default function AppHeader() {
+  // const location = useLocation();
+  // const history = useHistory();
+  const match = useRouteMatch();
+  // let match = useRouteMatch("/newCommunity");
+  console.log(match.url);
+  // console.log(history);
+
   return (
     <header className="App__header">
       {/* <img id="app_logo" src={BrandLogo} className="BrandLogo" alt=""></img> */}
@@ -15,12 +30,23 @@ export default function AppHeader() {
       </div>
 
       <div className="App__header_item">
-        <FaPlus className="itemIcon addIcon" />
+        <Link to="newCommunity">
+          <FaPlus className="itemIcon addIcon" />
+        </Link>
       </div>
       <div className="App__header_item">
         <FaUserAlt className="itemIcon userAvatarIcon" />
       </div>
-
+      <Route
+        path="/newCommunity"
+        render={() => {
+          return (
+            <Modal modalCaption="NewCommunity">
+              <NewCommunityModalPage />
+            </Modal>
+          );
+        }}
+      />
       {/* <nav className="App__nav">
         <ul>
           <li>

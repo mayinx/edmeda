@@ -1,0 +1,85 @@
+.CommunityList {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  gap: 1.5rem;
+
+  padding-bottom: 2rem;
+  width: 90vw;
+}
+.CommunityList__FilterBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  box-shadow: rgb(50 50 93 / 25%) 0px 13px 27px -5px,
+    rgb(0 0 0 / 30%) 0px 8px 16px -8px;
+  background-color: var(--senary-color);
+  border-radius: 6px;
+  padding: 0.5rem;
+
+  transition: width 500ms ease-in-out;
+}
+
+.CommunityList__FilterBar .ListItemsCount {
+  font-size: 1.25rem;
+}
+
+.CommunityList__FilterBar .form-control {
+  padding: 0.5rem;
+  /* border: 1px solid #00609d; */
+  border: 1px solid #56a2e5;
+  border-radius: 10px;
+  margin: 0.25rem;
+
+  letter-spacing: 2px;
+  width: 10rem;
+  font-weight: normal;
+}
+
+.CommunityList__FilterBar.FilterBarSticky {
+  position: absolute;
+  top: 89px;
+  left: 0;
+  width: 100vw;
+  z-index: 1;
+  border-radius: 0;
+  padding-left: 10rem;
+}
+
+.CommunityList__FilterBar.FilterBarSticky + .CommunityList__Items {
+  margin-top: 2rem;
+}
+
+.CommunityList__Items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: stretch;
+  align-items: stretch;
+  /* padding: 1rem 0; */
+  gap: 1.5rem;
+}
+
+.CommunityList__Items .CollectionEmpty {
+  width: 100%;
+  text-align: center;
+  padding: 2rem;
+}
+
+.CommunityList__Items .CollectionEmpty .LoadSampleCommunityhelfButton {
+  font-size: 1.5rem;
+
+  letter-spacing: 3px;
+  font-size: 1.5rem;
+  letter-spacing: 3px;
+  margin-top: 2rem;
+}
+
+.CommunityList__LoadMoreButton {
+  font-size: 1.5rem;
+
+  letter-spacing: 3px;
+}

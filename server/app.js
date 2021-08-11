@@ -3,7 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const mongoose = require("mongoose");
-const booksRouter = require("./routes/books");
+const communitiesRouter = require("./routes/communities");
 
 /*
   We create an express app calling
@@ -35,12 +35,12 @@ app.use(function logRequests(req, res, next) {
 */
 app.get("/", (req, res) => {
   res.json({
-    "/api/books": "read and create new books",
-    "/api/books/:id": "read, update and delete an individual book",
+    "/api/communities": "read and create new communities",
+    "/api/communities/:id": "read, update and delete an individual community",
   });
 });
 
-app.use("/api/books", booksRouter);
+app.use("/api/communities", communitiesRouter);
 
 /*
   We have to start the server. We make it listen on the port 4000
@@ -61,6 +61,8 @@ if (process.env.NODE_ENV === "production") {
 
 // fetch relevant env-vars
 const { MONGO_URI, PORT } = process.env;
+console.log("MONGO_URI", MONGO_URI);
+console.log("PORT", PORT);
 
 mongoose
   // .connect("mongodb://localhost:27017/edmeda", {
@@ -73,7 +75,7 @@ mongoose
   .then(() => {
     console.log("Connecteed to mongo");
     app.listen(PORT, () => {
-      console.log("Listening on http://localhost:${PORT}");
+      console.log(`Listening on http://localhost:${PORT}`);
     });
   })
   .catch((error) => {

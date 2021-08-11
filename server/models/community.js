@@ -2,49 +2,30 @@ const mongoose = require("mongoose");
 const mongoosePaginate = require("mongoose-paginate-v2");
 const { Schema } = mongoose;
 
-const booksSchema = new Schema(
+const communitiesSchema = new Schema(
   {
-    title: {
+    name: {
       type: String,
       required: true,
       trim: true,
       maxlength: 80,
       minlength: 1,
     },
-    author: {
+    creator: {
       type: String,
       required: true,
-      // TODO: If bored:
+      // TODO:
       // type: Schema.Types.ObjectId,
       // ref: "Author",
     },
-    genre: {
+    type: {
       type: String,
-      trim: true,
-      required: false,
-    },
-    isRead: {
-      type: Boolean,
-      default: false,
       required: false,
     },
     // TODO: If time:
-    cover: {
+    picture: {
       data: Buffer,
       contentType: String,
-    },
-    isbn: {
-      type: String,
-      required: false,
-    },
-    description: {
-      type: String,
-    },
-    published_date: {
-      type: Date,
-    },
-    publisher: {
-      type: String,
     },
   },
   {
@@ -57,7 +38,7 @@ const booksSchema = new Schema(
 );
 
 // activate pagination plugin
-booksSchema.plugin(mongoosePaginate);
+communitiesSchema.plugin(mongoosePaginate);
 
-const Book = mongoose.model("Book", booksSchema);
-module.exports = Book;
+const Community = mongoose.model("Community", communitiesSchema);
+module.exports = Community;

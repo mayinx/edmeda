@@ -1,7 +1,11 @@
 import "./Community.css";
 import { Link } from "react-router-dom";
 
-import CommunityFallbackProfilePic from "../../assets/stock-vector-college-or-university-students-group-young-happy-people-standing-isolated-on-white-background-1856929843.jpg";
+import CommunityFallbackProfilePic from "../../assets/happy-students.jpg";
+
+import { FaRegEdit } from "react-icons/fa";
+import { FaTrashAlt } from "react-icons/fa";
+import axios from "axios";
 
 // TODO: Move that beauty here somewhere generic - dunno: 'src/Utils' f.i. - or iplemen it as useConditionalWrapper-custom hook or whatnot?
 const ConditionalWrapper = ({ condition, wrapper, children }) =>
@@ -12,6 +16,18 @@ export default function Community({ community, as }) {
   const communityProfilePicImgSrc = community?.picture
     ? community?.picture
     : CommunityFallbackProfilePic;
+
+  const removeResource = (id) => {
+    axios
+      .delete(`api/communities/${id}`)
+      .then((res) => {
+        console.log("Yohooo - deleted");
+        window.location = "/";
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <section
@@ -37,6 +53,18 @@ export default function Community({ community, as }) {
         <div className="community__meta">
           <div>{community.name}</div>
           <div>{community.creator}</div>
+        </div>
+        <div className="community__actions">
+          <Link
+            className="community__action"
+            to="#"
+            onClick={() => removeResource(community._id)}
+          >
+            <FaTrashAlt className="actionIcon deleteIcon" />
+          </Link>
+          <Link className="community__action" to="/editCommunity">
+            <FaRegEdit className="actionIcon editIcon" />
+          </Link>
         </div>
       </ConditionalWrapper>
     </section>

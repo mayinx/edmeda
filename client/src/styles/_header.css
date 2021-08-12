@@ -12,10 +12,6 @@
 
   background-color: #80baee;
   transition: all 0.3s ease;
-
-  /* padding: 0.1rem 0.25rem; */
-  display: flex;
-  padding: 0.3rem;
 }
 .App__header .App__header_item:hover {
   /* background-color: var(--nav-item-hover-bg-color);  */
@@ -35,4 +31,9 @@
   /* .App__header .App__header_item .itemIcon:hover { */
   color: white;
   transform: scale(1.1);
+}
+
+.App__header .App__header_item a {
+  display: flex;
+  padding: 0.3rem;
 }

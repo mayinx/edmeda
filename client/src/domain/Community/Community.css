@@ -5,7 +5,7 @@ main section.Community {
   align-items: center;
   text-align: center;
 
-  padding-bottom: 2rem;
+  /* padding-bottom: 2rem; */
 
   width: 100%;
 
@@ -28,7 +28,7 @@ main section.Community {
   -webkit-backface-visibility: hidden;
 }
 main section.Community__ListItem {
-  padding-bottom: 2rem;
+  /* padding-bottom: 2rem; */
 }
 
 main section.Community__ListItem a {
@@ -38,7 +38,7 @@ main section.Community__ListItem a {
 }
 
 main section.Community__ListItem:hover {
-  transform: scale(1.05);
+  /* transform: scale(1.05); */
 }
 
 main section.Community.Community--alive {
@@ -66,40 +66,66 @@ main section.Community.Community--dead a {
 }
 
 main section.Community.Community:hover {
-  background-color: #00609d;
-  color: white;
+  /* background-color: #00609d; */
+  /* color: white; */
 }
 main section.Community.Community:hover a {
-  color: white;
+  /* color: white; */
 }
 
 main section.Community.Community:hover img {
+  z-index: -1;
 }
 main section.Community.Community:hover img {
-  z-index: -1;
   transition: all 0.5s ease-in-out;
   /* TODO: Ask Namir / Martin: This here is supposed
     to prevent flickering of css3-transitions/animations - why is that?*/
   -webkit-transform-style: preserve-3d;
   -webkit-backface-visibility: hidden;
 }
+
 main section.Community .community__meta {
-  z-index: 10;
   transition: all 1s ease-in-out;
   width: 100%;
   padding-top: 1rem;
+  background-color: var(--card-bg-color);
+  height: 5rem;
 }
 
-main section.Community.Community:hover img {
-  transform: scale(3) translateY(2rem);
+main section.Community .community__actions {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: #c3d1dcdb;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 10px;
 }
-main section.Community.Community:hover .community__meta {
+main section.Community .community__actions a.community__action {
+  display: flex;
+  color: lightslategray;
+  background-color: whitesmoke;
+  padding: 0.3rem;
+  flex: 0;
+  border-radius: 6px;
+  font-size: 1.5rem;
+  align-items: center;
+  justify-content: center;
+}
+main section.Community.Community:hover img {
+  transform: scale(1.75) translateY(2rem);
+}
+/* main section.Community.Community:hover .community__meta {
   background-color: #0303034d;
   z-index: 10;
   padding-top: 0;
-  /* transform: translateY(-4rem); */
+
   transform: translateY(-12rem);
-}
+} */
 
 main section.Community .Community__ProfilePic-wrapper {
   display: flex;
@@ -110,14 +136,9 @@ main section.Community .Community__ProfilePic-wrapper {
 }
 main section.Community .Community__ProfilePic-wrapper img {
   display: block;
-  /* margin: 1rem; */
+
   object-fit: cover;
   border-radius: 10px;
-  z-index: 30;
-  /* border: 5px solid #fff;
-  box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%); */
-  /* width: 100%;
-  height: 100%; */
 }
 
 /* MEDIA QUERIES */
@@ -142,7 +163,7 @@ main section.Community .Community__ProfilePic-wrapper img {
   } */
 
   main section.Community__ListItem {
-    width: 32%;
+    /* width: 32%; */
   }
 }
 
@@ -152,12 +173,13 @@ main section.Community .Community__ProfilePic-wrapper img {
   } */
 
   main section.Community__ListItem {
-    width: 23%;
+    /* width: 23%; */
+    /* width: 23%; */
   }
 
-  main section.Community.Community:hover .community__meta {
+  /* main section.Community.Community:hover .community__meta {
     transform: translateY(-4rem);
-  }
+  } */
 }
 
 @media all and (min-width: 900px) {
@@ -165,7 +187,8 @@ main section.Community .Community__ProfilePic-wrapper img {
 
 @media all and (min-width: 1100px) {
   main section.Community__ListItem {
-    width: 18%;
+    width: 20%;
+    max-width: 50%;
   }
 
   main section.Community__ListItem .Community__ProfilePic-wrapper img {

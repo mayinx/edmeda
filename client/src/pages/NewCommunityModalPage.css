@@ -1,0 +1,48 @@
+.NewCommunityModalPage {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  padding: 1rem;
+}
+.NewCommunityModalPage .Form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0 1rem;
+}
+
+.NewCommunityModalPage .Form .FormGroup,
+.NewCommunityModalPage .Form .FormActions {
+  display: flex;
+  flex-direction: column;
+}
+.NewCommunityModalPage .Form .FormGroup__ctrl {
+  /* TODO: unset all and specify everything ? */
+  all: unset;
+
+  background: var(--form-inputs-bg-color);
+  border: 2px solid var(--form-inputs-border-color);
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px rgb(0 0 0 / 5%);
+
+  outline: none;
+  color: var(--form-inputs-color);
+  /* color: inherit; */
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.NewCommunityModalPage .Form .FormGroup__ctrl:focus {
+  background-color: var(--form-inputs-focus-bg-color);
+  border-color: var(--form-inputs-focus-border-color);
+}
+
+.NewCommunityModalPage .Form .FormActions {
+  margin-top: 1rem;
+  flex-direction: row;
+  justify-content: flex-end;
+}

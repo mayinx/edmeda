@@ -22,6 +22,10 @@ const communitiesSchema = new Schema(
       type: String,
       required: false,
     },
+    grade: {
+      type: Number,
+      required: false,
+    },
     // TODO: If time:
     picture: {
       data: Buffer,

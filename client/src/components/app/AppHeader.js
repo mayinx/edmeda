@@ -22,11 +22,15 @@ export default function AppHeader() {
   console.log(match.url);
   // console.log(history);
 
+  const primaryAddActionFormId = "newCommunity";
+
   return (
     <header className="App__header">
       {/* <img id="app_logo" src={BrandLogo} className="BrandLogo" alt=""></img> */}
       <div className="App__header_item mr-auto">
-        <BsGrid3X3Gap className="itemIcon appNavIcon" />
+        <Link to="#">
+          <BsGrid3X3Gap className="itemIcon appNavIcon" />
+        </Link>
       </div>
 
       <div className="App__header_item">
@@ -35,14 +39,20 @@ export default function AppHeader() {
         </Link>
       </div>
       <div className="App__header_item">
-        <FaUserAlt className="itemIcon userAvatarIcon" />
+        <Link to="#">
+          <FaUserAlt className="itemIcon userAvatarIcon" />
+        </Link>
       </div>
       <Route
         path="/newCommunity"
         render={() => {
           return (
-            <Modal modalCaption="NewCommunity">
-              <NewCommunityModalPage />
+            <Modal
+              modalCaption="NewCommunity"
+              crudAction="create"
+              formId={primaryAddActionFormId}
+            >
+              <NewCommunityModalPage formId={primaryAddActionFormId} />
             </Modal>
           );
         }}

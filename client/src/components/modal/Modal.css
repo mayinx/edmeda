@@ -43,12 +43,21 @@
 }
 .ModalPage__body {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
+  align-items: flex-start;
+  justify-content: flex-start;
+  /* height: 100%; */
   flex: auto;
 }
 .ModalPage__footer {
   border-top: 1px solid #dad7d7;
+  padding: 1rem;
   display: flex;
+}
+
+.ModalPage__footer .ModalActions {
+  /* flex-direction: row;
+  justify-content: flex-end; */
+  display: flex;
+  gap: 1rem;
+  margin-left: auto;
 }

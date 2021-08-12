@@ -1,7 +1,7 @@
 .CommunityList {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   justify-content: center;
   align-items: stretch;
   gap: 1.5rem;

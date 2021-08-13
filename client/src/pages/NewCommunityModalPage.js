@@ -1,7 +1,14 @@
 import { useForm } from "react-hook-form";
 import "./NewCommunityModalPage.css";
 import axios from "axios";
+import { useContext } from "react";
+import { useHistory } from "react-router";
+import CommunitiesContext from "../contexts/CommunitiesContext";
+
 export default function NewCommunityModalPage() {
+  const { resources, setResources } = useContext(CommunitiesContext);
+  const history = useHistory();
+
   const {
     register,
     handleSubmit,
@@ -12,13 +19,15 @@ export default function NewCommunityModalPage() {
     axios
       .post("api/communities", data)
       .then((res) => {
-        console.log(res);
-        window.location = "/";
+        setResources([res.data, ...resources]);
+        // history.push("/");
+        history.goBack();
       })
       .catch((err) => {
-        console.log("Couldn't create a new community - something went wrong");
-        console.log(err);
-        console.log(err.message);
+        console.log(
+          "Couldn't create a new community - something went wrong: ",
+          err
+        );
       });
   };
   console.log("errors", errors);

@@ -1,22 +1,9 @@
-import axios from "axios";
-import { useState, useEffect } from "react";
 import CommunityList from "../domain/Community/CommunityList.js";
+import { useContext } from "react";
+import CommunitiesContext from "../contexts/CommunitiesContext";
 
 export default function MyCommunitiesPage() {
-  const [resources, setResources] = useState([]);
-
-  useEffect(() => {
-    console.log("yohooo effect");
-    axios
-      .get("/api/communities")
-      .then((res) => {
-        setResources(res.data || []);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
+  const { resources, setResources } = useContext(CommunitiesContext);
   return (
     <div className="App__Page App__ResourcesPage">
       <h1 className="App__Page__Head">MyCommunities</h1>

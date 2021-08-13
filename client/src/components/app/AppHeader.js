@@ -6,8 +6,8 @@ import {
   useRouteMatch,
   useHistory,
 } from "react-router-dom";
-import Modal from "../modal/Modal.js";
-import NewCommunityModalPage from "../../pages/NewCommunityModalPage.js";
+// import Modal from "../modal/Modal.js";
+// import NewCommunityModalPage from "../../pages/NewCommunityModalPage.js";
 
 // import BrandLogo from "../../assets/2973980108_ed69085414_o.jpg";
 import { BsGrid3X3Gap } from "react-icons/bs";
@@ -22,7 +22,7 @@ export default function AppHeader() {
   console.log(match.url);
   // console.log(history);
 
-  const primaryAddActionFormId = "newCommunity";
+  // const primaryAddActionFormId = "newCommunity";
 
   return (
     <header className="App__header">
@@ -43,7 +43,7 @@ export default function AppHeader() {
           <FaUserAlt className="itemIcon userAvatarIcon" />
         </Link>
       </div>
-      <Route
+      {/* <Route
         path="/newCommunity"
         render={() => {
           return (
@@ -56,26 +56,7 @@ export default function AppHeader() {
             </Modal>
           );
         }}
-      />
-      {/* <nav className="App__nav">
-        <ul>
-          <li>
-            <NavLink className="NavLink" exact={true} to="/">
-              Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink className="NavLink" to="/books">
-              Books
-            </NavLink>
-          </li>
-          <li>
-            <NavLink className="NavLink" to="/favs">
-              Favs
-            </NavLink>
-          </li>
-        </ul>
-      </nav> */}
+      /> */}
     </header>
   );
 }

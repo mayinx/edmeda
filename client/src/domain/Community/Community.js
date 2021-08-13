@@ -7,7 +7,12 @@ import { FaRegEdit } from "react-icons/fa";
 import { FaTrashAlt } from "react-icons/fa";
 import axios from "axios";
 
-// TODO: Move that beauty here somewhere generic - dunno: 'src/Utils' f.i. - or iplemen it as useConditionalWrapper-custom hook or whatnot?
+import CommunitiesContext from "../../contexts/CommunitiesContext";
+import { useContext } from "react";
+
+import { useHistory } from "react-router";
+
+// TODO: Get rid of that conditional wrapper again - shoudl be possible to just set an onLick-handler on the section-tag itself and basrta kanzla!
 const ConditionalWrapper = ({ condition, wrapper, children }) =>
   condition ? wrapper(children) : children;
 
@@ -17,15 +22,27 @@ export default function Community({ community, as }) {
     ? community?.picture
     : CommunityFallbackProfilePic;
 
+  const { resources, setResources } = useContext(CommunitiesContext);
+
+  const history = useHistory();
+
   const removeResource = (id) => {
     axios
       .delete(`api/communities/${id}`)
       .then((res) => {
-        console.log("Yohooo - deleted");
-        window.location = "/";
+        setResources(
+          resources.filter((resource) => {
+            return resource._id !== id;
+          })
+        );
+        // history.push("/");
+        history.goBack();
       })
       .catch((err) => {
-        console.log(err);
+        console.log(
+          "Failed to delete community resource - something went wrong: ",
+          err
+        );
       });
   };
 

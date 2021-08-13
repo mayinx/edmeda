@@ -33,12 +33,12 @@ app.use(function logRequests(req, res, next) {
 /*
   Endpoint to handle GET requests to the root URI "/"
 */
-app.get("/", (req, res) => {
-  res.json({
-    "/api/communities": "read and create new communities",
-    "/api/communities/:id": "read, update and delete an individual community",
-  });
-});
+// app.get("/", (req, res) => {
+//   res.json({
+//     "/api/communities": "read and create new communities",
+//     "/api/communities/:id": "read, update and delete an individual community",
+//   });
+// });
 
 app.use("/api/communities", communitiesRouter);
 

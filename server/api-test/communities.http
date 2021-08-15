@@ -14,6 +14,10 @@ GET http://localhost:4000/api/communities?genre=action&isRead=false HTTP/1.1
 ### List all communities filtered by isRead-status
 GET http://localhost:4000/api/communities?isRead=false HTTP/1.1
 
+
+### Get a certain community by id
+GET http://localhost:4000/api/communities/6116464fb6e88b50a221c2f6 HTTP/1.1
+
 ### Create a new community
 POST http://localhost:4000/api/communities HTTP/1.1
 Content-Type: application/json

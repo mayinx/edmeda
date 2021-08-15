@@ -30,21 +30,10 @@ app.use(function logRequests(req, res, next) {
   next();
 });
 
-/*
-  Endpoint to handle GET requests to the root URI "/"
-*/
-// app.get("/", (req, res) => {
-//   res.json({
-//     "/api/communities": "read and create new communities",
-//     "/api/communities/:id": "read, update and delete an individual community",
-//   });
-// });
-
 app.use("/api/communities", communitiesRouter);
 
 /*
   We have to start the server. We make it listen on the port 4000
-
 */
 
 /* in production: Serve the production ready React app and re-route
@@ -61,8 +50,6 @@ if (process.env.NODE_ENV === "production") {
 
 // fetch relevant env-vars
 const { MONGO_URI, PORT } = process.env;
-console.log("MONGO_URI", MONGO_URI);
-console.log("PORT", PORT);
 
 mongoose
   // .connect("mongodb://localhost:27017/edmeda", {

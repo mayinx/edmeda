@@ -1,16 +1,12 @@
 import "./Community.css";
-import { Link } from "react-router-dom";
-
 import CommunityFallbackProfilePic from "../../assets/happy-students.jpg";
-
-import { FaRegEdit } from "react-icons/fa";
-import { FaTrashAlt } from "react-icons/fa";
-import axios from "axios";
-
 import CommunitiesContext from "../../contexts/CommunitiesContext";
-import { useContext } from "react";
 
+import { useContext } from "react";
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
+import { FaRegEdit, FaTrashAlt } from "react-icons/fa";
+import axios from "axios";
 
 // TODO: Get rid of that conditional wrapper again - shoudl be possible to just set an onLick-handler on the section-tag itself and basrta kanzla!
 const ConditionalWrapper = ({ condition, wrapper, children }) =>
@@ -22,7 +18,7 @@ export default function Community({ community, as }) {
     ? community?.picture
     : CommunityFallbackProfilePic;
 
-  const { resources, setResources } = useContext(CommunitiesContext);
+  const { communities, setCommunities } = useContext(CommunitiesContext);
 
   const history = useHistory();
 
@@ -30,8 +26,8 @@ export default function Community({ community, as }) {
     axios
       .delete(`api/communities/${id}`)
       .then((res) => {
-        setResources(
-          resources.filter((resource) => {
+        setCommunities(
+          communities.filter((resource) => {
             return resource._id !== id;
           })
         );
@@ -79,7 +75,10 @@ export default function Community({ community, as }) {
           >
             <FaTrashAlt className="actionIcon deleteIcon" />
           </Link>
-          <Link className="community__action" to="/editCommunity">
+          <Link
+            className="community__action"
+            to={`editCommunity/${community._id}`}
+          >
             <FaRegEdit className="actionIcon editIcon" />
           </Link>
         </div>

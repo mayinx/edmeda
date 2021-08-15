@@ -65,8 +65,10 @@ router.post("/", (req, res) => {
 
 router.get("/:id", (req, res) => {
   const { id } = req.params;
-  Community.findById(id)
+  console.log("req.params", req.params);
+  console.log("id", id);
 
+  Community.findById(id)
     .then((community) => {
       if (!community) {
         res.status(404).end();

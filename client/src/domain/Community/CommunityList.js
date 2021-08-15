@@ -1,26 +1,8 @@
 import "./CommunityList.css";
-import { useEffect, useState } from "react";
 import Community from "./Community.js";
-import axios from "axios";
-
 import { Link } from "react-router-dom";
 
 export default function CommunityList({ resources }) {
-  console.log("COMMUNITIES LIST!");
-  // const [resources, setResources] = useState([]);
-
-  // useEffect(() => {
-  //   console.log("yohooo effect");
-  //   axios
-  //     .get("/api/communities")
-  //     .then((res) => {
-  //       setResources(res.data || []);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
-
   function renderResources() {
     if (Array.isArray(resources) && resources.length) {
       return resources.map((community) => {

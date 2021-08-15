@@ -12,7 +12,7 @@
         render={() => {
           return (
             <Modal>
-              <NewCommunityModalPage />
+              <NewCommunityPage />
             </Modal>
           );
         }}

@@ -28,13 +28,13 @@
   justify-content: space-between;
   align-items: center;
   padding: 0.25rem 1rem;
-  color: #bebebe;
+  color: lightslategray;
 }
 
 .ModalPage__headerCaption {
   font-size: 2rem;
   font-weight: lighter;
-  letter-spacing: 2px;
+  letter-spacing: 6px;
 }
 
 .ModalPage__header .closeDlgAction {

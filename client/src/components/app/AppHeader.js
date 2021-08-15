@@ -1,13 +1,4 @@
-import {
-  Switch,
-  Route,
-  NavLink,
-  Link,
-  useRouteMatch,
-  useHistory,
-} from "react-router-dom";
-// import Modal from "../modal/Modal.js";
-// import NewCommunityModalPage from "../../pages/NewCommunityModalPage.js";
+import { Link, useRouteMatch } from "react-router-dom";
 
 // import BrandLogo from "../../assets/2973980108_ed69085414_o.jpg";
 import { BsGrid3X3Gap } from "react-icons/bs";
@@ -15,14 +6,9 @@ import { FaPlus } from "react-icons/fa";
 import { FaUserAlt } from "react-icons/fa";
 
 export default function AppHeader() {
-  // const location = useLocation();
-  // const history = useHistory();
   const match = useRouteMatch();
-  // let match = useRouteMatch("/newCommunity");
-  console.log(match.url);
-  // console.log(history);
 
-  // const primaryAddActionFormId = "newCommunity";
+  console.log(match.url);
 
   return (
     <header className="App__header">
@@ -43,20 +29,6 @@ export default function AppHeader() {
           <FaUserAlt className="itemIcon userAvatarIcon" />
         </Link>
       </div>
-      {/* <Route
-        path="/newCommunity"
-        render={() => {
-          return (
-            <Modal
-              modalCaption="NewCommunity"
-              crudAction="create"
-              formId={primaryAddActionFormId}
-            >
-              <NewCommunityModalPage formId={primaryAddActionFormId} />
-            </Modal>
-          );
-        }}
-      /> */}
     </header>
   );
 }

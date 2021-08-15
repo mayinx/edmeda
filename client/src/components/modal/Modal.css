@@ -1,0 +1,63 @@
+.Modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  /* color: #fff; */
+}
+
+.Modal__inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  height: 90%;
+  background-color: #fff;
+  color: #aaa;
+  display: flex;
+  flex-direction: column;
+}
+
+.ModalPage__header {
+  display: flex;
+  border-bottom: 1px solid #dad7d7;
+  font-size: 2rem;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.25rem 1rem;
+  color: lightslategray;
+}
+
+.ModalPage__headerCaption {
+  font-size: 2rem;
+  font-weight: lighter;
+  letter-spacing: 6px;
+}
+
+.ModalPage__header .closeDlgAction {
+  cursor: pointer;
+  font-size: 2rem;
+}
+.ModalPage__body {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  /* height: 100%; */
+  flex: auto;
+}
+.ModalPage__footer {
+  border-top: 1px solid #dad7d7;
+  padding: 1rem;
+  display: flex;
+}
+
+.ModalPage__footer .ModalActions {
+  /* flex-direction: row;
+  justify-content: flex-end; */
+  display: flex;
+  gap: 1rem;
+  margin-left: auto;
+}

@@ -1,7 +1,7 @@
-.BookList {
+.CommunityList {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   justify-content: center;
   align-items: stretch;
   gap: 1.5rem;
@@ -9,7 +9,7 @@
   padding-bottom: 2rem;
   width: 90vw;
 }
-.BooksList__FilterBar {
+.CommunityList__FilterBar {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -23,11 +23,11 @@
   transition: width 500ms ease-in-out;
 }
 
-.BooksList__FilterBar .ListItemsCount {
+.CommunityList__FilterBar .ListItemsCount {
   font-size: 1.25rem;
 }
 
-.BooksList__FilterBar .form-control {
+.CommunityList__FilterBar .form-control {
   padding: 0.5rem;
   /* border: 1px solid #00609d; */
   border: 1px solid #56a2e5;
@@ -39,7 +39,7 @@
   font-weight: normal;
 }
 
-.BooksList__FilterBar.FilterBarSticky {
+.CommunityList__FilterBar.FilterBarSticky {
   position: absolute;
   top: 89px;
   left: 0;
@@ -49,11 +49,11 @@
   padding-left: 10rem;
 }
 
-.BooksList__FilterBar.FilterBarSticky + .BooksList__Items {
+.CommunityList__FilterBar.FilterBarSticky + .CommunityList__Items {
   margin-top: 2rem;
 }
 
-.BooksList__Items {
+.CommunityList__Items {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -63,13 +63,13 @@
   gap: 1.5rem;
 }
 
-.BooksList__Items .CollectionEmpty {
+.CommunityList__Items .CollectionEmpty {
   width: 100%;
   text-align: center;
   padding: 2rem;
 }
 
-.BooksList__Items .CollectionEmpty .LoadSampleBookshelfButton {
+.CommunityList__Items .CollectionEmpty .LoadSampleCommunityhelfButton {
   font-size: 1.5rem;
 
   letter-spacing: 3px;
@@ -78,7 +78,7 @@
   margin-top: 2rem;
 }
 
-.BooksList__LoadMoreButton {
+.CommunityList__LoadMoreButton {
   font-size: 1.5rem;
 
   letter-spacing: 3px;

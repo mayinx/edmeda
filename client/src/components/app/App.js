@@ -1,34 +1,74 @@
 import "./App.css";
-import { Switch, Route, NavLink } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
+import axios from "axios";
+import { useState, useEffect } from "react";
 import AppHeader from "./AppHeader.js";
-import HomePage from "../../pages/HomePage.js";
-// import AboutPage from "../../pages/AboutPage.js";
-import FavsPage from "../../pages/FavsPage.js";
-import BooksPage from "../../pages/BooksPage.js";
-import BookPage from "../../pages/BookPage.js";
+
+import MyCommunitiesPage from "../../pages/community/MyCommunitiesPage.js";
+import NewCommunityPage from "../../pages/community/NewCommunityPage.js";
+import EditCommunityPage from "../../pages/community/EditCommunityPage.js";
+import CommunitiesContext from "../../contexts/CommunitiesContext";
+import Modal from "../modal/Modal.js";
 
 function App() {
+  const [communities, setCommunities] = useState([]);
+
+  const ADD_ACTION_FORM_ID = "newCommunity";
+  const UPDATE_ACTION_FORM_ID = "editCommunity";
+
+  useEffect(() => {
+    axios
+      .get("/api/communities")
+      .then((res) => {
+        setCommunities(res.data || []);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <div className="App">
-      <AppHeader />
-      <main>
-        <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route path="/books/:id" component={BookPage} />
-          <Route path="/books" component={BooksPage} />
-          {/* <Route path="/about" component={AboutPage} /> */}
-          <Route path="/favs" component={FavsPage} />
-          <Route path="*">
-            <h2>
-              404 - Sorry, my friend of horror, but this page could not be
-              found!
-            </h2>
-          </Route>
-        </Switch>
-      </main>
-      <footer>
-        <div>Made with love for books by Chris</div>
-      </footer>
+      <CommunitiesContext.Provider value={{ communities, setCommunities }}>
+        <Route
+          path="/newCommunity"
+          render={() => {
+            return (
+              <Modal
+                modalCaption="New Community"
+                crudAction="create"
+                formId={ADD_ACTION_FORM_ID}
+              >
+                <NewCommunityPage formId={ADD_ACTION_FORM_ID} />
+              </Modal>
+            );
+          }}
+        />
+        <Route
+          path="/editCommunity/:id"
+          render={() => {
+            return (
+              <Modal
+                modalCaption="Edit Community"
+                crudAction="update"
+                formId={UPDATE_ACTION_FORM_ID}
+              >
+                <EditCommunityPage formId={UPDATE_ACTION_FORM_ID} />
+              </Modal>
+            );
+          }}
+        />
+
+        <AppHeader />
+        <main>
+          <Switch>
+            <Route path="/" component={MyCommunitiesPage} />
+            <Route path="*">
+              <h2>404 - Sorry, but this page could not be found!</h2>
+            </Route>
+          </Switch>
+        </main>
+      </CommunitiesContext.Provider>
     </div>
   );
 }

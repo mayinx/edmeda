@@ -3,7 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const mongoose = require("mongoose");
-const booksRouter = require("./routes/books");
+const communitiesRouter = require("./routes/communities");
 
 /*
   We create an express app calling
@@ -30,21 +30,10 @@ app.use(function logRequests(req, res, next) {
   next();
 });
 
-/*
-  Endpoint to handle GET requests to the root URI "/"
-*/
-app.get("/", (req, res) => {
-  res.json({
-    "/api/books": "read and create new books",
-    "/api/books/:id": "read, update and delete an individual book",
-  });
-});
-
-app.use("/api/books", booksRouter);
+app.use("/api/communities", communitiesRouter);
 
 /*
   We have to start the server. We make it listen on the port 4000
-
 */
 
 /* in production: Serve the production ready React app and re-route
@@ -73,7 +62,7 @@ mongoose
   .then(() => {
     console.log("Connecteed to mongo");
     app.listen(PORT, () => {
-      console.log("Listening on http://localhost:${PORT}");
+      console.log(`Listening on http://localhost:${PORT}`);
     });
   })
   .catch((error) => {

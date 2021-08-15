@@ -8,7 +8,7 @@ import { FaUserAlt } from "react-icons/fa";
 export default function AppHeader() {
   const match = useRouteMatch();
 
-  console.log(match.url);
+  // console.log(match.url);
 
   return (
     <header className="App__header">

@@ -33,7 +33,6 @@ router.get("/", (req, res) => {
     // .sort("-createdAt")
     // .populate("...")
     .then((resources) => {
-      // console.log(resources);
       res.send(resources);
     })
     .catch(() => {
@@ -45,7 +44,6 @@ router.get("/", (req, res) => {
 
 // router.post("/resources",  (req, res) => {
 router.post("/", (req, res) => {
-  console.log(req.body);
   // TODO: Make whitelisting params work with object arys as well- until then we chicken out here ;-)
   // Community.create(_.pick(req.body, "name", "type", "creator", "grade"))
   // yhcek out "joi" and "jup"
@@ -65,9 +63,6 @@ router.post("/", (req, res) => {
 
 router.get("/:id", (req, res) => {
   const { id } = req.params;
-  console.log("req.params", req.params);
-  console.log("id", id);
-
   Community.findById(id)
     .then((community) => {
       if (!community) {

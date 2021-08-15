@@ -13,8 +13,8 @@ import Modal from "../modal/Modal.js";
 function App() {
   const [communities, setCommunities] = useState([]);
 
-  const primaryAddActionFormId = "newCommunity";
-  const primaryUpdateActionFormId = "editCommunity";
+  const ADD_ACTION_FORM_ID = "newCommunity";
+  const UPDATE_ACTION_FORM_ID = "editCommunity";
 
   useEffect(() => {
     axios
@@ -37,9 +37,9 @@ function App() {
               <Modal
                 modalCaption="New Community"
                 crudAction="create"
-                formId={primaryAddActionFormId}
+                formId={ADD_ACTION_FORM_ID}
               >
-                <NewCommunityPage formId={primaryAddActionFormId} />
+                <NewCommunityPage formId={ADD_ACTION_FORM_ID} />
               </Modal>
             );
           }}
@@ -51,9 +51,9 @@ function App() {
               <Modal
                 modalCaption="Edit Community"
                 crudAction="update"
-                formId={primaryUpdateActionFormId}
+                formId={UPDATE_ACTION_FORM_ID}
               >
-                <EditCommunityPage formId={primaryUpdateActionFormId} />
+                <EditCommunityPage formId={UPDATE_ACTION_FORM_ID} />
               </Modal>
             );
           }}

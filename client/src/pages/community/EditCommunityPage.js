@@ -30,7 +30,6 @@ export default function EditCommunityPage() {
     axios
       .get(`/api/communities/${id}`)
       .then((res) => {
-        console.log("res.data", res.data);
         setCommunity(res.data);
       })
       .catch((err) => {
@@ -46,7 +45,6 @@ export default function EditCommunityPage() {
   }, [community]);
 
   const onSubmit = (data) => {
-    console.log("on submit fired");
     axios
       .patch(`/api/communities/${id}`, data)
       .then((res) => {

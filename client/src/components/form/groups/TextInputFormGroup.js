@@ -5,30 +5,38 @@ export default function TextInputFormGroup({
   formConfig,
   ...otherProps
 }) {
-  const { register, ErrorMessage } = useFormContext(); // retrieve all hook methods
+  const { register, ErrorMessage, errors } = useFormContext(); // retrieve all hook methods
   const attributes = { ...otherProps, ...formConfig };
   const {
+    id,
     label,
     defaultValue,
     placeholder,
     validationRuleset,
-    errors,
   } = attributes;
 
   return (
-    <div className="FormGroup">
+    <div
+      className={`FormGroup ${
+        errors && errors[name] ? "FormGroup--invalid" : ""
+      }`}
+    >
       <label className="FormGroup__Label" htmlFor={name}>
         {label}
       </label>
       <input
         className="FormGroup__Ctrl"
-        id={attributes.id || name}
+        id={id || name}
         name={name}
         type="text"
         defaultValue={defaultValue}
         placeholder={placeholder}
         {...register(`${name}`, validationRuleset)}
       />
+      {attributes?.errors?.name && (
+        <p className="sendMail_error">Name is required</p>
+      )}
+
       <ErrorMessage
         className="FormGroup__ErrorMessage"
         errors={errors}

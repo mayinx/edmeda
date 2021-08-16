@@ -14,7 +14,10 @@ export default function NewCommunityPage() {
   const history = useHistory();
 
   const formMethods = useForm();
-  const { handleSubmit } = formMethods;
+  const {
+    handleSubmit,
+    formState: { errors },
+  } = formMethods;
 
   const onSubmit = (data) => {
     axios
@@ -34,7 +37,7 @@ export default function NewCommunityPage() {
 
   return (
     <div className="ModalPage__bodyInner CommunityModalFormPage NewCommunityModalFormPage">
-      <FormProvider {...{ ...formMethods, ErrorMessage }}>
+      <FormProvider {...{ ...formMethods, ErrorMessage, errors }}>
         <form
           id="newCommunity"
           className="Form"

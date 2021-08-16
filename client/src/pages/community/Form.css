@@ -5,39 +5,36 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-
   padding: 1rem;
 }
-.CommunityModalFormPage .Form {
+
+.Form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   padding: 0 1rem;
 }
 
-.CommunityModalFormPage .Form .FormGroup,
-.CommunityModalFormPage .Form .FormActions {
+.Form .FormGroup,
+.Form .FormActions {
   display: flex;
   flex-direction: column;
 }
-.CommunityModalFormPage .Form .FormGroup__Label {
+
+.Form .FormGroup .FormGroup__Label {
   font-weight: bold;
   color: lightslategray;
 }
 
-.CommunityModalFormPage .Form .FormGroup__Ctrl {
-  /* TODO: unset all and specify everything ? */
+.Form .FormGroup .FormGroup__Ctrl {
   all: unset;
-
   background: var(--form-inputs-bg-color);
   border: 3px solid var(--form-inputs-border-color);
   border-radius: 3px;
   border-top: none;
   border-left: none;
   border-right: none;
-
   box-shadow: 1px 1px 1px rgb(0 0 0 / 5%);
-
   outline: none;
   color: var(--form-inputs-color);
   /* color: inherit; */
@@ -47,17 +44,22 @@
   font-size: inherit;
 }
 
-.CommunityModalFormPage .Form .FormGroup__Ctrl:focus {
+.Form .FormGroup .FormGroup__Ctrl:focus {
   background-color: var(--form-inputs-focus-bg-color);
   border-color: var(--form-inputs-focus-border-color);
 }
 
-.FormGroup__ErrorMessage {
+.Form .FormGroup.FormGroup--invalid .FormGroup__Ctrl {
+  border-bottom-color: #fd6358;
+  color: #e91818;
+}
+
+.FormGroup .FormGroup__ErrorMessage {
   color: #e91818;
   letter-spacing: 1px;
 }
 
-.CommunityModalFormPage .Form .FormActions {
+.Form .FormGroup .FormActions {
   margin-top: 1rem;
   flex-direction: row;
   justify-content: flex-end;

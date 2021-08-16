@@ -8,6 +8,7 @@ export default function SelectInputFormGroup({
   const { register, ErrorMessage } = useFormContext(); // retrieve all hook methods
   const attributes = { ...otherProps, ...formConfig };
   const {
+    id,
     label,
     defaultValue,
     validationRuleset,
@@ -16,14 +17,18 @@ export default function SelectInputFormGroup({
   } = attributes;
 
   return (
-    <div className="FormGroup">
+    <div
+      className={`FormGroup ${
+        errors && errors[name] ? "FormGroup--invalid" : ""
+      }`}
+    >
       <label className="FormGroup__Label" htmlFor={name}>
         {label}
       </label>
 
       <select
         className="FormGroup__Ctrl"
-        id={attributes.id || name}
+        id={id || name}
         name={name}
         defaultValue={defaultValue}
         {...register(`${name}`, validationRuleset)}

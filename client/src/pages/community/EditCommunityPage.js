@@ -24,7 +24,11 @@ export default function EditCommunityPage() {
   // } = useForm();
 
   const formMethods = useForm();
-  const { reset, handleSubmit } = formMethods;
+  const {
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = formMethods;
 
   useEffect(() => {
     axios
@@ -71,7 +75,7 @@ export default function EditCommunityPage() {
 
   return (
     <div className="ModalPage__bodyInner CommunityModalFormPage EditCommunityModalFormPage">
-      <FormProvider {...{ ...formMethods, ErrorMessage }}>
+      <FormProvider {...{ ...formMethods, ErrorMessage, errors }}>
         <form
           id="editCommunity"
           className="Form"

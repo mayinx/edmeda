@@ -21,8 +21,9 @@ export default function NewCommunityPage() {
 
   const onSubmit = (data) => {
     axios
-      .post("api/communities", data)
+      .post("/api/communities", data)
       .then((res) => {
+        console.log("res.data", res.data);
         setCommunities([res.data, ...communities]);
         // history.push("/");
         history.goBack();

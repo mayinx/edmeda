@@ -1,5 +1,5 @@
 import "./CommunityList.css";
-import Community from "./Community.js";
+import CommunityListItem from "./CommunityListItem.js";
 import { Link } from "react-router-dom";
 
 export default function CommunityList({ resources }) {
@@ -7,7 +7,11 @@ export default function CommunityList({ resources }) {
     if (Array.isArray(resources) && resources.length) {
       return resources.map((community) => {
         return (
-          <Community community={community} as="ListItem" key={community._id} />
+          <CommunityListItem
+            community={community}
+            as="ListItem"
+            key={community._id}
+          />
         );
       });
     } else {

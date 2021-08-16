@@ -8,7 +8,7 @@
 - If the Modal is used in combination with a Route (via the 'render'-attr / prop) and a path is provided, the rendered Modal receives its own visible url - e.g.:
 
       <Route
-        path="/newCommunity"
+        path="/communities/new"
         render={() => {
           return (
             <Modal>

@@ -1,0 +1,52 @@
+main.CommunityLayout {
+  flex: 1 1 auto;
+
+  display: flex;
+
+  flex-wrap: nowrap;
+  justify-content: center;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  color: var(--main-font-color);
+  background-color: var(--main-bg-color);
+}
+
+main.CommunityLayout .CommunitySidebar {
+  background-color: bisque;
+
+  flex-basis: 33%;
+  flex-grow: 1;
+  visibility: hidden;
+}
+main.CommunityLayout .CommunityContentArea {
+  background-color: rgb(119, 115, 111);
+  flex-basis: 0;
+  flex-grow: 999;
+  min-width: 100%;
+}
+
+/* MEDIA QUERIES */
+
+@media all and (min-width: 600px) {
+  main.CommunityLayout {
+    flex-wrap: wrap;
+  }
+
+  main.CommunityLayout .CommunitySidebar {
+    background-color: bisque;
+
+    flex-basis: 33%;
+    flex-grow: 1;
+    visibility: visible;
+  }
+
+  main.CommunityLayout .CommunityContentArea {
+    background-color: rgb(119, 115, 111);
+
+    flex-basis: 0;
+    flex-grow: 999;
+    min-width: 50%;
+  }
+}

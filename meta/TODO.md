@@ -14,3 +14,8 @@
 
 - Implememt User Auth etc.
   - see https://www.freecodecamp.org/news/state-management-with-react-hooks/ (ncl. AuthContext etc.)
+
+# Resources to check:
+
+- https://www.freecodecamp.org/news/state-management-with-react-hooks/
+- https://www.freecodecamp.org/news/state-management-with-react-hooks/

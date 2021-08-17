@@ -15,11 +15,12 @@ main.CommunityLayout {
 
 main.CommunityLayout .CommunitySidebar {
   background-color: bisque;
-
   flex-basis: 33%;
+  max-width: 33%;
   flex-grow: 1;
   visibility: hidden;
 }
+
 main.CommunityLayout .CommunityContentArea {
   background-color: rgb(119, 115, 111);
   flex-basis: 0;
@@ -27,7 +28,66 @@ main.CommunityLayout .CommunityContentArea {
   min-width: 100%;
 }
 
+main.CommunityLayout .CommunitySidebar .CommunitySidebar__CommunityHeader {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  box-shadow: rgb(50 50 93 / 25%) 0px 13px 27px -5px,
+    rgb(0 0 0 / 30%) 0px 8px 16px -8px;
+  background-color: var(--card-bg-color);
+  border: 2px solid whitesmoke;
+  transition: all 0.3s ease-in-out;
+  -webkit-transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+  /* visibility: hidden; */
+  display: none;
+}
+
+main section.Community .Community__ProfilePic-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0;
+  width: 100%;
+}
+main section.Community .Community__ProfilePic-wrapper img {
+  display: block;
+
+  object-fit: cover;
+  border-radius: 10px;
+}
+
 /* MEDIA QUERIES */
+
+@media all and (min-width: 400px) {
+  main.CommunityLayout {
+    flex-wrap: wrap;
+  }
+
+  main.CommunityLayout .CommunitySidebar {
+    background-color: bisque;
+    visibility: visible;
+    max-width: 10%;
+  }
+
+  main.CommunityLayout .CommunitySidebar .CommunitySidebar__CommunityHeader {
+    /* visibility: visible; */
+    display: flex;
+  }
+
+  main.CommunityLayout .CommunityContentArea {
+    background-color: rgb(119, 115, 111);
+
+    flex-basis: 0;
+    flex-grow: 999;
+    min-width: 50%;
+  }
+}
 
 @media all and (min-width: 600px) {
   main.CommunityLayout {
@@ -37,9 +97,15 @@ main.CommunityLayout .CommunityContentArea {
   main.CommunityLayout .CommunitySidebar {
     background-color: bisque;
 
-    flex-basis: 33%;
+    flex-basis: 25%;
+    max-width: 33%;
     flex-grow: 1;
     visibility: visible;
+  }
+
+  main.CommunityLayout .CommunitySidebar .CommunitySidebar__CommunityHeader {
+    /* visibility: visible; */
+    display: flex;
   }
 
   main.CommunityLayout .CommunityContentArea {

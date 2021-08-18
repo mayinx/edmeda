@@ -1,3 +1,5 @@
+/* TODO:Harmonize / merge relevant parts if this with _breakpoints.css*/
+
 .fs-1 {
   font-size: 1rem;
 }
@@ -59,6 +61,13 @@
   font-size: 0.75rem; /* 12px as per page font size of 16px */
   color: var(--color-medium-blue);
   letter-spacing: 1px;
+}
+
+/* FYI: The 'width'-property must be set by the element that utilizes this class here to make this work */
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .font-upper {

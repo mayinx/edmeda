@@ -58,9 +58,8 @@ main section.Community.Community:hover img {
 main section.Community .community__meta {
   transition: all 1s ease-in-out;
   width: 100%;
-  padding-top: 1rem;
+  padding: var(--r-spacing-md); /*TODO: responsive padding */
   background-color: var(--card-bg-color);
-  height: 5rem;
 }
 
 main section.Community .community__actions {

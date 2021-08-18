@@ -16,9 +16,14 @@ main.CommunityLayout {
 main.CommunityLayout .CommunitySidebar {
   background-color: bisque;
   flex-basis: 33%;
-  max-width: 33%;
+  /* max-width: 33%; */
   flex-grow: 1;
   visibility: hidden;
+
+  /* TODO:  */
+  width: 18%;
+  max-width: 420px;
+  min-width: 300px;
 }
 
 main.CommunityLayout .CommunityContentArea {
@@ -66,7 +71,7 @@ main section.Community .Community__ProfilePic-wrapper img {
 
 @media all and (min-width: 400px) {
   main.CommunityLayout {
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
   }
 
   main.CommunityLayout .CommunitySidebar {
@@ -101,6 +106,11 @@ main section.Community .Community__ProfilePic-wrapper img {
     max-width: 33%;
     flex-grow: 1;
     visibility: visible;
+  }
+  /* TODO:  */
+  main.CommunityLayout .CommunitySidebar--collapsed {
+  }
+  main.CommunityLayout .CommunitySidebar--fadedout {
   }
 
   main.CommunityLayout .CommunitySidebar .CommunitySidebar__CommunityHeader {

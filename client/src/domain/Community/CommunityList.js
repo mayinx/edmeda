@@ -19,7 +19,7 @@ export default function CommunityList({ resources }) {
         <div className="CollectionEmpty">
           <h2>Ups - looks like you didn't create any communities yet!</h2>
 
-          <Link to="newCommunity">
+          <Link to="communities/new">
             <button className="btn rounded green">
               Create your first community!
             </button>

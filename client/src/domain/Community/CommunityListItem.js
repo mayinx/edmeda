@@ -67,8 +67,8 @@ export default function Community({ community, as }) {
           />
         </p>
         <div className="community__meta">
-          <div>{community.name}</div>
-          <div>{community.creator}</div>
+          <div className="truncate">{community.name}</div>
+          <div className="truncate">{community.creator}</div>
         </div>
         <div className="community__actions">
           <Link

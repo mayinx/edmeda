@@ -6,9 +6,9 @@ class FormConfig {
 
     this.valdiationMsgNameRequired =
       "You must specify a uniq name for your class community (between 3 and 60 characters long)";
-    this.valdiationMsgGradeRequired = "You must spcify a class grade";
+    this.valdiationMsgGradeRequired = "You must specify a class grade";
     this.valdiationMsgCreatorRequired =
-      "You must spcify a class teacher as community owner (between 3 and 60 characters long)";
+      "You must specify a class teacher as community owner (between 3 and 60 characters long)";
 
     this.name = {
       label: "Class Community Name",

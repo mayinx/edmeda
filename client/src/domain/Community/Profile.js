@@ -28,8 +28,8 @@ export default function Profile({ community }) {
       key={community.id}
       id={community.id}
     >
-      <h3 className="CommunityProfile__CommunityName">
-        <div>{community.name}</div>
+      <h3 className="CommunityProfile__CommunityName truncate">
+        {community.name}
       </h3>
       <p className="CommunityProfile__Image--wrapper">
         <img
@@ -39,38 +39,40 @@ export default function Profile({ community }) {
         />
       </p>
 
-      <h3 className="CommunityProfile__CommunityName">
-        <div>{community.name}</div>
+      <h3 className="CommunityProfile__CommunityName truncate truncate">
+        {community.name}
       </h3>
 
       <ul className="CommunityProfile__CommunityMeta">
         <li>
-          <FaUserAlt className="CommunityMeta__Icon" />
-          <div>
+          <span>
+            <FaUserAlt className="CommunityMeta__Icon" />
+          </span>
+          <div className="">
             <span className="CommunityMeta__Caption">Creator: </span>
-            {community.creator}
+            <span className="truncate">{community.creator}</span>
           </div>
         </li>
         <li>
           <FaUsers className="CommunityMeta__Icon" />
-          <div>
+          <div className="d-flex">
             <span className="CommunityMeta__Caption">Members: </span>32 |
           </div>{" "}
           <FaDotCircle className="OnlineIcon" />
-          <div>
+          <div className="d-flex">
             <span className="CommunityMeta__Caption">Online: </span>15
           </div>
         </li>
         <li>
           <FaUserAlt className="CommunityMeta__Icon" />
-          <div>
+          <div className="d-flex">
             <span className="CommunityMeta__Caption">Students: </span>28 |{" "}
             <span className="CommunityMeta__Caption">Online: </span>13
           </div>
         </li>
         <li>
           <FaUserAlt className="CommunityMeta__Icon" />
-          <div>
+          <div className="d-flex">
             <span className="CommunityMeta__Caption">Students: </span>28 |{" "}
             <span className="CommunityMeta__Caption">Online: </span>13
           </div>

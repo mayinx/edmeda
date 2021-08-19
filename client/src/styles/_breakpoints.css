@@ -10,7 +10,9 @@
   --xxl: 1200px; /* min-width:  1200px */
   --hd: 1400px; /* min-width:  1400px */
 
-  /* not respnsive base vars - needed for fluid typography formula */
+  --body-min-width: 310px;
+
+  /* not respnsive base vars - needed for fluid typography formula etc. */
   --min-device-width-no: 400;
   --max-device-width-no: 1399;
   --min-device-width: calc(1px * var(--min-device-width-no));

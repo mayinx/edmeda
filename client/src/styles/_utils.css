@@ -162,6 +162,10 @@
 }
 /* UTILS FOR FLEX */
 
+.d-inline-flex {
+  display: flex;
+}
+
 .d-flex {
   display: flex;
 }

@@ -12,25 +12,34 @@ main.CommunityLayout {
   color: var(--main-font-color);
   background-color: var(--main-bg-color);
 }
-
+/* default: hidden */
 main.CommunityLayout .CommunitySidebar {
   background-color: bisque;
   flex-basis: 33%;
-  /* max-width: 33%; */
   flex-grow: 1;
   visibility: hidden;
-
-  /* TODO:  */
-  width: 18%;
-  max-width: 420px;
-  min-width: 300px;
+  flex-wrap: nowrap;
 }
 
-main.CommunityLayout .CommunityContentArea {
+main.CommunityLayout .CommunityMain {
   background-color: rgb(119, 115, 111);
-  flex-basis: 0;
-  flex-grow: 999;
+  flex: 1 1 auto;
+
   min-width: 100%;
+
+  /* flex-basis: 0;
+  flex-grow: 999; */
+}
+
+/* main.CommunityLayout .CommunitySidebar--hidden {
+  visibility: hidden;
+} */
+main.CommunityLayout .CommunitySidebar--toggled {
+  visibility: visible;
+}
+
+main.CommunityLayout .CommunitySidebar--toggled + .CommunityMain {
+  min-width: 50%;
 }
 
 main.CommunityLayout .CommunitySidebar .CommunitySidebar__CommunityHeader {
@@ -60,6 +69,7 @@ main section.Community .Community__ProfilePic-wrapper {
   padding: 0;
   width: 100%;
 }
+
 main section.Community .Community__ProfilePic-wrapper img {
   display: block;
 
@@ -67,33 +77,125 @@ main section.Community .Community__ProfilePic-wrapper img {
   border-radius: 10px;
 }
 
-/* MEDIA QUERIES */
+main.CommunityLayout .CommunityMain {
+  display: flex;
+  flex-direction: column;
+}
+main.CommunityLayout .CommunityMain .CommunityMain__Header {
+  display: flex;
+  /* flex-grow: 1; */
+  flex-basis: 50px;
+  background-color: chocolate;
+}
+main.CommunityLayout .CommunityMain .CommunityMain__Content {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 100%;
+}
+
+/* CSS PROPERTIES TO CONTROL RESPONSIVENESS  */
+
+/*
+  --xs: 400px;
+  --sm: 576px;
+  --md: 768px;
+  --lg: 992px;
+  --xl: 1024px;
+  --xxl: 1200px;
+  --hd: 1400px;   */
 
 @media all and (min-width: 400px) {
-  main.CommunityLayout {
-    /* flex-wrap: wrap; */
-  }
-
+  /* default: collapsed to min bar  */
   main.CommunityLayout .CommunitySidebar {
-    background-color: bisque;
     visibility: visible;
-    max-width: 10%;
+    max-width: 55px;
   }
 
-  main.CommunityLayout .CommunitySidebar .CommunitySidebar__CommunityHeader {
-    /* visibility: visible; */
-    display: flex;
+  main.CommunityLayout .CommunityMain {
+    min-width: 50%;
   }
 
-  main.CommunityLayout .CommunityContentArea {
-    background-color: rgb(119, 115, 111);
+  /* toggled: extend to max */
+  main.CommunityLayout .CommunitySidebar--toggled {
+    visibility: visible;
+    max-width: 33%;
+  }
 
-    flex-basis: 0;
-    flex-grow: 999;
+  main.CommunityLayout .CommunitySidebar--toggled + .CommunityMain {
     min-width: 50%;
   }
 }
 
+@media all and (min-width: 576px) {
+  /* default: collapsed to min bar  */
+  main.CommunityLayout .CommunitySidebar {
+    max-width: 75px;
+  }
+  /* toggled: extend to max */
+  main.CommunityLayout .CommunitySidebar--toggled {
+    max-width: 33%;
+  }
+}
+
+@media all and (min-width: 768px) {
+  /* default: collapsed to min bar  */
+  main.CommunityLayout .CommunitySidebar {
+    max-width: 75px;
+  }
+  /* toggled: extend to max */
+  main.CommunityLayout .CommunitySidebar--toggled {
+    max-width: 33%;
+  }
+}
+
+@media all and (min-width: 992px) {
+  /* default: collapsed to min bar  */
+  main.CommunityLayout .CommunitySidebar {
+    width: 33%;
+    max-width: 275px;
+  }
+  /* toggled: extend to max */
+  main.CommunityLayout .CommunitySidebar--toggled {
+    max-width: 75px;
+  }
+}
+
+@media all and (min-width: 1024px) {
+  /* default: collapsed to min bar  */
+  main.CommunityLayout .CommunitySidebar {
+    width: 33%;
+    max-width: 300px;
+  }
+  /* toggled: extend to max */
+  main.CommunityLayout .CommunitySidebar--toggled {
+    max-width: 75px;
+  }
+}
+@media all and (min-width: 1200px) {
+  /* default: collapsed to min bar  */
+  main.CommunityLayout .CommunitySidebar {
+    width: 33%;
+    max-width: 350px;
+  }
+  /* toggled: extend to max */
+  main.CommunityLayout .CommunitySidebar--toggled {
+    max-width: 75px;
+  }
+}
+
+@media all and (min-width: 1400px) {
+  /* default: collapsed to min bar  */
+  main.CommunityLayout .CommunitySidebar {
+    width: 33%;
+    max-width: 400px;
+  }
+  /* toggled: extend to max */
+  main.CommunityLayout .CommunitySidebar--toggled {
+    max-width: 75px;
+  }
+}
+
+/*
 @media all and (min-width: 600px) {
   main.CommunityLayout {
     flex-wrap: wrap;
@@ -107,22 +209,18 @@ main section.Community .Community__ProfilePic-wrapper img {
     flex-grow: 1;
     visibility: visible;
   }
-  /* TODO:  */
-  main.CommunityLayout .CommunitySidebar--collapsed {
+  main.CommunityLayout .CommunitySidebar--toggled {
   }
   main.CommunityLayout .CommunitySidebar--fadedout {
   }
 
   main.CommunityLayout .CommunitySidebar .CommunitySidebar__CommunityHeader {
-    /* visibility: visible; */
     display: flex;
   }
 
-  main.CommunityLayout .CommunityContentArea {
+  main.CommunityLayout .CommunityMain {
     background-color: rgb(119, 115, 111);
-
-    flex-basis: 0;
-    flex-grow: 999;
+    flex: 1 1 auto;
     min-width: 50%;
   }
-}
+} */

@@ -1,0 +1,45 @@
+/* FYI: SIDEBAR DEFAULT STATE ON VERY SMALL MOBILE SCREENS (UP UNTIL MIN-WIDTH OF 399PX)
+   - DEFAULT / UNTOGGLED: SIDEBAR COMPLETELY HIDDEN
+   - TOGGLED: SIDEBAR EXPANDED TO MAX WIDTH
+
+   - See Community/media-queries.css for breakpoint specific behavior on larger screens
+*/
+
+main.CommunityLayout .CommunitySidebar .CommunitySidebar__CommunityHeader {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  width: 100%;
+  overflow: hidden;
+  box-shadow: rgb(50 50 93 / 25%) 0px 13px 27px -5px,
+    rgb(0 0 0 / 30%) 0px 8px 16px -8px;
+  background-color: var(--card-bg-color);
+  padding: 0.25rem;
+}
+
+main.CommunityLayout
+  .CommunitySidebar--toggled
+  .CommunityProfile
+  .CommunityProfile__CommunityName {
+  display: block;
+}
+
+main.CommunityLayout
+  .CommunitySidebar
+  .CommunityProfile
+  .CommunityProfile__Image--wrapper {
+  width: 100%;
+  /* height: 50px; */
+  height: 35px;
+}
+
+main.CommunityLayout
+  .CommunitySidebar--toggled
+  .CommunityProfile
+  .CommunityProfile__Image--wrapper {
+  width: 100%;
+  height: auto;
+}

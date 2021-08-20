@@ -1,0 +1,40 @@
+/* FYI: SIDEBAR DEFAULT STATE ON VERY SMALL MOBILE SCREENS (UP UNTIL MIN-WIDTH OF 399PX)
+   - DEFAULT / UNTOGGLED: SIDEBAR COMPLETELY HIDDEN
+   - TOGGLED: SIDEBAR EXPANDED TO MAX WIDTH
+
+   - See Community/media-queries.css for breakpoint specific behavior on larger screens
+*/
+
+/* default: hidden */
+main.CommunityLayout .CommunitySidebar {
+  background-color: var(--CommunitySidebar-bg-color);
+  flex-basis: 33%;
+  flex-grow: 1;
+  flex-wrap: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  overflow: hidden;
+
+  transition: all 0.3s ease-in-out;
+  -webkit-transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+
+  padding: 0.25rem;
+}
+
+main.CommunityLayout .CommunityMain {
+  background-color: rgb(119, 115, 111);
+  flex: 1 1 auto;
+  min-width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+main.CommunityLayout .CommunitySidebar--toggled {
+  visibility: visible;
+  opacity: 1;
+}
+
+main.CommunityLayout .CommunitySidebar--toggled + .CommunityMain {
+  min-width: 50%;
+}

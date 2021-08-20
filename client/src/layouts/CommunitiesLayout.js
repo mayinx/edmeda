@@ -1,6 +1,6 @@
 import { Route, Switch } from "react-router-dom";
 import AppHeader from "../components/app/AppHeader";
-import MyCommunitiesPage from "../pages/community/MyCommunitiesPage";
+import MyCommunitiesPage from "../pages/communities/MyCommunitiesPage";
 import "./CommunitiesLayout.css";
 
 export default function CommunitiesLayout() {

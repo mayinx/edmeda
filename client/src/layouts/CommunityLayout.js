@@ -1,7 +1,7 @@
 import { Route, Switch } from "react-router-dom";
 import AppHeader from "../components/app/AppHeader";
 import CommunityContext from "../contexts/CommunityContext";
-import CommunityPage from "../pages/community/CommunityPage";
+import CommunityPage from "../pages/communities/CommunityPage";
 import "./CommunityLayout.css";
 
 import { useParams } from "react-router-dom";

@@ -8,6 +8,10 @@ main.CommunityLayout .CommunitySidebar .CommunityProfile {
   position: relative;
   overflow: hidden;
   background-color: var(--card-bg-color);
+  border-radius: 6px;
+
+  background-color: var(--CommunityMainHeader-bg-color);
+  justify-content: center;
 }
 
 main.CommunityLayout
@@ -16,7 +20,6 @@ main.CommunityLayout
   .CommunityProfile__CommunityName {
   display: none;
   width: 100%;
-  border-bottom: 4px solid lightblue;
   font-size: 1rem;
   font-weight: normal;
 }
@@ -29,8 +32,10 @@ main.CommunityLayout
   flex-direction: column;
   align-items: stretch;
   padding: 0;
-  max-width: auto;
-  max-height: auto;
+  /* max-width: auto;
+  max-height: auto; */
+  width: 100%;
+  height: 100%;
 }
 main.CommunityLayout
   .CommunitySidebar
@@ -39,7 +44,7 @@ main.CommunityLayout
   img {
   display: block;
   object-fit: cover;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   width: 100%;
   height: 100%;
 }

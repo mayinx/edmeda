@@ -24,6 +24,11 @@
     max-width: 55px;
   }
 
+  main.CommunityLayout .CommunitySidebar .SidebarHeader {
+    height: var(--CommunitySidebarHeader--collapsed-height);
+    padding: var(--CommunitySidebar--collapsed-padding);
+  }
+
   main.CommunityLayout .CommunityMain {
     min-width: 50%;
   }
@@ -35,9 +40,10 @@
     max-width: 33%;
   }
 
-  /* main.CommunityLayout .CommunitySidebar--toggled + .CommunityMain {
-    min-width: 50%;
-  } */
+  main.CommunityLayout .CommunitySidebar--toggled .SidebarHeader {
+    height: var(--CommunitySidebarHeader--expanded-height);
+    padding: var(--CommunitySidebar--expanded-padding);
+  }
 }
 
 @media all and (min-width: 576px) {
@@ -73,6 +79,11 @@
     max-width: 275px;
   }
 
+  main.CommunityLayout .CommunitySidebar .SidebarHeader {
+    height: var(--CommunitySidebarHeader--expanded-height);
+    padding: var(--CommunitySidebar--expanded-padding);
+  }
+
   main.CommunityLayout
     .CommunitySidebar
     .CommunityProfile
@@ -80,17 +91,14 @@
     display: block;
   }
 
-  main.CommunityLayout
-    .CommunitySidebar
-    .CommunityProfile
-    .CommunityProfile__Image--wrapper {
-    width: 100%;
-    height: auto;
-  }
-
   /* TOGGLED: COLLAPSED TO MIN BAR */
   main.CommunityLayout .CommunitySidebar--toggled {
     max-width: 75px;
+  }
+
+  main.CommunityLayout .CommunitySidebar--toggled .SidebarHeader {
+    height: var(--CommunitySidebarHeader--collapsed-height);
+    padding: var(--CommunitySidebar--collapsed-padding);
   }
 
   main.CommunityLayout
@@ -98,14 +106,6 @@
     .CommunityProfile
     .CommunityProfile__CommunityName {
     display: none;
-  }
-
-  main.CommunityLayout
-    .CommunitySidebar--toggled
-    .CommunityProfile
-    .CommunityProfile__Image--wrapper {
-    width: 100%;
-    height: 50px;
   }
 }
 
@@ -143,33 +143,3 @@
     max-width: 75px;
   }
 }
-
-/*
-@media all and (min-width: 600px) {
-  main.CommunityLayout {
-    flex-wrap: wrap;
-  }
-
-  main.CommunityLayout .CommunitySidebar {
-    background-color: bisque;
-
-    flex-basis: 25%;
-    max-width: 33%;
-    flex-grow: 1;
-    visibility: visible;
-  }
-  main.CommunityLayout .CommunitySidebar--toggled {
-  }
-  main.CommunityLayout .CommunitySidebar--fadedout {
-  }
-
-  main.CommunityLayout .CommunitySidebar .CommunitySidebar__CommunityHeader {
-    display: flex;
-  }
-
-  main.CommunityLayout .CommunityMain {
-    background-color: rgb(119, 115, 111);
-    flex: 1 1 auto;
-    min-width: 50%;
-  }
-} */

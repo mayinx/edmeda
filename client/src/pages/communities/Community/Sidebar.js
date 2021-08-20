@@ -4,11 +4,11 @@ import "./Sidebar.css";
 export default function Sidebar(props) {
   return (
     <sidebar className={props.className}>
-      <div className="CommunitySidebar__CommunityHeader">
+      <div className="SidebarHeader">
         <CommunityProfile community={props.community} />
       </div>
 
-      <div className="CommunitySidebar__CommunityGroups"></div>
+      <div className="SidebarContent"></div>
     </sidebar>
   );
 }

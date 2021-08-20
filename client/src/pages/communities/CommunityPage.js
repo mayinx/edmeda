@@ -10,9 +10,12 @@ import "./Community/media-queries.css";
 
 export default function CommunityPage() {
   const { currentCommunity } = useContext(CommunityContext);
-  // states: expanded - collapsed - hidden
+  // states: hidden - collapsed - expanded
   const [toggled, setToggled] = useState(false);
 
+  // TODO: REFACTORING: Check responsive react hook or something to produce
+  // three different state-specific css-classes here:
+  // 'CommunitySidebar--hidden', 'CommunitySidebar--collaped' + 'CommunitySidebar--expanded'
   const toggleSidebar = () => {
     setToggled(!toggled);
   };

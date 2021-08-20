@@ -1,12 +1,15 @@
 import "./Main.css";
-import { FaUserAlt } from "react-icons/fa";
+import { FaRegCaretSquareRight } from "react-icons/fa";
+import { FaCaretSquareRight } from "react-icons/fa";
+// import { FaRegCaretSquareRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
+
 // import Community from "../../../domain/Community/CommunityListItem";
 
 export default function Main(props) {
   return (
     <section className="CommunityMain">
-      <section className="CommunityMain__Header">
+      <section className="MainHeader">
         {/* <button
           type="button"
           className="button small"
@@ -17,10 +20,13 @@ export default function Main(props) {
 
         <Link
           to="#"
-          className="CommunityMainHeader__Item"
+          className="CommunityMainHeader__Item ToggleSidebarBtn"
           onClick={props.onSidebarToggle}
         >
-          <FaUserAlt className="itemIcon sidebarToggleIcon" />
+          {/* <FaRegCaretSquareRight className="itemIcon sidebarToggleIcon" /> */}
+          <FaCaretSquareRight className="itemIcon sidebarToggleIcon" />
+          {/* <FaRegCaretSquareRight className="itemIcon sidebarToggleIcon" /> */}
+          {/* <FaRegCaretSquareRight className="itemIcon sidebarToggleIcon" /> */}
         </Link>
 
         <div className="CommunityGroupLabel">
@@ -30,7 +36,7 @@ export default function Main(props) {
           </span>
         </div>
       </section>
-      <section className="CommunityMain__Content"></section>
+      <section className="MainContent"></section>
     </section>
   );
 }

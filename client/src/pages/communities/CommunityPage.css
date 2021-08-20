@@ -18,12 +18,10 @@ main.CommunityLayout .CommunitySidebar {
   transition: all 0.3s ease-in-out;
   -webkit-transform-style: preserve-3d;
   -webkit-backface-visibility: hidden;
-
-  padding: 0.25rem;
 }
 
 main.CommunityLayout .CommunityMain {
-  background-color: rgb(119, 115, 111);
+  background-color: var(--CommunityMain-bg-color);
   flex: 1 1 auto;
   min-width: 100%;
   display: flex;

@@ -1,8 +1,8 @@
-main.CommunityLayout .CommunityMain .CommunityMain__Header {
+main.CommunityLayout .CommunityMain .MainHeader {
   display: flex;
-  flex-basis: 50px;
+  height: var(--CommunityMainHeader-height);
 
-  background-color: var(--CommunityMain__Header-bg-color);
+  background-color: var(--CommunityMainHeader-bg-color);
 
   gap: 1rem;
   padding: 0.25rem 0.25rem 0.25rem 0rem;
@@ -11,19 +11,33 @@ main.CommunityLayout .CommunityMain .CommunityMain__Header {
   align-content: center;
   justify-content: flex-start;
 }
-main.CommunityLayout .CommunityMain .CommunityMain__Content {
+main.CommunityLayout .CommunityMain .MainContent {
   display: flex;
   flex: 1 1 auto;
   min-width: 100%;
 }
 
-main.CommunityLayout .CommunityMain a.CommunityMainHeader__Item {
+/* main.CommunityLayout .CommunityMain a.CommunityMainHeader__Item {
   padding: 0.3rem;
   padding-right: 0.75rem;
 
   background-color: #b5cfd8;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
+} */
+
+main.CommunityLayout .CommunityMain .MainHeader a.ToggleSidebarBtn {
+  padding: 0.3rem;
+  padding-right: 0.75rem;
+
+  background-color: var(--ToggleSidebarBtn-bg-color);
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 main.CommunityLayout
   .CommunityMain

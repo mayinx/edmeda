@@ -18,7 +18,9 @@ router.delete("/:id", CommunitiesController.delete);
 
 // POST api/communities/:id/groups
 // => create a new community-usergroup
+router.get("/:id/groups", CommunitiesController.indexGroups);
 router.post("/:id/groups", CommunitiesController.createGroup);
+router.get("/:id/groups/:groupId", CommunitiesController.findGroup);
 
 /* - COMMUNITY USERS */
 

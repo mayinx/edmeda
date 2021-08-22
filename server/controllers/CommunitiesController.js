@@ -1,5 +1,6 @@
 const Community = require("../models/community");
 const Group = require("../models/group");
+const { NotFoundError, InternalError } = require("../errors/AppErrors");
 
 exports.index = function (req, res) {
   // TODO: filter by current user
@@ -57,41 +58,39 @@ exports.find = function (req, res) {
   const { id } = req.params;
   Community.findById(id)
     .then((community) => {
-      if (!community) {
-        res.status(404).end();
-        return;
-      }
+      if (!community) throw new NotFoundError("community", id);
       res.send(community);
     })
-    .catch(() => {
-      res.status(500).json({
-        error: "Something went wrong, please try again later",
-      });
+    .catch((e) => {
+      if (e.name === "NotFoundError") {
+        res.status(404).json({ error: e });
+      } else {
+        res.status(500).json({
+          error: `Something went wrong, please try again later: ${e}`,
+        });
+      }
     });
 };
 exports.update = function (req, res) {
   const { id } = req.params;
 
-  // db.updateById(id, req.body)
-  // Community.updateOne({ _id: id }, req.body)
   Community.findByIdAndUpdate(id, req.body, { new: true })
     .then((updatedResource) => {
-      if (!updatedResource) {
-        res.status(404).end();
-        return;
-      }
+      if (!community) throw new NotFoundError("community", id, req.body);
       res.send(updatedResource);
     })
-    .catch(() => {
-      res.status(500).json({
-        error: "Something went wrong, please try again later",
-      });
+    .catch((e) => {
+      if (e.name === "NotFoundError") {
+        res.status(404).json({ error: e });
+      } else {
+        res.status(500).json({
+          error: `Something went wrong, please try again later: ${e}`,
+        });
+      }
     });
 };
 exports.delete = function (req, res) {
   const { id } = req.params;
-
-  // db.deleteById(id)
   Community.findByIdAndDelete(id)
     .then(() => {
       res.status(204).end();
@@ -107,12 +106,14 @@ exports.delete = function (req, res) {
 
 /* GROUPS*/
 
+//  create new community group
 exports.createGroup = function (req, res) {
   const results = {};
   const { id } = req.params;
   const groupAttributes = req.body;
   Community.findById(id)
     .then((community) => {
+      if (!community) throw new NotFoundError("community", id);
       results.community = community;
       const { name, type } = groupAttributes;
       return Group.create({
@@ -128,10 +129,50 @@ exports.createGroup = function (req, res) {
       res.status(201).send(group);
     })
     .catch((e) => {
-      if (!results?.community) {
-        res.status(404).end();
+      if (e.name === "NotFoundError") {
+        res.status(404).json({ error: e });
       } else if (e.name === "ValidationError") {
         res.status(400).json(e);
+      } else {
+        res.status(500).json({
+          error: `Something went wrong, please try again later: ${e}`,
+        });
+      }
+    });
+};
+// all groups of a community
+exports.indexGroups = function (req, res) {
+  const { id } = req.params;
+  Community.findById(id)
+    .populate("groups")
+    .then((community) => {
+      if (!community) throw new NotFoundError("community", id);
+      res.status(200).send(community.groups);
+    })
+    .catch((e) => {
+      if (e.name === "NotFoundError") {
+        res.status(404).json({ error: e });
+      } else {
+        res.status(500).json({
+          error: `Something went wrong, please try again later: ${e}`,
+        });
+      }
+    });
+};
+
+exports.findGroup = function (req, res) {
+  const { id, groupId } = req.params;
+  // Just to be double and tripple sure ;-)
+  // (a malicious pal could pass in the group id of anoterh community and thsu gain access to a foreign user group - oh noes!)
+  // TODO: Check whats the convention here - query via `Community...populate('groups')` and limit that samehow to the desired group - or like the following:
+  Group.findOne({ _id: groupId, community: id })
+    .then((group) => {
+      if (!group) throw new NotFoundError("group", id);
+      res.status(200).send(group);
+    })
+    .catch((e) => {
+      if (e.name === "NotFoundError") {
+        res.status(404).json({ error: e });
       } else {
         res.status(500).json({
           error: `Something went wrong, please try again later: ${e}`,

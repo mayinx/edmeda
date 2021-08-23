@@ -18,9 +18,13 @@
   width: 90%;
   height: 90%;
   background-color: #fff;
-  color: #aaa;
+  color: var(--main-font-color);
   display: flex;
   flex-direction: column;
+
+  border-radius: 6px;
+  box-shadow: 0 13px 27px -5px rgb(50 50 93 / 25%),
+    0 8px 16px -8px rgb(0 0 0 / 30%);
 }
 
 .ModalPage__header {

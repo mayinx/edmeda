@@ -58,7 +58,7 @@ main section.Community.Community:hover img {
 main section.Community .community__meta {
   transition: all 1s ease-in-out;
   width: 100%;
-  padding: var(--r-spacing-md); /*TODO: responsive padding */
+  padding: var(--r-spacing-md);
   background-color: var(--card-bg-color);
 }
 
@@ -112,30 +112,9 @@ main section.Community .Community__ProfilePic-wrapper img {
   }
 }
 
-@media all and (min-width: 600px) {
-  main section.Community__ListItem {
-    /* width: 32%; */
-  }
-}
-
-@media all and (min-width: 800px) {
-  main section.Community__ListItem {
-    /* width: 23%; */
-    /* width: 23%; */
-  }
-}
-
-@media all and (min-width: 900px) {
-}
-
 @media all and (min-width: 1100px) {
   main section.Community__ListItem {
     width: 20%;
     max-width: 50%;
-  }
-
-  main section.Community__ListItem .Community__ProfilePic-wrapper img {
-    /* width: 85%;
-    height: 85%; */
   }
 }

@@ -42,7 +42,6 @@ exports.create = function (req, res) {
   // Community.create(_.pick(req.body, "name", "type", "creator", "grade"))
   // yhcek out "joi" and "jup"
   Community.create(req.body)
-    // Community.create(req.body)
     .then((newResource) => {
       res.status(201).send(newResource);
     })
@@ -76,7 +75,8 @@ exports.update = function (req, res) {
 
   Community.findByIdAndUpdate(id, req.body, { new: true })
     .then((updatedResource) => {
-      if (!community) throw new NotFoundError("community", id, req.body);
+      if (!updatedResource) throw new NotFoundError("community", id, req.body);
+      console.log("updatedResource", updatedResource);
       res.send(updatedResource);
     })
     .catch((e) => {

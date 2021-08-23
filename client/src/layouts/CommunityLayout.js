@@ -3,9 +3,8 @@ import AppHeader from "../components/app/AppHeader";
 import CommunityContext from "../contexts/CommunityContext";
 import CommunityPage from "../pages/communities/CommunityPage";
 import "./CommunityLayout.css";
-
 import { useParams } from "react-router-dom";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function CommunityLayout() {

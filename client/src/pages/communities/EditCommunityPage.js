@@ -15,14 +15,6 @@ export default function EditCommunityPage() {
   const history = useHistory();
   const { id } = useParams();
   const [community, setCommunity] = useState({});
-
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   formState: { errors },
-  //   reset,
-  // } = useForm();
-
   const formMethods = useForm();
   const {
     reset,

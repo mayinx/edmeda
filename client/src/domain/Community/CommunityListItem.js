@@ -15,9 +15,6 @@ const ConditionalWrapper = ({ condition, wrapper, children }) =>
 export default function Community({ community, as }) {
   console.log("yo community");
   const renderAsListItem = as && as === "ListItem";
-  // const communityProfilePicImgSrc = community?.picture
-  //   ? community?.picture
-  //   : CommunityFallbackProfilePic;
   const communityProfilePicImgSrc =
     community?.picture ?? CommunityFallbackProfilePic;
 

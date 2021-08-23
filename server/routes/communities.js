@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Community = require("../models/community");
+// const Community = require("../models/community");
 var _ = require("underscore");
 
 const CommunitiesController = require("../controllers/CommunitiesController.js");
@@ -23,5 +23,6 @@ router.post("/:id/groups", CommunitiesController.createGroup);
 router.get("/:id/groups/:groupId", CommunitiesController.findGroup);
 
 /* - COMMUNITY USERS */
+// ...
 
 module.exports = router;

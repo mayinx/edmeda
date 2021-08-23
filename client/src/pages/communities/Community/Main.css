@@ -20,15 +20,6 @@ main.CommunityLayout .CommunityMain .MainContent {
   min-width: 100%;
 }
 
-/* main.CommunityLayout .CommunityMain a.CommunityMainHeader__Item {
-  padding: 0.3rem;
-  padding-right: 0.75rem;
-
-  background-color: #b5cfd8;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-} */
-
 main.CommunityLayout .CommunityMain .MainHeader a.ToggleSidebarBtn {
   padding: 0.3rem;
   padding-right: 0.75rem;

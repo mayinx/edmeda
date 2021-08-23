@@ -10,6 +10,8 @@
   "Proxy error: Could not proxy request /api/communities from localhost:3000 to http://localhost:4000.
   See https://nodejs.org/api/errors.html#errors_common_system_errors for more information (ECONNREFUSED)."
 
+- TODO: BUG: [Client] [New/Edit Community Modals] On invalid inputs, selects are not marked up with a red bottom border like reguar inputs do
+
 # Roadmap
 
 - Implememt User Auth etc.

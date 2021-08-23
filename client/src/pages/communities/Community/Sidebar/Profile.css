@@ -12,6 +12,9 @@ main.CommunityLayout .CommunitySidebar .CommunityProfile {
 
   background-color: var(--CommunityMainHeader-bg-color);
   justify-content: center;
+
+  border: 2px solid #94b3c6;
+  /* border: 2px solid #95b3c6; */
 }
 
 main.CommunityLayout
@@ -29,6 +32,8 @@ main.CommunityLayout
   width: 100%;
   font-size: 1rem;
   font-weight: normal;
+  border-top: 2px solid #94b3c6;
+  padding: 0.25rem;
 }
 
 main.CommunityLayout
@@ -48,6 +53,9 @@ main.CommunityLayout
   visibility: hidden;
   opacity: 0;
   height: 0px;
+
+  border-top: 0px;
+  padding: 0;
 }
 
 main.CommunityLayout

@@ -83,13 +83,15 @@
     height: var(--CommunitySidebarHeader--expanded-height);
     padding: var(--CommunitySidebar--expanded-padding);
   }
-
+  /*
   main.CommunityLayout
     .CommunitySidebar
+    .SidebarHeader
     .CommunityProfile
     .CommunityProfile__CommunityName {
-    display: block;
-  }
+    visibility: visible;
+    opacity: 1;
+  } */
 
   /* TOGGLED: COLLAPSED TO MIN BAR */
   main.CommunityLayout .CommunitySidebar--toggled {
@@ -101,12 +103,16 @@
     padding: var(--CommunitySidebar--collapsed-padding);
   }
 
-  main.CommunityLayout
+  /* main.CommunityLayout
     .CommunitySidebar--toggled
+    .SidebarHeader
     .CommunityProfile
     .CommunityProfile__CommunityName {
-    display: none;
-  }
+
+    visibility: hidden;
+    opacity: 0;
+    height: 0px;
+  } */
 }
 
 @media all and (min-width: 1024px) {

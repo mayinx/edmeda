@@ -16,16 +16,43 @@ main.CommunityLayout .CommunitySidebar .CommunityProfile {
 
 main.CommunityLayout
   .CommunitySidebar
+  .SidebarHeader
   .CommunityProfile
   .CommunityProfile__CommunityName {
-  display: none;
+  transition: all 0.5s ease-in-out;
+  -webkit-transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+
+  visibility: visible;
+  opacity: 1;
+
   width: 100%;
   font-size: 1rem;
   font-weight: normal;
 }
 
 main.CommunityLayout
+  .CommunitySidebar--expanded
+  .SidebarHeader
+  .CommunityProfile
+  .CommunityProfile__CommunityName {
+  visibility: visible;
+  opacity: 1;
+}
+
+main.CommunityLayout
+  .CommunitySidebar--collapsed
+  .SidebarHeader
+  .CommunityProfile
+  .CommunityProfile__CommunityName {
+  visibility: hidden;
+  opacity: 0;
+  height: 0px;
+}
+
+main.CommunityLayout
   .CommunitySidebar
+  .SidebarHeader
   .CommunityProfile
   .CommunityProfile__Image--wrapper {
   display: flex;
@@ -51,6 +78,7 @@ main.CommunityLayout
 
 main.CommunityLayout
   .CommunitySidebar
+  .SidebarHeader
   .CommunityProfile
   .CommunityProfile__CommunityMeta {
   display: flex;
@@ -67,6 +95,7 @@ main.CommunityLayout
 
 main.CommunityLayout
   .CommunitySidebar
+  .SidebarHeader
   .CommunityProfile
   .CommunityProfile__CommunityMeta
   li {
@@ -75,6 +104,7 @@ main.CommunityLayout
 }
 main.CommunityLayout
   .CommunitySidebar
+  .SidebarHeader
   .CommunityProfile
   .CommunityProfile__CommunityMeta
   .CommunityMeta__Icon {
@@ -83,6 +113,7 @@ main.CommunityLayout
 
 main.CommunityLayout
   .CommunitySidebar
+  .SidebarHeader
   .CommunityProfile
   .CommunityProfile__CommunityMeta
   .CommunityMeta__Caption {
@@ -91,6 +122,7 @@ main.CommunityLayout
 
 main.CommunityLayout
   .CommunitySidebar
+  .SidebarHeader
   .CommunityProfile
   .CommunityProfile__CommunityMeta
   .OnlineIcon {

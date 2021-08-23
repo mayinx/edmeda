@@ -22,9 +22,150 @@ main.CommunityLayout .CommunitySidebar .SidebarHeader {
   padding: var(--CommunitySidebar--expanded-padding);
 }
 
-main.CommunityLayout
+/* main.CommunityLayout
   .CommunitySidebar--toggled
+  .SidebarHeader
   .CommunityProfile
   .CommunityProfile__CommunityName {
-  display: block;
+  visibility: visible;
+  opacity: 1;
+} */
+
+main.CommunityLayout .CommunitySidebar .SidebarContent {
+  padding: var(--CommunitySidebar--expanded-padding);
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Group Lists */
+/* TOOO: Refactor: Extract into CommunityGroupsList component  */
+main.CommunityLayout .CommunitySidebar .SidebarContent ol.CommunityGroupsList {
+  list-style: none;
+
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 1rem;
+}
+
+main.CommunityLayout
+  .CommunitySidebar--collapsed
+  .SidebarContent
+  ol.CommunityGroupsList {
+  list-style: none;
+
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 1rem;
+}
+main.CommunityLayout
+  .CommunitySidebar--expanded
+  .SidebarContent
+  ol.CommunityGroupsList {
+  list-style: none;
+
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 1rem;
+
+  /* collapsed style*/
+  /* cursor: pointer; */
+  padding: 0.25rem;
+  background-color: #e8ecf1;
+
+  border-radius: 6px;
+  border: 2px solid #95b3c6;
+}
+
+main.CommunityLayout
+  .CommunitySidebar
+  .SidebarContent
+  ol.CommunityGroupsList
+  li {
+  /* say which counter you want to increment */
+  /* counter-increment: list-counter; */
+  display: flex;
+  width: 100%;
+
+  transition: all 0.3s ease-in-out;
+  -webkit-transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+}
+
+main.CommunityLayout
+  .CommunitySidebar--collapsed
+  .SidebarContent
+  ol.CommunityGroupsList
+  li {
+  /* say which counter you want to increment */
+  /* counter-increment: list-counter; */
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+
+  /* collapsed style*/
+  /* cursor: pointer; */
+  padding: 0.25rem;
+  background-color: #e8ecf1;
+
+  border-radius: 6px;
+  border: 2px solid #95b3c6;
+}
+
+main.CommunityLayout
+  .CommunitySidebar--expanded
+  .SidebarContent
+  ol.CommunityGroupsList
+  li {
+  /* say which counter you want to increment */
+  /* counter-increment: list-counter; */
+  display: flex;
+  width: 100%;
+
+  /* collapsed style*/
+  /* cursor: pointer; */
+  padding: 0.25rem;
+  /* background-color: #e8ecf1; */
+
+  border-radius: 6px;
+  /* border: 2px solid #95b3c6; */
+}
+
+main.CommunityLayout
+  .CommunitySidebar
+  .SidebarContent
+  ol.CommunityGroupsList
+  li
+  .groupName {
+  /* font-family: monospace; */
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+main.CommunityLayout
+  .CommunitySidebar--collapsed
+  .SidebarContent
+  ol.CommunityGroupsList
+  li
+  .groupName {
+  width: 2ch;
+}
+
+main.CommunityLayout
+  .CommunitySidebar--expanded
+  .SidebarContent
+  ol.CommunityGroupsList
+  li
+  .groupName {
+  width: auto;
 }

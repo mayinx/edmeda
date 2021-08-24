@@ -61,6 +61,13 @@
   letter-spacing: 1px;
 }
 
+/* FYI: The 'width'-property must be set by the element that utilizes this class here to make this work */
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .font-upper {
   text-transform: uppercase;
 }
@@ -153,6 +160,10 @@
 }
 /* UTILS FOR FLEX */
 
+.d-inline-flex {
+  display: flex;
+}
+
 .d-flex {
   display: flex;
 }
@@ -208,4 +219,17 @@
 
 .d-grid {
   display: grid;
+}
+
+/* visibility */
+
+.fade-out {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s linear 300ms, opacity 300ms;
+}
+.fade-in {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0s linear 0s, opacity 300ms;
 }

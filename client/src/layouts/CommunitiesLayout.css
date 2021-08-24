@@ -1,0 +1,10 @@
+main.CommunitiesLayout {
+  flex: 1 1 auto;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  overflow-y: auto;
+  overflow-x: hidden;
+  color: var(--main-font-color);
+  background-color: var(--main-bg-color);
+}

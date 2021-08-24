@@ -31,6 +31,7 @@ const communitiesSchema = new Schema(
       data: Buffer,
       contentType: String,
     },
+    groups: [{ type: Schema.Types.ObjectId, ref: "Group" }],
   },
   {
     timestamps: true,

@@ -9,19 +9,21 @@ import FormConfig from "./FormConfig";
 import TextInputFormGroup from "../../components/form/groups/TextInputFormGroup";
 import SelectInputFormGroup from "../../components/form/groups/SelectInputFormGroup";
 
-export default function NewCommunityPage() {
+export default function NewCommunityPage(props) {
   const { communities, setCommunities } = useContext(CommunitiesContext);
   const history = useHistory();
 
   const formMethods = useForm();
-  const { handleSubmit } = formMethods;
+  const {
+    handleSubmit,
+    formState: { errors },
+  } = formMethods;
 
   const onSubmit = (data) => {
     axios
-      .post("api/communities", data)
+      .post("/api/communities", data)
       .then((res) => {
         setCommunities([res.data, ...communities]);
-        // history.push("/");
         history.goBack();
       })
       .catch((err) => {
@@ -34,9 +36,9 @@ export default function NewCommunityPage() {
 
   return (
     <div className="ModalPage__bodyInner CommunityModalFormPage NewCommunityModalFormPage">
-      <FormProvider {...{ ...formMethods, ErrorMessage }}>
+      <FormProvider {...{ ...formMethods, ErrorMessage, errors }}>
         <form
-          id="newCommunity"
+          id={props.formId}
           className="Form"
           onSubmit={handleSubmit(onSubmit)}
         >

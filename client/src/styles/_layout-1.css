@@ -26,7 +26,7 @@ header {
   gap: 0.25rem;
 }
 
-main {
+/* main.CommunitiesLayout {
   flex: 1 1 auto;
   padding: 1rem;
   display: flex;
@@ -37,12 +37,11 @@ main {
 
   color: var(--main-font-color);
   background-color: var(--main-bg-color);
-}
+} */
 
-footer {
+/* footer {
   color: var(--footer-font-color);
   background-color: var(--footer-bg-color);
-  /* height: 3rem; */
   margin-top: auto;
   padding: 1rem;
 
@@ -51,7 +50,7 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-}
+} */
 
 main .App__Page {
   display: flex;
@@ -67,12 +66,12 @@ main .App__Page__Head {
 }
 
 /* TODO: Move to HomePage.css*/
-main .App__Page.App__HomePage {
+/* main .App__Page.App__HomePage {
   gap: 3rem;
   align-items: flex-start;
   justify-content: flex-start;
   margin-top: 4rem;
-}
+} */
 
 main .App__Page.App__HomePage h3 {
   align-self: flex-end;

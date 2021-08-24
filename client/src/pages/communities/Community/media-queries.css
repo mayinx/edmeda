@@ -1,0 +1,131 @@
+/* media queries for the CommunityPage-component that effect multiple subcomponents  (included as ast css-file in CommunityPage.js*/
+
+/* CSS PROPERTIES TO CONTROL RESPONSIVENESS  */
+
+/*
+  --xs: 400px;
+  --sm: 576px;
+  --md: 768px;
+  --lg: 992px;
+  --xl: 1024px;
+  --xxl: 1200px;
+  --hd: 1400px;   */
+
+/* FROM HERE ON (UP UNTIL MIN-WIDTH: 992PX / I.E. LARGE SCREENS)
+   THE SIDEBAR IS ALWAYS VISIBLE:
+   - DEFAULT / UNTOGGLED: SIDEBAR COLLAPSED TO (ALWAYS VISIBLE) MIN BAR
+   - TOGGLED: SIDEBAR EXPANDED TO MAX WIDTH
+*/
+@media all and (min-width: 400px) {
+  /* DEFAULT: COLLAPSED TO MIN BAR  */
+  main.CommunityLayout .CommunitySidebar {
+    visibility: visible;
+    opacity: 1;
+    max-width: 55px;
+  }
+
+  main.CommunityLayout .CommunitySidebar .SidebarHeader {
+    height: var(--CommunitySidebarHeader--collapsed-height);
+    padding: var(--CommunitySidebar--collapsed-padding);
+  }
+
+  main.CommunityLayout .CommunityMain {
+    min-width: 50%;
+  }
+
+  /* TOGGLED: EXPANDED TO MAX WIDTH  */
+  main.CommunityLayout .CommunitySidebar--toggled {
+    visibility: visible;
+    opacity: 1;
+    max-width: 33%;
+  }
+
+  main.CommunityLayout .CommunitySidebar--toggled .SidebarHeader {
+    height: var(--CommunitySidebarHeader--expanded-height);
+    padding: var(--CommunitySidebar--expanded-padding);
+  }
+}
+
+@media all and (min-width: 576px) {
+  /* DEFAULT: COLLAPSED TO MIN BAR  */
+  main.CommunityLayout .CommunitySidebar {
+    max-width: 75px;
+  }
+  /* TOGGLED: EXPANDED TO MAX WIDTH  */
+  main.CommunityLayout .CommunitySidebar--toggled {
+    max-width: 33%;
+  }
+}
+
+@media all and (min-width: 768px) {
+  /* DEFAULT: COLLAPSED TO MIN BAR  */
+  main.CommunityLayout .CommunitySidebar {
+    max-width: 75px;
+  }
+  /* TOGGLED: EXPANDED TO MAX WIDTH  */
+  main.CommunityLayout .CommunitySidebar--toggled {
+    max-width: 33%;
+  }
+}
+
+/* FROM HERE ON THE SIDEBAR IS ALWYS VISIBLE AS WELL - BUT:
+   - DEFAULT / UNTOGGLED: SIDEBAR EXPANDED TO MAX WIDTH PER DEFAULT
+   - TOGGLED: COLLAPSED TO (ALWAYS VISIBLE) MIN BAR
+*/
+@media all and (min-width: 992px) {
+  /* DEFAULT: EXPANDED TO MAX  */
+  main.CommunityLayout .CommunitySidebar {
+    width: 33%;
+    max-width: 275px;
+  }
+
+  main.CommunityLayout .CommunitySidebar .SidebarHeader {
+    height: var(--CommunitySidebarHeader--expanded-height);
+    padding: var(--CommunitySidebar--expanded-padding);
+  }
+
+  /* TOGGLED: COLLAPSED TO MIN BAR */
+  main.CommunityLayout .CommunitySidebar--toggled {
+    max-width: 75px;
+  }
+
+  main.CommunityLayout .CommunitySidebar--toggled .SidebarHeader {
+    height: var(--CommunitySidebarHeader--collapsed-height);
+    padding: var(--CommunitySidebar--collapsed-padding);
+  }
+}
+
+@media all and (min-width: 1024px) {
+  /* DEFAULT: EXPANDED TO MAX  */
+  main.CommunityLayout .CommunitySidebar {
+    /* width: 33%; */
+    max-width: 300px;
+  }
+  /* TOGGLED: COLLAPSED TO MIN BAR */
+  main.CommunityLayout .CommunitySidebar--toggled {
+    max-width: 75px;
+  }
+}
+@media all and (min-width: 1200px) {
+  /* DEFAULT: EXPANDED TO MAX  */
+  main.CommunityLayout .CommunitySidebar {
+    /* width: 33%; */
+    max-width: 350px;
+  }
+  /* TOGGLED: COLLAPSED TO MIN BAR */
+  main.CommunityLayout .CommunitySidebar--toggled {
+    max-width: 75px;
+  }
+}
+
+@media all and (min-width: 1400px) {
+  /* DEFAULT: EXPANDED TO MAX  */
+  main.CommunityLayout .CommunitySidebar {
+    /* width: 33%; */
+    max-width: 400px;
+  }
+  /* TOGGLED: COLLAPSED TO MIN BAR */
+  main.CommunityLayout .CommunitySidebar--toggled {
+    max-width: 75px;
+  }
+}

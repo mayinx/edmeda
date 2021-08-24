@@ -1,15 +1,18 @@
-import { Link, useRouteMatch } from "react-router-dom";
+import { Link, Route, Switch } from "react-router-dom";
 
 // import BrandLogo from "../../assets/2973980108_ed69085414_o.jpg";
 import { BsGrid3X3Gap } from "react-icons/bs";
 import { FaPlus } from "react-icons/fa";
 import { FaUserAlt } from "react-icons/fa";
 
+import Modal from "../modal/Modal.js";
+import NewCommunityPage from "../../pages/communities/NewCommunityPage.js";
+import EditCommunityPage from "../../pages/communities/EditCommunityPage.js";
+
+const ADD_ACTION_FORM_ID = "newCommunity";
+const UPDATE_ACTION_FORM_ID = "editCommunity";
+
 export default function AppHeader() {
-  const match = useRouteMatch();
-
-  // console.log(match.url);
-
   return (
     <header className="App__header">
       {/* <img id="app_logo" src={BrandLogo} className="BrandLogo" alt=""></img> */}
@@ -20,7 +23,7 @@ export default function AppHeader() {
       </div>
 
       <div className="App__header_item">
-        <Link to="newCommunity">
+        <Link to="../communities/new">
           <FaPlus className="itemIcon addIcon" />
         </Link>
       </div>

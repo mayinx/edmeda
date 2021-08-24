@@ -1,0 +1,36 @@
+main.CommunityLayout {
+  flex: 1 1 auto;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  overflow-y: auto;
+  overflow-x: hidden;
+  color: var(--main-font-color);
+  background-color: var(--main-bg-color);
+}
+
+:root {
+  /* ------------------ colors -----------------------------------*/
+  --CommunitySidebar-bg-color: #b5cfd8;
+  --CommunityMain-bg-color: #dae8e6; /*dae8e6*/
+  --CommunityMainHeader-bg-color: #e8ecf1;
+  --ToggleSidebarBtn-bg-color: var(--CommunitySidebar-bg-color);
+
+  /* ---------------------------------------------------------------- */
+
+  /* -------------------- dimensions ---------------------------------*/
+  --CommunityHeaders-base-height: 65px;
+  /* -- SidebarHeader */
+  --CommunitySidebarHeader--collapsed-height: var(
+    --CommunityHeaders-base-height
+  );
+  --CommunitySidebarHeader--expanded-height: auto;
+  /* -- MainHeader */
+  --CommunityMainHeader-height: var(--CommunityHeaders-base-height);
+  /* ---------------------------------------------------------------- */
+
+  /* ------------------------- spacing -------------------------------*/
+  --CommunitySidebar--expanded-padding: 0.5rem;
+  --CommunitySidebar--collapsed-padding: 0.25rem;
+  /* ---------------------------------------------------------------- */
+}

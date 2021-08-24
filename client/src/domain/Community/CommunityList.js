@@ -1,21 +1,19 @@
 import "./CommunityList.css";
-import Community from "./Community.js";
+import CommunityListItem from "./CommunityListItem.js";
 import { Link } from "react-router-dom";
 
 export default function CommunityList({ resources }) {
   function renderResources() {
     if (Array.isArray(resources) && resources.length) {
       return resources.map((community) => {
-        return (
-          <Community community={community} as="ListItem" key={community._id} />
-        );
+        return <CommunityListItem community={community} key={community._id} />;
       });
     } else {
       return (
         <div className="CollectionEmpty">
           <h2>Ups - looks like you didn't create any communities yet!</h2>
 
-          <Link to="newCommunity">
+          <Link to="communities/new">
             <button className="btn rounded green">
               Create your first community!
             </button>

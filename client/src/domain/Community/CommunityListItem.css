@@ -1,0 +1,135 @@
+main section.CommunityListItem {
+  --CommunityistItem-font-color: #556e7e;
+  --CommunityistItem-bg-color: #e8ecf1;
+  --CommunityistItem-border-color: #b5cfd8;
+  --CommunityListItem-border-radius: 10px;
+
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  box-shadow: rgb(50 50 93 / 25%) 0px 13px 27px -5px,
+    rgb(0 0 0 / 30%) 0px 8px 16px -8px;
+  border-radius: var(--CommunityListItem-border-radius);
+  background-color: var(--CommunityistItem-bg-color);
+  color: var(--CommunityistItem-font-color);
+  border: 2px solid var(--CommunityistItem-border-color);
+  transition: all 0.3s ease-in-out;
+  -webkit-transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+  cursor: pointer;
+}
+
+main section.CommunityListItem a {
+  text-decoration: none;
+  width: 100%;
+  color: #556e7e;
+}
+
+main section.CommunityListItem.CommunityListItem--alive {
+  background-color: green;
+}
+main section.CommunityListItem.CommunityListItem--alive,
+main section.CommunityListItem.CommunityListItem--alive a {
+  color: white;
+}
+
+main section.CommunityListItem.CommunityListItem--unknown {
+  background-color: yellow;
+}
+main section.CommunityListItem.CommunityListItem--unknown,
+main section.CommunityListItem.CommunityListItem--unknown a {
+  color: #893838;
+}
+
+main section.CommunityListItem.CommunityListItem--dead {
+  background-color: #3f3f3f;
+}
+main section.CommunityListItem.CommunityListItem--dead,
+main section.CommunityListItem.CommunityListItem--dead a {
+  color: white;
+}
+
+main section.CommunityListItem.CommunityListItem:hover img {
+  z-index: -1;
+}
+main section.CommunityListItem.CommunityListItem:hover img {
+  transition: all 0.5s ease-in-out;
+  -webkit-transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+  border-bottom-left-radius: var(--CommunityListItem-border-radius);
+  border-bottom-right-radius: var(--CommunityListItem-border-radius);
+}
+
+main section.CommunityListItem .community__meta {
+  transition: all 1s ease-in-out;
+  width: 100%;
+  padding: var(--r-spacing-md);
+  background-color: var(--CommunityistItem-bg-color);
+  border-bottom-left-radius: var(--CommunityListItem-border-radius);
+  border-bottom-right-radius: var(--CommunityListItem-border-radius);
+  border-top: 2px solid var(--CommunityistItem-border-color);
+}
+
+main section.CommunityListItem .community__actions {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: #c3d1dcdb;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border-radius: var(--CommunityListItem-border-radius);
+}
+main section.CommunityListItem .community__actions a.community__action {
+  display: flex;
+  color: lightslategray;
+  background-color: whitesmoke;
+  padding: 0.3rem;
+  flex: 0;
+  border-radius: 6px;
+  font-size: 1.5rem;
+  align-items: center;
+  justify-content: center;
+}
+main section.CommunityListItem:hover img {
+  transform: scale(1.75) translateY(2rem);
+  border-radius: var(--CommunityListItem-border-radius);
+}
+
+main section.CommunityListItem .Community__ProfilePic-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0;
+  width: 100%;
+  border-radius: var(--CommunityListItem-border-radius);
+}
+main section.CommunityListItem .Community__ProfilePic-wrapper img {
+  display: block;
+
+  object-fit: cover;
+  border-radius: var(--CommunityListItem-border-radius);
+}
+
+/* MEDIA QUERIES */
+
+@media all and (min-width: 400px) {
+  main section.CommunityListItem {
+    width: 48%;
+  }
+}
+
+@media all and (min-width: 1100px) {
+  main section.CommunityListItem {
+    width: 20%;
+    max-width: 50%;
+  }
+}

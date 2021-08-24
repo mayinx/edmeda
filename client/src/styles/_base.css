@@ -7,27 +7,40 @@
 }
 
 html {
-  font-size: 16px;
+  font-size: var(--r-base-font-size);
   font-family: "News Cycle";
   letter-spacing: 3px;
   /* to prevent scrolling of the body - we just want scrolling in the main container  */
   height: 100%;
   overflow: hidden;
   color: var(--page-font-color);
+
+  min-width: var(--body-min-width);
 }
 
 p {
   padding: 1em;
+  font-size: var(--r-base-font-size);
+}
+
+h1 {
+  font-size: var(--r-heading-lg);
+}
+h2 {
+  font-size: var(--r-heading-md);
+}
+h3 {
+  font-size: var(--r-heading-sm);
 }
 
 :root {
   /* CSS HEX */
-  --primary-color: #57a2e5; /* header */
+  --primary-color: #7393a7; /* #57a2e5;*/ /* header */
   --secondary-color: #dae8e6; /* main */
   --tertiary-color: #3b857e; /* footer */
-  --quaternary-color: #00609d; /* main font color */
-  --quinary-color: #00c4f1; /* hover bg nav item */
-  --senary-color: #9dc6e0;
+  --quaternary-color: #5d7889; /* main font color */
+  --quinary-color: #94b3c6; /* #00c4f1;*/ /*  bg nav item */
+  --senary-color: #b0c5d3; /* #00c4f1;*/ /* hover bg nav item */
 
   /* quaternary, quinary, senary, septenary, octonary, nonary */
 
@@ -60,7 +73,8 @@ p {
 
   /* MAIN NAV */
   --nav-item-link-color: var(--page-font-color);
-  --nav-item-hover-bg-color: var(--quinary-color);
+  --nav-item-bg-color: var(--quinary-color);
+  --nav-item-hover-bg-color: var(--senary-color);
   --nav-item-hover-border-color: #6b8fdb;
   --nav-item-hover-font-color: var(--hover-font-color);
 

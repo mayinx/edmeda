@@ -60,9 +60,9 @@ mongoose
     ignoreUndefined: true, // BSON serializer should ignore undefined fields (liek in query params).
   })
   .then(() => {
-    console.log("Connecteed to mongo");
+    console.log("--- Connected to MongoDB");
     app.listen(PORT, () => {
-      console.log(`Listening on http://localhost:${PORT}`);
+      console.log(`--- Listening on http://localhost:${PORT}`);
     });
   })
   .catch((error) => {

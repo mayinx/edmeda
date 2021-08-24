@@ -16,8 +16,8 @@ export default function CommunitiesLayout() {
       <AppHeader className="CommunitiesHeader" />
       <main className="CommunitiesLayout">
         {/* <Switch> */}
-        <Route exact path="/" component={MyCommunitiesPage} />
 
+        <Route exact path="/" component={MyCommunitiesPage} />
         <Route exact path="/communities/:id/edit">
           <Modal
             modalCaption="Edit Community"
@@ -28,7 +28,6 @@ export default function CommunitiesLayout() {
             <EditCommunityPage formId={UPDATE_ACTION_FORM_ID} />
           </Modal>
         </Route>
-
         <Route exact path="/communities/new">
           <Modal
             modalCaption="New Community"
@@ -39,7 +38,6 @@ export default function CommunitiesLayout() {
             <NewCommunityPage formId={CREATE_ACTION_FORM_ID} />
           </Modal>
         </Route>
-
         {/* </Switch> */}
       </main>
     </>

@@ -25,24 +25,28 @@ exports.create = function (req, res) {
           type: "default",
           scope: "all",
           community: newResource._id,
+          order: 0,
         },
         {
           name: "Students",
           type: "default",
           scope: "student",
           community: newResource._id,
+          order: 1,
         },
         {
           name: "Teachers",
           type: "default",
           scope: "teacher",
           community: newResource._id,
+          order: 2,
         },
         {
           name: "Parents",
           type: "default",
           scope: "parents",
           community: newResource._id,
+          order: 3,
         },
       ];
 

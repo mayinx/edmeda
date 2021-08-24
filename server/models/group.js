@@ -26,6 +26,10 @@ const groupsSchema = new Schema(
       type: String,
       required: false,
     },
+    order: {
+      type: Number,
+      required: false,
+    }
     // TODO: If time:
     // picture: {
     //   data: Buffer,

@@ -22,6 +22,10 @@ const groupsSchema = new Schema(
       type: String,
       required: false,
     },
+    scope: {
+      type: String,
+      required: false,
+    },
     // TODO: If time:
     // picture: {
     //   data: Buffer,

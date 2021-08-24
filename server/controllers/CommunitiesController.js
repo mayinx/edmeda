@@ -15,7 +15,47 @@ exports.index = function (req, res) {
     });
 };
 exports.create = function (req, res) {
+  let resource = null;
   Community.create(req.body)
+    .then((newResource) => {
+      resource = newResource;
+      const defaultGroups = [
+        {
+          name: "Community",
+          type: "default",
+          scope: "all",
+          community: newResource._id,
+        },
+        {
+          name: "Students",
+          type: "default",
+          scope: "student",
+          community: newResource._id,
+        },
+        {
+          name: "Teachers",
+          type: "default",
+          scope: "teacher",
+          community: newResource._id,
+        },
+        {
+          name: "Parents",
+          type: "default",
+          scope: "parents",
+          community: newResource._id,
+        },
+      ];
+
+      return Group.create(defaultGroups);
+    })
+    .then((groups) => {
+      console.log("groups ", groups);
+      return Community.findOneAndUpdate(
+        { _id: resource._id },
+        { $push: { groups: groups } },
+        { new: true }
+      );
+    })
     .then((newResource) => {
       res.status(201).send(newResource);
     })

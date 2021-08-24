@@ -16,14 +16,14 @@ const communitiesSchema = new Schema(
       required: true,
       // TODO:
       // type: Schema.Types.ObjectId,
-      // ref: "Author",
+      // ref: "User",
     },
     type: {
       type: String,
       required: false,
     },
-    grade: {
-      type: Number,
+    scope: {
+      type: String,
       required: false,
     },
     // TODO: If time:

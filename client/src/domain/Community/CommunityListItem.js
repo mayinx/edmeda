@@ -47,48 +47,38 @@ export default function Community({ community }) {
   };
 
   return (
-    <>
-      <button
-        className="community__action"
-        onClick={(e) => openEditCommunityModal(e, community._id)}
-      >
-        <FaRegEdit className="actionIcon editIcon" />
-      </button>
-      <section
-        className={`Resource Community Community--${community.type} ResourceListItem CommunityListItem CommunityListItem--${community.type} `}
-        key={community._id}
-        id={community._id}
-        onClick={(e) => openCommunityPage(e, community._id)}
-      >
-        {/* <Link id="RouterNavLink" to={`/communities/${community._id}`}> */}
-        <p className="Community__ProfilePic-wrapper">
-          <img
-            src={communityProfilePicImgSrc}
-            className="Community__ProfilePic"
-            alt=""
-          />
-        </p>
-        <div className="community__meta">
-          <div className="truncate">{community.name}</div>
-          <div className="truncate">{community.creator}</div>
-        </div>
-        <div className="community__actions">
-          <Link
-            className="community__action"
-            to="#"
-            onClick={(e) => removeResource(e, community._id)}
-          >
-            <FaTrashAlt className="actionIcon deleteIcon" />
-          </Link>
-          <Link
-            className="community__action"
-            onClick={(e) => openEditCommunityModal(e, community._id)}
-          >
-            <FaRegEdit className="actionIcon editIcon" />
-          </Link>
-        </div>
-        {/* </Link> */}
-      </section>
-    </>
+    <section
+      className={`Resource Community Community--${community.type} ResourceListItem CommunityListItem CommunityListItem--${community.type} `}
+      key={community._id}
+      id={community._id}
+      onClick={(e) => openCommunityPage(e, community._id)}
+    >
+      <p className="Community__ProfilePic-wrapper">
+        <img
+          src={communityProfilePicImgSrc}
+          className="Community__ProfilePic"
+          alt=""
+        />
+      </p>
+      <div className="community__meta">
+        <div className="truncate">{community.name}</div>
+        <div className="truncate">{community.creator}</div>
+      </div>
+      <div className="community__actions">
+        <Link
+          className="community__action"
+          to="#"
+          onClick={(e) => removeResource(e, community._id)}
+        >
+          <FaTrashAlt className="actionIcon deleteIcon" />
+        </Link>
+        <Link
+          className="community__action"
+          onClick={(e) => openEditCommunityModal(e, community._id)}
+        >
+          <FaRegEdit className="actionIcon editIcon" />
+        </Link>
+      </div>
+    </section>
   );
 }

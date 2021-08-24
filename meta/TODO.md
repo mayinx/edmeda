@@ -69,4 +69,4 @@ Here again main.ClassName. I think you don't need that
 # Resources to check:
 
 - https://www.freecodecamp.org/news/state-management-with-react-hooks/
-- https://www.freecodecamp.org/news/state-management-with-react-hooks/
+- https://dev.to/armelpingault/how-to-create-a-simple-and-beautiful-chat-with-mongodb-express-react-and-node-js-mern-stack-29l6

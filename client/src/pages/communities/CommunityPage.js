@@ -10,11 +10,23 @@ import "./Community/media-queries.css";
 
 export default function CommunityPage() {
   const { currentCommunity } = useContext(CommunityContext);
+  const [currentGroup, setCurrentGroup] = useState(
+    currentCommunity?.groups[0] || {}
+  );
   const [sidebarToggled, setSidebarToggled] = useState(false);
   const [mediaQueryToggled, setMediaQueryToggled] = useState(false);
   const [sidebarStateClass, setSidebarStateClass] = useState(
     "CommunitySidebar"
   );
+
+  const handleCurrentGroupChange = (e, newGroupId) => {
+    // Uh. Ah. Destructuring. Ahhh.
+    setCurrentGroup(
+      currentCommunity.groups.find(({ _id }) => {
+        return _id === newGroupId;
+      })
+    );
+  };
 
   const handleMediaQueryChange = (matches) => {
     setMediaQueryToggled(!mediaQueryToggled);
@@ -68,10 +80,13 @@ export default function CommunityPage() {
       <CommunitySidebar
         className={sidebarStateClass}
         community={currentCommunity}
+        currentGroup={currentGroup}
+        onGroupChange={handleCurrentGroupChange}
       />
 
       <CommunityMain
         community={currentCommunity}
+        currentGroup={currentGroup}
         onSidebarToggle={toggleSidebar}
       />
     </>

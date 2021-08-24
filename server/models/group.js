@@ -29,7 +29,7 @@ const groupsSchema = new Schema(
     order: {
       type: Number,
       required: false,
-    }
+    },
     // TODO: If time:
     // picture: {
     //   data: Buffer,

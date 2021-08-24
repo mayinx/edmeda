@@ -19,6 +19,9 @@ exports.create = function (req, res) {
   Community.create(req.body)
     .then((newResource) => {
       resource = newResource;
+
+      // TODO: Ask Namir: Where to put stuff like this
+      // in an express / mongoose app? - in the group-model?:
       const defaultGroups = [
         {
           name: "Community",
@@ -53,7 +56,6 @@ exports.create = function (req, res) {
       return Group.create(defaultGroups);
     })
     .then((groups) => {
-      console.log("groups ", groups);
       return Community.findOneAndUpdate(
         { _id: resource._id },
         { $push: { groups: groups } },
@@ -73,7 +75,12 @@ exports.create = function (req, res) {
 };
 exports.find = function (req, res) {
   const { id } = req.params;
+
   Community.findById(id)
+    // TODO: Ask Namir: How to conditionally populate here?
+    // (to avoid implementig different api-endpoints for an
+    // popualted and unpopulated version)
+    .populate("groups")
     .then((community) => {
       if (!community) throw new NotFoundError("community", id);
       res.send(community);

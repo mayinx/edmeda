@@ -32,39 +32,6 @@ export default function AppHeader() {
           <FaUserAlt className="itemIcon userAvatarIcon" />
         </Link>
       </div>
-
-      <Switch>
-        <Route
-          exact
-          path="/communities/new"
-          render={() => {
-            return (
-              <Modal
-                modalCaption="New Community"
-                crudAction="create"
-                formId={ADD_ACTION_FORM_ID}
-              >
-                <NewCommunityPage formId={ADD_ACTION_FORM_ID} />
-              </Modal>
-            );
-          }}
-        />
-        <Route
-          exact
-          path="/communities/edit/:id"
-          render={() => {
-            return (
-              <Modal
-                modalCaption="Edit Community"
-                crudAction="update"
-                formId={UPDATE_ACTION_FORM_ID}
-              >
-                <EditCommunityPage formId={UPDATE_ACTION_FORM_ID} />
-              </Modal>
-            );
-          }}
-        />
-      </Switch>
     </header>
   );
 }

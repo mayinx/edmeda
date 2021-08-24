@@ -10,7 +10,7 @@ import TextInputFormGroup from "../../components/form/groups/TextInputFormGroup"
 import SelectInputFormGroup from "../../components/form/groups/SelectInputFormGroup";
 // import { reset } from "nodemon";
 
-export default function EditCommunityPage() {
+export default function EditCommunityPage(props) {
   const { communities, setCommunities } = useContext(CommunitiesContext);
   const history = useHistory();
   const { id } = useParams();
@@ -53,9 +53,7 @@ export default function EditCommunityPage() {
         });
 
         setCommunities(newList);
-
         history.push("/");
-        // history.goBack();
       })
       .catch((err) => {
         console.log(
@@ -69,7 +67,7 @@ export default function EditCommunityPage() {
     <div className="ModalPage__bodyInner CommunityModalFormPage EditCommunityModalFormPage">
       <FormProvider {...{ ...formMethods, ErrorMessage, errors }}>
         <form
-          id="editCommunity"
+          id={props.formId}
           className="Form"
           onSubmit={handleSubmit(onSubmit)}
         >

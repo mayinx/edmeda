@@ -27,7 +27,7 @@ import { FaRegTimesCircle } from "react-icons/fa";
 
 export default function Modal(props) {
   const history = useHistory();
-
+  const goBackTo = props.goBackTo || "/";
   return createPortal(
     <div className="Modal">
       <div className="Modal__inner">
@@ -35,7 +35,10 @@ export default function Modal(props) {
           <h3 className="ModalPage__headerCaption">
             {props.modalCaption || "Modal Dialog"}
           </h3>
-          <div className="closeDlgAction" onClick={() => history.goBack()}>
+          <div
+            className="closeDlgAction"
+            onClick={() => history.push(goBackTo)}
+          >
             <FaRegTimesCircle />
           </div>
         </div>
@@ -44,7 +47,7 @@ export default function Modal(props) {
           <div className="ModalActions">
             <button
               className="btn rounded light-red"
-              onClick={() => history.goBack()}
+              onClick={() => history.push(goBackTo)}
             >
               Close
             </button>

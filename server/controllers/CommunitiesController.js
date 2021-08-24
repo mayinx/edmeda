@@ -3,31 +3,8 @@ const Group = require("../models/group");
 const { NotFoundError, InternalError } = require("../errors/AppErrors");
 
 exports.index = function (req, res) {
-  // TODO: filter by current user
-  // deconstructing the query object
-  //const { page, name, creator, type, grade  } = req.query;
   let query = {};
-  // if (title) {
-  //   // regex for substring search (case insensitive)
-  //   query.title = { $regex: new RegExp(title, "i") };
-  // }
-  // if (genre) {
-  //   query.genre = genre.toLowerCase();
-  // }
-  // if (isRead) {
-  //   query.isRead = isRead;
-  // }
-  // if (author) {
-  //   query.author = author;
-  // }
-  // TODO: Whitelist permitted filter params with pick
-  // _.pick(req.body, "genre", "isRead")
-  // Community.find(req.query)
   Community.find(query)
-    // Community.paginate(query, { page: page, limit: 20 })
-    // .limit(10)
-    // .sort("-createdAt")
-    // .populate("...")
     .then((resources) => {
       res.send(resources);
     })
@@ -38,9 +15,6 @@ exports.index = function (req, res) {
     });
 };
 exports.create = function (req, res) {
-  // TODO: Make whitelisting params work with object arys as well- until then we chicken out here ;-)
-  // Community.create(_.pick(req.body, "name", "type", "creator", "grade"))
-  // yhcek out "joi" and "jup"
   Community.create(req.body)
     .then((newResource) => {
       res.status(201).send(newResource);
@@ -162,9 +136,6 @@ exports.indexGroups = function (req, res) {
 
 exports.findGroup = function (req, res) {
   const { id, groupId } = req.params;
-  // Just to be double and tripple sure ;-)
-  // (a malicious pal could pass in the group id of anoterh community and thsu gain access to a foreign user group - oh noes!)
-  // TODO: Check whats the convention here - query via `Community...populate('groups')` and limit that samehow to the desired group - or like the following:
   Group.findOne({ _id: groupId, community: id })
     .then((group) => {
       if (!group) throw new NotFoundError("group", id);

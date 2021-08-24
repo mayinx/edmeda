@@ -8,13 +8,7 @@ import { Link } from "react-router-dom";
 import { FaRegEdit, FaTrashAlt } from "react-icons/fa";
 import axios from "axios";
 
-// TODO: Get rid of that conditional wrapper again - shoudl be possible to just set an onLick-handler on the section-tag itself and basrta kanzla!
-const ConditionalWrapper = ({ condition, wrapper, children }) =>
-  condition ? wrapper(children) : children;
-
-export default function Community({ community, as }) {
-  console.log("yo community");
-  const renderAsListItem = as && as === "ListItem";
+export default function Community({ community }) {
   const communityProfilePicImgSrc =
     community?.picture ?? CommunityFallbackProfilePic;
 
@@ -22,7 +16,8 @@ export default function Community({ community, as }) {
 
   const history = useHistory();
 
-  const removeResource = (id) => {
+  const removeResource = (e, id) => {
+    e.stopPropagation();
     axios
       .delete(`api/communities/${id}`)
       .then((res) => {
@@ -31,7 +26,6 @@ export default function Community({ community, as }) {
             return resource._id !== id;
           })
         );
-        // history.push("/");
         history.goBack();
       })
       .catch((err) => {
@@ -42,20 +36,31 @@ export default function Community({ community, as }) {
       });
   };
 
+  const openCommunityPage = (e, id) => {
+    history.push(`/communities/${id}`);
+  };
+
+  const openEditCommunityModal = (e, id) => {
+    history.push(`/communities/${id}/edit`);
+    e.stopPropagation();
+    e.preventDefault();
+  };
+
   return (
-    <section
-      className={`Resource Community Community--${community.type} ${
-        renderAsListItem && "Resource__ListItem Community__ListItem"
-      }`}
-      key={community.id}
-      id={community.id}
-    >
-      <ConditionalWrapper
-        condition={renderAsListItem}
-        wrapper={(children) => (
-          <Link to={`/communities/${community._id}`}>{children}</Link>
-        )}
+    <>
+      <button
+        className="community__action"
+        onClick={(e) => openEditCommunityModal(e, community._id)}
       >
+        <FaRegEdit className="actionIcon editIcon" />
+      </button>
+      <section
+        className={`Resource Community Community--${community.type} ResourceListItem CommunityListItem CommunityListItem--${community.type} `}
+        key={community._id}
+        id={community._id}
+        onClick={(e) => openCommunityPage(e, community._id)}
+      >
+        {/* <Link id="RouterNavLink" to={`/communities/${community._id}`}> */}
         <p className="Community__ProfilePic-wrapper">
           <img
             src={communityProfilePicImgSrc}
@@ -71,18 +76,19 @@ export default function Community({ community, as }) {
           <Link
             className="community__action"
             to="#"
-            onClick={() => removeResource(community._id)}
+            onClick={(e) => removeResource(e, community._id)}
           >
             <FaTrashAlt className="actionIcon deleteIcon" />
           </Link>
           <Link
             className="community__action"
-            to={`communities/edit/${community._id}`}
+            onClick={(e) => openEditCommunityModal(e, community._id)}
           >
             <FaRegEdit className="actionIcon editIcon" />
           </Link>
         </div>
-      </ConditionalWrapper>
-    </section>
+        {/* </Link> */}
+      </section>
+    </>
   );
 }

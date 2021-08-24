@@ -26,7 +26,13 @@ function App() {
     <div className="App">
       <CommunitiesContext.Provider value={{ communities, setCommunities }}>
         <Switch>
-          <Route path="/communities/:id" component={CommunityLayout} />
+          <Route exact path="/communities/new" component={CommunitiesLayout} />
+          <Route
+            exact
+            path="/communities/:id/edit"
+            component={CommunitiesLayout}
+          />
+          <Route exact path="/communities/:id" component={CommunityLayout} />
           <Route path="/" component={CommunitiesLayout} />
           <Route path="*">
             <h2>404 - Sorry, but this page could not be found!</h2>

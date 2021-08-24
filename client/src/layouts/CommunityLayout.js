@@ -16,7 +16,6 @@ export default function CommunityLayout() {
     axios
       .get(`/api/communities/${params.id}`)
       .then((res) => {
-        console.log("data", res.data);
         setCurrentCommunity(res.data);
         setIsLoading(false);
       })
@@ -27,9 +26,7 @@ export default function CommunityLayout() {
 
   return (
     <>
-      <CommunityContext.Provider
-        value={{ currentCommunity, setCurrentCommunity }}
-      >
+      <CommunityContext.Provider value={{ currentCommunity }}>
         <AppHeader className="CommunityHeader" />
         <main className="CommunityLayout">
           {isLoading || !currentCommunity ? (
@@ -37,9 +34,9 @@ export default function CommunityLayout() {
               Holy cow! Can't load that community!
             </div>
           ) : (
-            <Switch>
-              <Route path="/communities/:id" component={CommunityPage} />
-            </Switch>
+            // <Switch>
+            <Route path="/communities/:id" component={CommunityPage} />
+            // </Switch>
           )}
         </main>
       </CommunityContext.Provider>

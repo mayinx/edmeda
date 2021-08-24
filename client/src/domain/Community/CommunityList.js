@@ -6,13 +6,7 @@ export default function CommunityList({ resources }) {
   function renderResources() {
     if (Array.isArray(resources) && resources.length) {
       return resources.map((community) => {
-        return (
-          <CommunityListItem
-            community={community}
-            as="ListItem"
-            key={community._id}
-          />
-        );
+        return <CommunityListItem community={community} key={community._id} />;
       });
     } else {
       return (

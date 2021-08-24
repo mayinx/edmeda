@@ -8,7 +8,7 @@ import { FaUsers } from "react-icons/fa";
 
 export default function Sidebar(props) {
   return (
-    <sidebar className={props.className}>
+    <aside className={props.className}>
       <div className="SidebarHeader">
         <CommunityProfile community={props.community} />
       </div>
@@ -61,6 +61,6 @@ export default function Sidebar(props) {
           </li>
         </ol>
       </div>
-    </sidebar>
+    </aside>
   );
 }

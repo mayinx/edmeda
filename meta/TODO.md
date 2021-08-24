@@ -12,6 +12,55 @@
 
 - TODO: BUG: [Client] [New/Edit Community Modals] On invalid inputs, selects are not marked up with a red bottom border like reguar inputs do
 
+- TODO: BrandLogo - bro?! Ask schu if sch can ddo that?! + Check for default images and icons (Student, Patent, Teacher icons - group and community icons)
+
+- TODO: I planned on using a npm package for error- and crud-confirmation related user-notifications (the one is used for my Bello-App was quite nice) - so it's on my list already ...
+
+- TODO: REFAC: Namir: "I see you are selecting always main elemetType.ClassName why don't you just select the .ClassName? That should be enough"- e.g.
+
+  main section.Community {
+  main.CommunitiesLayout {
+
+@namirsab namirsab 22 hours ago
+Here again main.ClassName. I think you don't need that
+
+- in short: Switch to scss
+
+- TODO: Harmonize / merge relevant parts in utils.css with \_breakpoints.css
+
+- TODO: [SERVER]: Controller-functions: filter by current user
+- TODO: [SERVER]: Index controller function: Implement filter
+  // deconstructing the query object
+  //const { page, name, creator, type, grade } = req.query;
+
+  // if (title) {
+  // // regex for substring search (case insensitive)
+  // query.title = { $regex: new RegExp(title, "i") };
+  // }
+  // if (genre) {
+  // query.genre = genre.toLowerCase();
+  // }
+  // if (isRead) {
+  // query.isRead = isRead;
+  // }
+  // if (author) {
+  // query.author = author;
+  // }
+  // TODO: Whitelist permitted filter params with pick
+  // \_.pick(req.body, "genre", "isRead")
+  // Community.find(req.query)
+
+- TODO: [SERVER]: Index controller function: Implement pagination if needed
+  // Community.paginate(query, { page: page, limit: 20 })
+  // .limit(10)
+  // .sort("-createdAt")
+  // .populate("...")
+
+- TODO: Whiltelist params in Controller functions for every relevant crud function
+  // TODO: Make whitelisting params work with object arys as well- until then we chicken out here ;-)
+  // Community.create(\_.pick(req.body, "name", "type", "creator", "grade"))
+  // yhcek out "joi" and "jup"
+
 # Roadmap
 
 - Implememt User Auth etc.

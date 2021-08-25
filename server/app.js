@@ -11,6 +11,12 @@ const communitiesRouter = require("./routes/communities");
 */
 const app = express();
 
+// For SOCKET.IO:
+const http = require("http");
+const server = http.createServer(app);
+const { Server } = require("socket.io");
+const io = new Server(server);
+
 /*
   We setup middleware to:
   - parse the body of the request to json for us
@@ -68,3 +74,12 @@ mongoose
   .catch((error) => {
     console.error(error);
   });
+
+/* SOCKET.IO */
+io.on("connection", (socket) => {
+  console.log("a user connected");
+});
+
+server.listen(5000, () => {
+  console.log("listening on *:5000");
+});

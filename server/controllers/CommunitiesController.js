@@ -15,7 +15,53 @@ exports.index = function (req, res) {
     });
 };
 exports.create = function (req, res) {
+  let resource = null;
   Community.create(req.body)
+    .then((newResource) => {
+      resource = newResource;
+
+      // TODO: Ask Namir: Where to put stuff like this
+      // in an express / mongoose app? - in the group-model?:
+      const defaultGroups = [
+        {
+          name: "Community",
+          type: "default",
+          scope: "all",
+          community: newResource._id,
+          order: 0,
+        },
+        {
+          name: "Students",
+          type: "default",
+          scope: "student",
+          community: newResource._id,
+          order: 1,
+        },
+        {
+          name: "Teachers",
+          type: "default",
+          scope: "teacher",
+          community: newResource._id,
+          order: 2,
+        },
+        {
+          name: "Parents",
+          type: "default",
+          scope: "parents",
+          community: newResource._id,
+          order: 3,
+        },
+      ];
+
+      return Group.create(defaultGroups);
+    })
+    .then((groups) => {
+      return Community.findOneAndUpdate(
+        { _id: resource._id },
+        { $push: { groups: groups } },
+        { new: true }
+      );
+    })
     .then((newResource) => {
       res.status(201).send(newResource);
     })
@@ -29,7 +75,12 @@ exports.create = function (req, res) {
 };
 exports.find = function (req, res) {
   const { id } = req.params;
+
   Community.findById(id)
+    // TODO: Ask Namir: How to conditionally populate here?
+    // (to avoid implementig different api-endpoints for an
+    // popualted and unpopulated version)
+    .populate("groups")
     .then((community) => {
       if (!community) throw new NotFoundError("community", id);
       res.send(community);

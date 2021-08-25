@@ -18,11 +18,14 @@ export default function Main(props) {
         <div className="CommunityGroupLabel">
           <span className="GroupIcon"></span>
           <span className="GroupName">
-            # Students @ {props.community?.name}
+            {props.community?.name} >{" "}
+            <strong>#{props?.currentGroup?.name}</strong>
           </span>
         </div>
       </section>
-      <section className="MainContent"></section>
+      <section className="MainContent">
+        <h3>Group Chat #{props?.currentGroup?.name}</h3>
+      </section>
     </section>
   );
 }

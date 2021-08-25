@@ -1,18 +1,82 @@
 import "./Main.css";
-import { FaRegCaretSquareRight } from "react-icons/fa";
+// import { FaRegCaretSquareRight } from "react-icons/fa";
 import { FaCaretSquareRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
+
+import Messages from "./Main/Chat/Messages";
+import MessageInput from "./Main/Chat/MessageInput";
 
 import io from "socket.io-client";
 import { useEffect, useState } from "react";
 
+import pkgJSON from "../../../../package.json";
+
 export default function Main(props) {
+  // FYI: Uses "http://localhost:4000"in dev as socket endpoint
+  const socketURL =
+    process.env.NODE_ENV === "production"
+      ? window.location.hostname
+      : pkgJSON.proxy;
+
   const [socket, setSocket] = useState(null);
+
+  const [messages, setMessages] = useState({});
+
   useEffect(() => {
-    const newSocket = io(`http://${window.location.hostname}:3000`);
+    // open a web socket connection
+    const newSocket = io(socketURL, {
+      query: { groupId: props.currentGroup._id },
+    });
     setSocket(newSocket);
-    return () => newSocket.close();
-  }, [setSocket]);
+
+    newSocket.on("connect", function (socket) {
+      console.log("Connected!!");
+      console.log("---socket.current.id: ", socket);
+    });
+
+    // TODO: Check - can we pass args here to
+    // the server via the socket?
+    // newSocket.emit("getGroupMessages", props?.currentGroup?._id);
+
+    newSocket.emit("join", { groupId: props.currentGroup._id }, (err) => {
+      if (err) {
+        alert(err);
+      }
+    });
+
+    // On init event fired from server:
+    // Load the last 10 messages in the window.
+    newSocket.on("init", (messages) => {
+      // let msgReversed = messages.reverse();
+      console.log("on init - setMessages");
+      setMessages(messages);
+      // TODO: scrollToBottom
+    });
+
+    // Update the chat if a new message is broadcasted.
+    newSocket.on("push", (msg) => {
+      console.log("on push - add new message", msg);
+      console.log("on push - add new message");
+      console.log("on push - add new message");
+      setMessages((prevMessages) => {
+        const newMessages = { ...prevMessages, msg };
+        // newMessages[message.id] = message;
+        return newMessages;
+      });
+
+      // TODO:
+      // scrollToBottom
+    });
+    // return () => newSocket.close();
+    return () => {
+      newSocket.disconnect();
+    };
+    // }, [setSocket]);
+  }, [props.currentGroup]);
+
+  // useEffect(() => {
+
+  // }, [socket])
 
   return (
     <section className="CommunityMain">
@@ -28,7 +92,7 @@ export default function Main(props) {
         <div className="CommunityGroupLabel">
           <span className="GroupIcon"></span>
           <span className="GroupName">
-            {props.community?.name} >{" "}
+            {props.community?.name} >
             <strong>#{props?.currentGroup?.name}</strong>
           </span>
         </div>
@@ -38,7 +102,7 @@ export default function Main(props) {
 
         {socket ? (
           <div className="chat-container">
-            <Messages socket={socket} />
+            <Messages messages={messages} socket={socket} />
             <MessageInput socket={socket} />
           </div>
         ) : (

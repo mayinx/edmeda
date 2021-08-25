@@ -74,6 +74,7 @@ export default function Community({ community }) {
         </Link>
         <Link
           className="community__action"
+          to="#"
           onClick={(e) => openEditCommunityModal(e, community._id)}
         >
           <FaRegEdit className="actionIcon editIcon" />

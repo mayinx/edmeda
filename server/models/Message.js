@@ -15,7 +15,7 @@ const messageSchema = new Schema(
     },
     creator: {
       type: String,
-      required: true,
+      // required: true,
       // TODO:
       // type: Schema.Types.ObjectId,
       // ref: "User",

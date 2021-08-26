@@ -74,7 +74,7 @@ io.on("connection", (socket) => {
   console.log("--- groupId: ", groupId);
 
   // Get the last 10 messages from the database.
-  Message.find()
+  Message.find({ group: groupId })
     .sort({ createdAt: -1 })
     .limit(10)
     .exec((err, messages) => {
@@ -92,12 +92,13 @@ io.on("connection", (socket) => {
   // });
 
   socket.on("join", (groupId) => {
-    socket.join(groupId);
-    console.log("--- JOINED GROUP ", groupId);
-    //  socket.broadcast.to(groupId).emit("adminMessage", {
-    //        name: "admin",
-    //        content: `${name} has joined`,
-    //    });
+    try {
+      console.log("--- JOINED GROUP ", groupId);
+      socket.join(groupId);
+    } catch (e) {
+      console.log("[error]", "joining group failed:", e);
+      socket.emit("error", "couldnt perform requested action");
+    }
   });
 
   socket.on("disconnect", () => {
@@ -122,10 +123,10 @@ io.on("connection", (socket) => {
     // FYI: "push" can be used client-side
     // to hook into this server side event
     // via socket.io
-    // FYI: socket.emit => informs everyone incl. youself
-    // FYI: socket.broadcast.emit => inform everyone but youself
+    // FYI: "socket.emit" => informs everyone incl. youself
+    // FYI: "socket.broadcast.emit" => inform everyone but youself
     // socket.broadcast.emit("push", msg);
-    socket.emit("push", msg);
+    socket.emit("push", message);
   });
 });
 

@@ -103,7 +103,7 @@ export default function Main(props) {
         {socket ? (
           <div className="chat-container">
             <Messages messages={messages} socket={socket} />
-            <MessageInput socket={socket} />
+            <MessageInput socket={socket} currentGroup={props.currentGroup} />
           </div>
         ) : (
           <div>Not Connected</div>

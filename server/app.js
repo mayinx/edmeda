@@ -63,53 +63,99 @@ if (process.env.NODE_ENV === "production") {
 
 /* SOCKET.IO */
 
+// I feel we are gonna need that soon:
+// store connections
+var allClients = [];
+
 /* FYI: When the client is connected via the socket (i.ee. the socket is established) the "connection"-event is fired and the server can hook into that */
 io.on("connection", (socket) => {
-  console.log(`--- SOCKET CONNECTED (id: ${socket.id})`);
+  console.log("[SERVER] ON CONNECTION");
+  console.log("--- socket connected");
+  console.log("--- socket.id: ", socket.id);
+
+  // allClients.push(socket);
 
   // Join a conversation
-  const { groupId } = socket.handshake.query;
-  // socket.join(roomID)
-
-  console.log("--- groupId: ", groupId);
-
-  // Get the last 10 messages from the database.
-  Message.find({ group: groupId })
-    .sort({ createdAt: -1 })
-    .limit(10)
-    .exec((err, messages) => {
-      if (err) return console.error(err);
-
-      // Send the last messages to the user.
-      // FYI: "init" can be used client-side
-      // to hook into this server side event
-      // via socket.io
-      socket.emit("init", messages);
-    });
+  // TODO: Either by groupId (group chat) or userId (individual chat)
+  // let roomId = null;
+  // let groupId = null;
+  // let userId = null;
+  // let { roomId } = socket.handshake.query;
+  // socket.join(roomId);
 
   // socket.on("getGroupMessages", (groupId) => {
   //   console.log("Fetching Messages for User Group ", groupId);
   // });
 
-  socket.on("join", (groupId) => {
+  socket.on("disconnect", () => {
+    console.log("[SERVER] ON DISCONNECT");
+    console.log("--- SOCKET DISCONNECTED");
+    console.log("--- socket.id ", socket.id);
+    console.log("--- leaving room: ", socket.roomId);
+
+    var i = allClients.indexOf(socket);
+    allClients.splice(i, 1);
+
+    // TODO: Check - that necessary / explicitly I mean
+    socket.leave(socket.roomId);
+    // socket.leave(roomId);
+  });
+
+  socket.on("join", (args) => {
     try {
-      console.log("--- JOINED GROUP ", groupId);
-      socket.join(groupId);
+      // Join a conversation
+      // TODO: Either by groupId (group chat) or userId (individual chat)
+      console.log("[SERVER] ON JOIN");
+      console.log("--- args: ", args);
+      // ({ groupId, userId } = args);
+      const { groupId, userId } = args;
+      const roomId = groupId.toString();
+      // socket.roomId = roomId;
+      socket.join(roomId);
+      socket.roomId = roomId;
+      console.log("--- joined room: ", roomId);
+
+      const query = {};
+      if (groupId) {
+        query.group = groupId;
+      }
+      if (userId) {
+        query.user = userId;
+      }
+
+      // TODO: Load Messages either by groupId (group chat) or userId (individual chat)
+      // Get the last 10 messages from the database.
+      Message.find(query)
+        .sort({ createdAt: -1 })
+        .limit(10)
+        .exec((err, messages) => {
+          if (err) return console.error(err);
+
+          // Send the last messages to the user.
+          // FYI: "init" can be used client-side
+          // to hook into this server side event
+          // via socket.io
+
+          // socket.emit("init", messages);
+          io.to(roomId).emit("init", messages);
+        });
     } catch (e) {
-      console.log("[error]", "joining group failed:", e);
+      console.log("--- [error]", "joining group failed:", e);
       socket.emit("error", "couldnt perform requested action");
     }
   });
 
-  socket.on("disconnect", () => {
-    console.log("--- SOCKET DISCONNECTED");
-  });
-
   // Listen to connected users for a new message.
-  socket.on("newMessage", (msg) => {
-    console.log("Yeah - creating new message! ", msg);
+  socket.on("newMessage", (msg, args) => {
+    console.log("[SERVER] ON NEW MESSAGE");
+    console.log("--- msg: ", msg);
+    console.log("--- args: ", args);
     const message = new Message(msg);
 
+    const { groupId, userId } = args;
+    const roomId = groupId.toString();
+
+    console.log("--- current room: ", roomId);
     // Save the message to the database.
     message.save((err) => {
       if (err) return console.error(err);
@@ -126,7 +172,10 @@ io.on("connection", (socket) => {
     // FYI: "socket.emit" => informs everyone incl. youself
     // FYI: "socket.broadcast.emit" => inform everyone but youself
     // socket.broadcast.emit("push", msg);
-    socket.emit("push", message);
+    // console.log("roomId", roomId);
+    // socket.emit("push", message);
+    io.in(roomId).emit("push", message);
+    // socket.in(roomId).emit("push", message);
   });
 });
 

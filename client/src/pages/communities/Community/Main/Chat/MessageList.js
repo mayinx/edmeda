@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import "./Messages.css";
+import "./MessageList.css";
 
-export default function Messages(props) {
+export default function MessageList(props) {
   // const [messages, setMessages] = useState({});
 
   // useEffect(() => {
@@ -34,7 +34,7 @@ export default function Messages(props) {
   // }, [socket]);
 
   return (
-    <div className="message-list">
+    <div className="MessageList">
       {[...Object.values(props.messages)]
         .sort((a, b) => a.time - b.time)
         .map((message) => (

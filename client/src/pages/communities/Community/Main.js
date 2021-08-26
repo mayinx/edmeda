@@ -3,8 +3,8 @@ import "./Main.css";
 import { FaCaretSquareRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-import Messages from "./Main/Chat/Messages";
-import MessageInput from "./Main/Chat/MessageInput";
+import Messages from "./Main/Chat/MessageList";
+import MessageInput from "./Main/Chat/NewMessageForm";
 
 import io from "socket.io-client";
 import { useEffect, useState } from "react";
@@ -21,58 +21,76 @@ export default function Main(props) {
   const [socket, setSocket] = useState(null);
 
   const [messages, setMessages] = useState({});
+  const { currentGroup } = props;
+  const groupId = currentGroup._id;
 
   useEffect(() => {
+    if (!currentGroup) return;
+
     // open a web socket connection
     const newSocket = io(socketURL, {
       query: { groupId: props.currentGroup._id },
     });
+    // const newSocket = io(socketURL);
+    if (!newSocket) return;
     setSocket(newSocket);
 
-    newSocket.on("connect", function (socket) {
-      console.log("Connected!!");
-      console.log("---socket.current.id: ", socket);
+    // fired by the Socket instance upon
+    // connection AND reconnection.
+    newSocket.on("connect", () => {
+      console.log("[CLIENT] ON CONNECT!!");
+      console.log("--- connecteed to socket: ", newSocket.id);
+      console.log("--- attempting to join group: ", groupId);
+
+      // JOIN GROUP CHAT
+      // TODO: add currentUserID
+      if (newSocket && groupId) {
+        newSocket.emit("join", { groupId: groupId, userId: null }, (err) => {
+          if (err) {
+            alert(err);
+          }
+        });
+      }
     });
 
     // TODO: Check - can we pass args here to
     // the server via the socket?
-    // newSocket.emit("getGroupMessages", props?.currentGroup?._id);
-
-    newSocket.emit("join", { groupId: props.currentGroup._id }, (err) => {
-      if (err) {
-        alert(err);
-      }
-    });
+    // newSocket.emit("getGroupMessages", currentGroup._id);
 
     // On init event fired from server:
     // Load the last 10 messages in the window.
     newSocket.on("init", (messages) => {
       // let msgReversed = messages.reverse();
-      console.log("on init - setMessages");
+      console.log("[CLIENT] ON INIT");
+      console.log("--- setMessages");
       setMessages(messages);
       // TODO: scrollToBottom
     });
 
     // Update the chat if a new message is broadcasted.
     newSocket.on("push", (msg) => {
-      console.log("on push - add new message", msg);
-      console.log("on push - add new message");
-      console.log("on push - add new message");
+      console.log("[CLIENT] ON PUSH", msg);
+      console.log("--- add new message");
       setMessages((prevMessages) => {
-        const newMessages = { ...prevMessages, msg };
+        // const newMessages = { ...prevMessages, msg };
         // newMessages[message.id] = message;
-        return newMessages;
+        return [...prevMessages, msg];
       });
+
+      // newSocket.on("disconnecting", function () {
+      //   console.log("disconnecting.. ", newSocket.id);
+      // });
 
       // TODO:
       // scrollToBottom
+      window.scrollTo(0, document.body.scrollHeight);
     });
     // return () => newSocket.close();
     return () => {
-      newSocket.disconnect();
+      if (newSocket) newSocket.disconnect();
     };
     // }, [setSocket]);
-  }, [props.currentGroup]);
+  }, [currentGroup]);
 
   // useEffect(() => {
 
@@ -92,18 +110,17 @@ export default function Main(props) {
         <div className="CommunityGroupLabel">
           <span className="GroupIcon"></span>
           <span className="GroupName">
-            {props.community?.name} >
-            <strong>#{props?.currentGroup?.name}</strong>
+            {props.community?.name} ><strong>#{currentGroup.name}</strong>
           </span>
         </div>
       </section>
       <section className="MainContent">
-        <h3>Group Chat #{props?.currentGroup?.name}</h3>
+        <h3>Group Chat #{currentGroup.name}</h3>
 
         {socket ? (
           <div className="chat-container">
             <Messages messages={messages} socket={socket} />
-            <MessageInput socket={socket} currentGroup={props.currentGroup} />
+            <MessageInput socket={socket} currentGroup={currentGroup} />
           </div>
         ) : (
           <div>Not Connected</div>

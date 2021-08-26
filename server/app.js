@@ -14,9 +14,7 @@ const app = express();
 // For SOCKET.IO:
 const http = require("http");
 const httpServer = http.createServer(app);
-// const { Server } = require("socket.io");
-// const { Server } = require("socket.io");
-// const io = new Server(httpServer);
+
 const io = require("socket.io")(httpServer, {
   cors: {
     origin: "http://localhost:3000",
@@ -44,10 +42,6 @@ app.use(function logRequests(req, res, next) {
 });
 
 app.use("/api/communities", communitiesRouter);
-
-/*
-  We have to start the httpServer. We make it listen on the port 4000
-*/
 
 /* in production: Serve the production ready React app and re-route
 client-side routes to index.html.  */
@@ -91,14 +85,9 @@ io.on("connection", (socket) => {
     console.log("[SERVER] ON DISCONNECT");
     console.log("--- SOCKET DISCONNECTED");
     console.log("--- socket.id ", socket.id);
-    console.log("--- leaving room: ", socket.roomId);
 
     var i = allClients.indexOf(socket);
     allClients.splice(i, 1);
-
-    // TODO: Check - that necessary / explicitly I mean
-    socket.leave(socket.roomId);
-    // socket.leave(roomId);
   });
 
   socket.on("join", (args) => {
@@ -106,13 +95,13 @@ io.on("connection", (socket) => {
       // Join a conversation
       // TODO: Either by groupId (group chat) or userId (individual chat)
       console.log("[SERVER] ON JOIN");
+      console.log("--- socket.id ", socket.id);
       console.log("--- args: ", args);
       // ({ groupId, userId } = args);
       const { groupId, userId } = args;
       const roomId = groupId.toString();
       // socket.roomId = roomId;
       socket.join(roomId);
-      socket.roomId = roomId;
       console.log("--- joined room: ", roomId);
 
       const query = {};
@@ -131,23 +120,43 @@ io.on("connection", (socket) => {
         .exec((err, messages) => {
           if (err) return console.error(err);
 
-          // Send the last messages to the user.
-          // FYI: "init" can be used client-side
-          // to hook into this server side event
-          // via socket.io
-
           // socket.emit("init", messages);
           io.to(roomId).emit("init", messages);
         });
     } catch (e) {
       console.log("--- [error]", "joining group failed:", e);
-      socket.emit("error", "couldnt perform requested action");
+      socket.emit(
+        "error",
+        "[ON JOIN] couldnt perform requested action (joining room)"
+      );
+    }
+  });
+
+  socket.on("leave", (args) => {
+    try {
+      // Join a conversation
+      // TODO: Either by groupId (group chat) or userId (individual chat)
+      console.log("[SERVER] ON LEAVE");
+      console.log("--- socket.id ", socket.id);
+      console.log("--- args: ", args);
+      // ({ groupId, userId } = args);
+      const { groupId, userId } = args;
+      const roomId = groupId.toString();
+      socket.leave(roomId);
+      console.log("--- left room: ", roomId);
+    } catch (e) {
+      console.log("--- [error]", "leaving group failed:", e);
+      socket.emit(
+        "error",
+        "[ON LEAVE] couldnt perform requested action (leaving room)"
+      );
     }
   });
 
   // Listen to connected users for a new message.
   socket.on("newMessage", (msg, args) => {
     console.log("[SERVER] ON NEW MESSAGE");
+    console.log("--- socket.id ", socket.id);
     console.log("--- msg: ", msg);
     console.log("--- args: ", args);
     const message = new Message(msg);

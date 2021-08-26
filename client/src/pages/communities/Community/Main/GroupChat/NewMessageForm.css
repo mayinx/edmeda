@@ -1,12 +1,12 @@
 form.NewMessageForm {
   display: flex;
   flex-direction: column;
-  grid-gap: 1rem;
+
   gap: 1rem;
   padding: 1rem;
   flex: 0 0 100px;
   align-items: stretch;
-  justify-content: center;
+  justify-content: flex-end;
 }
 
 form.NewMessageForm input {
@@ -26,9 +26,9 @@ form.NewMessageForm input {
   font-size: inherit;
   display: flex;
   flex: auto;
-  border: 2px solid #b5cfd8;
+  border: 2px solid #93b5c6;
 }
 
 form.NewMessageForm input:focus {
-  border: 2px solid #93b5c6;
+  border: 2px solid #7393a7;
 }

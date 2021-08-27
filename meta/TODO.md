@@ -16,6 +16,9 @@
 
 - TODO: I planned on using a npm package for error- and crud-confirmation related user-notifications (the one is used for my Bello-App was quite nice) - so it's on my list already ...
 
+- TODO: Use afterInsert or something in Mongoose
+- TODO: Use propTypes for typesafety of component-props
+
 - TODO: REFAC: Namir: "I see you are selecting always main elemetType.ClassName why don't you just select the .ClassName? That should be enough"- e.g.
 
   main section.Community {

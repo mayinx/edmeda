@@ -1,28 +1,23 @@
-main.CommunityLayout .CommunityMain .MainContent .GroupChat .MessageList {
+.CommunityLayout .CommunityMain .MainContent .GroupChat .MessageList {
   flex: 1;
   overflow-y: scroll;
 }
 
-main.CommunityLayout
-  .CommunityMain
-  .MainContent
-  .GroupChat
-  .MessageList
-  .Message {
+.CommunityLayout .CommunityMain .MainContent .GroupChat .MessageList .Message {
   display: flex;
   flex-direction: row;
   padding: 0.5rem;
   border-bottom: 1px solid #eeeeee;
 }
 
-main.CommunityLayout
+.CommunityLayout
   .CommunityMain
   .MainContent
   .GroupChat
   .MessageList
   .Message
   .user,
-main.CommunityLayout
+.CommunityLayout
   .CommunityMain
   .MainContent
   .GroupChat
@@ -33,7 +28,7 @@ main.CommunityLayout
   color: #888888;
 }
 
-main.CommunityLayout
+.CommunityLayout
   .CommunityMain
   .MainContent
   .GroupChat
@@ -43,7 +38,7 @@ main.CommunityLayout
   min-width: 120px;
 }
 
-main.CommunityLayout
+.CommunityLayout
   .CommunityMain
   .MainContent
   .GroupChat

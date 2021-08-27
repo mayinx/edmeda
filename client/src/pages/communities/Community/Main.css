@@ -1,4 +1,4 @@
-main.CommunityLayout .CommunityMain .MainHeader {
+.CommunityLayout .CommunityMain .MainHeader {
   display: flex;
   flex: 0 0 var(--CommunityMainHeader-height);
   height: var(--CommunityMainHeader-height);
@@ -15,7 +15,7 @@ main.CommunityLayout .CommunityMain .MainHeader {
   box-shadow: rgb(50 50 93 / 25%) 0px 13px 27px -5px,
     rgb(0 0 0 / 30%) 0px 8px 16px -8px;
 }
-main.CommunityLayout .CommunityMain .MainContent {
+.CommunityLayout .CommunityMain .MainContent {
   display: flex;
   flex: 1 1 auto;
   min-width: 100%;
@@ -26,7 +26,7 @@ main.CommunityLayout .CommunityMain .MainContent {
   overflow: hidden;
 }
 
-main.CommunityLayout .CommunityMain .MainHeader a.ToggleSidebarBtn {
+.CommunityLayout .CommunityMain .MainHeader a.ToggleSidebarBtn {
   padding: 0.3rem;
   padding-right: 0.75rem;
 
@@ -39,14 +39,11 @@ main.CommunityLayout .CommunityMain .MainHeader a.ToggleSidebarBtn {
   align-items: center;
   justify-content: center;
 }
-main.CommunityLayout
-  .CommunityMain
-  a.CommunityMainHeader__Item
-  .sidebarToggleIcon {
+.CommunityLayout .CommunityMain a.CommunityMainHeader__Item .sidebarToggleIcon {
   color: whitesmoke;
 }
 
-main.CommunityLayout .CommunityMain .MainContent .GroupChat {
+.CommunityLayout .CommunityMain .MainContent .GroupChat {
   display: flex;
   flex: 1;
   flex-direction: column;

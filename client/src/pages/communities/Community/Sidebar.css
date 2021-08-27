@@ -5,7 +5,7 @@
    - See Community/media-queries.css for breakpoint specific behavior on larger screens
 */
 
-main.CommunityLayout .CommunitySidebar .SidebarHeader {
+.CommunityLayout .CommunitySidebar .SidebarHeader {
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
@@ -19,21 +19,21 @@ main.CommunityLayout .CommunitySidebar .SidebarHeader {
   padding: var(--CommunitySidebar--expanded-padding);
 }
 
-main.CommunityLayout .CommunitySidebar .SidebarContent {
+.CommunityLayout .CommunitySidebar .SidebarContent {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
-main.CommunityLayout .CommunitySidebar--collapsed .SidebarContent {
+.CommunityLayout .CommunitySidebar--collapsed .SidebarContent {
   padding: var(--CommunitySidebar--expanded-padding);
 }
-main.CommunityLayout .CommunitySidebar--expanded .SidebarContent {
+.CommunityLayout .CommunitySidebar--expanded .SidebarContent {
   padding: 1.25rem 0.75rem 1rem 0.75rem;
 }
 
 /* Group Lists */
 /* TOOO: Refactor: Extract into CommunityGroupsList component */
-main.CommunityLayout .CommunitySidebar .SidebarContent ol.CommunityGroupsList {
+.CommunityLayout .CommunitySidebar .SidebarContent ol.CommunityGroupsList {
   list-style: none;
   display: flex;
   gap: 0.5rem;

@@ -1,11 +1,11 @@
-main.CommunityLayout
+.CommunityLayout
   .CommunitySidebar--collapsed
   .SidebarContent
   ol.CommunityGroupsList {
   font-size: 1rem;
   line-height: 2.25;
 }
-main.CommunityLayout
+.CommunityLayout
   .CommunitySidebar--expanded
   .SidebarContent
   ol.CommunityGroupsList {
@@ -24,7 +24,7 @@ main.CommunityLayout
   line-height: 1.5;
 }
 
-main.CommunityLayout
+.CommunityLayout
   .CommunitySidebar
   .SidebarContent
   ol.CommunityGroupsList
@@ -38,7 +38,7 @@ main.CommunityLayout
   cursor: pointer;
 }
 
-main.CommunityLayout
+.CommunityLayout
   .CommunitySidebar
   .SidebarContent
   ol.CommunityGroupsList
@@ -47,7 +47,7 @@ main.CommunityLayout
   color: #5d7889;
 }
 
-main.CommunityLayout
+.CommunityLayout
   .CommunitySidebar--collapsed
   .SidebarContent
   ol.CommunityGroupsList
@@ -62,7 +62,7 @@ main.CommunityLayout
   border: 2px solid #95b3c6;
 }
 
-main.CommunityLayout
+.CommunityLayout
   .CommunitySidebar--expanded
   .SidebarContent
   ol.CommunityGroupsList
@@ -75,7 +75,7 @@ main.CommunityLayout
   border: 1px solid transparent;
 }
 
-main.CommunityLayout
+.CommunityLayout
   .CommunitySidebar--expanded
   .SidebarContent
   ol.CommunityGroupsList
@@ -85,7 +85,7 @@ main.CommunityLayout
   color: #385b72;
 }
 
-main.CommunityLayout
+.CommunityLayout
   .CommunitySidebar--collapsed
   .SidebarContent
   ol.CommunityGroupsList
@@ -95,7 +95,7 @@ main.CommunityLayout
   background-color: #dee6f1;
 }
 
-main.CommunityLayout
+.CommunityLayout
   .CommunitySidebar--expanded
   .SidebarContent
   ol.CommunityGroupsList
@@ -105,7 +105,7 @@ main.CommunityLayout
   background-color: #dee6f1;
 }
 
-main.CommunityLayout
+.CommunityLayout
   .CommunitySidebar
   .SidebarContent
   ol.CommunityGroupsList
@@ -114,7 +114,7 @@ main.CommunityLayout
   justify-content: flex-start;
 }
 
-main.CommunityLayout
+.CommunityLayout
   .CommunitySidebar--collapsed
   .SidebarContent
   ol.CommunityGroupsList
@@ -127,7 +127,7 @@ main.CommunityLayout
   height: 0;
 }
 
-main.CommunityLayout
+.CommunityLayout
   .CommunitySidebar--expanded
   .SidebarContent
   ol.CommunityGroupsList
@@ -147,7 +147,7 @@ main.CommunityLayout
   height: auto;
   margin-bottom: 0.5rem;
 }
-main.CommunityLayout
+.CommunityLayout
   .CommunitySidebar--expanded
   .SidebarContent
   ol.CommunityGroupsList
@@ -167,7 +167,7 @@ main.CommunityLayout
   border-bottom: 3px solid #a3b9c7;
 }
 
-main.CommunityLayout
+.CommunityLayout
   .CommunitySidebar--expanded
   .SidebarContent
   ol.CommunityGroupsList
@@ -177,7 +177,7 @@ main.CommunityLayout
   align-items: center;
   font-size: 125%;
 }
-main.CommunityLayout
+.CommunityLayout
   .CommunitySidebar--expanded
   .SidebarContent
   ol.CommunityGroupsList
@@ -189,7 +189,7 @@ main.CommunityLayout
   font-variant: all-petite-caps;
 }
 
-main.CommunityLayout
+.CommunityLayout
   .CommunitySidebar
   .SidebarContent
   ol.CommunityGroupsList
@@ -201,7 +201,7 @@ main.CommunityLayout
   align-items: center;
 }
 
-main.CommunityLayout
+.CommunityLayout
   .CommunitySidebar--collapsed
   .SidebarContent
   ol.CommunityGroupsList
@@ -210,7 +210,7 @@ main.CommunityLayout
   width: 2ch;
 }
 
-main.CommunityLayout
+.CommunityLayout
   .CommunitySidebar--expanded
   .SidebarContent
   ol.CommunityGroupsList
@@ -221,7 +221,7 @@ main.CommunityLayout
   letter-spacing: 1px;
 }
 
-main.CommunityLayout
+.CommunityLayout
   .CommunitySidebar
   .SidebarContent
   ol.CommunityGroupsList
@@ -231,7 +231,7 @@ main.CommunityLayout
   align-items: center;
 }
 
-main.CommunityLayout
+.CommunityLayout
   .CommunitySidebar--collapsed
   .SidebarContent
   ol.CommunityGroupsList
@@ -243,7 +243,7 @@ main.CommunityLayout
   height: 0;
 }
 
-main.CommunityLayout
+.CommunityLayout
   .CommunitySidebar--expanded
   .SidebarContent
   ol.CommunityGroupsList

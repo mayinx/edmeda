@@ -6,7 +6,7 @@
 */
 
 /* default: hidden */
-main.CommunityLayout .CommunitySidebar {
+.CommunityLayout .CommunitySidebar {
   background-color: var(--CommunitySidebar-bg-color);
   flex-basis: 33%;
   flex-grow: 1;
@@ -20,7 +20,7 @@ main.CommunityLayout .CommunitySidebar {
   -webkit-backface-visibility: hidden;
 }
 
-main.CommunityLayout .CommunityMain {
+.CommunityLayout .CommunityMain {
   background-color: var(--CommunityMain-bg-color);
   flex: 1 1 auto;
   min-width: 100%;
@@ -28,11 +28,11 @@ main.CommunityLayout .CommunityMain {
   flex-direction: column;
 }
 
-main.CommunityLayout .CommunitySidebar--toggled {
+.CommunityLayout .CommunitySidebar--toggled {
   visibility: visible;
   opacity: 1;
 }
 
-main.CommunityLayout .CommunitySidebar--toggled + .CommunityMain {
+.CommunityLayout .CommunitySidebar--toggled + .CommunityMain {
   min-width: 50%;
 }

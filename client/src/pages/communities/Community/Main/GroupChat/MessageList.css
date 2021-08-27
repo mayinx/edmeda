@@ -1,6 +1,6 @@
 .CommunityLayout .CommunityMain .MainContent .GroupChat .MessageList {
   flex: 1;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
 }
 
 .CommunityLayout .CommunityMain .MainContent .GroupChat .MessageList .Message {
@@ -46,4 +46,29 @@
   .Message
   .content {
   flex-grow: 1;
+}
+
+.CollectionEmpty {
+  max-width: fit-content;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.CollectionEmpty .imgWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0;
+  width: 100%;
+  height: 33%;
+}
+.CollectionEmpty .imgWrapper .CollectionEmptyPic {
+  border-radius: 20px;
+  display: block;
+  object-fit: cover;
+  height: 100%;
+  /* width: 50%; */
+  /* width: 50%; */
 }

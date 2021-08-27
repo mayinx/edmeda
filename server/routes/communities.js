@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 // const Community = require("../models/community");
 var _ = require("underscore");
+const auth = require("../middleware/auth");
 
 const CommunitiesController = require("../controllers/CommunitiesController.js");
 

@@ -1,4 +1,5 @@
 import CommunityFallbackProfilePic from "../../../../assets/happy-students.jpg";
+
 import "./Profile.css";
 import { FaUserAlt } from "react-icons/fa";
 import { FaDotCircle } from "react-icons/fa";

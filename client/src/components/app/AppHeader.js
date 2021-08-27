@@ -5,9 +5,9 @@ import { BsGrid3X3Gap } from "react-icons/bs";
 import { FaPlus } from "react-icons/fa";
 import { FaUserAlt } from "react-icons/fa";
 
-import Modal from "../modal/Modal.js";
-import NewCommunityPage from "../../pages/communities/NewCommunityPage.js";
-import EditCommunityPage from "../../pages/communities/EditCommunityPage.js";
+// import Modal from "../modal/Modal.js";
+// import NewCommunityPage from "../../pages/communities/NewCommunityPage.js";
+// import EditCommunityPage from "../../pages/communities/EditCommunityPage.js";
 
 const ADD_ACTION_FORM_ID = "newCommunity";
 const UPDATE_ACTION_FORM_ID = "editCommunity";

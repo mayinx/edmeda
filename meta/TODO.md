@@ -68,6 +68,7 @@ Here again main.ClassName. I think you don't need that
 
 - Implememt User Auth etc.
   - see https://www.freecodecamp.org/news/state-management-with-react-hooks/ (ncl. AuthContext etc.)
+  - https://levelup.gitconnected.com/authentication-using-jwt-in-mern-1cc5c8ccd03c
 
 # Resources to check:
 

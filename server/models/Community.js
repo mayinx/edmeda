@@ -38,7 +38,7 @@ const communitiesSchema = new Schema(
     versioKey: false,
     //TODO: test this
     strict: true, // only whitelisted (i.e. schema-defined) attrbutes are saved in the db - but: Aeht: Does NOT apply for query params! )
-    strictQuery: true, // ensutes teh abiove for query-params too
+    strictQuery: true, // ensutes the abiove for query-params too
   }
 );
 

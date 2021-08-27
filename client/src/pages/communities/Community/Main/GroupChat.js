@@ -1,5 +1,6 @@
-import Messages from "./GroupChat/MessageList";
+import MessageList from "./GroupChat/MessageList";
 import MessageInput from "./GroupChat/NewMessageForm";
+import "./GroupChat.css";
 
 import io from "socket.io-client";
 import { useEffect, useState } from "react";
@@ -15,7 +16,7 @@ export default function GroupChat(props) {
 
   const [socket, setSocket] = useState(null);
 
-  const [messages, setMessages] = useState({});
+  const [messages, setMessages] = useState([]);
 
   const { currentGroup } = props;
   const groupId = currentGroup._id;
@@ -61,8 +62,16 @@ export default function GroupChat(props) {
       // let msgReversed = messages.reverse();
       console.log("[CLIENT] ON INIT");
       console.log("--- setMessages");
+      console.log("--- messages: ", messages);
+
       setMessages(messages);
       // TODO: scrollToBottom
+    });
+
+    // TODO: User Notification!
+    newSocket.on("error", (error) => {
+      console.log("[CLIENT] ON ERROR");
+      console.log("--- an server side error occured: ", error);
     });
 
     // Update the chat if a new message is broadcasted.
@@ -72,6 +81,9 @@ export default function GroupChat(props) {
       setMessages((prevMessages) => {
         // const newMessages = { ...prevMessages, msg };
         // newMessages[message.id] = message;
+        //
+        // TODO: check!
+        // [...prevResources, ...(res.data.docs || [])];
         return [...prevMessages, msg];
       });
 
@@ -97,9 +109,22 @@ export default function GroupChat(props) {
   return (
     <section className="GroupChat">
       {/* <h3>Group Chat #{currentGroup.name}</h3> */}
+
+      <section className="GroupChat__Hero">
+        <div className="heading">
+          <h2 className="title">Group Chat</h2>
+          <h3 className="subtitle">
+            Welcome to the <strong>{currentGroup.name}'s group chat</strong>.
+            Enjoy chatting!
+          </h3>
+        </div>
+      </section>
+
       {socket ? (
         <>
-          <Messages messages={messages} socket={socket} />
+          <section className="GroupChat__Main">
+            <MessageList messages={messages} socket={socket} />
+          </section>
           <MessageInput socket={socket} currentGroup={currentGroup} />
         </>
       ) : (

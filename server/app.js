@@ -4,6 +4,7 @@ const cors = require("cors");
 const path = require("path");
 const mongoose = require("mongoose");
 const communitiesRouter = require("./routes/communities");
+const usersRouter = require("./routes/users");
 const Message = require("./models/Message");
 /*
   We create an express app calling
@@ -42,6 +43,7 @@ app.use(function logRequests(req, res, next) {
 });
 
 app.use("/api/communities", communitiesRouter);
+app.use("/api/users", usersRouter);
 
 /* in production: Serve the production ready React app and re-route
 client-side routes to index.html.  */
@@ -62,7 +64,7 @@ if (process.env.NODE_ENV === "production") {
 var allClients = [];
 
 /* FYI: When the client is connected via the socket (i.ee. the socket is established) the "connection"-event is fired and the server can hook into that */
-io.on("connection", (socket) => {
+io.on("connection", async (socket) => {
   console.log("[SERVER] ON CONNECTION");
   console.log("--- socket connected");
   console.log("--- socket.id: ", socket.id);
@@ -82,15 +84,23 @@ io.on("connection", (socket) => {
   // });
 
   socket.on("disconnect", () => {
-    console.log("[SERVER] ON DISCONNECT");
-    console.log("--- SOCKET DISCONNECTED");
-    console.log("--- socket.id ", socket.id);
+    try {
+      console.log("[SERVER] ON DISCONNECT");
+      console.log("--- SOCKET DISCONNECTED");
+      console.log("--- socket.id ", socket.id);
 
-    var i = allClients.indexOf(socket);
-    allClients.splice(i, 1);
+      var i = allClients.indexOf(socket);
+      allClients.splice(i, 1);
+    } catch (e) {
+      console.log("--- [error]", "Diconnecting socket failed:", e);
+      socket.emit(
+        "error",
+        "[SERVER > ON DISCONNECT]: Couldn't perform requested action (diconnecting socket and removing socket from list of active clients / connections)"
+      );
+    }
   });
 
-  socket.on("join", (args) => {
+  socket.on("join", async (args) => {
     try {
       // Join a conversation
       // TODO: Either by groupId (group chat) or userId (individual chat)
@@ -114,20 +124,25 @@ io.on("connection", (socket) => {
 
       // TODO: Load Messages either by groupId (group chat) or userId (individual chat)
       // Get the last 10 messages from the database.
-      Message.find(query)
-        .sort({ createdAt: -1 })
-        .limit(10)
-        .exec((err, messages) => {
-          if (err) return console.error(err);
+      // TODO: Ask Namir:
+      console.log("--- attempt to retrieve roomMessages ");
+      let roomMessages = await Message.roomMessages(query).limit(10);
+      console.log("--- roomMessages ", roomMessages);
+      // Message.find(query)
+      //   .sort({ createdAt: -1 })
+      //   .limit(10)
+      //   .exec((err, messages) => {
+      //     if (err) return console.error(err);
 
-          // socket.emit("init", messages);
-          io.to(roomId).emit("init", messages);
-        });
+      //     // socket.emit("init", messages);
+      //     io.to(roomId).emit("init", messages);
+      //   });
+      io.to(roomId).emit("init", roomMessages);
     } catch (e) {
-      console.log("--- [error]", "joining group failed:", e);
+      console.log("--- [error]", "Joining group failed:", e);
       socket.emit(
         "error",
-        "[ON JOIN] couldnt perform requested action (joining room)"
+        "[SERVER > ON JOIN]: Couldn't perform requested action (joining room and/or requesting group messages)"
       );
     }
   });
@@ -148,43 +163,51 @@ io.on("connection", (socket) => {
       console.log("--- [error]", "leaving group failed:", e);
       socket.emit(
         "error",
-        "[ON LEAVE] couldnt perform requested action (leaving room)"
+        "[SERVER > ON LEAVE]: Couldnt perform requested action (leaving room)"
       );
     }
   });
 
   // Listen to connected users for a new message.
   socket.on("newMessage", (msg, args) => {
-    console.log("[SERVER] ON NEW MESSAGE");
-    console.log("--- socket.id ", socket.id);
-    console.log("--- msg: ", msg);
-    console.log("--- args: ", args);
-    const message = new Message(msg);
+    try {
+      console.log("[SERVER] ON NEW MESSAGE");
+      console.log("--- socket.id ", socket.id);
+      console.log("--- msg: ", msg);
+      console.log("--- args: ", args);
+      const message = new Message(msg);
 
-    const { groupId, userId } = args;
-    const roomId = groupId.toString();
+      const { groupId, userId } = args;
+      const roomId = groupId.toString();
 
-    console.log("--- current room: ", roomId);
-    // Save the message to the database.
-    message.save((err) => {
-      if (err) return console.error(err);
-    });
+      console.log("--- current room: ", roomId);
+      // Save the message to the database.
+      message.save((err) => {
+        if (err) return console.error(err);
+      });
 
-    Message.countDocuments({}, function (err, count) {
-      console.log("%d messages", count);
-    });
+      Message.countDocuments({}, function (err, count) {
+        console.log("%d messages", count);
+      });
 
-    // Notify all other users about a new message.
-    // FYI: "push" can be used client-side
-    // to hook into this server side event
-    // via socket.io
-    // FYI: "socket.emit" => informs everyone incl. youself
-    // FYI: "socket.broadcast.emit" => inform everyone but youself
-    // socket.broadcast.emit("push", msg);
-    // console.log("roomId", roomId);
-    // socket.emit("push", message);
-    io.in(roomId).emit("push", message);
-    // socket.in(roomId).emit("push", message);
+      // Notify all other users about a new message.
+      // FYI: "push" can be used client-side
+      // to hook into this server side event
+      // via socket.io
+      // FYI: "socket.emit" => informs everyone incl. youself
+      // FYI: "socket.broadcast.emit" => inform everyone but youself
+      // socket.broadcast.emit("push", msg);
+      // console.log("roomId", roomId);
+      // socket.emit("push", message);
+      io.in(roomId).emit("push", message);
+      // socket.in(roomId).emit("push", message);
+    } catch (e) {
+      console.log("--- [error]", "creating message failed:", e);
+      socket.emit(
+        "error",
+        "[SERVER > ON NEWMESSAGE]: Couldnt perform requested action (creating and returning message)"
+      );
+    }
   });
 });
 

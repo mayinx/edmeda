@@ -1,0 +1,49 @@
+.CommunityLayout .CommunityMain .MainContent .GroupChat {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: stretch;
+  /* padding: 1rem 1rem 0 1rem; */
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+  gap: 0.5rem;
+}
+
+.GroupChat .GroupChat__Hero {
+  background-image: url("../../../../assets/tumbleweed-rolls-in-the-desert.jpg");
+  background-size: cover;
+  background-position: center;
+
+  display: flex;
+
+  box-shadow: rgb(50 50 93 / 25%) 0px 13px 27px -5px,
+    rgb(0 0 0 / 30%) 0px 8px 16px -8px;
+
+  position: relative;
+  min-height: 10vh;
+
+  color: #506f82;
+  padding: 1rem;
+}
+
+.GroupChat .GroupChat__Hero > * {
+  z-index: 101;
+}
+.GroupChat .GroupChat__Hero::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(120deg, #eaee44, #33d0ff);
+  background-color: #333;
+  opacity: 0.7;
+}
+
+.GroupChat .GroupChat__Main {
+  padding: 1rem 1rem 0 1rem;
+  flex: 1;
+  overflow-y: scroll;
+}

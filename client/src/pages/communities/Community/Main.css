@@ -1,5 +1,6 @@
-main.CommunityLayout .CommunityMain .MainHeader {
+.CommunityLayout .CommunityMain .MainHeader {
   display: flex;
+  flex: 0 0 var(--CommunityMainHeader-height);
   height: var(--CommunityMainHeader-height);
 
   background-color: var(--CommunityMainHeader-bg-color);
@@ -14,7 +15,7 @@ main.CommunityLayout .CommunityMain .MainHeader {
   box-shadow: rgb(50 50 93 / 25%) 0px 13px 27px -5px,
     rgb(0 0 0 / 30%) 0px 8px 16px -8px;
 }
-main.CommunityLayout .CommunityMain .MainContent {
+.CommunityLayout .CommunityMain .MainContent {
   display: flex;
   flex: 1 1 auto;
   min-width: 100%;
@@ -22,10 +23,10 @@ main.CommunityLayout .CommunityMain .MainContent {
   align-items: center;
 
   flex-direction: column;
-  padding-top: 3rem;
+  overflow: hidden;
 }
 
-main.CommunityLayout .CommunityMain .MainHeader a.ToggleSidebarBtn {
+.CommunityLayout .CommunityMain .MainHeader a.ToggleSidebarBtn {
   padding: 0.3rem;
   padding-right: 0.75rem;
 
@@ -38,9 +39,17 @@ main.CommunityLayout .CommunityMain .MainHeader a.ToggleSidebarBtn {
   align-items: center;
   justify-content: center;
 }
-main.CommunityLayout
-  .CommunityMain
-  a.CommunityMainHeader__Item
-  .sidebarToggleIcon {
+.CommunityLayout .CommunityMain a.CommunityMainHeader__Item .sidebarToggleIcon {
   color: whitesmoke;
+}
+
+.CommunityLayout .CommunityMain .MainContent .GroupChat {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 1rem 1rem 0 1rem;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
 }

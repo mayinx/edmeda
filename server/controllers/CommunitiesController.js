@@ -1,5 +1,6 @@
-const Community = require("../models/community");
-const Group = require("../models/group");
+const Community = require("../models/Community");
+const Group = require("../models/Group");
+const Message = require("../models/Message");
 const { NotFoundError, InternalError } = require("../errors/AppErrors");
 
 exports.index = function (req, res) {

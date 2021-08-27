@@ -1,4 +1,4 @@
-main.CommunityLayout .CommunitySidebar .CommunityProfile {
+.CommunityLayout .CommunitySidebar .CommunityProfile {
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
@@ -17,7 +17,7 @@ main.CommunityLayout .CommunitySidebar .CommunityProfile {
   /* border: 2px solid #95b3c6; */
 }
 
-main.CommunityLayout
+.CommunityLayout
   .CommunitySidebar
   .SidebarHeader
   .CommunityProfile
@@ -36,7 +36,7 @@ main.CommunityLayout
   padding: 0.25rem;
 }
 
-main.CommunityLayout
+.CommunityLayout
   .CommunitySidebar--expanded
   .SidebarHeader
   .CommunityProfile
@@ -45,7 +45,7 @@ main.CommunityLayout
   opacity: 1;
 }
 
-main.CommunityLayout
+.CommunityLayout
   .CommunitySidebar--collapsed
   .SidebarHeader
   .CommunityProfile
@@ -58,7 +58,7 @@ main.CommunityLayout
   padding: 0;
 }
 
-main.CommunityLayout
+.CommunityLayout
   .CommunitySidebar
   .SidebarHeader
   .CommunityProfile
@@ -70,7 +70,7 @@ main.CommunityLayout
   width: 100%;
   height: 100%;
 }
-main.CommunityLayout
+.CommunityLayout
   .CommunitySidebar
   .CommunityProfile
   .CommunityProfile__Image--wrapper
@@ -81,7 +81,7 @@ main.CommunityLayout
   height: 100%;
 }
 
-main.CommunityLayout
+.CommunityLayout
   .CommunitySidebar
   .SidebarHeader
   .CommunityProfile
@@ -97,7 +97,7 @@ main.CommunityLayout
   display: none;
 }
 
-main.CommunityLayout
+.CommunityLayout
   .CommunitySidebar
   .SidebarHeader
   .CommunityProfile
@@ -106,7 +106,7 @@ main.CommunityLayout
   display: flex;
   align-items: center;
 }
-main.CommunityLayout
+.CommunityLayout
   .CommunitySidebar
   .SidebarHeader
   .CommunityProfile
@@ -115,7 +115,7 @@ main.CommunityLayout
   margin-right: 0.5rem;
 }
 
-main.CommunityLayout
+.CommunityLayout
   .CommunitySidebar
   .SidebarHeader
   .CommunityProfile
@@ -124,7 +124,7 @@ main.CommunityLayout
   display: none;
 }
 
-main.CommunityLayout
+.CommunityLayout
   .CommunitySidebar
   .SidebarHeader
   .CommunityProfile

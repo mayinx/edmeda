@@ -41,6 +41,7 @@ const groupsSchema = new Schema(
       ref: "Community",
       // required: true,
     },
+    messages: [{ type: Schema.Types.ObjectId, ref: "Message" }],
   },
   {
     timestamps: true,

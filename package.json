@@ -2,9 +2,9 @@
   "name": "edmeda",
   "version": "1.0.0",
   "engines": {
-    "node": "16.5.0"
+    "node": "16.7.0"
   },
-  "description": "",
+  "description": "Easy remote communication & collaboration for schools",
   "scripts": {
     "start": "node server/app.js",
     "heroku-postbuild": "npm install && cd client && npm install && npm run build",
@@ -31,6 +31,7 @@
     "jshint": "^2.13.0",
     "mongoose": "^5.13.4",
     "mongoose-paginate-v2": "^1.4.1",
+    "socket.io": "^4.1.3",
     "underscore": "^1.13.1"
   }
 }

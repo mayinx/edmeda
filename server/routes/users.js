@@ -7,8 +7,8 @@ const UsersController = require("../controllers/UsersController.js");
 
 /* DEFAUTL RESTFUL COMMUNITIES API INTERFACE */
 router.post("/register", UsersController.register);
-router.post("/login", UsersController.register);
-router.post("/tokenIsValid", UsersController.tokenIsValid);
+router.post("/login", UsersController.login);
+router.post("/validateToken", UsersController.validateToken);
 router.get("/", auth, UsersController.index);
 router.post("/", auth, UsersController.create);
 router.get("/:id", auth, UsersController.find);

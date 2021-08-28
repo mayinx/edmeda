@@ -8,9 +8,14 @@ import CommunitiesContext from "../../contexts/CommunitiesContext";
 import FormConfig from "./FormConfig";
 import TextInputFormGroup from "../../components/form/groups/TextInputFormGroup";
 import SelectInputFormGroup from "../../components/form/groups/SelectInputFormGroup";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 export default function NewCommunityPage(props) {
   const { communities, setCommunities } = useContext(CommunitiesContext);
+  const { currentUserData, setCurrentUserData } = useContext(
+    CurrentUserContext
+  );
+
   const history = useHistory();
 
   const formMethods = useForm();
@@ -21,7 +26,9 @@ export default function NewCommunityPage(props) {
 
   const onSubmit = (data) => {
     axios
-      .post("/api/communities", data)
+      .post("/api/communities", data, {
+        headers: { "x-auth-token": currentUserData.token },
+      })
       .then((res) => {
         setCommunities([res.data, ...communities]);
         history.goBack();

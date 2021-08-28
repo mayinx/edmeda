@@ -10,7 +10,7 @@ const USER_TYPES = {
 
 const UserSchema = new Schema(
   {
-    name: {
+    fullName: {
       type: String,
       required: true,
       trim: true,
@@ -33,7 +33,7 @@ const UserSchema = new Schema(
     // },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true, minlength: 5 },
-    userName: { type: String },
+    userName: { type: String, required: true },
     creator: {
       type: String,
       required: false,

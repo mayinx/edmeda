@@ -7,6 +7,7 @@ import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import { FaRegEdit, FaTrashAlt } from "react-icons/fa";
 import axios from "axios";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 export default function Community({ community }) {
   const communityProfilePicImgSrc =
@@ -14,12 +15,22 @@ export default function Community({ community }) {
 
   const { communities, setCommunities } = useContext(CommunitiesContext);
 
+  const { currentUserData, setCurrentUserData } = useContext(
+    CurrentUserContext
+  );
+
   const history = useHistory();
 
   const removeResource = (e, id) => {
     e.stopPropagation();
+    console.log(
+      "[CLIENT > CommunityListItem > currentUserData]: ",
+      currentUserData
+    );
     axios
-      .delete(`api/communities/${id}`)
+      .delete(`api/communities/${id}`, {
+        headers: { "x-auth-token": currentUserData.token },
+      })
       .then((res) => {
         setCommunities(
           communities.filter((resource) => {

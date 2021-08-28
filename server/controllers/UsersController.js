@@ -8,14 +8,22 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 // const auth = require("../middleware/auth");
 
+/* AUTHENTICATION RELATED ROUTES */
 exports.register = async (req, res) => {
   try {
-    let { email, password, passwordCheck, userName } = req.body;
+    // let { email, password, passwordCheck, userName } = req.body;
+    let { email, password, passwordCheck, fullName, userName } = req.body;
+    const type = "teacher";
+    console.log("[SERVER | USERS#REGISTER]");
+    console.log("--- req.body", req.body);
+
+    if (!userName) userName = email;
 
     // validate
-
-    if (!email || !password || !passwordCheck)
-      return res.status(400).json({ msg: "Not all fields have been entered." });
+    if (!email || !password || !passwordCheck || !fullName || !userName)
+      return res
+        .status(400)
+        .json({ msg: "[USERS#REGISTER] Not all fields have been entered." });
     if (password.length < 5)
       return res
         .status(400)
@@ -25,24 +33,33 @@ exports.register = async (req, res) => {
         .status(400)
         .json({ msg: "Enter the same password twice for verification." });
 
-    const existingUser = await User.findOne({ email: email });
+    const existingUser = await User.findOne({ type, email });
     if (existingUser)
       return res
         .status(400)
         .json({ msg: "An account with this email already exists." });
 
-    if (!userName) userName = email;
+    // if (!userName) userName = email;
 
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);
 
     const newUser = new User({
+      type,
       email,
       password: passwordHash,
+      fullName,
       userName,
     });
     const savedUser = await newUser.save();
-    res.json(savedUser);
+    console.log("--- Succcessfully registered new user!");
+    console.log("All users: ", User.find({}));
+    // res.json(savedUser); // TODO: verify - what attributes to return?
+    res.json({
+      id: savedUser._id,
+      type: savedUser.type,
+      userName: savedUser.userName,
+    });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -52,9 +69,14 @@ exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
+    console.log("[SERVER | USERS#LOGIN]");
+    console.log("--- req.body", req.body);
+
     // validate
     if (!email || !password)
-      return res.status(400).json({ msg: "Not all fields have been entered." });
+      return res
+        .status(400)
+        .json({ msg: "[USERS#LOGIN] Not all fields have been entered." });
 
     const user = await User.findOne({ email: email });
     if (!user)
@@ -65,12 +87,18 @@ exports.login = async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ msg: "Invalid credentials." });
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+    // TODO: recheck: Saw otehr examples wher e a whole bunch of user attrubutes
+    // is passed in here - not just { id: user._id } ...?
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: process.env.JWT_EXPIRES_IN,
+    });
+
     console.log("token", token);
     res.json({
       token,
       user: {
         id: user._id,
+        type: user.type,
         userName: user.userName,
       },
     });
@@ -79,21 +107,80 @@ exports.login = async (req, res) => {
   }
 };
 
-exports.tokenIsValid = async (req, res) => {
+exports.validateToken = async (req, res) => {
   try {
-    const token = req.header("x-auth-token");
-    if (!token) return res.json(false);
+    console.log("[SERVER | USERS#validateToken]");
+    console.log("--- req.header", req.header);
 
+    // check header or url parameters or post parameters for token
+    const token =
+      req.header("x-auth-token") || req.body.token || req.query.token;
+    if (!token) return res.status(401).json({ validToken: false });
+    console.log("--- token present!", token);
+
+    // Check token that was passed by decoding token using secret
     const verified = jwt.verify(token, process.env.JWT_SECRET);
-    if (!verified) return res.json(false);
+    if (!verified) return res.status(401).json({ validToken: false });
+    console.log("--- token verified!", verified);
 
     const user = await User.findById(verified.id);
-    if (!user) return res.json(false);
+    if (!user) return res.status(401).json({ validToken: false });
+    console.log("--- user found by verified id!", user);
+    console.log("--- token", token);
 
-    return res.json(true);
+    // TODO: Check that:
+    //Note: you can renew token by creating new token(i.e.
+    //refresh it)w/ new expiration time at this point, but I’m
+    //passing the old token back.
+    // var token = utils.generateToken(user);
+
+    // return res.json(true);
+    //return user using the id from JWTToken
+    // we don't return the complete user object of course - just the relevant / absolutely needed parts
+    return res.json({
+      validToken: true,
+      token: token,
+      user: {
+        id: user._id,
+        type: user.type,
+        userName: user.userName,
+      },
+    });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
+};
+
+// exports.currentUser = async (req, res) => {
+//   const user = await User.findById(req.user);
+//   res.json({
+//     userName: user.userName,
+//     id: user._id,
+//   });
+// };
+
+/* DEFAULT RESTFUL ROUTES */
+
+exports.find = function (req, res) {
+  const { id } = req.params;
+
+  //TODO: FIlter al sensitive stuff out
+  // - check what the conventions are in the js/express community
+
+  User.findById(id)
+    .then((resource) => {
+      if (!resource) throw new NotFoundError("user", id);
+      res.send(resource);
+    })
+    .catch((e) => {
+      if (e.name === "NotFoundError") {
+        res.status(404).json({ error: e });
+      } else {
+        res.status(500).json({
+          error: `Something went wrong, please try again later: ${e}`,
+        });
+      }
+    });
 };
 
 exports.index = function (req, res) {
@@ -124,6 +211,9 @@ exports.create = function (req, res) {
 exports.find = function (req, res) {
   const { id } = req.params;
 
+  //TODO: FIlter al sensitive stuff out (like pw etc.)
+  // - check what the conventions are in teh js/express community
+
   User.findById(id)
     .then((resource) => {
       if (!resource) throw new NotFoundError("user", id);
@@ -139,6 +229,7 @@ exports.find = function (req, res) {
       }
     });
 };
+
 exports.update = function (req, res) {
   const { id } = req.params;
 

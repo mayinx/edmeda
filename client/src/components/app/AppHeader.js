@@ -1,16 +1,20 @@
-import { Link, Route, Switch } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // import BrandLogo from "../../assets/2973980108_ed69085414_o.jpg";
 import { BsGrid3X3Gap } from "react-icons/bs";
 import { FaPlus } from "react-icons/fa";
 import { FaUserAlt } from "react-icons/fa";
 
+import AuthOptions from "../auth/AuthOptions";
+
 // import Modal from "../modal/Modal.js";
 // import NewCommunityPage from "../../pages/communities/NewCommunityPage.js";
 // import EditCommunityPage from "../../pages/communities/EditCommunityPage.js";
 
-const ADD_ACTION_FORM_ID = "newCommunity";
-const UPDATE_ACTION_FORM_ID = "editCommunity";
+import "./AppHeader.css";
+
+// const ADD_ACTION_FORM_ID = "newCommunity";
+// const UPDATE_ACTION_FORM_ID = "editCommunity";
 
 export default function AppHeader() {
   return (
@@ -31,6 +35,7 @@ export default function AppHeader() {
         <Link to="#">
           <FaUserAlt className="itemIcon userAvatarIcon" />
         </Link>
+        <AuthOptions />
       </div>
     </header>
   );

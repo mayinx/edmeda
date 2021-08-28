@@ -8,6 +8,7 @@ import CommunitiesContext from "../../contexts/CommunitiesContext";
 import FormConfig from "./FormConfig";
 import TextInputFormGroup from "../../components/form/groups/TextInputFormGroup";
 import SelectInputFormGroup from "../../components/form/groups/SelectInputFormGroup";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 // import { reset } from "nodemon";
 
 export default function EditCommunityPage(props) {
@@ -22,9 +23,15 @@ export default function EditCommunityPage(props) {
     formState: { errors },
   } = formMethods;
 
+  const { currentUserData, setCurrentUserData } = useContext(
+    CurrentUserContext
+  );
+
   useEffect(() => {
     axios
-      .get(`/api/communities/${id}`)
+      .get(`/api/communities/${id}`, {
+        headers: { "x-auth-token": currentUserData.token },
+      })
       .then((res) => {
         setCommunity(res.data);
       })
@@ -42,7 +49,9 @@ export default function EditCommunityPage(props) {
 
   const onSubmit = (data) => {
     axios
-      .patch(`/api/communities/${id}`, data)
+      .patch(`/api/communities/${id}`, data, {
+        headers: { "x-auth-token": currentUserData.token },
+      })
       .then((res) => {
         const newList = communities.map((el) => {
           if (el._id === id) {

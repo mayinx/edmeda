@@ -9,7 +9,7 @@ const CommunitiesController = require("../controllers/CommunitiesController.js")
 /* DEFAUTL RESTFUL COMMUNITIES API INTERFACE */
 router.get("/", CommunitiesController.index);
 router.post("/", CommunitiesController.create);
-router.get("/:id", CommunitiesController.find);
+router.get("/:id", auth, CommunitiesController.find);
 router.patch("/:id", CommunitiesController.update);
 router.delete("/:id", CommunitiesController.delete);
 

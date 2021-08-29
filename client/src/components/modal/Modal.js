@@ -19,15 +19,28 @@
       />
 */
 
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import "./Modal.css";
 import { useHistory } from "react-router";
 import { createPortal } from "react-dom";
 import { FaRegTimesCircle } from "react-icons/fa";
-
+import ModalContext from "../../contexts/ModalContext";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export default function Modal(props) {
   const history = useHistory();
   const goBackTo = props.goBackTo || "/";
+
+  const { modalOpen, setModalOpen } = useContext(ModalContext);
+
+  useEffect(() => {
+    setModalOpen(true);
+
+    return () => {
+      setModalOpen(false);
+    };
+  }, []);
+
   return createPortal(
     <div className="Modal">
       <div className="Modal__inner">
@@ -72,6 +85,17 @@ export default function Modal(props) {
           </div>
         </div>
       </div>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>,
     document.getElementById("modal_root")
   );

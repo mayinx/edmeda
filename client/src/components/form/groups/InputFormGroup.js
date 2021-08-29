@@ -1,20 +1,20 @@
 import { useFormContext } from "react-hook-form";
 
-export default function TextInputFormGroup({
-  name,
-  formConfig,
-  ...otherProps
-}) {
+export default function InputFormGroup({ name, formConfig, ...otherProps }) {
   const { register, ErrorMessage, errors } = useFormContext(); // retrieve all hook methods
   // const attributes = { ...otherProps, ...formConfig };
   const attributes = { ...formConfig, ...otherProps };
   const {
+    type,
     id,
     label,
     defaultValue,
     placeholder,
     validationRuleset,
   } = attributes;
+
+  console.log("validationRuleset ", validationRuleset);
+  console.log("otherProps ", otherProps);
 
   return (
     <div
@@ -29,7 +29,7 @@ export default function TextInputFormGroup({
         className="FormGroup__Ctrl"
         id={id || name}
         name={name}
-        type="text"
+        type={type || "text"}
         defaultValue={defaultValue}
         placeholder={placeholder}
         {...register(`${name}`, validationRuleset)}

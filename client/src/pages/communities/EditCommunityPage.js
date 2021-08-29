@@ -62,7 +62,7 @@ export default function EditCommunityPage(props) {
         });
 
         setCommunities(newList);
-        history.push("/");
+        history.push("/communities");
       })
       .catch((err) => {
         console.log(

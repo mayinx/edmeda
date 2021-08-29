@@ -11,8 +11,14 @@ const jwt = require("jsonwebtoken");
 /* AUTHENTICATION RELATED ROUTES */
 exports.register = async (req, res) => {
   try {
-    // let { email, password, passwordCheck, userName } = req.body;
-    let { email, password, passwordCheck, fullName, userName } = req.body;
+    // let { email, password, passwordConfirmation, userName } = req.body;
+    let {
+      email,
+      password,
+      passwordConfirmation,
+      fullName,
+      userName,
+    } = req.body;
     const type = "teacher";
     console.log("[SERVER | USERS#REGISTER]");
     console.log("--- req.body", req.body);
@@ -20,7 +26,7 @@ exports.register = async (req, res) => {
     if (!userName) userName = email;
 
     // validate
-    if (!email || !password || !passwordCheck || !fullName || !userName)
+    if (!email || !password || !passwordConfirmation || !fullName || !userName)
       return res
         .status(400)
         .json({ msg: "[USERS#REGISTER] Not all fields have been entered." });
@@ -28,7 +34,7 @@ exports.register = async (req, res) => {
       return res
         .status(400)
         .json({ msg: "The password needs to be at least 5 characters long." });
-    if (password !== passwordCheck)
+    if (password !== passwordConfirmation)
       return res
         .status(400)
         .json({ msg: "Enter the same password twice for verification." });

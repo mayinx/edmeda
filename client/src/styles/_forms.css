@@ -1,13 +1,3 @@
-/* concerns more or less all forms - TODO: Remve community scoping in style rulesets amd move to a global forms-style-file */
-
-.CommunityModalFormPage {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  padding: 1rem;
-}
-/*
 .Form {
   display: flex;
   flex-direction: column;
@@ -63,4 +53,4 @@
   margin-top: 1rem;
   flex-direction: row;
   justify-content: flex-end;
-} */
+}

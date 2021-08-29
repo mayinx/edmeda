@@ -6,7 +6,8 @@ export default function SelectInputFormGroup({
   ...otherProps
 }) {
   const { register, ErrorMessage } = useFormContext(); // retrieve all hook methods
-  const attributes = { ...otherProps, ...formConfig };
+  // const attributes = { ...otherProps, ...formConfig };
+  const attributes = { ...formConfig, ...otherProps };
   const {
     id,
     label,

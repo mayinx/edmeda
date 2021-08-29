@@ -4,17 +4,23 @@ import { useState, useEffect } from "react";
 
 import axios from "axios";
 
-import Register from "../../components/auth/Register";
-import Login from "../../components/auth/Login";
-import CurrentUserContext from "../../contexts/CurrentUserContext";
+// import Register from "../../components/auth/Register";
+// import Login from "../../components/auth/Login";
 
+//  TODO: Ok - okei: Switch to redux already ;-)
+import CurrentUserContext from "../../contexts/CurrentUserContext";
+import CommunitiesContext from "../../contexts/CommunitiesContext";
+import ModalContext from "../../contexts/ModalContext";
+
+import RegistrationLayout from "../../layouts/RegistrationLayout";
 import CommunityLayout from "../../layouts/CommunityLayout.js";
 import CommunitiesLayout from "../../layouts/CommunitiesLayout";
-import CommunitiesContext from "../../contexts/CommunitiesContext";
 
-function setToken(userToken) {}
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+// function setToken(userToken) {}
 
-function getToken() {}
+// function getToken() {}
 
 function App() {
   const [currentUserData, setCurrentUserData] = useState({
@@ -65,7 +71,7 @@ function App() {
     checkLoggedIn();
   }, []);
 
-  const token = getToken();
+  // const token = getToken();
 
   const [communities, setCommunities] = useState([]);
 
@@ -80,34 +86,55 @@ function App() {
       });
   }, []);
 
+  const [modalOpen, setModalOpen] = useState();
+
   return (
-    <div className="App">
-      <CurrentUserContext.Provider
-        value={{ currentUserData, setCurrentUserData }}
-      >
-        <CommunitiesContext.Provider value={{ communities, setCommunities }}>
-          <Switch>
-            <Route path="/register" component={Register} />
-            <Route path="/login" component={Login} />
-            <Route
-              exact
-              path="/communities/new"
-              component={CommunitiesLayout}
+    <ModalContext.Provider value={{ modalOpen, setModalOpen }}>
+      <div className={`App ${modalOpen && "App--modalOpened"}`}>
+        <CurrentUserContext.Provider
+          value={{ currentUserData, setCurrentUserData }}
+        >
+          <CommunitiesContext.Provider value={{ communities, setCommunities }}>
+            <Switch>
+              <Route exact path="/" component={RegistrationLayout} />
+              <Route path="/register" component={RegistrationLayout} />
+              <Route path="/login" component={RegistrationLayout} />
+              <Route
+                exact
+                path="/communities/new"
+                component={CommunitiesLayout}
+              />
+              <Route
+                exact
+                path="/communities/:id/edit"
+                component={CommunitiesLayout}
+              />
+              <Route
+                exact
+                path="/communities/:id"
+                component={CommunityLayout}
+              />
+              {/* <Route path="/" component={CommunitiesLayout} /> */}
+              <Route path="/communities" component={CommunitiesLayout} />
+              <Route path="*">
+                <h2>404 - Sorry, but this page could not be found!</h2>
+              </Route>
+            </Switch>
+            <ToastContainer
+              position="top-center"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
             />
-            <Route
-              exact
-              path="/communities/:id/edit"
-              component={CommunitiesLayout}
-            />
-            <Route exact path="/communities/:id" component={CommunityLayout} />
-            <Route path="/" component={CommunitiesLayout} />
-            <Route path="*">
-              <h2>404 - Sorry, but this page could not be found!</h2>
-            </Route>
-          </Switch>
-        </CommunitiesContext.Provider>
-      </CurrentUserContext.Provider>
-    </div>
+          </CommunitiesContext.Provider>
+        </CurrentUserContext.Provider>
+      </div>
+    </ModalContext.Provider>
   );
 }
 

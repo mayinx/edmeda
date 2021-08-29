@@ -17,13 +17,13 @@ export default function CommunitiesLayout() {
       <main className="CommunitiesLayout">
         {/* <Switch> */}
 
-        <Route exact path="/" component={MyCommunitiesPage} />
+        <Route exact path="/communities" component={MyCommunitiesPage} />
         <Route exact path="/communities/:id/edit">
           <Modal
             modalCaption="Edit Community"
             crudAction="update"
             formId={UPDATE_ACTION_FORM_ID}
-            goBackTo="/"
+            goBackTo="/communities"
           >
             <EditCommunityPage formId={UPDATE_ACTION_FORM_ID} />
           </Modal>
@@ -33,7 +33,7 @@ export default function CommunitiesLayout() {
             modalCaption="New Community"
             crudAction="create"
             formId={CREATE_ACTION_FORM_ID}
-            goBackTo="/"
+            goBackTo="/communities"
           >
             <NewCommunityPage formId={CREATE_ACTION_FORM_ID} />
           </Modal>

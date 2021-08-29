@@ -1,14 +1,11 @@
 import { Route, Switch } from "react-router-dom";
-import AppHeader from "../components/app/AppHeader";
-import LandingPage from "../pages/welcome/LandingPage";
+import Header from "./Registration/Header";
+import LandingPage from "../../pages/welcome/LandingPage";
 import "./RegistrationLayout.css";
 
-import Modal from "../components/modal/Modal.js";
-import NewCommunityPage from "../pages/communities/NewCommunityPage.js";
-import EditCommunityPage from "../pages/communities/EditCommunityPage.js";
-
-import Register from "../components/auth/Register";
-import Login from "../components/auth/Login";
+import Modal from "../../components/modal/Modal.js";
+import Register from "../../components/auth/Register";
+import Login from "../../components/auth/Login";
 
 export default function RegistrationLayout() {
   const REGISTER_ACTION_FORM_ID = "registerUser";
@@ -16,7 +13,7 @@ export default function RegistrationLayout() {
 
   return (
     <>
-      <AppHeader className="RegistrationHeader" />
+      <Header className="RegistrationHeader" />
       <main className="RegistrationLayout">
         <Route exact path="/" component={LandingPage} />
 

@@ -1,11 +1,11 @@
 import { Route, Switch } from "react-router-dom";
-import AppHeader from "../components/app/AppHeader";
-import MyCommunitiesPage from "../pages/communities/MyCommunitiesPage";
+import AppHeader from "../../components/app/AppHeader";
+import MyCommunitiesPage from "../../pages/communities/MyCommunitiesPage";
 import "./CommunitiesLayout.css";
 
-import Modal from "../components/modal/Modal.js";
-import NewCommunityPage from "../pages/communities/NewCommunityPage.js";
-import EditCommunityPage from "../pages/communities/EditCommunityPage.js";
+import Modal from "../../components/modal/Modal.js";
+import NewCommunityPage from "../../pages/communities/NewCommunityPage.js";
+import EditCommunityPage from "../../pages/communities/EditCommunityPage.js";
 
 export default function CommunitiesLayout() {
   const CREATE_ACTION_FORM_ID = "newCommunity";

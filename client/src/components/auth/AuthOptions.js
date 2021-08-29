@@ -1,30 +1,11 @@
-import React, { useContext } from "react";
-import { useHistory } from "react-router-dom";
-import CurrentUserContext from "../../contexts/CurrentUserContext";
+import useAuthActions from "./useAuthActions";
 
-function AuthOptions() {
-  const { currentUserData, setCurrentUserData } = useContext(
-    CurrentUserContext
-  );
-  const history = useHistory();
-
-  const register = () => history.push("/register");
-  const login = () => history.push("/login");
-  const logout = () => {
-    setCurrentUserData({
-      token: undefined,
-      user: undefined,
-    });
-    localStorage.setItem("auth-token", "");
-    history.push("/");
-  };
-
-  console.log("[Appheader] currentUserData: ", currentUserData);
-  console.log("[Appheader] currentUserData.user: ", currentUserData.user);
+export default function AuthOptions() {
+  const { userLoggedIn, register, login, logout } = useAuthActions();
 
   return (
     <nav className="auth-options">
-      {currentUserData.user ? (
+      {userLoggedIn ? (
         <button className="btn green" onClick={logout}>
           Logout
         </button>
@@ -41,5 +22,3 @@ function AuthOptions() {
     </nav>
   );
 }
-
-export default AuthOptions;

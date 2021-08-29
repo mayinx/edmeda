@@ -78,17 +78,12 @@ export default function Login(props) {
       notifyUserLoggedIn();
       history.push("/communities");
     } catch (err) {
+      const errMsg = err?.response?.data?.msg ?? err;
       console.log(
         "Couldn't login user - something went wrong: ",
         err?.response?.data || err
       );
-      notifyError(
-        "Login failed",
-        `Couldn't login user: ${err?.response?.data || err}`
-      );
-      // notify(`Couldn't login user: ${err?.response?.data || err}`);
-      // notify("Couldn't login user");
-      // err.response.data.msg && setError(err.response.data.msg);
+      notifyError("Login failed", `Couldn't login user: ${errMsg}`);
     }
   };
 

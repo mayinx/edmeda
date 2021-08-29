@@ -5,6 +5,10 @@
 }
 
 .App__header .App__header_item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   background-color: var(--nav-item-bg-color);
   color: var(--nav-item-hover-font-color);
   border-radius: 6px;

@@ -12,9 +12,9 @@ import CurrentUserContext from "../../contexts/CurrentUserContext";
 import CommunitiesContext from "../../contexts/CommunitiesContext";
 import ModalContext from "../../contexts/ModalContext";
 
-import RegistrationLayout from "../../layouts/RegistrationLayout";
-import CommunityLayout from "../../layouts/CommunityLayout.js";
-import CommunitiesLayout from "../../layouts/CommunitiesLayout";
+import RegistrationLayout from "../../layouts/public/RegistrationLayout";
+import CommunityLayout from "../../layouts/private/CommunityLayout.js";
+import CommunitiesLayout from "../../layouts/private/CommunitiesLayout";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -90,7 +90,7 @@ function App() {
 
   return (
     <ModalContext.Provider value={{ modalOpen, setModalOpen }}>
-      <div className={`App ${modalOpen && "App--modalOpened"}`}>
+      <div className={`App ${modalOpen ? "App--modalOpened" : ""}`}>
         <CurrentUserContext.Provider
           value={{ currentUserData, setCurrentUserData }}
         >

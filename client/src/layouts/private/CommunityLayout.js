@@ -1,12 +1,12 @@
 import { Route, Switch } from "react-router-dom";
-import AppHeader from "../components/app/AppHeader";
-import CommunityContext from "../contexts/CommunityContext";
-import CommunityPage from "../pages/communities/CommunityPage";
+import AppHeader from "../../components/app/AppHeader";
+import CommunityPage from "../../pages/communities/CommunityPage";
 import "./CommunityLayout.css";
 import { useParams } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import CurrentUserContext from "../contexts/CurrentUserContext";
+import CommunityContext from "../../contexts/CommunityContext";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 export default function CommunityLayout() {
   const [currentCommunity, setCurrentCommunity] = useState({});

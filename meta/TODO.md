@@ -64,6 +64,10 @@ Here again main.ClassName. I think you don't need that
   // Community.create(\_.pick(req.body, "name", "type", "creator", "grade"))
   // yhcek out "joi" and "jup"
 
+- React hook form server sidde valdiation messages : https://www.carlrippon.com/react-hook-form-server-validation/
+
+- switch to redux for currentUser currentCommunity, modalState etc-
+
 # Roadmap
 
 - Implememt User Auth etc.

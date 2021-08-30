@@ -4,9 +4,5 @@ import { useContext } from "react";
 
 export default function LandingPage() {
   // const { communities } = useContext(CommunitiesContext);
-  return (
-    <div className="App__Page App__ResourcesPage">
-      <h1 className="App__Page__Head">Landing</h1>
-    </div>
-  );
+  return <div className="App__Page App__ResourcesPage"></div>;
 }

@@ -7,6 +7,8 @@ import Modal from "../../components/modal/Modal.js";
 import Register from "../../components/auth/Register";
 import Login from "../../components/auth/Login";
 
+import Carousel from "./Registration/HeroCarousel";
+
 export default function RegistrationLayout() {
   const REGISTER_ACTION_FORM_ID = "registerUser";
   const LOGIN_ACTION_FORM_ID = "loginUser";
@@ -15,6 +17,7 @@ export default function RegistrationLayout() {
     <>
       <Header className="RegistrationHeader" />
       <main className="RegistrationLayout">
+        <Carousel />
         <Route exact path="/" component={LandingPage} />
 
         <Route exact path="/register">
@@ -29,10 +32,15 @@ export default function RegistrationLayout() {
         </Route>
         <Route exact path="/login">
           <Modal
+            className="LoginModal"
             modalCaption="Login"
+            crudActionBtnCaption="Login"
             crudAction="update"
             formId={LOGIN_ACTION_FORM_ID}
             goBackTo="/"
+            modalWidth="35%"
+            modalMinWidth="350px"
+            modalHeight="80%"
           >
             <Login formId={LOGIN_ACTION_FORM_ID} />
           </Modal>

@@ -5,6 +5,7 @@ import useAuthActions from "../../../components/auth/useAuthActions";
 import { BsGrid3X3Gap } from "react-icons/bs";
 import { FaPlus } from "react-icons/fa";
 import { FaUserAlt } from "react-icons/fa";
+import { ImRocket } from "react-icons/im";
 
 import AuthOptions from "../../../components/auth/AuthOptions";
 

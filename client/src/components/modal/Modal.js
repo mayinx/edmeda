@@ -42,8 +42,16 @@ export default function Modal(props) {
   }, []);
 
   return createPortal(
-    <div className="Modal">
-      <div className="Modal__inner">
+    <div className={`Modal ${props.className}`}>
+      <div
+        className="Modal__inner"
+        style={{
+          width: props.modalWidth || "90%",
+          minWidth: props.modalMinWidth || "auto",
+          height: props.modalHeight || "90%",
+          minHeight: props.modalMinHeight || "auto",
+        }}
+      >
         <div className="ModalPage__header d-flex">
           <h3 className="ModalPage__headerCaption">
             {props.modalCaption || "Modal Dialog"}
@@ -70,7 +78,7 @@ export default function Modal(props) {
                 className="btn rounded green newResourceBtn"
                 type="submit"
               >
-                Create
+                {`${props.crudActionBtnCaption ?? "Create"}`}
               </button>
             )}
             {props.crudAction === "update" && (
@@ -79,7 +87,7 @@ export default function Modal(props) {
                 className="btn rounded green updateResourceBtn"
                 type="submit"
               >
-                Update
+                {`${props.crudActionBtnCaption ?? "Update"}`}
               </button>
             )}
           </div>

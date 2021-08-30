@@ -11,15 +11,7 @@ import CarouselPic6 from "../../../assets/SaferinternetatOIAT_1.jpg";
 import CarouselPic7 from "../../../assets/shutterstock_1684741660.jpg";
 
 export default () => (
-  <Carousel
-    className="HeroCarousel"
-    // autoPlay
-    // infiniteLoop
-    // renderThumbs={() => {
-    //   return false;
-    // }}
-    showThumbs={false}
-  >
+  <Carousel className="HeroCarousel" autoPlay infiniteLoop showThumbs={false}>
     {/* <Carousel autoPlay dynamicHeight={true}> */}
     <div>
       <img alt="" src={CarouselPic1} />

@@ -13,9 +13,6 @@ export default function InputFormGroup({ name, formConfig, ...otherProps }) {
     validationRuleset,
   } = attributes;
 
-  console.log("validationRuleset ", validationRuleset);
-  console.log("otherProps ", otherProps);
-
   return (
     <div
       className={`FormGroup ${

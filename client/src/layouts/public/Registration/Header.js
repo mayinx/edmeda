@@ -13,6 +13,7 @@ import AuthOptions from "../../../components/auth/AuthOptions";
 // import NewCommunityPage from "../../pages/communities/NewCommunityPage.js";
 // import EditCommunityPage from "../../pages/communities/EditCommunityPage.js";
 
+import DropdownMenu from "../../../components/misc/DropdownMenu";
 import "./Header.css";
 
 // const ADD_ACTION_FORM_ID = "newCommunity";
@@ -55,9 +56,24 @@ export default function Header() {
           </Link> */}
 
           {userLoggedIn ? (
-            <Link class="NavItem NavItem--BtnIconOnly" to="#" onClick={logout}>
-              <FaUserAlt className="NavItem__Icon userAvatarIcon" />
-            </Link>
+            <>
+              {/* <Link class="NavItem NavItem--BtnIconOnly" to="#">
+                <FaUserAlt className="NavItem__Icon userAvatarIcon" />
+              </Link> */}
+
+              <DropdownMenu>
+                <li>
+                  <Link class="SubNavItem" to="#">
+                    Profile
+                  </Link>
+                </li>
+                <li>
+                  <Link class="SubNavItem" to="#" onClick={logout}>
+                    Logout
+                  </Link>
+                </li>
+              </DropdownMenu>
+            </>
           ) : (
             <>
               <Link

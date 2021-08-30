@@ -5,17 +5,10 @@ export default function SelectInputFormGroup({
   formConfig,
   ...otherProps
 }) {
-  const { register, ErrorMessage } = useFormContext(); // retrieve all hook methods
+  const { register, ErrorMessage, errors } = useFormContext(); // retrieve all hook methods
   // const attributes = { ...otherProps, ...formConfig };
   const attributes = { ...formConfig, ...otherProps };
-  const {
-    id,
-    label,
-    defaultValue,
-    validationRuleset,
-    errors,
-    options,
-  } = attributes;
+  const { id, label, defaultValue, validationRuleset, options } = attributes;
 
   return (
     <div
@@ -34,8 +27,18 @@ export default function SelectInputFormGroup({
         defaultValue={defaultValue}
         {...register(`${name}`, validationRuleset)}
       >
-        {options.map((option) => {
-          return <option value={option.value}>{option.label}</option>;
+        {options?.map((option) => {
+          return (
+            <option
+              value={option.value}
+              className={option?.className ?? null}
+              disabled={!option?.value}
+              selected={!option?.value}
+              hidden={!option?.value}
+            >
+              {option.label}
+            </option>
+          );
         })}
       </select>
       <ErrorMessage

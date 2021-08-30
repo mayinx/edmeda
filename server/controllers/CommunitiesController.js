@@ -17,12 +17,12 @@ exports.index = function (req, res) {
 };
 exports.create = function (req, res) {
   let resource = null;
+  console.log("req.body", req.body);
   Community.create(req.body)
     .then((newResource) => {
+      console.log("newResource", newResource);
       resource = newResource;
 
-      // TODO: Ask Namir: Where to put stuff like this
-      // in an express / mongoose app? - in the group-model?:
       const defaultGroups = [
         {
           name: "Community",

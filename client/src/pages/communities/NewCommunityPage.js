@@ -59,7 +59,7 @@ export default function NewCommunityPage(props) {
           <SelectInputFormGroup
             name="grade"
             formConfig={FormConfig.grade}
-            options={FormConfig.gradeOptionsForSelect}
+            // options={FormConfig.gradeOptionsForSelect}
           />
 
           <TextInputFormGroup name="creator" formConfig={FormConfig.creator} />

@@ -42,19 +42,35 @@
   border-color: var(--form-inputs-focus-border-color);
 }
 
+::placeholder {
+  color: var(--form-inputs-placeholder-color);
+  opacity: 1; /* Firefox */
+}
+
 .Form .FormGroup .FormGroup__Ctrl::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: var(--form-inputs-placeholder-color);
   opacity: 1; /* Firefox */
 }
+/* This here actually styles the default option when the dropdown list is expanded */
 .Form .FormGroup .FormGroup__Ctrl:-ms-input-placeholder {
   /* Internet Explorer 10-11 */
   color: var(--form-inputs-placeholder-color);
 }
 
+.Form .FormGroup .FormGroup__Ctrl [hidden] {
+  display: none;
+}
+
 .Form .FormGroup .FormGroup__Ctrl::-ms-input-placeholder {
   /* Microsoft Edge */
   color: var(--form-inputs-placeholder-color);
+}
+
+.Form .FormGroup select.FormGroup__Ctrl option.default {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: var(--form-inputs-placeholder-color);
+  opacity: 1; /* Firefox */
 }
 
 .Form .FormGroup .FormGroup__Ctrl:focus::-webkit-input-placeholder {

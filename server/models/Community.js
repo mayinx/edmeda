@@ -18,6 +18,10 @@ const communitiesSchema = new Schema(
       // type: Schema.Types.ObjectId,
       // ref: "User",
     },
+    grade: {
+      type: Number,
+      required: true,
+    },
     type: {
       type: String,
       required: false,

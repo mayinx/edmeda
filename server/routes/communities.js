@@ -6,7 +6,7 @@ const auth = require("../middleware/auth");
 
 const CommunitiesController = require("../controllers/CommunitiesController.js");
 
-/* DEFAUTL RESTFUL COMMUNITIES API INTERFACE */
+/* DEFAULT RESTFUL COMMUNITIES API INTERFACE */
 router.get("/", CommunitiesController.index);
 router.post("/", CommunitiesController.create);
 router.get("/:id", auth, CommunitiesController.find);

@@ -9,8 +9,10 @@ import { ErrorMessage } from "@hookform/error-message";
 
 import FormConfig from "./FormConfig";
 import InputFormGroup from "../../components/form/groups/InputFormGroup";
+import useNotify from "../notifications/useNotify";
 
 export default function Register(props) {
+  const { notifyError, notifySuccess } = useNotify();
   // const { communities, setCommunities } = useContext(CommunitiesContext);
   const { currentUserData, setCurrentUserData } = useContext(
     CurrentUserContext
@@ -46,15 +48,25 @@ export default function Register(props) {
       localStorage.setItem("auth-token", loginResponse.data.token);
       console.log("--- yeah localStorage set! LocalStorage: ", localStorage);
       console.log(
-        "--- Rerouting successfully registred and logged in users to home..."
+        "--- Rerouting successfully registred and logged in user to home..."
       );
+      notifySuccess({
+        title: "Registration successfull",
+        msg: "Welcome to Edmeda - happy socializing!",
+      });
       history.push("/communities");
     } catch (err) {
+      // err.response.data.msg && setError(err.response.data.msg);
+      const errMsg = err?.response?.data?.msg ?? err;
       console.log(
         "Couldn't register user - something went wrong: ",
         err?.response?.data || err
       );
-      // err.response.data.msg && setError(err.response.data.msg);
+      notifyError({
+        title: "Registration failed",
+        msg: `Couldn't register user: ${errMsg}`,
+        toastCntId: "modalNotificationCnt",
+      });
     }
   };
 
@@ -66,9 +78,16 @@ export default function Register(props) {
           className="Form"
           onSubmit={handleSubmit(onSubmit)}
         >
+          {/* <InputFormGroup
+            name="schoolName"
+            formConfig={FormConfig.schoolName}
+          />
+          <InputFormGroup
+            name="schoolType"
+            formConfig={FormConfig.schoolType}
+          /> */}
           <InputFormGroup name="fullName" formConfig={FormConfig.fullName} />
           <InputFormGroup name="email" formConfig={FormConfig.email} />
-
           <InputFormGroup name="password" formConfig={FormConfig.password} />
 
           <InputFormGroup

@@ -22,10 +22,13 @@ export default function RegistrationLayout() {
 
         <Route exact path="/register">
           <Modal
-            modalCaption="Register"
+            modalCaption="Create Edmeda-Account"
             crudAction="create"
             formId={REGISTER_ACTION_FORM_ID}
             goBackTo="/"
+            modalWidth="35%"
+            modalMinWidth="350px"
+            modalHeight="80%"
           >
             <Register formId={REGISTER_ACTION_FORM_ID} />
           </Modal>

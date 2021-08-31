@@ -4,6 +4,18 @@
 - TODO: Implement a staging environment and point the MONGO_URI to the "edmeda-staging"-db
 - TODO: Implement a demo environment and point the MONGO_URI to the "edmeda-demo"-db
 
+- TODO: Refine registration dlg - add missing fields to schema and form [EDIT - postpone that - too many fields for 1 form - if time left, we will implement an onbording screen ]
+- TODO: Registration process: Success / Error notifictions [DONE]
+- TODO: Scope communities to current user
+- TODO: Create a default school community on registration (if not already existing)
+
+- TODO: Add Users to communites on community creation - added the same time to the School-community as well
+- TODO: Add/Remove Users for a specific community via edit dlg
+- TODO: Add/Remove Users from within a community / edit dlg or something
+- TODO: Confirmation dlg before deleting communities + show successfulyl deleted notification
+
+- TODO: BrandLogo - bro?! Which funtions as home btn as well - ask Schu if sche can do that?! + Check for default images and icons (Student-, Parent-, Teacher-icons - group- and community-icons)
+
 - TODO: Ask what's teh best approach to handle globally shared literals / data (see client => pages => community => SharedData.js)
 - TODO: Ask : How to get rid of that flickering when oepning tehnew and edit form
 - TODO: Ask namir / martin: I get heaps of warnings like the below - which I can only resolve by killing the node processes and rerun 'node run startboth' again (or by hitting reload liek a mad man) - what are your two cents on this?:
@@ -11,8 +23,6 @@
   See https://nodejs.org/api/errors.html#errors_common_system_errors for more information (ECONNREFUSED)."
 
 - TODO: BUG: [Client] [New/Edit Community Modals] On invalid inputs, selects are not marked up with a red bottom border like reguar inputs do
-
-- TODO: BrandLogo - bro?! Ask schu if sch can ddo that?! + Check for default images and icons (Student, Patent, Teacher icons - group and community icons)
 
 - TODO: I planned on using a npm package for error- and crud-confirmation related user-notifications (the one is used for my Bello-App was quite nice) - so it's on my list already ...
 

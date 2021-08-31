@@ -14,7 +14,7 @@ import InputFormGroup from "../../components/form/groups/InputFormGroup";
 import useNotify from "../notifications/useNotify";
 
 export default function Login(props) {
-  const { notify, notifyError, notifySuccess } = useNotify();
+  const { notifyError, notifySuccess } = useNotify();
 
   // notify("Couldn't login user");
   const { setCurrentUserData } = useContext(CurrentUserContext);
@@ -48,7 +48,7 @@ export default function Login(props) {
       console.log("--- rerouting successfully logged in user home");
       notifySuccess({
         title: "Login successfull",
-        msg: "Welcome to Edmeda - happy socializing",
+        msg: "Welcome to Edmeda - happy socializing!",
       });
       history.push("/communities");
     } catch (err) {

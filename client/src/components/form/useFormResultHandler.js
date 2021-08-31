@@ -23,18 +23,30 @@
 
 import useNotify from "../notifications/useNotify";
 
-export default function useFormErrorHandler(props) {
+export default function useFormResultHandler(props) {
   let { modelName = "Object", crudAction = "modify", setFieldError } = props;
   const { notifyError, notifySuccess } = useNotify();
 
-  function handleServerSideError(props) {
+  function handleFormSuccess(props) {
+    let { objectName, title, msg, toastCntId = "appNotificationCnt" } = props;
+
+    notifySuccess({
+      title: title ?? `${modelName} ${crudAction}ed`,
+      msg:
+        msg ??
+        `The ${modelName} '${
+          objectName ?? null
+        }' was successfully ${crudAction}ed`,
+      toastCntId: toastCntId,
+    });
+  }
+
+  function handleFormError(props) {
     let {
       errorObject,
-      fbErrorNotice: { title, msg, toastCntId } = {
-        title: null,
-        msg: null,
-        toastCntId: "modalNotificationCnt",
-      },
+      title,
+      msg,
+      toastCntId = "modalNotificationCnt",
     } = props;
 
     const serverErrorsObj = errorObject?.response?.data;
@@ -64,5 +76,5 @@ export default function useFormErrorHandler(props) {
     }
   }
 
-  return { handleServerSideError };
+  return { handleFormSuccess, handleFormError };
 }

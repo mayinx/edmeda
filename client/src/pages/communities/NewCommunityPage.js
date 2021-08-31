@@ -9,9 +9,7 @@ import FormConfig from "./FormConfig";
 import TextInputFormGroup from "../../components/form/groups/TextInputFormGroup";
 import SelectInputFormGroup from "../../components/form/groups/SelectInputFormGroup";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
-
-import useNotify from "../../components/notifications/useNotify";
-import useFormErrorHandler from "../../components/form/useFormErrorHandler";
+import useFormResultHandler from "../../components/form/useFormResultHandler";
 
 export default function NewCommunityPage(props) {
   const { communities, setCommunities } = useContext(CommunitiesContext);
@@ -20,7 +18,7 @@ export default function NewCommunityPage(props) {
   );
 
   const history = useHistory();
-  const { notifyError, notifySuccess } = useNotify();
+
   const formMethods = useForm();
   const {
     handleSubmit,
@@ -28,7 +26,7 @@ export default function NewCommunityPage(props) {
     setError,
   } = formMethods;
 
-  const { handleFormError } = useFormErrorHandler({
+  const { handleFormSuccess, handleFormError } = useFormResultHandler({
     modelName: "Community",
     crudAction: "create",
     setFieldError: setError,
@@ -41,22 +39,11 @@ export default function NewCommunityPage(props) {
       })
       .then((res) => {
         setCommunities([res.data, ...communities]);
-        notifySuccess({
-          title: "Community created",
-          msg: `The Community '${res?.data?.name}' was successfully created`,
-        });
-
-        // handleFormSuccess({
-        //   title: "Community created",
-        //   msg: `The Community '${res?.data?.name}' was successfully created`,
-        // });
-
+        handleFormSuccess({ objectName: res?.data?.name });
         history.goBack();
       })
       .catch((err) => {
-        handleFormError({
-          errorObject: err,
-        });
+        handleFormError({ errorObject: err });
       });
   };
 

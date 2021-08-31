@@ -10,6 +10,8 @@ import TextInputFormGroup from "../../components/form/groups/TextInputFormGroup"
 import SelectInputFormGroup from "../../components/form/groups/SelectInputFormGroup";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
+import useNotify from "../../components/notifications/useNotify";
+
 export default function NewCommunityPage(props) {
   const { communities, setCommunities } = useContext(CommunitiesContext);
   const { currentUserData, setCurrentUserData } = useContext(
@@ -17,7 +19,7 @@ export default function NewCommunityPage(props) {
   );
 
   const history = useHistory();
-
+  const { notifyError, notifySuccess } = useNotify();
   const formMethods = useForm();
   const {
     handleSubmit,
@@ -31,6 +33,10 @@ export default function NewCommunityPage(props) {
       })
       .then((res) => {
         setCommunities([res.data, ...communities]);
+        notifySuccess({
+          title: "Community created",
+          msg: `The Community '${res?.data?.name}' was successfully created`,
+        });
         history.goBack();
       })
       .catch((err) => {
@@ -38,6 +44,10 @@ export default function NewCommunityPage(props) {
           "Couldn't create a new community - something went wrong: ",
           err
         );
+        notifyError({
+          title: "Failed to create Community",
+          msg: `The community couldn't be created - an error occured: ${err}`,
+        });
       });
   };
 

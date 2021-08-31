@@ -9,11 +9,13 @@ import FormConfig from "./FormConfig";
 import TextInputFormGroup from "../../components/form/groups/TextInputFormGroup";
 import SelectInputFormGroup from "../../components/form/groups/SelectInputFormGroup";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
-// import { reset } from "nodemon";
+
+import useNotify from "../../components/notifications/useNotify";
 
 export default function EditCommunityPage(props) {
   const { communities, setCommunities } = useContext(CommunitiesContext);
   const history = useHistory();
+  const { notifyError, notifySuccess } = useNotify();
   const { id } = useParams();
   const [community, setCommunity] = useState({});
   const formMethods = useForm();
@@ -38,6 +40,11 @@ export default function EditCommunityPage(props) {
       .catch((err) => {
         console.log("err: ", err);
         console.log("id:", id);
+        notifyError({
+          title: "Community not found",
+          msg: `A Community with this couldn't be found - an error occured: ${err}`,
+          toastCntId: "modalNotificationCnt",
+        });
       });
   }, []);
 
@@ -62,6 +69,11 @@ export default function EditCommunityPage(props) {
         });
 
         setCommunities(newList);
+        notifySuccess({
+          title: "Community updated",
+          msg: `The Community '${community?.name}' was successfully updated`,
+        });
+
         history.push("/communities");
       })
       .catch((err) => {
@@ -69,6 +81,12 @@ export default function EditCommunityPage(props) {
           `Couldn't update the community with the id '${id}' - something went wrong: `,
           err
         );
+        notifyError({
+          title: "Community update failed",
+          msg: `The Community '${
+            community?.name ?? id
+          }' couldn't be updated - an error occured: ${err}`,
+        });
       });
   };
 

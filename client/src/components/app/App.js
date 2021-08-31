@@ -18,6 +18,8 @@ import CommunitiesLayout from "../../layouts/private/CommunitiesLayout";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "../notifications/ReactToastifyOverrides.css";
+
 // function setToken(userToken) {}
 
 // function getToken() {}
@@ -121,8 +123,11 @@ function App() {
               </Route>
             </Switch>
             <ToastContainer
-              position="top-center"
+              enableMultiContainer
+              containerId={"appNotificationCnt"}
+              position="top-left"
               autoClose={5000}
+              // toastClassName="Toastify__toast-theme--colored"
               hideProgressBar={false}
               newestOnTop
               closeOnClick

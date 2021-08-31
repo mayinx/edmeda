@@ -94,8 +94,11 @@ export default function Modal(props) {
         </div>
       </div>
       <ToastContainer
-        position="top-center"
+        enableMultiContainer
+        containerId={"modalNotificationCnt"}
+        position="top-left"
         autoClose={5000}
+        // toastClassName="Toastify__toast-theme--colored"
         hideProgressBar={false}
         newestOnTop
         closeOnClick

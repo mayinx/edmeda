@@ -11,39 +11,10 @@ import { ErrorMessage } from "@hookform/error-message";
 import FormConfig from "./FormConfig";
 import InputFormGroup from "../../components/form/groups/InputFormGroup";
 
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import useNotify from "../notifications/useNotify";
 
 export default function Login(props) {
-  const toastOptions = {
-    position: "top-center",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-  };
-
-  const notifyUserLoggedIn = () =>
-    toast.success(
-      <div>
-        <h3>Login successfull</h3>
-        <div>Welcome to Edmeda - happy socializing</div>
-      </div>,
-      toastOptions
-    );
-
-  const notifyError = (title, msg) =>
-    toast.error(
-      <div>
-        <h3>{title}</h3>
-        <div>{msg}</div>
-      </div>,
-      toastOptions
-    );
-
-  // const notify = (msg) => toast(msg);
+  const { notify, notifyError, notifySuccess } = useNotify();
 
   // notify("Couldn't login user");
   const { setCurrentUserData } = useContext(CurrentUserContext);
@@ -75,7 +46,10 @@ export default function Login(props) {
       localStorage.setItem("auth-token", loginResponse.data.token);
       console.log("--- localStorage: ", localStorage);
       console.log("--- rerouting successfully logged in user home");
-      notifyUserLoggedIn();
+      notifySuccess({
+        title: "Login successfull",
+        msg: "Welcome to Edmeda - happy socializing",
+      });
       history.push("/communities");
     } catch (err) {
       const errMsg = err?.response?.data?.msg ?? err;
@@ -83,7 +57,11 @@ export default function Login(props) {
         "Couldn't login user - something went wrong: ",
         err?.response?.data || err
       );
-      notifyError("Login failed", `Couldn't login user: ${errMsg}`);
+      notifyError({
+        title: "Login failed",
+        msg: `Couldn't login user: ${errMsg}`,
+        toastCntId: "modalNotificationCnt",
+      });
     }
   };
 
@@ -102,7 +80,6 @@ export default function Login(props) {
             formConfig={FormConfig.login.password}
           />
         </form>
-        {/* <ToastContainer /> */}
       </FormProvider>
     </div>
   );

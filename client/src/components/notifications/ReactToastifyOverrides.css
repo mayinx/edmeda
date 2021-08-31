@@ -1,0 +1,68 @@
+/* toast style customizations - necessary because for soem reason the class 'Toastify__toast-theme--colored' is not added to toast.sucess() | toast.errror()-calls - plus: we wil ccsutomize those anyways ... */
+/* for more details: https://fkhadra.github.io/react-toastify/how-to-style/*/
+:root {
+  --toastify-color-light: #fff;
+  --toastify-color-dark: #121212;
+  --toastify-color-info: #3498db;
+  --toastify-color-success: #07bc0c;
+  --toastify-color-warning: #f1c40f;
+  --toastify-color-error: #e74c3c;
+  --toastify-color-transparent: rgba(255, 255, 255, 0.7);
+
+  --toastify-icon-color-info: var(--toastify-color-info);
+  --toastify-icon-color-success: #fff;
+  --toastify-icon-color-warning: #fff;
+  --toastify-icon-color-error: #fff;
+
+  --toastify-color-progress-info: var(--toastify-color-info);
+  --toastify-color-progress-success: whitesmoke;
+  --toastify-color-progress-warning: whitesmoke;
+  --toastify-color-progress-error: whitesmoke;
+}
+
+.Toastify__toast {
+  border: 1px solid #4c7be0; /*#ADD9ED*/
+  border-radius: 10px;
+
+  background-color: #5890ff;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+.Toastify__toast-theme--light {
+  background: var(--toastify-color-light);
+  color: var(--toastify-text-color-light);
+  font-weight: normal;
+}
+.Toastify__toast--default {
+  background: var(--toastify-color-light);
+  color: var(--toastify-text-color-light);
+  font-weight: normal;
+}
+.Toastify__toast-theme--colored.Toastify__toast--info {
+  /* color: var(--toastify-text-color-info);
+  background: var(--toastify-color-info); */
+
+  /*background-color: #E5F6FE;*/
+  background-color: #5890ff;
+  border-color: #4c7be0; /*#ADD9ED*/
+  color: #fff;
+  font-weight: normal;
+}
+.Toastify__toast-theme--colored.Toastify__toast--success {
+  background-color: #caed9e;
+  border-color: #90d93f;
+  color: #3f6219;
+  font-weight: normal;
+}
+.Toastify__toast-theme--colored..Toastify__toast--warning {
+  color: var(--toastify-text-color-warning);
+  background: var(--toastify-color-warning);
+  font-weight: normal;
+}
+.Toastify__toast-theme--colored.Toastify__toast--error {
+  background-color: #d95252; /*#B33C3D*/ /*#F78B83*/
+  border-color: #d95252; /*#D95252*/
+  color: #fff;
+  font-weight: normal;
+}

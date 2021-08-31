@@ -12,11 +12,9 @@ const communitiesSchema = new Schema(
       minlength: 1,
     },
     creator: {
-      type: String,
-      required: true,
-      // TODO:
-      // type: Schema.Types.ObjectId,
-      // ref: "User",
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true, // TODO: Conditionally require
     },
     grade: {
       type: Number,

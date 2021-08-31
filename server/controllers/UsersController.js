@@ -157,14 +157,6 @@ exports.validateToken = async (req, res) => {
   }
 };
 
-// exports.currentUser = async (req, res) => {
-//   const user = await User.findById(req.user);
-//   res.json({
-//     userName: user.userName,
-//     id: user._id,
-//   });
-// };
-
 /* DEFAULT RESTFUL ROUTES */
 
 exports.find = function (req, res) {

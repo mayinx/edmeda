@@ -11,6 +11,7 @@ import SelectInputFormGroup from "../../components/form/groups/SelectInputFormGr
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 import useNotify from "../../components/notifications/useNotify";
+import useServerSideFormErrorHandler from "../../components/form/useServerSideFormErrorHandler";
 
 export default function NewCommunityPage(props) {
   const { communities, setCommunities } = useContext(CommunitiesContext);
@@ -24,7 +25,14 @@ export default function NewCommunityPage(props) {
   const {
     handleSubmit,
     formState: { errors },
+    setError,
   } = formMethods;
+
+  const { handleServerSideError } = useServerSideFormErrorHandler({
+    modelName: "Community",
+    crudAction: "create",
+    setFieldError: setError,
+  });
 
   const onSubmit = (data) => {
     axios
@@ -40,13 +48,8 @@ export default function NewCommunityPage(props) {
         history.goBack();
       })
       .catch((err) => {
-        console.log(
-          "Couldn't create a new community - something went wrong: ",
-          err
-        );
-        notifyError({
-          title: "Failed to create Community",
-          msg: `The community couldn't be created - an error occured: ${err}`,
+        handleServerSideError({
+          errorObject: err,
         });
       });
   };

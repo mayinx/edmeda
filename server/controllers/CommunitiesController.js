@@ -5,6 +5,7 @@ const { NotFoundError, InternalError } = require("../errors/AppErrors");
 
 exports.index = function (req, res) {
   let query = {};
+  // let query = {userId};
   Community.find(query)
     .then((resources) => {
       res.send(resources);
@@ -18,7 +19,11 @@ exports.index = function (req, res) {
 exports.create = function (req, res) {
   let resource = null;
   console.log("req.body", req.body);
-  Community.create(req.body)
+  // let attributes = {
+
+  // }
+
+  Community.create({ ...req.body, ...{ creator: req.currentUser } })
     .then((newResource) => {
       console.log("newResource", newResource);
       resource = newResource;

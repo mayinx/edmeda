@@ -86,6 +86,7 @@ export default function EditCommunityPage(props) {
           msg: `The Community '${
             community?.name ?? id
           }' couldn't be updated - an error occured: ${err}`,
+          toastCntId: "modalNotificationCnt",
         });
       });
   };

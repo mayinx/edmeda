@@ -11,7 +11,7 @@ import SelectInputFormGroup from "../../components/form/groups/SelectInputFormGr
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 import useNotify from "../../components/notifications/useNotify";
-import useServerSideFormErrorHandler from "../../components/form/useServerSideFormErrorHandler";
+import useFormErrorHandler from "../../components/form/useFormErrorHandler";
 
 export default function NewCommunityPage(props) {
   const { communities, setCommunities } = useContext(CommunitiesContext);
@@ -28,7 +28,7 @@ export default function NewCommunityPage(props) {
     setError,
   } = formMethods;
 
-  const { handleServerSideError } = useServerSideFormErrorHandler({
+  const { handleFormError } = useFormErrorHandler({
     modelName: "Community",
     crudAction: "create",
     setFieldError: setError,
@@ -45,10 +45,16 @@ export default function NewCommunityPage(props) {
           title: "Community created",
           msg: `The Community '${res?.data?.name}' was successfully created`,
         });
+
+        // handleFormSuccess({
+        //   title: "Community created",
+        //   msg: `The Community '${res?.data?.name}' was successfully created`,
+        // });
+
         history.goBack();
       })
       .catch((err) => {
-        handleServerSideError({
+        handleFormError({
           errorObject: err,
         });
       });

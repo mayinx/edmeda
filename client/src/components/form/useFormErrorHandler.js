@@ -23,7 +23,7 @@
 
 import useNotify from "../notifications/useNotify";
 
-export default function useServerSideFormErrorHandler(props) {
+export default function useFormErrorHandler(props) {
   let { modelName = "Object", crudAction = "modify", setFieldError } = props;
   const { notifyError, notifySuccess } = useNotify();
 

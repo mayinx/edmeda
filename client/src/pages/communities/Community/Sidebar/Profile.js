@@ -1,4 +1,5 @@
 import CommunityFallbackProfilePic from "../../../../assets/happy-students.jpg";
+
 import "./Profile.css";
 import { FaUserAlt } from "react-icons/fa";
 import { FaDotCircle } from "react-icons/fa";
@@ -33,7 +34,7 @@ export default function Profile({ community }) {
           </span>
           <div className="">
             <span className="CommunityMeta__Caption">Creator: </span>
-            <span className="truncate">{community.creator}</span>
+            <span className="truncate">{community?.creator?.fullName}</span>
           </div>
         </li>
         <li>

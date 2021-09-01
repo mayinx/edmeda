@@ -2,6 +2,9 @@
 /* Simple flex based layout for a classic header-main-footer page, where the header contains the nav and the main part fills the avaiable space
 
 */
+
+/* TODO: Move to according components and tie everything to classes only, not elements */
+
 .App {
   display: flex;
   flex-direction: column;

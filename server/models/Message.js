@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const mongoosePaginate = require("mongoose-paginate-v2");
 const { Schema } = mongoose;
 
-const messageSchema = new Schema(
+const MessageSchema = new Schema(
   {
     name: String,
 
@@ -10,7 +10,6 @@ const messageSchema = new Schema(
       type: String,
       required: true,
       trim: true,
-      maxlength: 80,
       minlength: 1,
     },
     creator: {
@@ -36,8 +35,28 @@ const messageSchema = new Schema(
   }
 );
 
-// activate pagination plugin
-messageSchema.plugin(mongoosePaginate);
+MessageSchema.statics.latest = (count) => {
+  return Message.find({}).sort({ _id: "desc" }).limit(count);
+};
+MessageSchema.statics.roomMessages = (query) => {
+  return Message.find(query).sort({ createdAt: -1 });
+  // return Message.find(query).sort({ _id: "desc" }).limit(10);
 
-const Message = mongoose.model("Message", messageSchema);
+  // return Message.find({ group: "454asd" }).sort({ createdAt: -1 }).limit(10);
+
+  // return new Promise((resolve, reject) => {
+  //   Message.find((query, error, docs) => {
+  //     if (error) {
+  //       console.error(error);
+  //       return reject(error);
+  //     }
+  //     resolve(docs);
+  //   });
+  // });
+};
+
+// activate pagination plugin
+MessageSchema.plugin(mongoosePaginate);
+
+const Message = mongoose.model("Message", MessageSchema);
 module.exports = Message;

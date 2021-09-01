@@ -38,4 +38,11 @@ b) Passing formGroup-attributes via props and formConfig:
 />
 ```
 
-export default function TextInputFormGroup({
+## Usage of the generic `InputFormGroup`-Component:
+
+The generic InputFormGroup-Compoenent for text-/email-/passowrd etc. inputs.
+Usage is easy peasy - just like above, but we need to provide a "type"-prop - either via the regular propss or via formConfig...
+
+```js
+<InputFormGroup name="password" type="password" />
+```

@@ -19,18 +19,39 @@
       />
 */
 
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import "./Modal.css";
 import { useHistory } from "react-router";
 import { createPortal } from "react-dom";
 import { FaRegTimesCircle } from "react-icons/fa";
-
+import ModalContext from "../../contexts/ModalContext";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export default function Modal(props) {
   const history = useHistory();
   const goBackTo = props.goBackTo || "/";
+
+  const { modalOpen, setModalOpen } = useContext(ModalContext);
+
+  useEffect(() => {
+    setModalOpen(true);
+
+    return () => {
+      setModalOpen(false);
+    };
+  }, []);
+
   return createPortal(
-    <div className="Modal">
-      <div className="Modal__inner">
+    <div className={`Modal ${props.className}`}>
+      <div
+        className="Modal__inner"
+        style={{
+          width: props.modalWidth || "90%",
+          minWidth: props.modalMinWidth || "auto",
+          height: props.modalHeight || "90%",
+          minHeight: props.modalMinHeight || "auto",
+        }}
+      >
         <div className="ModalPage__header d-flex">
           <h3 className="ModalPage__headerCaption">
             {props.modalCaption || "Modal Dialog"}
@@ -57,7 +78,7 @@ export default function Modal(props) {
                 className="btn rounded green newResourceBtn"
                 type="submit"
               >
-                Create
+                {`${props.crudActionBtnCaption ?? "Create"}`}
               </button>
             )}
             {props.crudAction === "update" && (
@@ -66,12 +87,26 @@ export default function Modal(props) {
                 className="btn rounded green updateResourceBtn"
                 type="submit"
               >
-                Update
+                {`${props.crudActionBtnCaption ?? "Update"}`}
               </button>
             )}
           </div>
         </div>
       </div>
+      <ToastContainer
+        enableMultiContainer
+        containerId={"modalNotificationCnt"}
+        position="top-left"
+        autoClose={5000}
+        // toastClassName="Toastify__toast-theme--colored"
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>,
     document.getElementById("modal_root")
   );

@@ -7,7 +7,7 @@
   flex-direction: column;
   padding: 1rem;
 }
-
+/*
 .Form {
   display: flex;
   flex-direction: column;
@@ -37,7 +37,7 @@
   box-shadow: 1px 1px 1px rgb(0 0 0 / 5%);
   outline: none;
   color: var(--form-inputs-color);
-  /* color: inherit; */
+
   padding: 0.5rem 1rem;
   font-size: 1rem;
   font-family: inherit;
@@ -63,4 +63,4 @@
   margin-top: 1rem;
   flex-direction: row;
   justify-content: flex-end;
-}
+} */

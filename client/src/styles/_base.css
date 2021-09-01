@@ -82,6 +82,8 @@ h3 {
   --form-inputs-color: var(--page-font-color);
   --form-inputs-border-color: #eee;
 
+  --form-inputs-placeholder-color: #9eb1bd;
+
   --form-inputs-focus-bg-color: #f0f0f0;
   --form-inputs-focus-border-color: #00bcd4;
 

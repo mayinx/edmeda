@@ -1,20 +1,35 @@
 import { Route, Switch } from "react-router-dom";
-import AppHeader from "../components/app/AppHeader";
-import CommunityContext from "../contexts/CommunityContext";
-import CommunityPage from "../pages/communities/CommunityPage";
+import AppHeader from "../../components/app/AppHeader";
+import CommunityPage from "../../pages/communities/CommunityPage";
 import "./CommunityLayout.css";
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import CommunityContext from "../../contexts/CommunityContext";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 export default function CommunityLayout() {
   const [currentCommunity, setCurrentCommunity] = useState({});
   const params = useParams();
   const [isLoading, setIsLoading] = useState(true);
 
+  const { currentUserData, setCurrentUserData } = useContext(
+    CurrentUserContext
+  );
+
   useEffect(() => {
+    console.log(
+      "[CLIENT > CommunityLayout > currentUserData]: ",
+      currentUserData
+    );
+
     axios
-      .get(`/api/communities/${params.id}`)
+      .get(`/api/communities/${params.id}`, {
+        headers: {
+          "x-auth-token":
+            currentUserData?.token ?? localStorage.getItem("auth-token"),
+        },
+      })
       .then((res) => {
         setCurrentCommunity(res.data);
         setIsLoading(false);

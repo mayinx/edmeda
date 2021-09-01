@@ -68,6 +68,7 @@ main section.CommunityListItem.CommunityListItem:hover img {
 main section.CommunityListItem .community__meta {
   transition: all 1s ease-in-out;
   width: 100%;
+  flex: 1;
   padding: var(--r-spacing-md);
   background-color: var(--CommunityistItem-bg-color);
   border-bottom-left-radius: var(--CommunityListItem-border-radius);

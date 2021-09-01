@@ -1,9 +1,5 @@
-// TODO: Ask Namir / Martin: What's the best practice here to share domain-object-related literals and config data and whatnotbetween a group of ocmponents (I mean apart from contexts )? Is the following a 'valid solution'?:
 class FormConfig {
   constructor() {
-    // TODO: Discuss this simple use case here (as a blueprint for more complex stuff yet to come):
-    // Shared options for the grade selects in the new and update forms ... - one could argue that it's business logic / domain model stuff and thus server side responsibility to know which range of grades are valid / allowed  - but it's certainly responsibility of the client to know how to render those - so what's the convention to handle cenarios like this? Where to keep sort of global stuff like this etc. ...?
-
     this.valdiationMsgNameRequired =
       "You must specify a uniq name for your class community (between 3 and 60 characters long)";
     this.valdiationMsgGradeRequired = "You must specify a class grade";
@@ -34,6 +30,7 @@ class FormConfig {
         {
           label: "-- Select Class Grade --",
           value: "",
+          className: "default",
         },
         {
           label: "1",

@@ -1,5 +1,5 @@
 import "./Community.css";
-import CommunityFallbackProfilePic from "../../assets/happy-students.jpg";
+// import CommunityFallbackProfilePic from "../../assets/happy-students.jpg";
 
 export default function Community({ community, as }) {
   return (

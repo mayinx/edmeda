@@ -42,14 +42,3 @@
 .CommunityLayout .CommunityMain a.CommunityMainHeader__Item .sidebarToggleIcon {
   color: whitesmoke;
 }
-
-.CommunityLayout .CommunityMain .MainContent .GroupChat {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  align-items: stretch;
-  padding: 1rem 1rem 0 1rem;
-  justify-content: space-between;
-  height: 100%;
-  width: 100%;
-}

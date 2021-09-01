@@ -1,0 +1,103 @@
+.Form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0 1rem;
+
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.Form .FormGroup,
+.Form .FormActions {
+  display: flex;
+  flex-direction: column;
+}
+
+.Form .FormGroup .FormGroup__Label {
+  font-weight: bold;
+  color: lightslategray;
+}
+
+.Form .FormGroup .FormGroup__Ctrl {
+  all: unset;
+  background: var(--form-inputs-bg-color);
+  border: 3px solid var(--form-inputs-border-color);
+  border-radius: 3px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  box-shadow: 1px 1px 1px rgb(0 0 0 / 5%);
+  outline: none;
+  color: var(--form-inputs-color);
+
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.Form .FormGroup .FormGroup__Ctrl:focus {
+  background-color: var(--form-inputs-focus-bg-color);
+  border-color: var(--form-inputs-focus-border-color);
+}
+
+::placeholder {
+  color: var(--form-inputs-placeholder-color);
+  opacity: 1; /* Firefox */
+}
+
+.Form .FormGroup .FormGroup__Ctrl::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: var(--form-inputs-placeholder-color);
+  opacity: 1; /* Firefox */
+}
+/* This here actually styles the default option when the dropdown list is expanded */
+.Form .FormGroup .FormGroup__Ctrl:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: var(--form-inputs-placeholder-color);
+}
+
+.Form .FormGroup .FormGroup__Ctrl [hidden] {
+  display: none;
+}
+
+.Form .FormGroup .FormGroup__Ctrl::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: var(--form-inputs-placeholder-color);
+}
+
+.Form .FormGroup select.FormGroup__Ctrl option.default {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: var(--form-inputs-placeholder-color);
+  opacity: 1; /* Firefox */
+}
+
+.Form .FormGroup .FormGroup__Ctrl:focus::-webkit-input-placeholder {
+  color: transparent;
+}
+.Form .FormGroup .FormGroup__Ctrl:focus:-moz-placeholder {
+  color: transparent;
+} /* FF 4-18 */
+.Form .FormGroup .FormGroup__Ctrl:focus::-moz-placeholder {
+  color: transparent;
+} /* FF 19+ */
+.Form .FormGroup .FormGroup__Ctrl:focus:-ms-input-placeholder {
+  color: transparent;
+} /* IE 10+ */
+
+.Form .FormGroup.FormGroup--invalid .FormGroup__Ctrl {
+  border-bottom-color: #fd6358;
+  color: var(--form-inputs-color);
+}
+
+.FormGroup .FormGroup__ErrorMessage {
+  color: #e91818;
+  letter-spacing: 1px;
+}
+
+.Form .FormGroup .FormActions {
+  margin-top: 1rem;
+  flex-direction: row;
+  justify-content: flex-end;
+}

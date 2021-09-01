@@ -8,29 +8,45 @@ import CommunitiesContext from "../../contexts/CommunitiesContext";
 import FormConfig from "./FormConfig";
 import TextInputFormGroup from "../../components/form/groups/TextInputFormGroup";
 import SelectInputFormGroup from "../../components/form/groups/SelectInputFormGroup";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
+import useFormResultHandler from "../../components/form/useFormResultHandler";
 
 export default function NewCommunityPage(props) {
   const { communities, setCommunities } = useContext(CommunitiesContext);
+  const { currentUserData, setCurrentUserData } = useContext(
+    CurrentUserContext
+  );
+
   const history = useHistory();
 
   const formMethods = useForm();
   const {
     handleSubmit,
     formState: { errors },
+    setError,
   } = formMethods;
+
+  const { handleFormSuccess, handleFormError } = useFormResultHandler({
+    modelName: "Community",
+    crudAction: "create",
+    setFieldError: setError,
+  });
 
   const onSubmit = (data) => {
     axios
-      .post("/api/communities", data)
+      .post("/api/communities", data, {
+        headers: {
+          "x-auth-token":
+            currentUserData?.token ?? localStorage.getItem("auth-token"),
+        },
+      })
       .then((res) => {
         setCommunities([res.data, ...communities]);
+        handleFormSuccess({ objectName: res?.data?.name });
         history.goBack();
       })
       .catch((err) => {
-        console.log(
-          "Couldn't create a new community - something went wrong: ",
-          err
-        );
+        handleFormError({ errorObject: err });
       });
   };
 
@@ -52,7 +68,7 @@ export default function NewCommunityPage(props) {
           <SelectInputFormGroup
             name="grade"
             formConfig={FormConfig.grade}
-            options={FormConfig.gradeOptionsForSelect}
+            // options={FormConfig.gradeOptionsForSelect}
           />
 
           <TextInputFormGroup name="creator" formConfig={FormConfig.creator} />

@@ -6,8 +6,12 @@ const { NotFoundError, InternalError } = require("../errors/AppErrors");
 exports.index = function (req, res) {
   let query = {};
 
+  console.log("req.currentUser.communities: ", req.currentUser.communities);
+
   // let query = {userId};
-  Community.find({ ...query, ...{ creator: req.currentUser._id } })
+  Community.find({ _id: { $in: req.currentUser.communities } })
+    // req.currentUser.communities
+    .find(query)
     .populate("creator")
     .then((resources) => {
       res.send(resources);
@@ -32,6 +36,7 @@ exports.create = async function (req, res) {
       ...{ type: type, creator: req.currentUser._id },
     };
     console.log("--- attributes: ", attributes);
+
     const existingCommunity = await Community.findOne({
       name,
     });

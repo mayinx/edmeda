@@ -26,6 +26,11 @@ const communitiesSchema = new Schema(
       ref: "User",
       required: true, // TODO: Conditionally require
     },
+    members: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: false, // TODO: Conditionally require
+    },
     grade: {
       type: Number,
       required: false, // Conditonally require that
@@ -111,7 +116,8 @@ communitiesSchema.methods.performAfterCreationChores = async function () {
     // i.e. something like 'community.update(...)' - which doesn't seem to work here?
     const updatedCommunity = await Community.findOneAndUpdate(
       { _id: this._id },
-      { $push: { groups: groups } },
+      // { $push: { groups: groups } },
+      { $push: { groups: groups, members: this.creator } },
       { new: true }
     ).populate("creator");
 
@@ -119,6 +125,31 @@ communitiesSchema.methods.performAfterCreationChores = async function () {
   } catch (err) {
     console.log("[ERROR] Community#performAfterCreationChores: ", err);
     throw new Error(`[ERROR] Community#performAfterCreationChores: ${err}`);
+  }
+};
+
+communitiesSchema.methods.addMember = async function (newMember) {
+  try {
+    // TODO: What's the instance method version of this ?
+    // i.e. something like 'req.currentUser.update(...)' - which doesn't seem to work here?
+    const user = await User.findOneAndUpdate(
+      { _id: newMember },
+      { $push: { communities: this } },
+      { new: true }
+    );
+
+    // TODO: What's the instance method version of this ?
+    // i.e. something like 'community.update(...)' - which doesn't seem to work here?
+    const updatedCommunity = await Community.findOneAndUpdate(
+      { _id: this._id },
+      { $push: { members: newMember } },
+      { new: true }
+    ).populate("creator");
+
+    return updatedCommunity;
+  } catch (err) {
+    console.log("[ERROR] Community#addMember: ", err);
+    throw new Error(`[ERROR] Community#addMember: ${err}`);
   }
 };
 

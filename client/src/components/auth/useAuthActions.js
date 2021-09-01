@@ -14,7 +14,8 @@ export default function useAuthActions() {
   const login = (e) => history.push("/login");
   const logout = (e) => {
     console.log("currentUserData", currentUserData);
-    const userName = currentUserData?.user?.userName;
+    // TODO:Swqap to first name
+    const userFirstName = currentUserData?.user?.fullName;
     setCurrentUserData({
       token: undefined,
       user: undefined,
@@ -22,7 +23,9 @@ export default function useAuthActions() {
     localStorage.setItem("auth-token", "");
     notifySuccess({
       title: "Logged out",
-      msg: `You've been successfully logged out - cu soon ${userName ?? null}!`,
+      msg: `You've been successfully logged out - cu soon ${
+        userFirstName ?? null
+      }!`,
     });
     history.push("/");
   };

@@ -76,18 +76,36 @@ exports.register = async (req, res) => {
     console.log("--- Succcessfully registered new user!");
     // console.log("All users: ", User.find({}));
 
-    const schoolCommunity = await Community.create({
-      name: "School Community",
+    // Each app instacne can only have 1 school community
+    // To allow for more school communities per app instacne, we are going to introduce multi tenancy
+    // and will scope everything per tenant here...
+    // TODO: Test that!
+    const existingSchoolCommunity = await Community.findOne({
       type: Community.TYPES.TENANT,
-      creator: savedUser._id,
     });
-    console.log("--- Succcessfully created school community!");
+    if (!existingSchoolCommunity) {
+      console.log("--- School Communty doesn't exist yet - creating one now!");
+      const schoolCommunity = await Community.create({
+        name: "School Community",
+        type: Community.TYPES.TENANT,
+        creator: savedUser._id,
+      });
+      console.log("--- Succcessfully created school community!");
 
-    const updatedCommunity = await schoolCommunity.performAfterCreationChores();
+      const updatedCommunity = await schoolCommunity.performAfterCreationChores();
+    } else {
+      console.log(
+        "--- School Communty already exist - just add new user as member!"
+      );
+      const updatedSchoolCommunity = await existingSchoolCommunity.addMember(
+        savedUser
+      );
+    }
 
     res.json({
       id: savedUser._id,
       type: savedUser.type,
+      fullName: user.fullName,
       userName: savedUser.userName,
     });
   } catch (err) {
@@ -117,8 +135,8 @@ exports.login = async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ msg: "Invalid credentials." });
 
-    console.log("process.env: ", process.env);
-    console.log("process.env.JWT_SECRET: ", process.env.JWT_SECRET);
+    // console.log("process.env: ", process.env);
+    // console.log("process.env.JWT_SECRET: ", process.env.JWT_SECRET);
 
     // TODO: recheck: Saw otehr examples wher e a whole bunch of user attrubutes
     // is passed in here - not just { id: user._id } ...?
@@ -132,8 +150,8 @@ exports.login = async (req, res) => {
       user: {
         id: user._id,
         type: user.type,
+        fullName: user.fullName,
         userName: user.userName,
-        name: user.name,
       },
     });
   } catch (err) {
@@ -153,7 +171,7 @@ exports.validateToken = async (req, res) => {
     console.log("--- token present!", token);
 
     // Check token that was passed by decoding token using secret
-    const verified = jwt.verify(token, process.env.JWT_SECRET);
+    const verified = jwt.verify(token, `${process.env.JWT_SECRET}`);
     if (!verified) return res.status(401).json({ validToken: false });
     console.log("--- token verified!", verified);
 
@@ -177,8 +195,8 @@ exports.validateToken = async (req, res) => {
       user: {
         id: user._id,
         type: user.type,
+        fullName: user.fullName,
         userName: user.userName,
-        name: user.name,
       },
     });
   } catch (err) {

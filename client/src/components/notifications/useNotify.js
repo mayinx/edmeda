@@ -88,13 +88,13 @@ export default function useNotify() {
             containerId: toastCntId ?? "appNotificationCnt",
           }
         );
-      case "warn":
+      case "info":
         return toast.info(
           <div>
-            <h3>{title ?? "Warning"}</h3>
+            <h3>{title ?? "Info"}</h3>
             <div>
               {msg ??
-                "Yeah - funny thing: I'm supposed to warn you about somethimg - but got no clou, what that might be! Just know this: Be warned ;-)"}
+                "Yeah - funny thing: I'm supposed to inform you about somethimg - but got no clou, what that might be! Just know this: Be and feel informed ;-)"}
             </div>
           </div>,
           {

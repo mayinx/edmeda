@@ -105,6 +105,11 @@ function App() {
               />
               <Route
                 exact
+                path="/communities/:id/editMembers"
+                component={CommunitiesLayout}
+              />
+              <Route
+                exact
                 path="/communities/:id"
                 component={CommunityLayout}
               />

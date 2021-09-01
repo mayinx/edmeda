@@ -34,7 +34,10 @@ export default function Login(props) {
       // const formData = { email, password };
       console.log("--- Attempting to log in user ", formData);
       const loginResponse = await axios.post("/api/users/login", formData);
-      console.log("--- User logged in!");
+
+      // TODO:Swqap to first name
+      const userFirstName = loginResponse?.data?.user?.fullName;
+
       console.log(
         "--- Setting currentUserData and localStorage from loginResponse: ",
         loginResponse
@@ -44,11 +47,10 @@ export default function Login(props) {
         user: loginResponse.data.user,
       });
       localStorage.setItem("auth-token", loginResponse.data.token);
-      console.log("--- localStorage: ", localStorage);
-      console.log("--- rerouting successfully logged in user home");
+
       notifySuccess({
         title: "Login successfull",
-        msg: "Welcome to Edmeda - happy socializing!",
+        msg: `Welcome to Edmeda, ${userFirstName} - happy socializing!`,
       });
       history.push("/communities");
     } catch (err) {

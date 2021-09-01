@@ -24,6 +24,8 @@ router.post("/:id/groups", CommunitiesController.createGroup);
 router.get("/:id/groups/:groupId", CommunitiesController.findGroup);
 
 /* - COMMUNITY USERS */
-// ...
+router.get("/:id/members", CommunitiesController.indexMembers);
+router.post("/:id/members", CommunitiesController.addMember);
+router.get("/:id/members/:memberId", CommunitiesController.findMember);
 
 module.exports = router;

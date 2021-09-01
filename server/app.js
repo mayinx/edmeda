@@ -224,6 +224,7 @@ mongoose
   })
   .then(() => {
     console.log("--- Connected to MongoDB");
+    console.log("--- MONGO_URI: ", MONGO_URI);
     // app.listen(PORT, () => {
     //   console.log(`--- Listening on http://localhost:${PORT}`);
     // });

@@ -117,10 +117,13 @@ exports.login = async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ msg: "Invalid credentials." });
 
+    console.log("process.env: ", process.env);
+    console.log("process.env.JWT_SECRET: ", process.env.JWT_SECRET);
+
     // TODO: recheck: Saw otehr examples wher e a whole bunch of user attrubutes
     // is passed in here - not just { id: user._id } ...?
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: process.env.JWT_EXPIRES_IN,
+    const token = jwt.sign({ id: user._id }, `${process.env.JWT_SECRET}`, {
+      expiresIn: `${process.env.JWT_EXPIRES_IN}`,
     });
 
     console.log("token", token);

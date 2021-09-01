@@ -14,7 +14,7 @@ export default function useAuthActions() {
   const login = (e) => history.push("/login");
   const logout = (e) => {
     console.log("currentUserData", currentUserData);
-    const userName = currentUserData.user.userName;
+    const userName = currentUserData?.user?.userName;
     setCurrentUserData({
       token: undefined,
       user: undefined,
@@ -22,7 +22,7 @@ export default function useAuthActions() {
     localStorage.setItem("auth-token", "");
     notifySuccess({
       title: "Logged out",
-      msg: `You've been successfully logged out - cu soon ${userName}!`,
+      msg: `You've been successfully logged out - cu soon ${userName ?? null}!`,
     });
     history.push("/");
   };
@@ -30,12 +30,6 @@ export default function useAuthActions() {
   // TODO: Check at least presence of token as well
   // const userLoggedIn = currentUserData && currentUserData.user && currentUserData.token;
   const userLoggedIn = currentUserData && currentUserData.user ? true : false;
-
-  console.log("[Appheader/AuthActions] currentUserData: ", currentUserData);
-  console.log(
-    "[Appheader/AuthActions] currentUserData.user: ",
-    currentUserData.user
-  );
 
   return { userLoggedIn, register, login, logout };
 }

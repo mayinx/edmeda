@@ -29,22 +29,17 @@ function App() {
     token: undefined,
     user: undefined,
   });
+  const [communities, setCommunities] = useState([]);
 
-  useEffect(() => {
-    const checkLoggedIn = async () => {
-      console.log("[CLIENT] checkLoggedIn");
-      console.log("--- currentUserData: ", currentUserData);
+  const checkLoggedIn = async () => {
+    try {
       let token = localStorage.getItem("auth-token");
-      console.log("--- fetching token from localStorage - token: ", token);
+
       if (token === null) {
-        console.log(
-          "--- TOKEN NULL - setting localStorage auth-token to empty string",
-          localStorage
-        );
         localStorage.setItem("auth-token", "");
         token = "";
       }
-      console.log("--- validate token on server");
+
       // TODO: Why post-request?
       const validationResp = await axios.post(
         "/api/users/validateToken",
@@ -53,40 +48,37 @@ function App() {
           headers: { "x-auth-token": token },
         }
       );
-      console.log("--- server side token validation performed");
-      console.log("--- validationResp: ", validationResp);
+
       if (validationResp.data && validationResp.data.validToken) {
-        console.log("--- TOKEN IS VALID AND STORED IN CURRENTUSERDATA!!");
-        // const userRes = await axios.get("/api/users/current", {
-        //   headers: { "x-auth-token": token },
-        // });
-        // setCurrentUserData({
-        //   token,
-        //   user: userRes.data,
-        // });
         setCurrentUserData({
           token: validationResp.data.token,
           user: validationResp.data.user,
         });
       }
-    };
+    } catch (err) {
+      console.log("-- checkLoggedInError: ", err);
+    }
+  };
+
+  useEffect(() => {
     checkLoggedIn();
   }, []);
 
   // const token = getToken();
 
-  const [communities, setCommunities] = useState([]);
-
   useEffect(() => {
     axios
-      .get("/api/communities")
+      .get("/api/communities", {
+        headers: { "x-auth-token": currentUserData.token },
+      })
+
       .then((res) => {
         setCommunities(res.data || []);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [currentUserData.token]);
 
   const [modalOpen, setModalOpen] = useState();
 

@@ -20,12 +20,13 @@ export default function CommunityPage() {
   );
 
   const handleCurrentGroupChange = (e, newGroupId) => {
-    // Uh. Ah. Destructuring. Ahhh.
-    setCurrentGroup(
-      currentCommunity.groups.find(({ _id }) => {
-        return _id === newGroupId;
-      })
-    );
+    if (currentCommunity?.groups) {
+      setCurrentGroup(
+        currentCommunity.groups.find(({ _id }) => {
+          return _id === newGroupId;
+        })
+      );
+    }
   };
 
   const handleMediaQueryChange = (matches) => {

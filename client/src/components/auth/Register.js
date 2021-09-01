@@ -10,6 +10,7 @@ import { ErrorMessage } from "@hookform/error-message";
 import FormConfig from "./FormConfig";
 import InputFormGroup from "../../components/form/groups/InputFormGroup";
 import useNotify from "../notifications/useNotify";
+import useFormResultHandler from "../form/useFormResultHandler";
 
 export default function Register(props) {
   const { notifyError, notifySuccess } = useNotify();
@@ -25,31 +26,31 @@ export default function Register(props) {
     getValues,
     handleSubmit,
     formState: { errors },
+    setError,
   } = formMethods;
+
+  const { handleFormSuccess, handleFormError } = useFormResultHandler({
+    modelName: "Community",
+    crudAction: "create",
+    setFieldError: setError,
+  });
 
   const onSubmit = async (formData) => {
     console.log("[REGISTER] Submit!");
     try {
-      console.log("--- yeah new user : ", formData);
       await axios.post("/api/users/register", formData);
-      console.log("--- yeah new user registered");
+
       const loginResponse = await axios.post("/api/users/login", {
         email: formData.email,
         password: formData.password,
       });
-      console.log(
-        "--- yeah new user logged in - loginResponse: ",
-        loginResponse
-      );
+
       setCurrentUserData({
         token: loginResponse.data.token,
         user: loginResponse.data.user,
       });
       localStorage.setItem("auth-token", loginResponse.data.token);
-      console.log("--- yeah localStorage set! LocalStorage: ", localStorage);
-      console.log(
-        "--- Rerouting successfully registred and logged in user to home..."
-      );
+
       notifySuccess({
         title: "Registration successfull",
         msg: "Welcome to Edmeda - happy socializing!",
@@ -57,15 +58,21 @@ export default function Register(props) {
       history.push("/communities");
     } catch (err) {
       // err.response.data.msg && setError(err.response.data.msg);
-      const errMsg = err?.response?.data?.msg ?? err;
-      console.log(
-        "Couldn't register user - something went wrong: ",
-        err?.response?.data || err
-      );
-      notifyError({
+      // const errMsg = err?.response?.data?.msg ?? err;
+      // console.log(
+      //   "Couldn't register user - something went wrong: ",
+      //   err?.response?.data || err
+      // );
+      // notifyError({
+      //   title: "Registration failed",
+      //   msg: `Couldn't register user: ${errMsg}`,
+      //   toastCntId: "modalNotificationCnt",
+      // });
+
+      handleFormError({
+        errorObject: err,
         title: "Registration failed",
-        msg: `Couldn't register user: ${errMsg}`,
-        toastCntId: "modalNotificationCnt",
+        msg: "Couldn't create Edmeda-Account - an unexpected error occured.",
       });
     }
   };

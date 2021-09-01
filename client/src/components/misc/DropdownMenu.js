@@ -21,7 +21,7 @@ export default function DropdownMenu(props) {
       </button> */}
 
       <Link
-        class="NavItem NavItem--BtnIconOnly menu-trigger"
+        className="NavItem NavItem--BtnIconOnly menu-trigger"
         onClick={onClick}
         to="#"
       >

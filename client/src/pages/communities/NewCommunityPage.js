@@ -35,7 +35,10 @@ export default function NewCommunityPage(props) {
   const onSubmit = (data) => {
     axios
       .post("/api/communities", data, {
-        headers: { "x-auth-token": currentUserData.token },
+        headers: {
+          "x-auth-token":
+            currentUserData?.token ?? localStorage.getItem("auth-token"),
+        },
       })
       .then((res) => {
         setCommunities([res.data, ...communities]);

@@ -1,12 +1,14 @@
 const Community = require("../models/Community");
 const Group = require("../models/Group");
-const Message = require("../models/Message");
+const User = require("../models/User");
 const { NotFoundError, InternalError } = require("../errors/AppErrors");
 
 exports.index = function (req, res) {
   let query = {};
+
   // let query = {userId};
-  Community.find(query)
+  Community.find({ ...query, ...{ creator: req.currentUser._id } })
+    .populate("creator")
     .then((resources) => {
       res.send(resources);
     })
@@ -16,68 +18,45 @@ exports.index = function (req, res) {
       });
     });
 };
-exports.create = function (req, res) {
-  let resource = null;
-  console.log("req.body", req.body);
-  // let attributes = {
+exports.create = async function (req, res) {
+  console.log("COMMUNTIES_CONTROLLER#CREATE");
+  console.log("--- req.body: ", req.body);
+  try {
+    // let resource = null;
+    let community = null;
 
-  // }
+    const { type = Community.TYPES.CLASS, name } = req.body;
 
-  Community.create({ ...req.body, ...{ creator: req.currentUser } })
-    .then((newResource) => {
-      console.log("newResource", newResource);
-      resource = newResource;
-
-      const defaultGroups = [
-        {
-          name: "Community",
-          type: "default",
-          scope: "all",
-          community: newResource._id,
-          order: 0,
-        },
-        {
-          name: "Students",
-          type: "default",
-          scope: "student",
-          community: newResource._id,
-          order: 1,
-        },
-        {
-          name: "Teachers",
-          type: "default",
-          scope: "teacher",
-          community: newResource._id,
-          order: 2,
-        },
-        {
-          name: "Parents",
-          type: "default",
-          scope: "parents",
-          community: newResource._id,
-          order: 3,
-        },
-      ];
-
-      return Group.create(defaultGroups);
-    })
-    .then((groups) => {
-      return Community.findOneAndUpdate(
-        { _id: resource._id },
-        { $push: { groups: groups } },
-        { new: true }
-      );
-    })
-    .then((newResource) => {
-      res.status(201).send(newResource);
-    })
-    .catch((error) => {
-      if (error.name === "ValidationError") {
-        res.status(400).json(error);
-      } else {
-        res.status(500).json(error);
-      }
+    const attributes = {
+      ...req.body,
+      ...{ type: type, creator: req.currentUser._id },
+    };
+    console.log("--- attributes: ", attributes);
+    const existingCommunity = await Community.findOne({
+      name,
     });
+    if (existingCommunity) {
+      return res.status(400).json({
+        errors: {
+          name:
+            "A Community with this name already exists - please choose a unique name!",
+        },
+      });
+    }
+
+    community = await Community.create(attributes);
+
+    const updatedCommunity = await community.performAfterCreationChores();
+
+    res.status(201).send(updatedCommunity);
+  } catch (error) {
+    console.log("--- error", error);
+    if (error.name === "ValidationError") {
+      res.status(400).json({ error: error });
+    } else {
+      res.status(500).json();
+    }
+  }
 };
 exports.find = function (req, res) {
   const { id } = req.params;
@@ -87,6 +66,7 @@ exports.find = function (req, res) {
     // (to avoid implementig different api-endpoints for an
     // popualted and unpopulated version)
     .populate("groups")
+    .populate("creator")
     .then((community) => {
       if (!community) throw new NotFoundError("community", id);
       res.send(community);
@@ -103,8 +83,8 @@ exports.find = function (req, res) {
 };
 exports.update = function (req, res) {
   const { id } = req.params;
-
   Community.findByIdAndUpdate(id, req.body, { new: true })
+    .populate("creator")
     .then((updatedResource) => {
       if (!updatedResource) throw new NotFoundError("community", id, req.body);
       console.log("updatedResource", updatedResource);

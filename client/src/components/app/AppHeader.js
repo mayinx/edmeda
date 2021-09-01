@@ -39,12 +39,17 @@ export default function AppHeader() {
         </Link> */}
         <DropdownMenu>
           <li>
-            <Link class="SubNavItem" to="#">
+            <Link className="SubNavItem" to="#">
               Profile
             </Link>
           </li>
           <li>
-            <Link class="SubNavItem" to="#" onClick={logout}>
+            <Link className="SubNavItem" to="/communities">
+              MyCommunities
+            </Link>
+          </li>
+          <li>
+            <Link className="SubNavItem" to="#" onClick={logout}>
               Logout
             </Link>
           </li>

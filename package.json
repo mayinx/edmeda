@@ -4,7 +4,7 @@
   "engines": {
     "node": "16.7.0"
   },
-  "description": "Easy remote communication & collaboration for schools",
+  "description": "Easy remote communication & collaboration for Schools",
   "scripts": {
     "start": "node server/app.js",
     "heroku-postbuild": "npm install && cd client && npm install && npm run build",

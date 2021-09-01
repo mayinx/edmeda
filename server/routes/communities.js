@@ -7,11 +7,11 @@ const auth = require("../middleware/auth");
 const CommunitiesController = require("../controllers/CommunitiesController.js");
 
 /* DEFAULT RESTFUL COMMUNITIES API INTERFACE */
-router.get("/", CommunitiesController.index);
-router.post("/", CommunitiesController.create);
+router.get("/", auth, CommunitiesController.index);
+router.post("/", auth, CommunitiesController.create);
 router.get("/:id", auth, CommunitiesController.find);
-router.patch("/:id", CommunitiesController.update);
-router.delete("/:id", CommunitiesController.delete);
+router.patch("/:id", auth, CommunitiesController.update);
+router.delete("/:id", auth, CommunitiesController.delete);
 
 /* RESTFUL ROUTES FOR NESTED COMMUNITIES RESOUCRES */
 

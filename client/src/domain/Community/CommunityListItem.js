@@ -21,6 +21,8 @@ export default function Community({ community }) {
 
   const history = useHistory();
 
+  console.log("community: ", community);
+
   const removeResource = (e, id) => {
     e.stopPropagation();
     console.log(
@@ -29,7 +31,10 @@ export default function Community({ community }) {
     );
     axios
       .delete(`api/communities/${id}`, {
-        headers: { "x-auth-token": currentUserData.token },
+        headers: {
+          "x-auth-token":
+            currentUserData?.token ?? localStorage.getItem("auth-token"),
+        },
       })
       .then((res) => {
         setCommunities(
@@ -73,7 +78,7 @@ export default function Community({ community }) {
       </p>
       <div className="community__meta">
         <div className="truncate">{community.name}</div>
-        <div className="truncate">{community.creator}</div>
+        <div className="truncate">{community?.creator?.fullName}</div>
       </div>
       <div className="community__actions">
         <Link

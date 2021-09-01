@@ -25,7 +25,10 @@ export default function CommunityLayout() {
 
     axios
       .get(`/api/communities/${params.id}`, {
-        headers: { "x-auth-token": currentUserData.token },
+        headers: {
+          "x-auth-token":
+            currentUserData?.token ?? localStorage.getItem("auth-token"),
+        },
       })
       .then((res) => {
         setCurrentCommunity(res.data);

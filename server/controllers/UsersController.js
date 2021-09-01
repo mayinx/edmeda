@@ -26,24 +26,38 @@ exports.register = async (req, res) => {
     if (!userName) userName = email;
 
     // validate
-    if (!email || !password || !passwordConfirmation || !fullName || !userName)
+    if (
+      !email ||
+      !password ||
+      !passwordConfirmation ||
+      !fullName ||
+      !userName
+    ) {
+      return res.status(400).json({
+        message: "Not all fields have been entered.",
+      });
+    }
+
+    if (password.length < 5) {
+      return res.status(400).json({
+        message: "The password needs to be at least 5 characters long.",
+      });
+    }
+
+    if (password !== passwordConfirmation) {
       return res
         .status(400)
-        .json({ msg: "[USERS#REGISTER] Not all fields have been entered." });
-    if (password.length < 5)
-      return res
-        .status(400)
-        .json({ msg: "The password needs to be at least 5 characters long." });
-    if (password !== passwordConfirmation)
-      return res
-        .status(400)
-        .json({ msg: "Enter the same password twice for verification." });
+        .json({ message: "Enter the same password twice for verification." });
+    }
 
     const existingUser = await User.findOne({ type, email });
-    if (existingUser)
-      return res
-        .status(400)
-        .json({ msg: "An account with this email already exists." });
+    if (existingUser) {
+      return res.status(400).json({
+        errors: {
+          email: "An account with this email already exists.",
+        },
+      });
+    }
 
     // if (!userName) userName = email;
 
@@ -59,8 +73,17 @@ exports.register = async (req, res) => {
     });
     const savedUser = await newUser.save();
     console.log("--- Succcessfully registered new user!");
-    console.log("All users: ", User.find({}));
-    // res.json(savedUser); // TODO: verify - what attributes to return?
+    // console.log("All users: ", User.find({}));
+
+    const schoolCommunity = await Community.create({
+      name: "School Community",
+      type: Community.TYPES.TENANT,
+      creator: savedUser._id,
+    });
+    console.log("--- Succcessfully created school community!");
+
+    const updatedCommunity = await schoolCommunity.performAfterCreationChores();
+
     res.json({
       id: savedUser._id,
       type: savedUser.type,
@@ -106,6 +129,7 @@ exports.login = async (req, res) => {
         id: user._id,
         type: user.type,
         userName: user.userName,
+        name: user.name,
       },
     });
   } catch (err) {
@@ -150,6 +174,7 @@ exports.validateToken = async (req, res) => {
         id: user._id,
         type: user.type,
         userName: user.userName,
+        name: user.name,
       },
     });
   } catch (err) {

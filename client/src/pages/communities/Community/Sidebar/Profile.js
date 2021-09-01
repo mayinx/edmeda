@@ -34,7 +34,7 @@ export default function Profile({ community }) {
           </span>
           <div className="">
             <span className="CommunityMeta__Caption">Creator: </span>
-            <span className="truncate">{community.creator}</span>
+            <span className="truncate">{community?.creator?.fullName}</span>
           </div>
         </li>
         <li>

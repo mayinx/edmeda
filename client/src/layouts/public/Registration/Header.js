@@ -28,25 +28,25 @@ export default function Header() {
         <div className="AppNav__Left">
           {/* <img id="app_logo" src={BrandLogo} className="BrandLogo" alt=""></img> */}
 
-          <Link class="NavItem NavItem--BtnIconOnly" to="#">
+          <Link className="NavItem NavItem--BtnIconOnly" to="#">
             <BsGrid3X3Gap className="NavItem__Icon appNavIcon" />
           </Link>
         </div>
 
         <div className="AppNav__Center">
-          <Link class="NavItem NavItem--Link" to="#">
+          <Link className="NavItem NavItem--Link" to="#">
             <span className="NavItem__Caption">Features</span>
           </Link>
-          <Link class="NavItem NavItem--Link" to="#">
+          <Link className="NavItem NavItem--Link" to="#">
             <span className="NavItem__Caption">Use Cases</span>
           </Link>
-          <Link class="NavItem NavItem--Link" to="#">
+          <Link className="NavItem NavItem--Link" to="#">
             <span className="NavItem__Caption">Praise</span>
           </Link>
-          <Link class="NavItem NavItem--Link" to="#">
+          <Link className="NavItem NavItem--Link" to="#">
             <span className="NavItem__Caption">Plans</span>
           </Link>
-          <Link class="NavItem NavItem--Link" to="#">
+          <Link className="NavItem NavItem--Link" to="#">
             <span className="NavItem__Caption">FAQ</span>
           </Link>
         </div>
@@ -63,12 +63,17 @@ export default function Header() {
 
               <DropdownMenu>
                 <li>
-                  <Link class="SubNavItem" to="#">
+                  <Link className="SubNavItem" to="#">
                     Profile
                   </Link>
                 </li>
                 <li>
-                  <Link class="SubNavItem" to="#" onClick={logout}>
+                  <Link className="SubNavItem" to="/communities">
+                    MyCommunities
+                  </Link>
+                </li>
+                <li>
+                  <Link className="SubNavItem" to="#" onClick={logout}>
                     Logout
                   </Link>
                 </li>
@@ -77,7 +82,7 @@ export default function Header() {
           ) : (
             <>
               <Link
-                class="NavItem NavItem--Btn NavItem--LoginBtn"
+                className="NavItem NavItem--Btn NavItem--LoginBtn"
                 to="#"
                 onClick={login}
               >
@@ -85,7 +90,7 @@ export default function Header() {
               </Link>
 
               <Link
-                class="NavItem NavItem--Btn NavItem--SignUpBtn"
+                className="NavItem NavItem--Btn NavItem--SignUpBtn"
                 to="#"
                 onClick={register}
               >

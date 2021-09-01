@@ -1,3 +1,4 @@
+require("dotenv").config();
 const User = require("../models/User");
 const Community = require("../models/Community");
 const Group = require("../models/Group");

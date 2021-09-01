@@ -30,7 +30,7 @@ export default function Register(props) {
   } = formMethods;
 
   const { handleFormSuccess, handleFormError } = useFormResultHandler({
-    modelName: "Community",
+    modelName: "User",
     crudAction: "create",
     setFieldError: setError,
   });

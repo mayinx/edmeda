@@ -5,7 +5,7 @@ import CommunitiesContext from "../../contexts/CommunitiesContext";
 import { useContext } from "react";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
-import { FaRegEdit, FaTrashAlt } from "react-icons/fa";
+import { FaRegEdit, FaRegTrashAlt, FaUsersCog } from "react-icons/fa";
 import axios from "axios";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
@@ -15,9 +15,7 @@ export default function Community({ community }) {
 
   const { communities, setCommunities } = useContext(CommunitiesContext);
 
-  const { currentUserData, setCurrentUserData } = useContext(
-    CurrentUserContext
-  );
+  const { currentUserData } = useContext(CurrentUserContext);
 
   const history = useHistory();
 
@@ -62,6 +60,12 @@ export default function Community({ community }) {
     e.preventDefault();
   };
 
+  const openEditCommunityMembersModal = (e, id) => {
+    history.push(`/communities/${id}/editMembers`);
+    e.stopPropagation();
+    e.preventDefault();
+  };
+
   return (
     <section
       className={`Resource Community Community--${community.type} ResourceListItem CommunityListItem CommunityListItem--${community.type} `}
@@ -86,7 +90,7 @@ export default function Community({ community }) {
           to="#"
           onClick={(e) => removeResource(e, community._id)}
         >
-          <FaTrashAlt className="actionIcon deleteIcon" />
+          <FaRegTrashAlt className="actionIcon deleteIcon" />
         </Link>
         <Link
           className="community__action"
@@ -94,6 +98,13 @@ export default function Community({ community }) {
           onClick={(e) => openEditCommunityModal(e, community._id)}
         >
           <FaRegEdit className="actionIcon editIcon" />
+        </Link>
+        <Link
+          className="community__action"
+          to="#"
+          onClick={(e) => openEditCommunityMembersModal(e, community._id)}
+        >
+          <FaUsersCog className="actionIcon editMembersIcon" />
         </Link>
       </div>
     </section>

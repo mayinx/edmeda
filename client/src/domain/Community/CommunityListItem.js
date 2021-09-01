@@ -8,6 +8,11 @@ import { Link } from "react-router-dom";
 import { FaRegEdit, FaRegTrashAlt, FaUsersCog } from "react-icons/fa";
 import axios from "axios";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
+import { confirmAlert } from "react-confirm-alert"; // Import
+import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
+import "../../components/notifications/ReactConfirmAlertOverrides.css";
+
+import useNotify from "../../components/notifications/useNotify";
 
 export default function Community({ community }) {
   const communityProfilePicImgSrc =
@@ -18,15 +23,33 @@ export default function Community({ community }) {
   const { currentUserData } = useContext(CurrentUserContext);
 
   const history = useHistory();
+  const { notifySuccess, notifyError } = useNotify();
 
-  console.log("community: ", community);
-
-  const removeResource = (e, id) => {
+  // console.log("community: ", community);
+  const cofirmResourceRemoval = (e, resourceName, id) => {
     e.stopPropagation();
-    console.log(
-      "[CLIENT > CommunityListItem > currentUserData]: ",
-      currentUserData
-    );
+
+    confirmAlert({
+      title: "Confirm to delete Community",
+      message: `Are you sure you want to delete the community '${resourceName}' along with all its groups? (No worries: The Community- and Group-Members will NOT be touched at all by this action)`,
+      buttons: [
+        {
+          label: "Yep, delete",
+          onClick: () => removeResource(e, resourceName, id),
+        },
+        {
+          label: "Nope, keep",
+          onClick: () => {
+            return false;
+          },
+        },
+      ],
+    });
+  };
+
+  const removeResource = (e, resourceName, id) => {
+    e.stopPropagation();
+
     axios
       .delete(`api/communities/${id}`, {
         headers: {
@@ -35,18 +58,31 @@ export default function Community({ community }) {
         },
       })
       .then((res) => {
+        console.log("res: ", res);
         setCommunities(
           communities.filter((resource) => {
             return resource._id !== id;
           })
         );
+        notifySuccess({
+          title: "Community deleted",
+          msg: `The community '${resourceName}' was successfully deleted`,
+        });
         history.goBack();
       })
       .catch((err) => {
         console.log(
-          "Failed to delete community resource - something went wrong: ",
+          `Failed to delete community ${
+            resourceName ?? id ?? null
+          } - something went wrong: `,
           err
         );
+        notifyError({
+          title: "Community not deleted",
+          msg: `Failed to delete community ${
+            resourceName ?? id ?? null
+          } - an unexpeted error occured`,
+        });
       });
   };
 
@@ -88,7 +124,9 @@ export default function Community({ community }) {
         <Link
           className="community__action"
           to="#"
-          onClick={(e) => removeResource(e, community._id)}
+          onClick={(e) =>
+            cofirmResourceRemoval(e, community.name, community._id)
+          }
         >
           <FaRegTrashAlt className="actionIcon deleteIcon" />
         </Link>

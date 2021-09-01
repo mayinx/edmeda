@@ -51,8 +51,8 @@ exports.register = async (req, res) => {
         .json({ message: "Enter the same password twice for verification." });
     }
 
-    const existingUser = await User.findOne({ type, email });
-    if (existingUser) {
+    // User alredy registered?
+    if (await User.findOne({ type, email })) {
       return res.status(400).json({
         errors: {
           email: "An account with this email already exists.",
@@ -62,51 +62,47 @@ exports.register = async (req, res) => {
 
     // if (!userName) userName = email;
 
-    const salt = await bcrypt.genSalt();
-    const passwordHash = await bcrypt.hash(password, salt);
+    // const salt = await bcrypt.genSalt();
+    // const passwordHash = await bcrypt.hash(password, salt);
+    const passwordHash = await User.createPasswordHash(password);
 
-    const newUser = new User({
+    let newUser = await User.create({
       type,
       email,
       password: passwordHash,
       fullName,
       userName,
     });
-    const savedUser = await newUser.save();
+    // const savedUser = await newUser.save();
     console.log("--- Succcessfully registered new user!");
-    // console.log("All users: ", User.find({}));
 
-    // Each app instacne can only have 1 school community
-    // To allow for more school communities per app instacne, we are going to introduce multi tenancy
-    // and will scope everything per tenant here...
-    // TODO: Test that!
-    const existingSchoolCommunity = await Community.findOne({
+    let schoolCommunity = await Community.findOne({
       type: Community.TYPES.TENANT,
     });
-    if (!existingSchoolCommunity) {
+    if (!schoolCommunity) {
       console.log("--- School Communty doesn't exist yet - creating one now!");
-      const schoolCommunity = await Community.create({
+
+      schoolCommunity = await Community.create({
         name: "School Community",
         type: Community.TYPES.TENANT,
-        creator: savedUser._id,
+        creator: newUser._id,
       });
       console.log("--- Succcessfully created school community!");
 
-      const updatedCommunity = await schoolCommunity.performAfterCreationChores();
-    } else {
-      console.log(
-        "--- School Communty already exist - just add new user as member!"
-      );
-      const updatedSchoolCommunity = await existingSchoolCommunity.addMember(
-        savedUser
-      );
+      schoolCommunity = await schoolCommunity.performAfterCreationChores();
     }
 
+    // Either way: add user as member
+    ({
+      community: schoolCommunity,
+      member: newUser,
+    } = await schoolCommunity.addMember(newUser));
+
     res.json({
-      id: savedUser._id,
-      type: savedUser.type,
-      fullName: user.fullName,
-      userName: savedUser.userName,
+      id: newUser._id,
+      type: newUser.type,
+      fullName: newUser.fullName,
+      userName: newUser.userName,
     });
   } catch (err) {
     res.status(500).json({ error: err.message });

@@ -15,7 +15,7 @@ router.get("/:id", auth, UsersController.find);
 router.patch("/:id", auth, UsersController.update);
 router.delete("/:id", auth, UsersController.delete);
 
-/* RESTFUL ROUTES FOR NESTED COMMUNITIES RESOUCRES */
+/* RESTFUL ROUTES FOR NESTED USERS RESOUCRES */
 
 /* - USERS GROUPS */
 

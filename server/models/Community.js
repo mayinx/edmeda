@@ -26,11 +26,13 @@ const communitiesSchema = new Schema(
       ref: "User",
       required: true, // TODO: Conditionally require
     },
-    members: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-      required: false, // TODO: Conditionally require
-    },
+    members: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        required: false, // TODO: Conditionally require
+      },
+    ],
     grade: {
       type: Number,
       required: false, // Conditonally require that
@@ -71,6 +73,7 @@ communitiesSchema.methods.performAfterCreationChores = async function () {
     console.log("this: ", this);
     // TODO: What's the instance method version of this ?
     // i.e. something like 'req.currentUser.update(...)' - which doesn't seem to work here?
+    // EDIT: Check => 'this.populate('creator').creator.communities.push(this)';
     const user = await User.findOneAndUpdate(
       { _id: this.creator },
       { $push: { communities: this } },
@@ -114,6 +117,7 @@ communitiesSchema.methods.performAfterCreationChores = async function () {
 
     // TODO: What's the instance method version of this ?
     // i.e. something like 'community.update(...)' - which doesn't seem to work here?
+    // TODO: Check => this.groups.push(groups) && this.members.push(this.creator);
     const updatedCommunity = await Community.findOneAndUpdate(
       { _id: this._id },
       // { $push: { groups: groups } },
@@ -132,21 +136,28 @@ communitiesSchema.methods.addMember = async function (newMember) {
   try {
     // TODO: What's the instance method version of this ?
     // i.e. something like 'req.currentUser.update(...)' - which doesn't seem to work here?
-    const user = await User.findOneAndUpdate(
-      { _id: newMember },
-      { $push: { communities: this } },
-      { new: true }
-    );
+    // EDIT: TODO: Check =>  nwMember.communities.push(this) && newMember.save();
+    let updatedCommunity = null;
 
+    if (!newMember.communities.includes(this._id)) {
+      newMember = await User.findOneAndUpdate(
+        { _id: newMember._id },
+        { $push: { communities: this } },
+        { new: true }
+      );
+    }
     // TODO: What's the instance method version of this ?
     // i.e. something like 'community.update(...)' - which doesn't seem to work here?
-    const updatedCommunity = await Community.findOneAndUpdate(
-      { _id: this._id },
-      { $push: { members: newMember } },
-      { new: true }
-    ).populate("creator");
+    // TODO: Check => this.members.push(newMember); && this.save
+    if (!this.members.includes(newMember._id)) {
+      updatedCommunity = await Community.findOneAndUpdate(
+        { _id: this._id },
+        { $push: { members: newMember } },
+        { new: true }
+      ).populate("creator");
+    }
 
-    return updatedCommunity;
+    return { community: updatedCommunity ?? this, member: newMember };
   } catch (err) {
     console.log("[ERROR] Community#addMember: ", err);
     throw new Error(`[ERROR] Community#addMember: ${err}`);

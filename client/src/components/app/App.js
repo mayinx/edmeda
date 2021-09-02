@@ -1,5 +1,5 @@
 import "./App.css";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Redirect, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import axios from "axios";
@@ -93,28 +93,36 @@ function App() {
               <Route exact path="/" component={RegistrationLayout} />
               <Route path="/register" component={RegistrationLayout} />
               <Route path="/login" component={RegistrationLayout} />
-              <Route
-                exact
-                path="/communities/new"
-                component={CommunitiesLayout}
-              />
-              <Route
-                exact
-                path="/communities/:id/edit"
-                component={CommunitiesLayout}
-              />
-              <Route
-                exact
-                path="/communities/:id/editMembers"
-                component={CommunitiesLayout}
-              />
-              <Route
-                exact
-                path="/communities/:id"
-                component={CommunityLayout}
-              />
-              {/* <Route path="/" component={CommunitiesLayout} /> */}
-              <Route path="/communities" component={CommunitiesLayout} />
+              {currentUserData.user ? (
+                <>
+                  <Route
+                    exact
+                    path="/communities/new"
+                    component={CommunitiesLayout}
+                  />
+                  <Route
+                    exact
+                    path="/communities/:id/edit"
+                    component={CommunitiesLayout}
+                  />
+                  <Route
+                    exact
+                    path="/communities/:id/members"
+                    component={CommunitiesLayout}
+                  />
+                  <Route
+                    exact
+                    path="/communities/:id"
+                    component={CommunityLayout}
+                  />
+
+                  {/* <Route path="/" component={CommunitiesLayout} /> */}
+                  <Route path="/communities" component={CommunitiesLayout} />
+                </>
+              ) : (
+                <Redirect to="/login" />
+              )}
+
               <Route path="*">
                 <h2>404 - Sorry, but this page could not be found!</h2>
               </Route>

@@ -90,6 +90,7 @@ export default function Modal(props) {
                 {`${props.crudActionBtnCaption ?? "Update"}`}
               </button>
             )}
+            {props.crudAction === "custom" && props.modalFooterActions}
           </div>
         </div>
       </div>

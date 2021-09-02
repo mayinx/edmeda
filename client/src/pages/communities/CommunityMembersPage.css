@@ -1,0 +1,83 @@
+.CommunityMembersModalPage {
+  height: 100%;
+  width: 100%;
+  flex: 1 1;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  padding: 1rem;
+  align-items: flex-start;
+  overflow-x: hidden;
+
+  grid-gap: 0.5rem;
+  gap: 0.5rem;
+}
+
+.CommunityMembersModalPage .NewUserForm {
+  display: flex;
+  flex-direction: row;
+  grid-gap: 1rem;
+  gap: 1rem;
+  padding: 0 1rem;
+  grid-gap: 2rem;
+  gap: 2rem;
+  padding: 1rem;
+  flex: 0 0 100px;
+  align-items: stretch;
+  justify-content: flex-end;
+}
+
+.CommunityMembersModalPage .NewUserForm .createCommunityMemberBtn {
+  align-self: center;
+}
+
+.CommunityMembersModalPage .BottomBar {
+  /* transform: translate(-50%, -50%); */
+  display: flex;
+  flex: 0 0 175px;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  color: var(--main-font-color);
+  flex-direction: column;
+  border-radius: 6px;
+  box-shadow: 0 13px 27px -5px rgb(50 50 93 / 25%),
+    0 8px 16px -8px rgb(0 0 0 / 30%);
+}
+.CommunityMembersModalPage .BottomBar .BottomBar__Header {
+  display: flex;
+  line-height: 2;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #dad7d7;
+  font-size: 1rem;
+  padding: 0.25rem 1rem;
+  color: lightslategray;
+  color: whitesmoke;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  background-color: #9773a7;
+}
+.CommunityMembersModalPage
+  .BottomBar
+  .BottomBar__Header
+  .BottomBar__HeaderCaption {
+  font-size: 1rem;
+  font-weight: lighter;
+  letter-spacing: 6px;
+  margin-left: 1rem;
+}
+.CommunityMembersModalPage .BottomBar .BottomBar__Header .closeBottomBarAction {
+  cursor: pointer;
+  font-size: 2rem;
+  display: flex;
+}
+
+.CommunityMembersModalPage .BottomBar .BottomBar__Body {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex: auto;
+  overflow: auto;
+}

@@ -5,12 +5,14 @@
   --UserListItem-border-radius: 10px;
 
   /* flex: 1 1 auto; */
-  flex: 1 1 150px;
+  /* width: 100%;
+  max-width: 25%; */
+  /* flex: 1 1 200px; */
+  flex: 0 1 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  width: 100%;
   position: relative;
   overflow: hidden;
   box-shadow: rgb(50 50 93 / 25%) 0px 13px 27px -5px,
@@ -31,12 +33,40 @@
   color: #556e7e;
 }
 
-.UserListItem.UserListItem--alive {
-  background-color: green;
+.UserListItem.UserListItem--student {
+  /* background-color: green; */
+  /* border-color: green; */
 }
-.UserListItem.UserListItem--alive,
-.UserListItem.UserListItem--alive a {
-  color: white;
+.UserListItem.UserListItem--student,
+.UserListItem.UserListItem--student a {
+  /* color: white; */
+}
+.UserListItem.UserListItem--student .User__ProfilePic-wrapper img {
+  /* border-color: green; */
+}
+
+.UserListItem.UserListItem--teacher {
+  /* background-color: green; */
+  /* border-color: green; */
+}
+.UserListItem.UserListItem--teacher,
+.UserListItem.UserListItem--teacher a {
+  /* color: white; */
+}
+.UserListItem.UserListItem--teacher .User__ProfilePic-wrapper img {
+  /* border-color: green; */
+}
+
+.UserListItem.UserListItem--parent {
+  /* background-color: green; */
+  /* border-color: green; */
+}
+.UserListItem.UserListItem--parent,
+.UserListItem.UserListItem--parent a {
+  /* color: white; */
+}
+.UserListItem.UserListItem--parent .User__ProfilePic-wrapper img {
+  /* border-color: green; */
 }
 
 .UserListItem.UserListItem--unknown {
@@ -47,22 +77,19 @@
   color: #893838;
 }
 
-.UserListItem.UserListItem--dead {
-  background-color: #3f3f3f;
-}
-.UserListItem.UserListItem--dead,
-.UserListItem.UserListItem--dead a {
-  color: white;
-}
-
-.UserListItem.UserListItem:hover img {
-  z-index: -1;
-}
-.UserListItem.UserListItem:hover img {
+.UserListItem.UserListItem img {
   transition: all 0.5s ease-in-out;
   -webkit-transform-style: preserve-3d;
   -webkit-backface-visibility: hidden;
 }
+.UserListItem.UserListItem:hover img {
+  z-index: -1;
+}
+/* .UserListItem.UserListItem:hover img {
+  transition: all 0.5s ease-in-out;
+  -webkit-transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+} */
 
 .UserListItem .user__meta {
   transition: all 1s ease-in-out;

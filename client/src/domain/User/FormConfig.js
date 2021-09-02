@@ -1,112 +1,149 @@
 class FormConfig {
   constructor() {
-    this.valdiationMsgNameRequired =
-      "You must specify a uniq name for your class community (between 3 and 60 characters long)";
-    this.valdiationMsgGradeRequired = "You must specify a class grade";
-    this.valdiationMsgCreatorRequired =
-      "You must specify a class teacher as community owner (between 3 and 60 characters long)";
+    this.shared = {
+      valdiationMsgEmailRequired: "Please provide an Email-Address",
+      valdiationMsgPasswordRequired: "Please provide a Password",
+      valdiationMsgTypeRequired: "Please provide a valid User Type",
+      valdiationMsgFullNameRequired:
+        "Please provide your full name (between 3 and 60 characters long)",
+    };
+    // this.newShared = {
+    //   valdiationMsgEmailRequired: "Please provide an Email-Address",
+    // };
+    this.new = {
+      type: {
+        label: "User Type",
+        options: [
+          {
+            label: "-- Select User Type --",
+            value: "",
+            className: "default",
+          },
+          {
+            label: "Student",
+            value: "student",
+          },
+          {
+            label: "Teacher",
+            value: "teacher",
+          },
+          {
+            label: "Parent",
+            value: "parent",
+          },
+        ],
+        validationRuleset: {
+          required: {
+            value: true,
+            message: this.shared.valdiationMsgTypeRequired,
+          },
+        },
+      },
 
-    this.fullName = {
-      label: "Full Name",
-      placeholder: "E.g. 'Jonny Mustermähn'",
-      validationRuleset: {
-        required: {
-          value: true,
-          message: this.valdiationMsgNameRequired,
+      email: {
+        type: "email",
+        label: "E-Mail-Address",
+        placeholder: "E.g. 'jonny.mcguire@gmail.com'",
+        validationRuleset: {
+          required: {
+            value: true,
+            message: this.shared.valdiationMsgEmailRequired,
+          },
+          minLength: {
+            value: 6,
+            message: this.shared.valdiationMsgEmailRequired,
+          },
+          maxLength: {
+            value: 60,
+            message: this.shared.valdiationMsgEmailRequired,
+          },
         },
-        minLength: {
-          value: 3,
-          message: this.valdiationMsgNameRequired,
-        },
-        maxLength: {
-          value: 60,
-          message: this.valdiationMsgNameRequired,
+      },
+      fullName: {
+        type: "text",
+        label: "Full name",
+        placeholder: "E.g. 'Jonny McGuire'",
+        validationRuleset: {
+          required: {
+            value: true,
+            message: this.shared.valdiationMsgFullNameRequired,
+          },
+          minLength: {
+            value: 3,
+            message: this.shared.valdiationMsgFullNameRequired,
+          },
+          maxLength: {
+            value: 60,
+            message: this.shared.valdiationMsgFullNameRequired,
+          },
         },
       },
     };
-    this.grade = {
-      label: "Class Grade",
-      options: [
-        {
-          label: "-- Select Class Grade --",
-          value: "",
-          className: "default",
+    this.valdiationMsgFullNameRequired =
+      "Please provide your full name (between 3 and 60 characters long)";
+    this.valdiationMsgEmailRequired =
+      "Please provide a valid Email-Address (between 6 and 60 characters long)";
+    this.valdiationMsgPasswordRequired =
+      "Please provide a valid Password (between 6 and 60 characters long, etc. ...)";
+    this.valdiationMsgPasswordConfirmationRequired =
+      "Please repeat your pasword to confirm it";
+
+    this.email = {
+      type: "email",
+      label: "Your E-Mail-Adress",
+      placeholder: "E.g. 'jonny.mcguire@gmail.com'",
+      validationRuleset: {
+        required: {
+          value: true,
+          message: this.valdiationMsgEmailRequired,
         },
-        {
-          label: "1",
-          value: 1,
-        },
-        {
-          label: "2",
-          value: 2,
-        },
-        {
-          label: "3",
-          value: 3,
-        },
-        {
-          label: "4",
-          value: 4,
-        },
-        {
-          label: "5",
-          value: 5,
-        },
-        {
-          label: "6",
+        minLength: {
           value: 6,
-        },
-        {
-          label: "7",
-          value: 7,
-        },
-        {
-          label: "8",
-          value: 8,
-        },
-        {
-          label: "9",
-          value: 9,
-        },
-        {
-          label: "10",
-          value: 10,
-        },
-        {
-          label: "11",
-          value: 11,
-        },
-        {
-          label: "12",
-          value: 12,
-        },
-        {
-          label: "13",
-          value: 13,
-        },
-      ],
-      validationRuleset: {
-        required: {
-          value: true,
-          message: this.valdiationMsgGradeRequired,
-        },
-      },
-    };
-    this.creator = {
-      label: "Teacher (Community Owner)",
-      placeholder: "Teacher / Community Owner",
-      validationRuleset: {
-        required: {
-          value: true,
-          message: this.valdiationMsgCreatorRequired,
-        },
-        minLength: {
-          value: 3,
-          message: this.valdiationMsgCreatorRequired,
+          message: this.valdiationMsgEmailRequired,
         },
         maxLength: {
           value: 60,
-          message: this.valdiationMsgCreatorRequired,
+          message: this.valdiationMsgEmailRequired,
+        },
+      },
+    };
+
+    this.password = {
+      type: "password",
+      label: "Your Password",
+      placeholder: "NOT 'jonny123' ;-)",
+      validationRuleset: {
+        required: {
+          value: true,
+          message: this.valdiationMsgPasswordRequired,
+        },
+        minLength: {
+          value: 6,
+          message: this.valdiationMsgPasswordRequired,
+        },
+        maxLength: {
+          value: 60,
+          message: this.valdiationMsgPasswordRequired,
+        },
+      },
+    };
+
+    this.passwordConfirmation = {
+      type: "password",
+      label: "Password Confirmation",
+      placeholder: "Repeat your password",
+      validationRuleset: {
+        required: {
+          value: true,
+          message: this.valdiationMsgPasswordConfirmationRequired,
+        },
+        minLength: {
+          value: 6,
+          message: this.valdiationMsgPasswordConfirmationRequired,
+        },
+        maxLength: {
+          value: 60,
+          message: this.valdiationMsgPasswordConfirmationRequired,
         },
       },
     };

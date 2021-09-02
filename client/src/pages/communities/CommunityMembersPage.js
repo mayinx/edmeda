@@ -6,7 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import CommunitiesContext from "../../contexts/CommunitiesContext";
 import FormConfig from "../../domain/User/FormConfig";
-import TextInputFormGroup from "../../components/form/groups/TextInputFormGroup";
+import InputFormGroup from "../../components/form/groups/InputFormGroup";
 import SelectInputFormGroup from "../../components/form/groups/SelectInputFormGroup";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
@@ -15,9 +15,12 @@ import useFormResultHandler from "../../components/form/useFormResultHandler";
 // import { UserList as CommunityMembersList } from "../../domain/User/UserList";
 import { default as CommunityMembersList } from "../../domain/User/UserList";
 
-import "./EditCommunityMembersPage.css";
+import "./CommunityMembersPage.css";
 
-export default function EditCommunityMembersPage(props) {
+import _ from "lodash";
+import { FaRegTimesCircle } from "react-icons/fa";
+
+export default function CommunityMembersPage(props) {
   const { communities, setCommunities } = useContext(CommunitiesContext);
   const history = useHistory();
   const { notifyError } = useNotify();
@@ -28,9 +31,11 @@ export default function EditCommunityMembersPage(props) {
   const formMethods = useForm();
   const {
     reset,
+
     handleSubmit,
     formState: { errors },
     setError,
+    setFocus,
   } = formMethods;
 
   const { handleFormSuccess, handleFormError } = useFormResultHandler({
@@ -63,11 +68,11 @@ export default function EditCommunityMembersPage(props) {
       });
   }, []);
 
-  useEffect(() => {
-    if (community) {
-      reset(community);
-    }
-  }, [community]);
+  // useEffect(() => {
+  //   if (community) {
+  //     reset(community);
+  //   }
+  // }, [community]);
 
   useEffect(() => {
     axios
@@ -78,7 +83,7 @@ export default function EditCommunityMembersPage(props) {
         },
       })
       .then((res) => {
-        console.log("res: ", res);
+        // console.log("res: ", res);
         setCommunityMembers(res.data);
       })
       .catch((err) => {
@@ -86,11 +91,18 @@ export default function EditCommunityMembersPage(props) {
         console.log("id:", id);
         notifyError({
           title: "Community not found",
-          msg: `Community with the given id couldn't be found - an error occured: ${err}`,
+          msg: `An unexpected error occured: ${err}`,
           toastCntId: "modalNotificationCnt",
         });
       });
   }, []);
+
+  // Form related effeects
+  useEffect(() => {
+    // if (community) {
+    reset({ type: "", fullName: "", email: "" });
+    // }
+  }, [community, communityMembers]);
 
   const onSubmit = (data) => {
     axios
@@ -101,23 +113,37 @@ export default function EditCommunityMembersPage(props) {
         },
       })
       .then((res) => {
-        const newList = communities.map((el) => {
-          if (el._id === id) {
-            return { ...el, ...data };
-          }
+        // ON EDIT:
+        // const newList = communities.map((el) => {
+        //   if (el._id === id) {
+        //     return { ...el, ...data };
+        //   }
 
-          return el;
-        });
+        //   return el;
+        // });
 
-        setCommunities(newList);
+        // setCommunities(newList);
+
+        // ON NEW
+        setCommunityMembers([res.data, ...communityMembers]);
+        reset({ type: res.data.type });
         // notifySuccess({
         //   title: "Community updated",
         //   msg: `The Community '${community?.name}' was successfully updated`,
         // });
 
-        handleFormSuccess({ objectName: community?.name });
+        handleFormSuccess({
+          objectName: community?.name,
+          title: "New Community member added",
+          message: `The ${_.camelCase(res?.data?.type) ?? "user"} ${
+            res?.data?.fullName ?? null
+          } was sucessfully created and added as a new member to the ${
+            community?.name
+          }-Community.`,
+          toastCntId: "modalNotificationCnt",
+        });
 
-        history.push("/communities");
+        // history.push("/communities");
       })
       .catch((err) => {
         // console.log(
@@ -135,38 +161,61 @@ export default function EditCommunityMembersPage(props) {
         handleFormError({ errorObject: err, objectId: id });
       });
   };
-  // EditCommunityMembersModalPage;
+  // CommunityMembersModalPage;
+
   return (
-    <div className="ModalPage__bodyInner EditCommunityMembersModalPage">
+    <div className="ModalPage__bodyInner CommunityMembersModalPage">
       {/* <div className="ResourcesListCnt UserListCnt CommunityMembersListCnt"> */}
       <CommunityMembersList resources={communityMembers} />
       {/* </div> */}
+      <section
+        className={`BottomBar ${
+          props.bottomBarToggled ? "BottomBar--expanded" : "BottomBar--hidden"
+        }`}
+      >
+        <div className="BottomBar__Header ">
+          <h3 className="BottomBar__HeaderCaption">New User</h3>
+          <div
+            className="closeBottomBarAction"
+            onClick={() => props.toggleBottomBar(false)}
+          >
+            <FaRegTimesCircle />
+          </div>
+        </div>
+        <div className="BottomBar__Body">
+          <FormProvider {...{ ...formMethods, ErrorMessage, errors }}>
+            <form
+              id={props.formId}
+              className="Form NewUserForm"
+              onSubmit={handleSubmit(onSubmit)}
+            >
+              <SelectInputFormGroup
+                name="type"
+                formConfig={FormConfig.new.type}
+              />
 
-      <FormProvider {...{ ...formMethods, ErrorMessage, errors }}>
-        <form
-          id={props.formId}
-          className="Form NewUserForm"
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          <TextInputFormGroup
-            name="name"
-            formConfig={FormConfig.name}
-            defaultValue={community?.name}
-          />
+              <InputFormGroup
+                name="fullName"
+                formConfig={FormConfig.new.fullName}
+              />
+              <InputFormGroup name="email" formConfig={FormConfig.new.email} />
 
-          <SelectInputFormGroup
-            name="grade"
-            formConfig={FormConfig.grade}
-            defaultValue={community?.grade}
-          />
-
-          {/* <TextInputFormGroup
+              {/* <TextInputFormGroup
             name="creator"
             formConfig={FormConfig.creator}
             defaultValue={community?.creator}
           /> */}
-        </form>
-      </FormProvider>
+              <button
+                form="newCommunityMember"
+                class="btn rounded green newResourceBtn createCommunityMemberBtn"
+                type="submit"
+              >
+                Create User
+              </button>
+            </form>
+          </FormProvider>
+        </div>
+      </section>
     </div>
   );
 }

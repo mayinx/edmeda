@@ -97,7 +97,7 @@ export default function Community({ community }) {
   };
 
   const openEditCommunityMembersModal = (e, id) => {
-    history.push(`/communities/${id}/editMembers`);
+    history.push(`/communities/${id}/members`);
     e.stopPropagation();
     e.preventDefault();
   };

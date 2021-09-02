@@ -54,8 +54,8 @@
 .UserList__Items {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: stretch;
+  justify-content: flex-start;
+
   align-items: stretch;
   gap: 1.5rem;
 }

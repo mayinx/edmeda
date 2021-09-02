@@ -1,12 +1,14 @@
 .UserList {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: stretch;
+  grid-gap: 1.5rem;
   gap: 1.5rem;
-
   padding-bottom: 2rem;
-  width: 90vw;
+  width: 100%;
+  flex: 1 1;
+  overflow-y: scroll;
 }
 .UserList__FilterBar {
   display: flex;

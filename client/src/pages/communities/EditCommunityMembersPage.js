@@ -5,7 +5,7 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import CommunitiesContext from "../../contexts/CommunitiesContext";
-import FormConfig from "./FormConfig";
+import FormConfig from "../../domain/User/FormConfig";
 import TextInputFormGroup from "../../components/form/groups/TextInputFormGroup";
 import SelectInputFormGroup from "../../components/form/groups/SelectInputFormGroup";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
@@ -138,14 +138,14 @@ export default function EditCommunityMembersPage(props) {
   // EditCommunityMembersModalPage;
   return (
     <div className="ModalPage__bodyInner EditCommunityMembersModalPage">
-      <div className="communityMembersList">
-        <CommunityMembersList resources={communityMembers} />
-      </div>
+      {/* <div className="ResourcesListCnt UserListCnt CommunityMembersListCnt"> */}
+      <CommunityMembersList resources={communityMembers} />
+      {/* </div> */}
 
       <FormProvider {...{ ...formMethods, ErrorMessage, errors }}>
         <form
           id={props.formId}
-          className="Form"
+          className="Form NewUserForm"
           onSubmit={handleSubmit(onSubmit)}
         >
           <TextInputFormGroup

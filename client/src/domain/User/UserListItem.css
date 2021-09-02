@@ -1,10 +1,11 @@
-main section.UserListItem {
+.UserListItem {
   --UserListItem-font-color: #556e7e;
   --UserListItem-bg-color: #e8ecf1;
   --UserListItem-border-color: #b5cfd8;
   --UserListItem-border-radius: 10px;
 
-  flex: 1 1 auto;
+  /* flex: 1 1 auto; */
+  flex: 1 1 150px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,51 +25,50 @@ main section.UserListItem {
   cursor: pointer;
 }
 
-main section.UserListItem a {
+.UserListItem a {
   text-decoration: none;
   width: 100%;
   color: #556e7e;
 }
 
-main section.UserListItem.UserListItem--alive {
+.UserListItem.UserListItem--alive {
   background-color: green;
 }
-main section.UserListItem.UserListItem--alive,
-main section.UserListItem.UserListItem--alive a {
+.UserListItem.UserListItem--alive,
+.UserListItem.UserListItem--alive a {
   color: white;
 }
 
-main section.UserListItem.UserListItem--unknown {
+.UserListItem.UserListItem--unknown {
   background-color: yellow;
 }
-main section.UserListItem.UserListItem--unknown,
-main section.UserListItem.UserListItem--unknown a {
+.UserListItem.UserListItem--unknown,
+.UserListItem.UserListItem--unknown a {
   color: #893838;
 }
 
-main section.UserListItem.UserListItem--dead {
+.UserListItem.UserListItem--dead {
   background-color: #3f3f3f;
 }
-main section.UserListItem.UserListItem--dead,
-main section.UserListItem.UserListItem--dead a {
+.UserListItem.UserListItem--dead,
+.UserListItem.UserListItem--dead a {
   color: white;
 }
 
-main section.UserListItem.UserListItem:hover img {
+.UserListItem.UserListItem:hover img {
   z-index: -1;
 }
-main section.UserListItem.UserListItem:hover img {
+.UserListItem.UserListItem:hover img {
   transition: all 0.5s ease-in-out;
   -webkit-transform-style: preserve-3d;
   -webkit-backface-visibility: hidden;
-  border-bottom-left-radius: var(--UserListItem-border-radius);
-  border-bottom-right-radius: var(--UserListItem-border-radius);
 }
 
-main section.UserListItem .user__meta {
+.UserListItem .user__meta {
   transition: all 1s ease-in-out;
   width: 100%;
-  flex: 1;
+
+  flex: 1 1 150px;
   padding: var(--r-spacing-md);
   background-color: var(--UserListItem-bg-color);
   border-bottom-left-radius: var(--UserListItem-border-radius);
@@ -76,9 +76,9 @@ main section.UserListItem .user__meta {
   border-top: 2px solid var(--UserListItem-border-color);
 }
 
-main section.UserListItem .user__actions {
+.UserListItem .user__actions {
   position: absolute;
-  top: 5px;
+  bottom: 5px;
   right: 5px;
   background: #c3d1dcdb;
   display: flex;
@@ -89,48 +89,57 @@ main section.UserListItem .user__actions {
   padding: 0.5rem;
   border-radius: var(--UserListItem-border-radius);
 }
-main section.UserListItem .user__actions a.user__action {
+.UserListItem .user__actions a.user__action {
   display: flex;
   color: lightslategray;
   background-color: whitesmoke;
   padding: 0.3rem;
   flex: 0;
   border-radius: 6px;
-  font-size: 1.5rem;
+  font-size: 1rem;
   align-items: center;
   justify-content: center;
 }
-main section.UserListItem:hover img {
-  transform: scale(1.75) translateY(2rem);
+.UserListItem:hover img {
+  transform: scale(1.1);
   border-radius: var(--UserListItem-border-radius);
 }
 
-main section.UserListItem .User__ProfilePic-wrapper {
-  display: flex;
+.UserListItem .User__ProfilePic-wrapper {
+  /* display: flex;
   flex-direction: column;
   align-items: stretch;
-  padding: 0;
   width: 100%;
-  border-radius: var(--UserListItem-border-radius);
-}
-main section.UserListItem .User__ProfilePic-wrapper img {
-  display: block;
+  border-radius: var(--UserListItem-border-radius); */
 
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.UserListItem .User__ProfilePic-wrapper img {
+  display: block;
+  margin: 1rem;
+  width: 100px;
+  height: 100px;
   object-fit: cover;
-  border-radius: var(--UserListItem-border-radius);
+  border-radius: 100%;
+  z-index: 30;
+  border: 1px solid #fff;
+  box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%);
 }
 
 /* MEDIA QUERIES */
 
-@media all and (min-width: 400px) {
-  main section.UserListItem {
+/* @media all and (min-width: 400px) {
+  .UserListItem {
     width: 48%;
   }
 }
 
 @media all and (min-width: 1100px) {
-  main section.UserListItem {
+  .UserListItem {
     width: 20%;
     max-width: 50%;
   }
-}
+} */

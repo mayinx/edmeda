@@ -104,7 +104,7 @@ export default function UserListItem({ user }) {
 
   return (
     <section
-      className={`Resource User User--${user.type} ResourceListItem UserListItem UserListItem--${user.type} `}
+      className={`ResourceListItem UserListItem UserListItem--${user.type} `}
       key={user._id}
       id={user._id}
       // onClick={(e) => openCommunityPage(e, user._id)}
@@ -113,7 +113,7 @@ export default function UserListItem({ user }) {
         <img src={userProfilePicImgSrc} className="User__ProfilePic" alt="" />
       </p>
       <div className="user__meta">
-        <div className="truncate">{user.name}</div>
+        <div className="truncate">{user?.fullName}</div>
         <div className="truncate">{user?.creator?.fullName}</div>
       </div>
       <div className="user__actions">

@@ -19,6 +19,7 @@ import CommunitiesLayout from "../../layouts/private/CommunitiesLayout";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../notifications/ReactToastifyOverrides.css";
+import ProtectedRoutes from "../auth/ProtectedRoutes";
 
 // function setToken(userToken) {}
 
@@ -93,36 +94,31 @@ function App() {
               <Route exact path="/" component={RegistrationLayout} />
               <Route path="/register" component={RegistrationLayout} />
               <Route path="/login" component={RegistrationLayout} />
-              {currentUserData.user ? (
-                <>
-                  <Route
-                    exact
-                    path="/communities/new"
-                    component={CommunitiesLayout}
-                  />
-                  <Route
-                    exact
-                    path="/communities/:id/edit"
-                    component={CommunitiesLayout}
-                  />
-                  <Route
-                    exact
-                    path="/communities/:id/members"
-                    component={CommunitiesLayout}
-                  />
-                  <Route
-                    exact
-                    path="/communities/:id"
-                    component={CommunityLayout}
-                  />
+              <ProtectedRoutes>
+                <Route
+                  exact
+                  path="/communities/new"
+                  component={CommunitiesLayout}
+                />
+                <Route
+                  exact
+                  path="/communities/:id/edit"
+                  component={CommunitiesLayout}
+                />
+                <Route
+                  exact
+                  path="/communities/:id/members"
+                  component={CommunitiesLayout}
+                />
+                <Route
+                  exact
+                  path="/communities/:id"
+                  component={CommunityLayout}
+                />
 
-                  {/* <Route path="/" component={CommunitiesLayout} /> */}
-                  <Route path="/communities" component={CommunitiesLayout} />
-                </>
-              ) : (
-                <Redirect to="/login" />
-              )}
-
+                {/* <Route path="/" component={CommunitiesLayout} /> */}
+                <Route path="/communities" component={CommunitiesLayout} />
+              </ProtectedRoutes>
               <Route path="*">
                 <h2>404 - Sorry, but this page could not be found!</h2>
               </Route>

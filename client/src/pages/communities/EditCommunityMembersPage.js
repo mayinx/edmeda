@@ -12,6 +12,10 @@ import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 import useNotify from "../../components/notifications/useNotify";
 import useFormResultHandler from "../../components/form/useFormResultHandler";
+// import { UserList as CommunityMembersList } from "../../domain/User/UserList";
+import { default as CommunityMembersList } from "../../domain/User/UserList";
+
+import "./EditCommunityMembersPage.css";
 
 export default function EditCommunityMembersPage(props) {
   const { communities, setCommunities } = useContext(CommunitiesContext);
@@ -19,6 +23,8 @@ export default function EditCommunityMembersPage(props) {
   const { notifyError } = useNotify();
   const { id } = useParams();
   const [community, setCommunity] = useState({});
+  const [communityMembers, setCommunityMembers] = useState([]);
+
   const formMethods = useForm();
   const {
     reset,
@@ -28,8 +34,8 @@ export default function EditCommunityMembersPage(props) {
   } = formMethods;
 
   const { handleFormSuccess, handleFormError } = useFormResultHandler({
-    modelName: "User",
-    crudAction: "create",
+    modelName: "Community",
+    crudAction: "update",
     setFieldError: setError,
   });
 
@@ -63,9 +69,32 @@ export default function EditCommunityMembersPage(props) {
     }
   }, [community]);
 
+  useEffect(() => {
+    axios
+      .get(`/api/communities/${id}/members`, {
+        headers: {
+          "x-auth-token":
+            currentUserData?.token ?? localStorage.getItem("auth-token"),
+        },
+      })
+      .then((res) => {
+        console.log("res: ", res);
+        setCommunityMembers(res.data);
+      })
+      .catch((err) => {
+        console.log("err: ", err);
+        console.log("id:", id);
+        notifyError({
+          title: "Community not found",
+          msg: `Community with the given id couldn't be found - an error occured: ${err}`,
+          toastCntId: "modalNotificationCnt",
+        });
+      });
+  }, []);
+
   const onSubmit = (data) => {
     axios
-      .patch(`/api/communities/${id}/updateMembers`, data, {
+      .post(`/api/communities/${id}/members`, data, {
         headers: {
           "x-auth-token":
             currentUserData?.token ?? localStorage.getItem("auth-token"),
@@ -106,9 +135,13 @@ export default function EditCommunityMembersPage(props) {
         handleFormError({ errorObject: err, objectId: id });
       });
   };
-
+  // EditCommunityMembersModalPage;
   return (
-    <div className="ModalPage__bodyInner CommunityModalFormPage EditCommunityModalFormPage">
+    <div className="ModalPage__bodyInner EditCommunityMembersModalPage">
+      <div className="communityMembersList">
+        <CommunityMembersList resources={communityMembers} />
+      </div>
+
       <FormProvider {...{ ...formMethods, ErrorMessage, errors }}>
         <form
           id={props.formId}

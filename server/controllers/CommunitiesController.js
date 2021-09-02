@@ -204,8 +204,6 @@ exports.indexMembers = function (req, res) {
     .populate("members")
     .then((community) => {
       if (!community) throw new NotFoundError("community", id);
-      console.log("community: ", community);
-      console.log("community.members: ", community.members);
       res.status(200).send(community.members);
     })
     .catch((e) => {

@@ -1,0 +1,9 @@
+.EditCommunityMembersModalPage {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  padding: 1rem;
+  align-items: flex-start;
+  overflow-x: hidden;
+}

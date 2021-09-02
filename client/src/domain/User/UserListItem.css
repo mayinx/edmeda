@@ -1,0 +1,136 @@
+main section.UserListItem {
+  --UserListItem-font-color: #556e7e;
+  --UserListItem-bg-color: #e8ecf1;
+  --UserListItem-border-color: #b5cfd8;
+  --UserListItem-border-radius: 10px;
+
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  box-shadow: rgb(50 50 93 / 25%) 0px 13px 27px -5px,
+    rgb(0 0 0 / 30%) 0px 8px 16px -8px;
+  border-radius: var(--UserListItem-border-radius);
+  background-color: var(--UserListItem-bg-color);
+  color: var(--UserListItem-font-color);
+  border: 2px solid var(--UserListItem-border-color);
+  transition: all 0.3s ease-in-out;
+  -webkit-transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+  cursor: pointer;
+}
+
+main section.UserListItem a {
+  text-decoration: none;
+  width: 100%;
+  color: #556e7e;
+}
+
+main section.UserListItem.UserListItem--alive {
+  background-color: green;
+}
+main section.UserListItem.UserListItem--alive,
+main section.UserListItem.UserListItem--alive a {
+  color: white;
+}
+
+main section.UserListItem.UserListItem--unknown {
+  background-color: yellow;
+}
+main section.UserListItem.UserListItem--unknown,
+main section.UserListItem.UserListItem--unknown a {
+  color: #893838;
+}
+
+main section.UserListItem.UserListItem--dead {
+  background-color: #3f3f3f;
+}
+main section.UserListItem.UserListItem--dead,
+main section.UserListItem.UserListItem--dead a {
+  color: white;
+}
+
+main section.UserListItem.UserListItem:hover img {
+  z-index: -1;
+}
+main section.UserListItem.UserListItem:hover img {
+  transition: all 0.5s ease-in-out;
+  -webkit-transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+  border-bottom-left-radius: var(--UserListItem-border-radius);
+  border-bottom-right-radius: var(--UserListItem-border-radius);
+}
+
+main section.UserListItem .user__meta {
+  transition: all 1s ease-in-out;
+  width: 100%;
+  flex: 1;
+  padding: var(--r-spacing-md);
+  background-color: var(--UserListItem-bg-color);
+  border-bottom-left-radius: var(--UserListItem-border-radius);
+  border-bottom-right-radius: var(--UserListItem-border-radius);
+  border-top: 2px solid var(--UserListItem-border-color);
+}
+
+main section.UserListItem .user__actions {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: #c3d1dcdb;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border-radius: var(--UserListItem-border-radius);
+}
+main section.UserListItem .user__actions a.user__action {
+  display: flex;
+  color: lightslategray;
+  background-color: whitesmoke;
+  padding: 0.3rem;
+  flex: 0;
+  border-radius: 6px;
+  font-size: 1.5rem;
+  align-items: center;
+  justify-content: center;
+}
+main section.UserListItem:hover img {
+  transform: scale(1.75) translateY(2rem);
+  border-radius: var(--UserListItem-border-radius);
+}
+
+main section.UserListItem .User__ProfilePic-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0;
+  width: 100%;
+  border-radius: var(--UserListItem-border-radius);
+}
+main section.UserListItem .User__ProfilePic-wrapper img {
+  display: block;
+
+  object-fit: cover;
+  border-radius: var(--UserListItem-border-radius);
+}
+
+/* MEDIA QUERIES */
+
+@media all and (min-width: 400px) {
+  main section.UserListItem {
+    width: 48%;
+  }
+}
+
+@media all and (min-width: 1100px) {
+  main section.UserListItem {
+    width: 20%;
+    max-width: 50%;
+  }
+}

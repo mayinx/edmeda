@@ -6,14 +6,29 @@ const User = require("./User");
 const Group = require("./Group");
 
 const TYPES = {
-  CLASS: "class",
-  COURSE: "course",
-  TENANT: "tenant", // i.e. the whole school
-  CUSTOM: "custom", // i.e. the whole school
+  CLASS: "Class",
+  COURSE: "Course",
+  TENANT: "Tenant", // i.e. the whole school
+  CUSTOM: "Custom", // i.e. the whole school
 };
+
+const DEFAULT_PROFILE_PICS = [
+  "ComFbProfilePic1",
+  "ComFbProfilePic2",
+  "ComFbProfilePic3",
+  "ComFbProfilePic4",
+];
 
 const communitiesSchema = new Schema(
   {
+    type: {
+      type: String,
+      required: true,
+      enum: {
+        values: Object.values(TYPES),
+        message: "Invalid user type",
+      },
+    },
     name: {
       type: String,
       required: true,
@@ -37,12 +52,14 @@ const communitiesSchema = new Schema(
       type: Number,
       required: false, // Conditonally require that
     },
-    type: {
+
+    scope: {
       type: String,
       required: false,
     },
-    scope: {
+    fbProfilePicFileName: {
       type: String,
+      trim: true,
       required: false,
     },
     // TODO: If time:
@@ -62,7 +79,7 @@ const communitiesSchema = new Schema(
 );
 
 communitiesSchema.statics.TYPES = TYPES;
-
+communitiesSchema.statics.DEFAULT_PROFILE_PICS = DEFAULT_PROFILE_PICS;
 // performAfterCreationChores();
 // userSchema.methods.getFullName = function () {
 //   return this.firstName + this.lastName;
@@ -128,7 +145,8 @@ communitiesSchema.methods.performAfterCreationChores = async function () {
     return updatedCommunity;
   } catch (err) {
     console.log("[ERROR] Community#performAfterCreationChores: ", err);
-    throw new Error(`[ERROR] Community#performAfterCreationChores: ${err}`);
+    // throw new Error(`[ERROR] Community#performAfterCreationChores: ${err}`);
+    throw err;
   }
 };
 
@@ -160,7 +178,8 @@ communitiesSchema.methods.addMember = async function (newMember) {
     return { community: updatedCommunity ?? this, member: newMember };
   } catch (err) {
     console.log("[ERROR] Community#addMember: ", err);
-    throw new Error(`[ERROR] Community#addMember: ${err}`);
+    // throw new Error(`[ERROR] Community#addMember: ${err}`);
+    throw err;
   }
 };
 

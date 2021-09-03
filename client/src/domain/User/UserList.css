@@ -7,7 +7,8 @@
   gap: 1.5rem;
   /* padding-bottom: 2rem; */
   width: 100%;
-  flex: 1 1;
+  height: 100%;
+  flex: 0 1 auto;
   overflow-y: scroll;
 
   padding: 1rem;
@@ -58,7 +59,10 @@
   flex-wrap: wrap;
   justify-content: flex-start;
 
+  /* height: 100%; */
+  flex: auto;
   align-items: stretch;
+  align-items: flex-start;
   gap: 1.5rem;
 }
 

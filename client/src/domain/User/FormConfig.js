@@ -21,15 +21,15 @@ class FormConfig {
           },
           {
             label: "Student",
-            value: "student",
+            value: "Student",
           },
           {
             label: "Teacher",
-            value: "teacher",
+            value: "Teacher",
           },
           {
             label: "Parent",
-            value: "parent",
+            value: "Parent",
           },
         ],
         validationRuleset: {

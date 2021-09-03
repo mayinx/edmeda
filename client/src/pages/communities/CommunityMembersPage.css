@@ -7,8 +7,8 @@
   flex-direction: column;
   /* padding: 1rem; */
   align-items: flex-start;
-  overflow-x: hidden;
-
+  /* overflow-x: hidden; */
+  overflow: hidden;
   grid-gap: 0.5rem;
   gap: 0.5rem;
 }

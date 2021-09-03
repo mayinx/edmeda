@@ -5,7 +5,12 @@ import CommunitiesContext from "../../contexts/CommunitiesContext";
 import { useContext } from "react";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
-import { FaRegEdit, FaRegTrashAlt, FaUsersCog } from "react-icons/fa";
+import {
+  FaRegEdit,
+  FaRegTrashAlt,
+  FaUserAlt,
+  FaUsersCog,
+} from "react-icons/fa";
 import axios from "axios";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import { confirmAlert } from "react-confirm-alert"; // Import
@@ -16,7 +21,10 @@ import "../../components/notifications/ReactConfirmAlertOverrides.css";
 import useNotify from "../../components/notifications/useNotify";
 
 export default function UserListItem({ user }) {
-  const userProfilePicImgSrc = user?.picture ?? UserFallbackProfilePic;
+  const userProfilePicImgSrc =
+    user?.picture ?? user?.fbAvatarFileName
+      ? `../../assets/user_default_avatars/${user?.fbAvatarFileName}.png`
+      : UserFallbackProfilePic;
 
   const { communities, setCommunities } = useContext(CommunitiesContext);
 
@@ -111,6 +119,7 @@ export default function UserListItem({ user }) {
     >
       <p className="User__ProfilePic-wrapper">
         <img src={userProfilePicImgSrc} className="User__ProfilePic" alt="" />
+        {/* <FaUserAlt className="NavItem__Icon userAvatarIcon User__ProfilePic" /> */}
       </p>
       <div className="user__meta">
         <div className="truncate">{user?.fullName}</div>

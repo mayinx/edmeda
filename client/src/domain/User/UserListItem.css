@@ -144,7 +144,8 @@
   align-items: center;
   justify-content: center;
 }
-.UserListItem .User__ProfilePic-wrapper img {
+/* .UserListItem .User__ProfilePic-wrapper img { */
+.UserListItem .User__ProfilePic-wrapper .User__ProfilePic {
   display: block;
   margin: 1rem;
   width: 100px;

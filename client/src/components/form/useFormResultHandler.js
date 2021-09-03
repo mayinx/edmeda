@@ -22,18 +22,24 @@
 // });
 
 import useNotify from "../notifications/useNotify";
+import _ from "lodash";
 
 export default function useFormResultHandler(props) {
   let { modelName = "Object", crudAction = "modify", setFieldError } = props;
   const { notifyError, notifySuccess } = useNotify();
 
   function handleFormSuccess(props) {
-    let { objectName, title, msg, toastCntId = "appNotificationCnt" } = props;
+    let {
+      objectName,
+      title,
+      message,
+      toastCntId = "appNotificationCnt",
+    } = props;
 
     notifySuccess({
       title: title ?? `${modelName} ${crudAction}d`,
       msg:
-        msg ??
+        message ??
         `The ${modelName} '${
           objectName ?? null
         }' was successfully ${crudAction}d`,
@@ -46,7 +52,7 @@ export default function useFormResultHandler(props) {
       errorObject,
       objectId,
       title,
-      msg,
+      message,
       toastCntId = "modalNotificationCnt",
     } = props;
 
@@ -55,9 +61,14 @@ export default function useFormResultHandler(props) {
       Object.entries(serverErrorsObj.errors).forEach(([errorField, error]) => {
         console.log("errorField: ", errorField);
         console.log("error: ", error);
+        console.log("error.message: ", error.message);
+        let errMsg = null;
+        if (error) {
+          errMsg = _.isString(error) ? error : error?.message;
+        }
         setFieldError(errorField, {
           type: "server",
-          message: `${error ?? `Something went wong with ${errorField}`}`,
+          message: errMsg ?? `Something went wong with ${errorField}`,
         });
       });
     } else {
@@ -69,7 +80,7 @@ export default function useFormResultHandler(props) {
       notifyError({
         title: title ?? `Failed to ${crudAction} ${modelName}`,
         msg:
-          msg ??
+          message ??
           `The ${modelName} couldn't be ${crudAction}d - an unexpected error occured`,
         toastCntId: toastCntId,
       });

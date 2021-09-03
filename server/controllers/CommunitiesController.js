@@ -30,10 +30,16 @@ exports.create = async function (req, res) {
     let community = null;
 
     const { type = Community.TYPES.CLASS, name } = req.body;
-
+    const fbProfilePicFileName = `${type}_${_.sample(
+      Community.DEFAULT_PROFILE_PICS
+    )}`;
     const attributes = {
       ...req.body,
-      ...{ type: type, creator: req.currentUser._id },
+      ...{
+        type: type,
+        creator: req.currentUser._id,
+        fbProfilePicFileName,
+      },
     };
     console.log("--- attributes: ", attributes);
 
@@ -198,13 +204,32 @@ exports.findGroup = function (req, res) {
 
 // Fetch all community members
 // GET api/communities/:id/members
+//
+// FYI: The json-result contains
+// - the unpopulated "community" (which in turn contains the members
+//   but just as an _id-ary) and
+// - a fully populated community "members" ary
+//
+// json-result:
+//
+//  data: {
+//    community: { ... } // unpopulated community
+//    members: { ... }  // populated community members
+//  }
+//
 exports.indexMembers = function (req, res) {
   const { id } = req.params;
+  const result = {
+    community: null,
+    members: null,
+  };
   Community.findById(id)
     .populate("members")
     .then((community) => {
       if (!community) throw new NotFoundError("community", id);
-      res.status(200).send(community.members);
+      result.members = community.members;
+      result.community = community.depopulate("members");
+      res.status(200).send(result);
     })
     .catch((e) => {
       if (e.name === "NotFoundError") {
@@ -232,28 +257,34 @@ exports.addMember = async function (req, res) {
 
     if (!member) {
       // TODO: OF COURSE this has to evolve ;-)
-      // TODO: Send email with a registration confirmation token or something
-      const passwordHash = await User.createPasswordHash("NewUser99");
-
-      member = await User.create({
-        type,
-        email,
-        password: passwordHash,
-        fullName,
-        userName: userName ?? fullName,
+      // TODO: Send email with a registration confirmation token / a default random pw or something
+      member = await User.register({
+        ...memberAttributes,
+        ...{ password: "NewUser99" },
       });
     }
 
+    if (community.members.includes(member._id)) {
+      return res.status(400).json({
+        errors: {
+          email: "User is already member of this community.",
+        },
+      });
+    }
+
+    console.log("member AFTER: ", member);
+
     ({ community, member } = await community.addMember(member));
+
+    console.log("member AFTER AFTER: ", member);
 
     const schoolCommunity = await Community.findOne({
       type: Community.TYPES.TENANT,
     });
-    if (schoolCommunity._id !== community._id) {
+    if (schoolCommunity && schoolCommunity._id !== community._id) {
       ({ community, member } = await schoolCommunity.addMember(member));
     }
 
-    delete member.password;
     res.status(201).send(member);
   } catch (e) {
     if (e.name === "NotFoundError") {
@@ -261,6 +292,9 @@ exports.addMember = async function (req, res) {
     } else if (e.name === "ValidationError") {
       res.status(400).json(e);
     } else {
+      console.log("ERR CATCHED IN COM CTRL");
+      console.log(e);
+
       res.status(500).json({
         error: `Something went wrong, please try again later: ${e}`,
       });

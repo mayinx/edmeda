@@ -52,7 +52,7 @@ exports.register = async (req, res) => {
     }
 
     // User alredy registered?
-    if (await User.findOne({ type, email })) {
+    if (await User.findOne({ email })) {
       return res.status(400).json({
         errors: {
           email: "An account with this email already exists.",

@@ -10,6 +10,8 @@ import InputFormGroup from "../../components/form/groups/InputFormGroup";
 import SelectInputFormGroup from "../../components/form/groups/SelectInputFormGroup";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
+// import ReactLoading from "react-loading";
+
 import useNotify from "../../components/notifications/useNotify";
 import useFormResultHandler from "../../components/form/useFormResultHandler";
 // import { UserList as CommunityMembersList } from "../../domain/User/UserList";
@@ -29,6 +31,7 @@ export default function CommunityMembersPage(props) {
   const { id } = useParams();
   const [community, setCommunity] = useState({});
   const [communityMembers, setCommunityMembers] = useState([]);
+  // const [isLoading, setIsLoading] = useState(undefined);
 
   const formMethods = useForm();
   const {
@@ -48,28 +51,6 @@ export default function CommunityMembersPage(props) {
 
   const { currentUserData } = useContext(CurrentUserContext);
 
-  useEffect(() => {
-    axios
-      .get(`/api/communities/${id}`, {
-        headers: {
-          "x-auth-token":
-            currentUserData?.token ?? localStorage.getItem("auth-token"),
-        },
-      })
-      .then((res) => {
-        setCommunity(res.data);
-      })
-      .catch((err) => {
-        console.log("err: ", err);
-        console.log("id:", id);
-        notifyError({
-          title: "Community not found",
-          msg: `Community with the given id couldn't be found - an error occured: ${err}`,
-          toastCntId: "modalNotificationCnt",
-        });
-      });
-  }, []);
-
   // useEffect(() => {
   //   if (community) {
   //     reset(community);
@@ -85,8 +66,9 @@ export default function CommunityMembersPage(props) {
         },
       })
       .then((res) => {
-        // console.log("res: ", res);
-        setCommunityMembers(res.data);
+        console.log("res: ", res);
+        setCommunity(res.data.community);
+        setCommunityMembers(res.data.members);
       })
       .catch((err) => {
         console.log("err: ", err);
@@ -116,6 +98,7 @@ export default function CommunityMembersPage(props) {
         },
       })
       .then((res) => {
+        console.log("res: ", res);
         // ON EDIT:
         // const newList = communities.map((el) => {
         //   if (el._id === id) {

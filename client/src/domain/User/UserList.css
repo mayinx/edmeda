@@ -5,10 +5,12 @@
   align-items: stretch;
   grid-gap: 1.5rem;
   gap: 1.5rem;
-  padding-bottom: 2rem;
+  /* padding-bottom: 2rem; */
   width: 100%;
   flex: 1 1;
   overflow-y: scroll;
+
+  padding: 1rem;
 }
 .UserList__FilterBar {
   display: flex;

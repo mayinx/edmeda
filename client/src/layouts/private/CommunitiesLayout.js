@@ -44,7 +44,9 @@ export default function CommunitiesLayout() {
             modalFooterActions={
               <button
                 className="btn rounded green newResourceBtn createCommunityMemberBtn"
-                onClick={() => toggleMembersPageBottomBar(true)}
+                onClick={() =>
+                  toggleMembersPageBottomBar(!membersPageBottomBarToggled)
+                }
               >
                 Add Member
               </button>

@@ -115,8 +115,6 @@ function App() {
                   path="/communities/:id"
                   component={CommunityLayout}
                 />
-
-                {/* <Route path="/" component={CommunitiesLayout} /> */}
                 <Route path="/communities" component={CommunitiesLayout} />
               </ProtectedRoutes>
               <Route path="*">

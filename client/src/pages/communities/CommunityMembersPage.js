@@ -16,6 +16,8 @@ import useFormResultHandler from "../../components/form/useFormResultHandler";
 import { default as CommunityMembersList } from "../../domain/User/UserList";
 
 import "./CommunityMembersPage.css";
+// TODO: Once the varios forms are extracted, ensure that media queries are pulled in last - or by component ...
+import "./CommunityMembers/media-queries.css";
 
 import _ from "lodash";
 import { FaRegTimesCircle } from "react-icons/fa";
@@ -105,6 +107,7 @@ export default function CommunityMembersPage(props) {
   }, [community, communityMembers]);
 
   const onSubmit = (data) => {
+    console.log("onSubmit");
     axios
       .post(`/api/communities/${id}/members`, data, {
         headers: {
@@ -177,7 +180,9 @@ export default function CommunityMembersPage(props) {
           <h3 className="BottomBar__HeaderCaption">New User</h3>
           <div
             className="closeBottomBarAction"
-            onClick={() => props.toggleBottomBar(false)}
+            onClick={() => {
+              props.toggleBottomBar(false);
+            }}
           >
             <FaRegTimesCircle />
           </div>
@@ -206,8 +211,8 @@ export default function CommunityMembersPage(props) {
             defaultValue={community?.creator}
           /> */}
               <button
-                form="newCommunityMember"
-                class="btn rounded green newResourceBtn createCommunityMemberBtn"
+                form={props.formId}
+                className="btn rounded green newResourceBtn createCommunityMemberBtn"
                 type="submit"
               >
                 Create User

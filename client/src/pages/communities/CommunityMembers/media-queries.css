@@ -1,0 +1,43 @@
+@media all and (min-width: 400px) {
+  .CommunityMembersModalPage .BottomBar--hidden {
+    margin-bottom: -530px;
+  }
+  .CommunityMembersModalPage .BottomBar--expanded {
+    margin-bottom: -5px;
+  }
+
+  .CommunityMembersModalPage .BottomBar .BottomBar__Body .NewUserForm {
+    flex-direction: column;
+  }
+}
+
+@media all and (min-width: 576px) {
+}
+
+@media all and (min-width: 768px) {
+}
+
+/* FROM HERE ON THE SIDEBAR IS ALWYS VISIBLE AS WELL - BUT:
+   - DEFAULT / UNTOGGLED: SIDEBAR EXPANDED TO MAX WIDTH PER DEFAULT
+   - TOGGLED: COLLAPSED TO (ALWAYS VISIBLE) MIN BAR
+*/
+@media all and (min-width: 992px) {
+  .CommunityMembersModalPage .BottomBar--hidden {
+    margin-bottom: -270px;
+  }
+  .CommunityMembersModalPage .BottomBar--expanded {
+    margin-bottom: -5px;
+  }
+
+  .CommunityMembersModalPage .BottomBar .BottomBar__Body .NewUserForm {
+    flex-direction: row;
+  }
+}
+
+@media all and (min-width: 1024px) {
+}
+@media all and (min-width: 1200px) {
+}
+
+@media all and (min-width: 1400px) {
+}

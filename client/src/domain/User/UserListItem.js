@@ -1,5 +1,6 @@
 import "./UserListItem.css";
-import UserFallbackProfilePic from "../../assets/happy-students.jpg";
+import UserFallbackProfilePic from "../../assets/user/fb_avatars/fbAvatar.png";
+// import FemaleAvatar from "../../assets/user_default_avatars/Teacher_female_fbAvatar1.png";
 import CommunitiesContext from "../../contexts/CommunitiesContext";
 
 import { useContext } from "react";
@@ -21,10 +22,24 @@ import "../../components/notifications/ReactConfirmAlertOverrides.css";
 import useNotify from "../../components/notifications/useNotify";
 
 export default function UserListItem({ user }) {
-  const userProfilePicImgSrc =
-    user?.picture ?? user?.fbAvatarFileName
-      ? `../../assets/user_default_avatars/${user?.fbAvatarFileName}.png`
-      : UserFallbackProfilePic;
+  let avatarUrl = null;
+  try {
+    avatarUrl =
+      user?.picture ?? user?.fbAvatarFileName
+        ? require(`../../assets/user/fb_avatars/${user?.fbAvatarFileName}.png`)
+            .default
+        : UserFallbackProfilePic;
+  } catch (e) {
+    avatarUrl = UserFallbackProfilePic;
+  }
+
+  // const anotherAvatarUrl = `../../assets/happy-students.jpg`;
+  // const resolvedAvatarUrl = require(`${anotherAvatarUrl}`).default;
+  // console.log("resolvedAvatarUrl: ", resolvedAvatarUrl);
+  // const lala = "assets";
+  // const resolvedAvatarUrl = require(`../../${lala}/happy-students.jpg`).default;
+  // const resolvedAvatarUrl = require(`../../${lala}/user_default_avatars/Teacher_female_fbAvatar1.png`)
+  //   .default;
 
   const { communities, setCommunities } = useContext(CommunitiesContext);
 
@@ -118,7 +133,7 @@ export default function UserListItem({ user }) {
       // onClick={(e) => openCommunityPage(e, user._id)}
     >
       <p className="User__ProfilePic-wrapper">
-        <img src={userProfilePicImgSrc} className="User__ProfilePic" alt="" />
+        <img src={`${avatarUrl}`} className="User__ProfilePic" alt="" />
         {/* <FaUserAlt className="NavItem__Icon userAvatarIcon User__ProfilePic" /> */}
       </p>
       <div className="user__meta">

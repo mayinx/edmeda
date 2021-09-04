@@ -11,11 +11,14 @@ const TYPES = {
   PARENT: "Parent",
 };
 const GENDERS = ["male", "female", "diverse"];
-
-//
-// TODO: Let's start small here ;-) - extend later
-// const DEFAULT_AVATARS = ["fbAvatar1", "fbAvatar2", "fbAvatar3", "fbAvatar4"];
-const DEFAULT_AVATARS = ["fbAvatar1"];
+const DEFAULT_AVATARS = [
+  "fbAvatar1",
+  "fbAvatar2",
+  "fbAvatar3",
+  "fbAvatar4",
+  "fbAvatar5",
+  "fbAvatar6",
+];
 
 const UserSchema = new Schema(
   {
@@ -116,12 +119,20 @@ const UserSchema = new Schema(
 UserSchema.statics.TYPES = TYPES;
 UserSchema.statics.GENDERS = GENDERS;
 UserSchema.statics.DEFAULT_AVATARS = DEFAULT_AVATARS;
+
 UserSchema.statics.register = async function (userAttributes) {
   try {
     // const salt = await bcryptjs.genSalt();
     // const passwordHash = await bcryptjs.hash(password, salt);
     console.log("userAttributes: ", userAttributes);
     const { fullName, userName, type, email, password } = userAttributes;
+
+    if (!type || !email || !password || !fullName) {
+      throw new Error("Not all fields have been entered.");
+      // return res.status(400).json({
+      //   message: "Not all fields have been entered.",
+      // });
+    }
 
     // User alredy registered?
     if (await User.findOne({ email })) {
@@ -134,7 +145,8 @@ UserSchema.statics.register = async function (userAttributes) {
     }
 
     // TODO:Valdiate type + gender
-
+    const firstName = fullName.split(" ")[0];
+    const lastName = fullName.replace(`${firstName} `, "");
     //TODO: just for now - use a guessing lib for that
     const gender = _.sample(User.GENDERS);
     const fbAvatarFileName = `${type}_${gender}_${_.sample(
@@ -149,6 +161,8 @@ UserSchema.statics.register = async function (userAttributes) {
       fbAvatarFileName,
       password: passwordHash,
       fullName,
+      firstName,
+      lastName,
       userName: userName ?? fullName,
     });
 

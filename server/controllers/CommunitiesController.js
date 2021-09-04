@@ -2,6 +2,7 @@ const Community = require("../models/Community");
 const Group = require("../models/Group");
 const User = require("../models/User");
 const { NotFoundError, InternalError } = require("../errors/AppErrors");
+const _ = require("lodash");
 
 exports.index = function (req, res) {
   let query = {};
@@ -248,7 +249,8 @@ exports.addMember = async function (req, res) {
   try {
     const { id } = req.params;
     const memberAttributes = req.body;
-    const { fullName, userName, type, email } = memberAttributes;
+    // TODO: Ensure to whitelist permitted attributes/params here!
+    const { email } = memberAttributes;
 
     let community = await Community.findById(id);
     if (!community) throw new NotFoundError("community", id);

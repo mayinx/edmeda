@@ -6,12 +6,7 @@ import CommunitiesContext from "../../contexts/CommunitiesContext";
 import { useContext } from "react";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
-import {
-  FaRegEdit,
-  FaRegTrashAlt,
-  FaUserAlt,
-  FaUsersCog,
-} from "react-icons/fa";
+import { FaRegEdit, FaRegTrashAlt, FaUserMinus } from "react-icons/fa";
 import axios from "axios";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import { confirmAlert } from "react-confirm-alert"; // Import
@@ -21,44 +16,41 @@ import "../../components/notifications/ReactConfirmAlertOverrides.css";
 
 import useNotify from "../../components/notifications/useNotify";
 
-export default function UserListItem({ user }) {
-  let avatarUrl = null;
-  try {
-    avatarUrl =
-      user?.picture ?? user?.fbAvatarFileName
+export default function UserListItem(props) {
+  // TODO: Refactor: Move that dependencies all up again - implement
+  // event handlers on CommunityMembersPage-componenet + pass those
+  // handlers down here - or use a context or whatever
+  const { user, community, communityMembers, setCommunityMembers } = props;
+  let avatarUrl = user?.picture;
+  if (!avatarUrl) {
+    try {
+      avatarUrl = user?.fbAvatarFileName
         ? require(`../../assets/user/fb_avatars/${user?.fbAvatarFileName}.png`)
             .default
         : UserFallbackProfilePic;
-  } catch (e) {
-    avatarUrl = UserFallbackProfilePic;
+    } catch (e) {
+      avatarUrl = UserFallbackProfilePic;
+    }
   }
 
-  // const anotherAvatarUrl = `../../assets/happy-students.jpg`;
-  // const resolvedAvatarUrl = require(`${anotherAvatarUrl}`).default;
-  // console.log("resolvedAvatarUrl: ", resolvedAvatarUrl);
-  // const lala = "assets";
-  // const resolvedAvatarUrl = require(`../../${lala}/happy-students.jpg`).default;
-  // const resolvedAvatarUrl = require(`../../${lala}/user_default_avatars/Teacher_female_fbAvatar1.png`)
-  //   .default;
-
-  const { communities, setCommunities } = useContext(CommunitiesContext);
+  // const { communities, setCommunities } = useContext(CommunitiesContext);
 
   const { currentUserData } = useContext(CurrentUserContext);
 
   const history = useHistory();
-  const { notifySuccess, notifyError } = useNotify();
+  const { notifySuccess, notifyError, notifyInfo } = useNotify();
 
   // console.log("user: ", user);
-  const cofirmResourceRemoval = (e, resourceName, id) => {
+  const confirmResourceRemoval = (e, memberName, memberId, communityId) => {
     e.stopPropagation();
 
     confirmAlert({
-      title: "Confirm to delete User",
-      message: `Are you sure you want to delete the user '${resourceName}' along with all its groups? (No worries: The User- and Group-Members will NOT be touched at all by this action)`,
+      title: "Confirm to remove Community Member",
+      message: `Are you sure you want to remove the user '${memberName}' from the current community?`,
       buttons: [
         {
           label: "Yep, delete",
-          onClick: () => removeResource(e, resourceName, id),
+          onClick: () => removeResource(e, memberName, memberId, communityId),
         },
         {
           label: "Nope, keep",
@@ -70,11 +62,11 @@ export default function UserListItem({ user }) {
     });
   };
 
-  const removeResource = (e, resourceName, id) => {
+  const removeResource = (e, memberName, memberId, communityId) => {
     e.stopPropagation();
 
     axios
-      .delete(`api/communities/${id}`, {
+      .delete(`/api/communities/${communityId}/members/${memberId}`, {
         headers: {
           "x-auth-token":
             currentUserData?.token ?? localStorage.getItem("auth-token"),
@@ -82,29 +74,31 @@ export default function UserListItem({ user }) {
       })
       .then((res) => {
         console.log("res: ", res);
-        setCommunities(
-          communities.filter((resource) => {
-            return resource._id !== id;
+        setCommunityMembers(
+          communityMembers.filter((resource) => {
+            return resource._id !== memberId;
           })
         );
         notifySuccess({
-          title: "User deleted",
-          msg: `The user '${resourceName}' was successfully deleted`,
+          title: "Member removed",
+          message: `The user '${memberName}' was successfully removed from this community`,
+          toastCntId: "modalNotificationCnt",
         });
         history.goBack();
       })
       .catch((err) => {
         console.log(
-          `Failed to delete user ${
-            resourceName ?? id ?? null
-          } - something went wrong: `,
+          `Failed to remove member ${
+            memberName ?? memberId ?? null
+          } from community - something went wrong: `,
           err
         );
         notifyError({
-          title: "User not deleted",
-          msg: `Failed to delete user ${
-            resourceName ?? id ?? null
-          } - an unexpeted error occured`,
+          title: "Member not removed",
+          message: `Failed to remove user ${
+            memberName ?? memberId ?? null
+          } from community - an unexpeted error occured`,
+          toastCntId: "modalNotificationCnt",
         });
       });
   };
@@ -144,23 +138,39 @@ export default function UserListItem({ user }) {
         <Link
           className="user__action"
           to="#"
-          // onClick={(e) => cofirmResourceRemoval(e, user.name, user._id)}
+          // onClick={(e) => confirmResourceRemoval(e, user.name, user._id)}
+          onClick={(e) =>
+            notifyInfo({
+              title: "Patience you must have, my young padawan.",
+              message: "...for this feature is not yet implemented",
+              toastCntId: "modalNotificationCnt",
+            })
+          }
         >
           <FaRegTrashAlt className="actionIcon deleteIcon" />
         </Link>
         <Link
           className="user__action"
           to="#"
-          // onClick={(e) => openEditCommunityModal(e, user._id)}
+          // onClick={(e) => openEditCommunityMembersModal(e, user._id)}
+          onClick={(e) =>
+            notifyInfo({
+              title: "Patience you must have, my young padawan.",
+              message: "...for this feature is not yet implemented",
+              toastCntId: "modalNotificationCnt",
+            })
+          }
         >
           <FaRegEdit className="actionIcon editIcon" />
         </Link>
         <Link
           className="user__action"
           to="#"
-          // onClick={(e) => openEditCommunityMembersModal(e, user._id)}
+          onClick={(e) =>
+            confirmResourceRemoval(e, user.fullName, user._id, community._id)
+          }
         >
-          <FaUsersCog className="actionIcon editMembersIcon" />
+          <FaUserMinus className="actionIcon editMembersIcon" />
         </Link>
       </div>
     </section>

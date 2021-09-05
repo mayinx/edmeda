@@ -51,7 +51,7 @@ export default function Community({ community }) {
     e.stopPropagation();
 
     axios
-      .delete(`api/communities/${id}`, {
+      .delete(`/api/communities/${id}`, {
         headers: {
           "x-auth-token":
             currentUserData?.token ?? localStorage.getItem("auth-token"),
@@ -66,7 +66,7 @@ export default function Community({ community }) {
         );
         notifySuccess({
           title: "Community deleted",
-          msg: `The community '${resourceName}' was successfully deleted`,
+          message: `The community '${resourceName}' was successfully deleted`,
         });
         history.goBack();
       })
@@ -79,7 +79,7 @@ export default function Community({ community }) {
         );
         notifyError({
           title: "Community not deleted",
-          msg: `Failed to delete community ${
+          message: `Failed to delete community ${
             resourceName ?? id ?? null
           } - an unexpeted error occured`,
         });

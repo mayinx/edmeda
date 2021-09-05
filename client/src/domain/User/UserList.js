@@ -3,11 +3,20 @@ import UserListItem from "./UserListItem.js";
 import { Link } from "react-router-dom";
 import ReactLoading from "react-loading";
 
-export default function UserList({ resources }) {
+export default function UserList(props) {
+  const { community, communityMembers, setCommunityMembers } = props;
   function renderResources() {
-    if (Array.isArray(resources) && resources.length) {
-      return resources.map((user) => {
-        return <UserListItem user={user} key={user._id} />;
+    if (Array.isArray(communityMembers) && communityMembers.length) {
+      return communityMembers.map((user) => {
+        return (
+          <UserListItem
+            user={user}
+            key={user._id}
+            community={community}
+            communityMembers={communityMembers}
+            setCommunityMembers={setCommunityMembers}
+          />
+        );
       });
     } else {
       return (

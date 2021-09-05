@@ -7,11 +7,9 @@ const _ = require("lodash");
 exports.index = function (req, res) {
   let query = {};
 
-  console.log("req.currentUser.communities: ", req.currentUser.communities);
-
+  // console.log("req.currentUser.communities: ", req.currentUser.communities);
   // let query = {userId};
   Community.find({ _id: { $in: req.currentUser.communities } })
-    // req.currentUser.communities
     .find(query)
     .populate("creator")
     .then((resources) => {
@@ -245,6 +243,7 @@ exports.indexMembers = function (req, res) {
 
 //  Add/create new community member
 //  POST api/communities/:id/members
+// TODO: Wrap adding and removing of community memebrs in transactions!
 exports.addMember = async function (req, res) {
   try {
     const { id } = req.params;
@@ -322,4 +321,41 @@ exports.findMember = function (req, res) {
         });
       }
     });
+};
+
+// Scoped delete / remove of a given community member from the current community
+// (!= destroying the user for good)
+// DELETE api/communities/:id/members/:memberId
+// TODO: Wrap adding and removing of community memebrs in transactions!
+exports.removeMember = async function (req, res) {
+  try {
+    const { id, memberId } = req.params;
+
+    let member = await User.findOne({ _id: memberId, communities: id });
+    if (!member) {
+      return res.status(400).json({
+        errors: {
+          user: "User is not a member of this community.",
+        },
+      });
+    }
+
+    let community = await Community.findById(id).populate("creator");
+    if (!community) throw new NotFoundError("community", id);
+
+    ({ community, member } = await community.removeMember(
+      member,
+      req.currentUser
+    ));
+
+    res.status(200).send(member);
+  } catch (e) {
+    if (e.name === "NotFoundError") {
+      res.status(404).json({ error: e });
+    } else {
+      res.status(500).json({
+        error: `Something went wrong, please try again later: ${e}`,
+      });
+    }
+  }
 };

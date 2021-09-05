@@ -50,7 +50,7 @@ export default function Login(props) {
 
       notifySuccess({
         title: "Login successfull",
-        msg: `Welcome to Edmeda, ${userFirstName} - happy socializing!`,
+        message: `Welcome to Edmeda, ${userFirstName} - happy socializing!`,
       });
       history.push("/communities");
     } catch (err) {
@@ -61,7 +61,7 @@ export default function Login(props) {
       );
       notifyError({
         title: "Login failed",
-        msg: `Couldn't login user: ${errMsg}`,
+        message: `Couldn't login user: ${errMsg}`,
         toastCntId: "modalNotificationCnt",
       });
     }

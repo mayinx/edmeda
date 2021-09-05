@@ -9,7 +9,7 @@
 //   modelName: "Community",
 //   fbErrorNotice: {
 //     title: "Failed to create Community",
-//     msg: `The community couldn't be created - an unexpected error occured`,
+//     message: `The community couldn't be created - an unexpected error occured`,
 //     toastCntId: "modalNotificationCnt",
 //   },
 // });
@@ -38,7 +38,7 @@ export default function useFormResultHandler(props) {
 
     notifySuccess({
       title: title ?? `${modelName} ${crudAction}d`,
-      msg:
+      message:
         message ??
         `The ${modelName} '${
           objectName ?? null
@@ -79,7 +79,7 @@ export default function useFormResultHandler(props) {
 
       notifyError({
         title: title ?? `Failed to ${crudAction} ${modelName}`,
-        msg:
+        message:
           message ??
           `The ${modelName} couldn't be ${crudAction}d - an unexpected error occured`,
         toastCntId: toastCntId,

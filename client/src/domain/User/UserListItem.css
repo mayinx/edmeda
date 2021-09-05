@@ -8,6 +8,8 @@
   /* width: 100%;
   max-width: 25%; */
   /* flex: 1 1 200px; */
+  /* flex: 1 1 200px; */
+  /* max-width: 200px; */
   flex: 0 1 200px;
   display: flex;
   flex-direction: column;

@@ -144,7 +144,7 @@ UserSchema.statics.register = async function (userAttributes) {
       // });
     }
 
-    // TODO:Valdiate type + gender
+    // TODO: Valdiate type + gender
     const firstName = fullName.split(" ")[0];
     const lastName = fullName.replace(`${firstName} `, "");
     //TODO: just for now - use a guessing lib for that

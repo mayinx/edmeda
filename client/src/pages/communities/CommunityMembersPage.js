@@ -3,8 +3,8 @@ import { ErrorMessage } from "@hookform/error-message";
 import "./Form.css";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router";
-import CommunitiesContext from "../../contexts/CommunitiesContext";
+import { useParams } from "react-router";
+// import CommunitiesContext from "../../contexts/CommunitiesContext";
 import FormConfig from "../../domain/User/FormConfig";
 import InputFormGroup from "../../components/form/groups/InputFormGroup";
 import SelectInputFormGroup from "../../components/form/groups/SelectInputFormGroup";
@@ -25,8 +25,8 @@ import _ from "lodash";
 import { FaRegTimesCircle } from "react-icons/fa";
 
 export default function CommunityMembersPage(props) {
-  const { communities, setCommunities } = useContext(CommunitiesContext);
-  const history = useHistory();
+  // const { communities, setCommunities } = useContext(CommunitiesContext);
+  // const history = useHistory();
   const { notifyError } = useNotify();
   const { id } = useParams();
   const [community, setCommunity] = useState({});
@@ -36,7 +36,6 @@ export default function CommunityMembersPage(props) {
   const formMethods = useForm();
   const {
     reset,
-
     handleSubmit,
     formState: { errors },
     setError,
@@ -75,7 +74,7 @@ export default function CommunityMembersPage(props) {
         console.log("id:", id);
         notifyError({
           title: "Community not found",
-          msg: `An unexpected error occured: ${err}`,
+          message: `An unexpected error occured: ${err}`,
           toastCntId: "modalNotificationCnt",
         });
       });
@@ -100,32 +99,24 @@ export default function CommunityMembersPage(props) {
       .then((res) => {
         console.log("res: ", res);
         // ON EDIT:
-        // const newList = communities.map((el) => {
+        // const newList = communityMembers.map((el) => {
         //   if (el._id === id) {
         //     return { ...el, ...data };
         //   }
-
         //   return el;
         // });
-
-        // setCommunities(newList);
+        // setCommunityMembers(newList);
 
         // ON NEW
         setCommunityMembers([res.data, ...communityMembers]);
         reset({ type: res.data.type });
-        // notifySuccess({
-        //   title: "Community updated",
-        //   msg: `The Community '${community?.name}' was successfully updated`,
-        // });
 
         handleFormSuccess({
           objectName: community?.name,
           title: "New Community member added",
           message: `The ${_.camelCase(res?.data?.type) ?? "user"} ${
             res?.data?.fullName ?? null
-          } was sucessfully created and added as a new member to the ${
-            community?.name
-          }-Community.`,
+          } was sucessfully registered and added as a new Community-member`,
           toastCntId: "modalNotificationCnt",
         });
 
@@ -138,7 +129,7 @@ export default function CommunityMembersPage(props) {
         // );
         // notifyError({
         //   title: "Community update failed",
-        //   msg: `The Community '${
+        //   message: `The Community '${
         //     community?.name ?? id
         //   }' couldn't be updated - an error occured: ${err}`,
         //   toastCntId: "modalNotificationCnt",
@@ -149,11 +140,17 @@ export default function CommunityMembersPage(props) {
   };
   // CommunityMembersModalPage;
 
+  // onMemberRemoval;
+
   return (
     <div className="ModalPage__bodyInner CommunityMembersModalPage">
-      {/* <div className="ResourcesListCnt UserListCnt CommunityMembersListCnt"> */}
-      <CommunityMembersList resources={communityMembers} />
-      {/* </div> */}
+      <CommunityMembersList
+        communityMembers={communityMembers}
+        // TODOD: Handle events/actions here and pass down handlers only
+        setCommunityMembers={setCommunityMembers}
+        community={community}
+      />
+
       <section
         className={`BottomBar ${
           props.bottomBarToggled ? "BottomBar--expanded" : "BottomBar--hidden"

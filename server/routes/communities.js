@@ -19,13 +19,18 @@ router.delete("/:id", auth, CommunitiesController.delete);
 
 // POST api/communities/:id/groups
 // => create a new community-usergroup
-router.get("/:id/groups", CommunitiesController.indexGroups);
-router.post("/:id/groups", CommunitiesController.createGroup);
-router.get("/:id/groups/:groupId", CommunitiesController.findGroup);
+router.get("/:id/groups", auth, CommunitiesController.indexGroups);
+router.post("/:id/groups", auth, CommunitiesController.createGroup);
+router.get("/:id/groups/:groupId", auth, CommunitiesController.findGroup);
 
 /* - COMMUNITY USERS */
-router.get("/:id/members", CommunitiesController.indexMembers);
-router.post("/:id/members", CommunitiesController.addMember);
-router.get("/:id/members/:memberId", CommunitiesController.findMember);
+router.get("/:id/members", auth, CommunitiesController.indexMembers);
+router.post("/:id/members", auth, CommunitiesController.addMember);
+router.get("/:id/members/:memberId", auth, CommunitiesController.findMember);
+router.delete(
+  "/:id/members/:memberId",
+  auth,
+  CommunitiesController.removeMember
+);
 
 module.exports = router;

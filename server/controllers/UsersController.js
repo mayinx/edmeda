@@ -25,11 +25,9 @@ exports.register = async (req, res) => {
       });
     }
 
-    // if (!userName) userName = fullName;
-
-    if (password.length < 5) {
+    if (password.length < 6) {
       return res.status(400).json({
-        message: "The password needs to be at least 5 characters long.",
+        message: "The password needs to be at least 6 characters long.",
       });
     }
 

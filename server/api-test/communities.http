@@ -75,3 +75,6 @@ Content-Type: application/json
   "email": "around@the.de",
   "type": "student"
 }
+
+### Remove a community member from the given community (!= deleting the user
+DELETE  http://localhost:4000/api/communities/6103da28ffe84d2c7cc1172f/members/612f9de44d211814a774b431 HTTP/1.1

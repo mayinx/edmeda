@@ -23,7 +23,7 @@ export default function useAuthActions() {
     localStorage.setItem("auth-token", "");
     notifySuccess({
       title: "Logged out",
-      msg: `You've been successfully logged out - cu soon ${
+      message: `You've been successfully logged out - cu soon ${
         userFirstName ?? null
       }!`,
     });

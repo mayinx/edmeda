@@ -60,7 +60,8 @@
   justify-content: flex-start;
 
   /* height: 100%; */
-  flex: auto;
+  /* flex: auto; */
+  flex: 0 1 auto;
   align-items: stretch;
   align-items: flex-start;
   gap: 1.5rem;

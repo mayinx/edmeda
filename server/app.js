@@ -194,6 +194,8 @@ io.on("connection", async (socket) => {
       // });
 
       message.save(function (err, message) {
+        if (err) return console.error(err);
+
         message.populate("creator", function (err, message) {
           if (err) return console.error(err);
           console.log("message in tralalal: ", message);

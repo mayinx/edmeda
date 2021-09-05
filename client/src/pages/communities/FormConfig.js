@@ -3,6 +3,7 @@ class FormConfig {
     this.valdiationMsgNameRequired =
       "You must specify a uniq name for your class community (between 3 and 60 characters long)";
     this.valdiationMsgGradeRequired = "You must specify a class grade";
+    this.valdiationMsgTypeRequired = "You must specify a community type";
     this.valdiationMsgCreatorRequired =
       "You must specify a class teacher as community owner (between 3 and 60 characters long)";
 
@@ -24,11 +25,39 @@ class FormConfig {
         },
       },
     };
-    this.grade = {
-      label: "Class Grade",
+    this.type = {
+      label: "Community Type",
       options: [
         {
-          label: "-- Select Class Grade --",
+          label: "-- Select the Community Type --",
+          value: "",
+          className: "default",
+        },
+        {
+          label: "Class Community",
+          value: "Class",
+        },
+        {
+          label: "Course Community",
+          value: "Course",
+        },
+        {
+          label: "Custom Community",
+          value: "Custom",
+        },
+      ],
+      validationRuleset: {
+        required: {
+          value: true,
+          message: this.valdiationMsgTypeRequired,
+        },
+      },
+    };
+    this.grade = {
+      label: "Class or Course Grade",
+      options: [
+        {
+          label: "-- Select Class or Course Grade --",
           value: "",
           className: "default",
         },

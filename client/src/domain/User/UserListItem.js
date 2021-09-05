@@ -20,6 +20,7 @@ export default function UserListItem(props) {
   // TODO: Refactor: Move that dependencies all up again - implement
   // event handlers on CommunityMembersPage-componenet + pass those
   // handlers down here - or use a context or whatever
+
   const { user, community, communityMembers, setCommunityMembers } = props;
   let avatarUrl = user?.picture;
   if (!avatarUrl) {

@@ -122,12 +122,20 @@ export default function EditCommunityPage(props) {
             formConfig={FormConfig.name}
             defaultValue={community?.name}
           />
-
-          <SelectInputFormGroup
-            name="grade"
-            formConfig={FormConfig.grade}
-            defaultValue={community?.grade}
-          />
+          {community?.type !== "Tenant" && (
+            <>
+              <SelectInputFormGroup
+                name="type"
+                formConfig={FormConfig.type}
+                defaultValue={community?.type}
+              />
+              <SelectInputFormGroup
+                name="grade"
+                formConfig={FormConfig.grade}
+                defaultValue={community?.grade}
+              />
+            </>
+          )}
 
           {/* <TextInputFormGroup
             name="creator"

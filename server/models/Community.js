@@ -7,6 +7,7 @@ const Group = require("./Group");
 
 const TYPES = {
   CLASS: "Class",
+  GRADE: "Grade",
   COURSE: "Course",
   TENANT: "Tenant", // i.e. the whole school
   CUSTOM: "Custom", // i.e. the whole school
@@ -17,6 +18,7 @@ const DEFAULT_PROFILE_PICS = [
   "ComFbProfilePic2",
   "ComFbProfilePic3",
   "ComFbProfilePic4",
+  "ComFbProfilePic5",
 ];
 
 const communitiesSchema = new Schema(
@@ -26,7 +28,7 @@ const communitiesSchema = new Schema(
       required: true,
       enum: {
         values: Object.values(TYPES),
-        message: "Invalid user type",
+        message: "Invalid Community Type",
       },
     },
     name: {

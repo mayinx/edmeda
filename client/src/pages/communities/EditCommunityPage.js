@@ -53,7 +53,7 @@ export default function EditCommunityPage(props) {
         console.log("id:", id);
         notifyError({
           title: "Community not found",
-          msg: `A Community with this couldn't be found - an error occured: ${err}`,
+          message: `A Community with this couldn't be found - an error occured: ${err}`,
           toastCntId: "modalNotificationCnt",
         });
       });
@@ -85,7 +85,7 @@ export default function EditCommunityPage(props) {
         setCommunities(newList);
         // notifySuccess({
         //   title: "Community updated",
-        //   msg: `The Community '${community?.name}' was successfully updated`,
+        //   message: `The Community '${community?.name}' was successfully updated`,
         // });
 
         handleFormSuccess({ objectName: community?.name });
@@ -99,7 +99,7 @@ export default function EditCommunityPage(props) {
         // );
         // notifyError({
         //   title: "Community update failed",
-        //   msg: `The Community '${
+        //   message: `The Community '${
         //     community?.name ?? id
         //   }' couldn't be updated - an error occured: ${err}`,
         //   toastCntId: "modalNotificationCnt",

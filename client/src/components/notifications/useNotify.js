@@ -25,19 +25,19 @@
 //
 //       notifyError({
 //         title: "Login failed",
-//         msg: `Couldn't login user: ${errMsg}`,
+//         message: `Couldn't login user: ${errMsg}`,
 //       });
 //
 //       notifySuccess({
 //         title: "Login successfull",
-//         msg: "Welcome to Edmeda - happy socializing",
+//         message: "Welcome to Edmeda - happy socializing",
 //       });
 //
 //       // or:
 //       notify({
 //         type: "success",
 //         title: "Login successfull",
-//         msg: "Welcome to Edmeda - happy socializing",
+//         message: "Welcome to Edmeda - happy socializing",
 //       });
 //
 // }
@@ -46,14 +46,14 @@ import { toast } from "react-toastify";
 
 export default function useNotify() {
   const notify = (props) => {
-    const { type, title, msg, toastId, toastCntId } = props;
+    const { type, title, message, toastId, toastCntId } = props;
 
     switch (type) {
       case "success":
         return toast.success(
           <div>
             <h3>{title ?? "Success"}</h3>
-            <div>{msg ?? "Action successfully performed"}</div>
+            <div>{message ?? "Action successfully performed"}</div>
           </div>,
           {
             theme: "colored",
@@ -65,7 +65,7 @@ export default function useNotify() {
         return toast.error(
           <div>
             <h3>{title ?? "Error"}</h3>
-            <div>{msg ?? "An error occured."}</div>
+            <div>{message ?? "An error occured."}</div>
           </div>,
           {
             theme: "colored",
@@ -78,7 +78,7 @@ export default function useNotify() {
           <div>
             <h3>{title ?? "Warning"}</h3>
             <div>
-              {msg ??
+              {message ??
                 "Yeah - funny thing: I'm supposed to warn you about somethimg - but got no clou, what that might be! Just know this: Be warned ;-)"}
             </div>
           </div>,
@@ -93,7 +93,7 @@ export default function useNotify() {
           <div>
             <h3>{title ?? "Info"}</h3>
             <div>
-              {msg ??
+              {message ??
                 "Yeah - funny thing: I'm supposed to inform you about somethimg - but got no clou, what that might be! Just know this: Be and feel informed ;-)"}
             </div>
           </div>,
@@ -107,7 +107,7 @@ export default function useNotify() {
         return toast.info(
           <div>
             <h3>{title}</h3>
-            <div>{msg}</div>
+            <div>{message}</div>
           </div>,
           {
             theme: "colored",
@@ -119,13 +119,17 @@ export default function useNotify() {
   };
 
   const notifyError = (props) => {
-    const { title, msg, toastCntId } = props;
+    const { title, message, toastCntId } = props;
     notify({ ...props, ...{ type: "error" } });
   };
   const notifySuccess = (props) => {
-    const { title, msg, toastCntId } = props;
+    const { title, message, toastCntId } = props;
     notify({ ...props, ...{ type: "success" } });
   };
+  const notifyInfo = (props) => {
+    const { title, message, toastCntId } = props;
+    notify({ ...props, ...{ type: "info" } });
+  };
 
-  return { notify, notifyError, notifySuccess };
+  return { notify, notifyError, notifySuccess, notifyInfo };
 }

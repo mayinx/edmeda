@@ -13,35 +13,21 @@ const jwt = require("jsonwebtoken");
 exports.register = async (req, res) => {
   try {
     // let { email, password, passwordConfirmation, userName } = req.body;
-    let {
-      email,
-      password,
-      passwordConfirmation,
-      fullName,
-      userName,
-    } = req.body;
-    const type = "teacher";
+    let { email, password, passwordConfirmation, fullName } = req.body;
+    const type = "Teacher";
     console.log("[SERVER | USERS#REGISTER]");
     console.log("--- req.body", req.body);
 
-    if (!userName) userName = email;
-
     // validate
-    if (
-      !email ||
-      !password ||
-      !passwordConfirmation ||
-      !fullName ||
-      !userName
-    ) {
+    if (!type || !email || !password || !passwordConfirmation || !fullName) {
       return res.status(400).json({
         message: "Not all fields have been entered.",
       });
     }
 
-    if (password.length < 5) {
+    if (password.length < 6) {
       return res.status(400).json({
-        message: "The password needs to be at least 5 characters long.",
+        message: "The password needs to be at least 6 characters long.",
       });
     }
 
@@ -51,28 +37,13 @@ exports.register = async (req, res) => {
         .json({ message: "Enter the same password twice for verification." });
     }
 
-    // User alredy registered?
-    if (await User.findOne({ type, email })) {
-      return res.status(400).json({
-        errors: {
-          email: "An account with this email already exists.",
-        },
-      });
-    }
-
-    // if (!userName) userName = email;
-
-    // const salt = await bcrypt.genSalt();
-    // const passwordHash = await bcrypt.hash(password, salt);
-    const passwordHash = await User.createPasswordHash(password);
-
-    let newUser = await User.create({
+    let newUser = await User.register({
       type,
       email,
-      password: passwordHash,
+      password,
       fullName,
-      userName,
     });
+
     // const savedUser = await newUser.save();
     console.log("--- Succcessfully registered new user!");
 
@@ -101,8 +72,10 @@ exports.register = async (req, res) => {
     res.json({
       id: newUser._id,
       type: newUser.type,
+      gender: newUser.gender,
       fullName: newUser.fullName,
       userName: newUser.userName,
+      firstName: newUser.firstName,
     });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -146,8 +119,10 @@ exports.login = async (req, res) => {
       user: {
         id: user._id,
         type: user.type,
+        gender: user.gender,
         fullName: user.fullName,
         userName: user.userName,
+        firstName: user.firstName,
       },
     });
   } catch (err) {
@@ -191,8 +166,10 @@ exports.validateToken = async (req, res) => {
       user: {
         id: user._id,
         type: user.type,
+        gender: user.gender,
         fullName: user.fullName,
         userName: user.userName,
+        firstName: user.firstName,
       },
     });
   } catch (err) {

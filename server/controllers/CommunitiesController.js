@@ -2,15 +2,14 @@ const Community = require("../models/Community");
 const Group = require("../models/Group");
 const User = require("../models/User");
 const { NotFoundError, InternalError } = require("../errors/AppErrors");
+const _ = require("lodash");
 
 exports.index = function (req, res) {
   let query = {};
 
-  console.log("req.currentUser.communities: ", req.currentUser.communities);
-
+  // console.log("req.currentUser.communities: ", req.currentUser.communities);
   // let query = {userId};
   Community.find({ _id: { $in: req.currentUser.communities } })
-    // req.currentUser.communities
     .find(query)
     .populate("creator")
     .then((resources) => {
@@ -30,10 +29,16 @@ exports.create = async function (req, res) {
     let community = null;
 
     const { type = Community.TYPES.CLASS, name } = req.body;
-
+    const fbProfilePicFileName = `${type}_${_.sample(
+      Community.DEFAULT_PROFILE_PICS
+    )}`;
     const attributes = {
       ...req.body,
-      ...{ type: type, creator: req.currentUser._id },
+      ...{
+        type: type,
+        creator: req.currentUser._id,
+        fbProfilePicFileName,
+      },
     };
     console.log("--- attributes: ", attributes);
 
@@ -198,15 +203,32 @@ exports.findGroup = function (req, res) {
 
 // Fetch all community members
 // GET api/communities/:id/members
+//
+// FYI: The json-result contains
+// - the unpopulated "community" (which in turn contains the members
+//   but just as an _id-ary) and
+// - a fully populated community "members" ary
+//
+// json-result:
+//
+//  data: {
+//    community: { ... } // unpopulated community
+//    members: { ... }  // populated community members
+//  }
+//
 exports.indexMembers = function (req, res) {
   const { id } = req.params;
+  const result = {
+    community: null,
+    members: null,
+  };
   Community.findById(id)
     .populate("members")
     .then((community) => {
       if (!community) throw new NotFoundError("community", id);
-      console.log("community: ", community);
-      console.log("community.members: ", community.members);
-      res.status(200).send(community.members);
+      result.members = community.members;
+      result.community = community.depopulate("members");
+      res.status(200).send(result);
     })
     .catch((e) => {
       if (e.name === "NotFoundError") {
@@ -221,11 +243,13 @@ exports.indexMembers = function (req, res) {
 
 //  Add/create new community member
 //  POST api/communities/:id/members
+// TODO: Wrap adding and removing of community memebrs in transactions!
 exports.addMember = async function (req, res) {
   try {
     const { id } = req.params;
     const memberAttributes = req.body;
-    const { fullName, userName, type, email } = memberAttributes;
+    // TODO: Ensure to whitelist permitted attributes/params here!
+    const { email } = memberAttributes;
 
     let community = await Community.findById(id);
     if (!community) throw new NotFoundError("community", id);
@@ -234,28 +258,34 @@ exports.addMember = async function (req, res) {
 
     if (!member) {
       // TODO: OF COURSE this has to evolve ;-)
-      // TODO: Send email with a registration confirmation token or something
-      const passwordHash = await User.createPasswordHash("NewUser99");
-
-      member = await User.create({
-        type,
-        email,
-        password: passwordHash,
-        fullName,
-        userName: userName ?? fullName,
+      // TODO: Send email with a registration confirmation token / a default random pw or something
+      member = await User.register({
+        ...memberAttributes,
+        ...{ password: "NewUser99" },
       });
     }
 
+    if (community.members.includes(member._id)) {
+      return res.status(400).json({
+        errors: {
+          email: "User is already member of this community.",
+        },
+      });
+    }
+
+    console.log("member AFTER: ", member);
+
     ({ community, member } = await community.addMember(member));
+
+    console.log("member AFTER AFTER: ", member);
 
     const schoolCommunity = await Community.findOne({
       type: Community.TYPES.TENANT,
     });
-    if (schoolCommunity._id !== community._id) {
+    if (schoolCommunity && schoolCommunity._id !== community._id) {
       ({ community, member } = await schoolCommunity.addMember(member));
     }
 
-    delete member.password;
     res.status(201).send(member);
   } catch (e) {
     if (e.name === "NotFoundError") {
@@ -263,6 +293,9 @@ exports.addMember = async function (req, res) {
     } else if (e.name === "ValidationError") {
       res.status(400).json(e);
     } else {
+      console.log("ERR CATCHED IN COM CTRL");
+      console.log(e);
+
       res.status(500).json({
         error: `Something went wrong, please try again later: ${e}`,
       });
@@ -288,4 +321,41 @@ exports.findMember = function (req, res) {
         });
       }
     });
+};
+
+// Scoped delete / remove of a given community member from the current community
+// (!= destroying the user for good)
+// DELETE api/communities/:id/members/:memberId
+// TODO: Wrap adding and removing of community memebrs in transactions!
+exports.removeMember = async function (req, res) {
+  try {
+    const { id, memberId } = req.params;
+
+    let member = await User.findOne({ _id: memberId, communities: id });
+    if (!member) {
+      return res.status(400).json({
+        errors: {
+          user: "User is not a member of this community.",
+        },
+      });
+    }
+
+    let community = await Community.findById(id).populate("creator");
+    if (!community) throw new NotFoundError("community", id);
+
+    ({ community, member } = await community.removeMember(
+      member,
+      req.currentUser
+    ));
+
+    res.status(200).send(member);
+  } catch (e) {
+    if (e.name === "NotFoundError") {
+      res.status(404).json({ error: e });
+    } else {
+      res.status(500).json({
+        error: `Something went wrong, please try again later: ${e}`,
+      });
+    }
+  }
 };

@@ -1,4 +1,4 @@
-main section.CommunityListItem {
+.CommunityListItem {
   --CommunityistItem-font-color: #556e7e;
   --CommunityistItem-bg-color: #e8ecf1;
   --CommunityistItem-border-color: #b5cfd8;
@@ -24,40 +24,40 @@ main section.CommunityListItem {
   cursor: pointer;
 }
 
-main section.CommunityListItem a {
+.CommunityListItem a {
   text-decoration: none;
   width: 100%;
   color: #556e7e;
 }
 
-main section.CommunityListItem.CommunityListItem--alive {
+.CommunityListItem.CommunityListItem--alive {
   background-color: green;
 }
-main section.CommunityListItem.CommunityListItem--alive,
-main section.CommunityListItem.CommunityListItem--alive a {
+.CommunityListItem.CommunityListItem--alive,
+.CommunityListItem.CommunityListItem--alive a {
   color: white;
 }
 
-main section.CommunityListItem.CommunityListItem--unknown {
+.CommunityListItem.CommunityListItem--unknown {
   background-color: yellow;
 }
-main section.CommunityListItem.CommunityListItem--unknown,
-main section.CommunityListItem.CommunityListItem--unknown a {
+.CommunityListItem.CommunityListItem--unknown,
+.CommunityListItem.CommunityListItem--unknown a {
   color: #893838;
 }
 
-main section.CommunityListItem.CommunityListItem--dead {
+.CommunityListItem.CommunityListItem--dead {
   background-color: #3f3f3f;
 }
-main section.CommunityListItem.CommunityListItem--dead,
-main section.CommunityListItem.CommunityListItem--dead a {
+.CommunityListItem.CommunityListItem--dead,
+.CommunityListItem.CommunityListItem--dead a {
   color: white;
 }
 
-main section.CommunityListItem.CommunityListItem:hover img {
+.CommunityListItem.CommunityListItem:hover img {
   z-index: -1;
 }
-main section.CommunityListItem.CommunityListItem:hover img {
+.CommunityListItem.CommunityListItem:hover img {
   transition: all 0.5s ease-in-out;
   -webkit-transform-style: preserve-3d;
   -webkit-backface-visibility: hidden;
@@ -65,7 +65,7 @@ main section.CommunityListItem.CommunityListItem:hover img {
   border-bottom-right-radius: var(--CommunityListItem-border-radius);
 }
 
-main section.CommunityListItem .community__meta {
+.CommunityListItem .community__meta {
   transition: all 1s ease-in-out;
   width: 100%;
   flex: 1;
@@ -76,7 +76,7 @@ main section.CommunityListItem .community__meta {
   border-top: 2px solid var(--CommunityistItem-border-color);
 }
 
-main section.CommunityListItem .community__actions {
+.CommunityListItem .community__actions {
   position: absolute;
   top: 5px;
   right: 5px;
@@ -89,7 +89,7 @@ main section.CommunityListItem .community__actions {
   padding: 0.5rem;
   border-radius: var(--CommunityListItem-border-radius);
 }
-main section.CommunityListItem .community__actions a.community__action {
+.CommunityListItem .community__actions a.community__action {
   display: flex;
   color: lightslategray;
   background-color: whitesmoke;
@@ -100,12 +100,12 @@ main section.CommunityListItem .community__actions a.community__action {
   align-items: center;
   justify-content: center;
 }
-main section.CommunityListItem:hover img {
+.CommunityListItem:hover img {
   transform: scale(1.75) translateY(2rem);
   border-radius: var(--CommunityListItem-border-radius);
 }
 
-main section.CommunityListItem .Community__ProfilePic-wrapper {
+.CommunityListItem .Community__ProfilePic-wrapper {
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -113,7 +113,7 @@ main section.CommunityListItem .Community__ProfilePic-wrapper {
   width: 100%;
   border-radius: var(--CommunityListItem-border-radius);
 }
-main section.CommunityListItem .Community__ProfilePic-wrapper img {
+.CommunityListItem .Community__ProfilePic-wrapper img {
   display: block;
 
   object-fit: cover;
@@ -123,13 +123,13 @@ main section.CommunityListItem .Community__ProfilePic-wrapper img {
 /* MEDIA QUERIES */
 
 @media all and (min-width: 400px) {
-  main section.CommunityListItem {
+  .CommunityListItem {
     width: 48%;
   }
 }
 
 @media all and (min-width: 1100px) {
-  main section.CommunityListItem {
+  .CommunityListItem {
     width: 20%;
     max-width: 50%;
   }

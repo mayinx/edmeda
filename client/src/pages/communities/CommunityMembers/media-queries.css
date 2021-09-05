@@ -1,0 +1,194 @@
+@media all and (min-width: 400px) {
+  .CommunityMembersModalPage .UserListItem {
+    flex: 0 1 100px;
+  }
+
+  .CommunityMembersModalPage
+    .UserListItem
+    .User__ProfilePic-wrapper
+    .User__ProfilePic {
+    display: block;
+    margin: 0.5rem;
+    width: 75px;
+    height: 75px;
+  }
+
+  .CommunityMembersModalPage .UserListItem .user__meta {
+    flex: 1 1 115px; /* flex: 1 1 150px;*/
+    padding: 0.5rem; /* 1rem;*/
+  }
+
+  /*  TODO: transform into pulldown / meatball menu instead - until then we shrink / start (too) tiny   */
+  .CommunityMembersModalPage .UserListItem .user__actions {
+    gap: 0.25rem; /*0.5rem*/
+    padding: 0.25rem; /*0.5rem*/
+  }
+  .CommunityMembersModalPage .UserListItem .user__actions a.user__action {
+    font-size: 0.9rem; /*1rem*/
+    padding: 0.25rem; /*0.3rem*/
+  }
+
+  .CommunityMembersModalPage .BottomBar--hidden {
+    margin-bottom: -530px;
+  }
+  .CommunityMembersModalPage .BottomBar--expanded {
+    margin-bottom: -5px;
+  }
+  .CommunityMembersModalPage .BottomBar .BottomBar__Body .NewUserForm {
+    flex-direction: column;
+  }
+}
+
+@media all and (min-width: 576px) {
+}
+
+@media all and (min-width: 768px) {
+  .CommunityMembersModalPage .UserListItem {
+    flex: 0 1 125px;
+  }
+
+  .CommunityMembersModalPage
+    .UserListItem
+    .User__ProfilePic-wrapper
+    .User__ProfilePic {
+    display: block;
+    margin: 0.5rem;
+    width: 85px;
+    height: 85px;
+  }
+
+  .CommunityMembersModalPage .UserListItem .user__meta {
+    flex: 1 1 125px; /* flex: 1 1 150px;*/
+    padding: 0.5rem; /* 1rem;*/
+  }
+
+  /*  TODO: transform into pulldown / meatball menu instead - until then we shrink / start (too) tiny   */
+  .CommunityMembersModalPage .UserListItem .user__actions {
+    gap: 0.3rem; /*0.5rem*/
+    padding: 0.3rem; /*0.5rem*/
+  }
+  .CommunityMembersModalPage .UserListItem .user__actions a.user__action {
+    font-size: 1rem; /*1rem*/
+    padding: 0.3rem; /*0.3rem*/
+  }
+}
+
+@media all and (min-width: 992px) {
+  .CommunityMembersModalPage .UserListItem {
+    flex: 0 1 150px;
+  }
+  .CommunityMembersModalPage
+    .UserListItem
+    .User__ProfilePic-wrapper
+    .User__ProfilePic {
+    display: block;
+    margin: 0.5rem;
+    width: 100px;
+    height: 100px;
+  }
+
+  .CommunityMembersModalPage .UserListItem .user__meta {
+    flex: 1 1 150px; /* flex: 1 1 150px;*/
+    padding: 0.75rem; /* 1rem;*/
+  }
+
+  .CommunityMembersModalPage .UserListItem .user__actions {
+    gap: 0.4rem; /*0.5rem*/
+    padding: 0.4rem; /*0.5rem*/
+  }
+  .CommunityMembersModalPage .UserListItem .user__actions a.user__action {
+    font-size: 1.1rem; /*1rem*/
+    padding: 0.3rem; /*0.3rem*/
+  }
+
+  .CommunityMembersModalPage .BottomBar--hidden {
+    margin-bottom: -270px;
+  }
+  .CommunityMembersModalPage .BottomBar--expanded {
+    margin-bottom: -5px;
+  }
+  .CommunityMembersModalPage .BottomBar .BottomBar__Body .NewUserForm {
+    flex-direction: row;
+  }
+}
+
+@media all and (min-width: 1024px) {
+  .CommunityMembersModalPage .UserListItem {
+    flex: 0 1 175px;
+  }
+
+  .CommunityMembersModalPage
+    .UserListItem
+    .User__ProfilePic-wrapper
+    .User__ProfilePic {
+    margin: 0.75rem;
+    width: 125px;
+    height: 125px;
+  }
+
+  .CommunityMembersModalPage .UserListItem .user__meta {
+    flex: 1 1 160px; /* flex: 1 1 150px;*/
+    padding: 0.85rem; /* 1rem;*/
+  }
+  .CommunityMembersModalPage .UserListItem .user__actions {
+    gap: 0.5rem; /*0.5rem*/
+    padding: 0.5rem; /*0.5rem*/
+  }
+  .CommunityMembersModalPage .UserListItem .user__actions a.user__action {
+    font-size: 1.2rem; /*1rem*/
+    padding: 0.3rem; /*0.3rem*/
+  }
+}
+@media all and (min-width: 1200px) {
+  .CommunityMembersModalPage .UserListItem {
+    flex: 0 1 200px;
+  }
+  .CommunityMembersModalPage
+    .UserListItem
+    .User__ProfilePic-wrapper
+    .User__ProfilePic {
+    margin: 0.75rem;
+    width: 125px;
+    height: 125px;
+  }
+
+  .CommunityMembersModalPage .UserListItem .user__meta {
+    flex: 1 1 175px; /* flex: 1 1 150px;*/
+    padding: 1rem; /* 1rem;*/
+  }
+  .CommunityMembersModalPage .UserListItem .user__actions {
+    gap: 0.5rem; /*0.5rem*/
+    padding: 0.5rem; /*0.5rem*/
+  }
+  .CommunityMembersModalPage .UserListItem .user__actions a.user__action {
+    font-size: 1.3rem; /*1rem*/
+    padding: 0.4rem; /*0.3rem*/
+  }
+}
+
+@media all and (min-width: 1400px) {
+  .CommunityMembersModalPage .UserListItem {
+    flex: 0 1 225px;
+  }
+  .CommunityMembersModalPage
+    .UserListItem
+    .User__ProfilePic-wrapper
+    .User__ProfilePic {
+    margin: 1rem;
+    width: 150px;
+    height: 150px;
+  }
+
+  .CommunityMembersModalPage .UserListItem .user__meta {
+    flex: 1 1 200px; /* flex: 1 1 150px;*/
+    padding: 1rem; /* 1rem;*/
+  }
+  .CommunityMembersModalPage .UserListItem .user__actions {
+    gap: 0.6rem; /*0.5rem*/
+    padding: 0.6rem; /*0.5rem*/
+  }
+  .CommunityMembersModalPage .UserListItem .user__actions a.user__action {
+    font-size: 1.5rem; /*1rem*/
+    padding: 0.4rem; /*0.3rem*/
+  }
+}

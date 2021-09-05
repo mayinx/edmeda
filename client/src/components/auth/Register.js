@@ -53,7 +53,7 @@ export default function Register(props) {
 
       notifySuccess({
         title: "Registration successfull",
-        msg: "Welcome to Edmeda - happy socializing!",
+        message: "Welcome to Edmeda - happy socializing!",
       });
       history.push("/communities");
     } catch (err) {
@@ -65,14 +65,15 @@ export default function Register(props) {
       // );
       // notifyError({
       //   title: "Registration failed",
-      //   msg: `Couldn't register user: ${errMsg}`,
+      //   message: `Couldn't register user: ${errMsg}`,
       //   toastCntId: "modalNotificationCnt",
       // });
 
       handleFormError({
         errorObject: err,
         title: "Registration failed",
-        msg: "Couldn't create Edmeda-Account - an unexpected error occured.",
+        message:
+          "Couldn't create Edmeda-Account - an unexpected error occured.",
       });
     }
   };

@@ -6,14 +6,29 @@ const User = require("./User");
 const Group = require("./Group");
 
 const TYPES = {
-  CLASS: "class",
-  COURSE: "course",
-  TENANT: "tenant", // i.e. the whole school
-  CUSTOM: "custom", // i.e. the whole school
+  CLASS: "Class",
+  COURSE: "Course",
+  TENANT: "Tenant", // i.e. the whole school
+  CUSTOM: "Custom", // i.e. the whole school
 };
+
+const DEFAULT_PROFILE_PICS = [
+  "ComFbProfilePic1",
+  "ComFbProfilePic2",
+  "ComFbProfilePic3",
+  "ComFbProfilePic4",
+];
 
 const communitiesSchema = new Schema(
   {
+    type: {
+      type: String,
+      required: true,
+      enum: {
+        values: Object.values(TYPES),
+        message: "Invalid user type",
+      },
+    },
     name: {
       type: String,
       required: true,
@@ -37,12 +52,13 @@ const communitiesSchema = new Schema(
       type: Number,
       required: false, // Conditonally require that
     },
-    type: {
+    scope: {
       type: String,
       required: false,
     },
-    scope: {
+    fbProfilePicFileName: {
       type: String,
+      trim: true,
       required: false,
     },
     // TODO: If time:
@@ -62,7 +78,7 @@ const communitiesSchema = new Schema(
 );
 
 communitiesSchema.statics.TYPES = TYPES;
-
+communitiesSchema.statics.DEFAULT_PROFILE_PICS = DEFAULT_PROFILE_PICS;
 // performAfterCreationChores();
 // userSchema.methods.getFullName = function () {
 //   return this.firstName + this.lastName;
@@ -128,7 +144,8 @@ communitiesSchema.methods.performAfterCreationChores = async function () {
     return updatedCommunity;
   } catch (err) {
     console.log("[ERROR] Community#performAfterCreationChores: ", err);
-    throw new Error(`[ERROR] Community#performAfterCreationChores: ${err}`);
+    // throw new Error(`[ERROR] Community#performAfterCreationChores: ${err}`);
+    throw err;
   }
 };
 
@@ -160,7 +177,91 @@ communitiesSchema.methods.addMember = async function (newMember) {
     return { community: updatedCommunity ?? this, member: newMember };
   } catch (err) {
     console.log("[ERROR] Community#addMember: ", err);
-    throw new Error(`[ERROR] Community#addMember: ${err}`);
+    // throw new Error(`[ERROR] Community#addMember: ${err}`);
+    throw err;
+  }
+};
+
+communitiesSchema.methods.removeMember = async function (
+  member,
+  actonPerformer = null
+) {
+  try {
+    let updatedCommunity = null;
+    const schoolCommunity = await Community.findOne({
+      type: Community.TYPES.TENANT,
+    });
+    if (this._id.equals(schoolCommunity._id)) {
+      throw new Error(
+        "Users can't be removed from the school community. To remove a user from the main school community, you have to delete the user account for good"
+      );
+    }
+    console.log("Not school community - next >");
+
+    console.log("creator._id: ", this.creator);
+
+    console.log("member._id: ", member._id);
+
+    if (this.creator._id.equals(member._id)) {
+      throw new Error(
+        "The member to be removed from this community is its creator: No one can remove the creator from its community, not even the creator himself. To remove a creator from its community, you have to destroy the community."
+      );
+    }
+
+    console.log("actonPerformer._id: ", actonPerformer._id);
+    console.log("member._id: ", member._id);
+    console.log(
+      "member._id === actonPerformer._id: ",
+      member._id === actonPerformer._id
+    );
+
+    console.log("creator and member are not identical - next >");
+    // TODO: later: Distinct between class+ course communites (no self removal possible,
+    // at least not for students) and free / custom communities (self removal possible)
+    //- and between user types (e.g. teacher's ca remove theselves from any community
+    // - except they are the owner/creator or the community is the SchollCommunity etc.)
+    if (actonPerformer && member._id.equals(actonPerformer._id)) {
+      throw new Error(
+        "You tried to remove yourself from this community: No one can remove himself from any community - this has to be done by the community's owner (i.e. its creator)"
+      );
+    }
+
+    console.log("actonPerformer and member are not identical - next >");
+
+    console.log("--- member: ", member);
+    console.log(
+      "--- member.communities.includes(this._id): ",
+      member.communities.includes(this._id)
+    );
+    console.log(
+      "--- this.members.includes(member._id): ",
+      this.members.includes(member._id)
+    );
+
+    if (member.communities.includes(this._id)) {
+      member = await User.findOneAndUpdate(
+        { _id: member._id },
+        { $pull: { communities: this._id } },
+        { new: true }
+      );
+    }
+
+    console.log("this: ", this);
+    console.log("next! ");
+
+    if (this.members.includes(member._id)) {
+      updatedCommunity = await Community.findOneAndUpdate(
+        { _id: this._id },
+        { $pull: { members: member._id } },
+        { new: true }
+      ).populate("creator");
+    }
+
+    return { community: updatedCommunity ?? this, member };
+  } catch (err) {
+    console.log("[ERROR] Community#addMember: ", err);
+    // throw new Error(`[ERROR] Community#addMember: ${err}`);
+    throw err;
   }
 };
 

@@ -112,7 +112,7 @@ export default function GroupChat(props) {
 
       <section className="GroupChat__Hero">
         <div className="heading">
-          <h2 className="title">Group Chat</h2>
+          <h2 className="title">{currentGroup.name}: Group Chat</h2>
           <h3 className="subtitle">
             Welcome to the <strong>{currentGroup.name}'s group chat</strong>.
             Enjoy chatting!

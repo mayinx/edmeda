@@ -19,6 +19,9 @@ export default function Sidebar(props) {
       <div className="SidebarContent">
         <CommunityGroupsList
           community={props.community}
+          groups={props.community.groups.filter((group) => {
+            return group.type === "default";
+          })}
           head="Default Groups"
           addClass="defaultGroups"
           currentGroup={props.currentGroup}
@@ -27,6 +30,9 @@ export default function Sidebar(props) {
 
         <CommunityGroupsList
           community={props.community}
+          groups={props.community.groups.filter((group) => {
+            return group.type === "custom";
+          })}
           head="Custom Groups"
           addClass="customGroups"
           currentGroup={props.currentGroup}

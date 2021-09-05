@@ -34,5 +34,5 @@ export default function useAuthActions() {
   // const userLoggedIn = currentUserData && currentUserData.user && currentUserData.token;
   const userLoggedIn = currentUserData && currentUserData.user ? true : false;
 
-  return { userLoggedIn, register, login, logout };
+  return { userLoggedIn, currentUserData, register, login, logout };
 }

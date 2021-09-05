@@ -10,7 +10,8 @@ const TYPES = {
   STUDENT: "Student",
   PARENT: "Parent",
 };
-const GENDERS = ["male", "female", "diverse"];
+// const GENDERS = ["male", "female", "diverse"];
+const GENDERS = ["male", "female"];
 const DEFAULT_AVATARS = [
   "fbAvatar1",
   "fbAvatar2",

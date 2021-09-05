@@ -1,0 +1,23 @@
+.User__ProfilePic-wrapper {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.User__ProfilePic-wrapper .User__ProfilePic {
+  display: block;
+  margin: 1rem;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 100%;
+  z-index: 30;
+  border: 1px solid #fff;
+  box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%);
+}
+
+.User__ProfilePic.NavItem__Icon.userAvatarIcon {
+  width: 26px;
+  height: 26px;
+}

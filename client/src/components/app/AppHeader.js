@@ -3,9 +3,9 @@ import useAuthActions from "../../components/auth/useAuthActions";
 // import BrandLogo from "../../assets/2973980108_ed69085414_o.jpg";
 import { BsGrid3X3Gap } from "react-icons/bs";
 import { FaPlus } from "react-icons/fa";
-import { FaUserAlt } from "react-icons/fa";
+// import { FaUserAlt } from "react-icons/fa";
 
-import AuthOptions from "../auth/AuthOptions";
+// import AuthOptions from "../auth/AuthOptions";
 
 // import Modal from "../modal/Modal.js";
 // import NewCommunityPage from "../../pages/communities/NewCommunityPage.js";
@@ -13,11 +13,12 @@ import AuthOptions from "../auth/AuthOptions";
 
 import DropdownMenu from "../../components/misc/DropdownMenu";
 import "./AppHeader.css";
+import UserAvatar from "../../domain/User/UserAvatar";
 // const ADD_ACTION_FORM_ID = "newCommunity";
 // const UPDATE_ACTION_FORM_ID = "editCommunity";
 
 export default function AppHeader() {
-  const { userLoggedIn, logout } = useAuthActions();
+  const { userLoggedIn, logout, currentUserData } = useAuthActions();
 
   return (
     <header className="App__header">
@@ -33,14 +34,19 @@ export default function AppHeader() {
           <FaPlus className="itemIcon addIcon" />
         </Link>
       </div>
-      <div className="App__header_item">
-        {/* <Link to="#">
-          <FaUserAlt className="itemIcon userAvatarIcon" />
-        </Link> */}
+      <div className="App__header_item App__header_item--UserAvtar">
         <DropdownMenu>
           <li>
-            <Link className="SubNavItem" to="#">
-              Profile
+            <Link className="SubNavItem SubNavItem--UserProfileCard" to="#">
+              <UserAvatar user={currentUserData.user} />
+              <div className="User__Meta">
+                <span className="User__Name">
+                  {currentUserData?.user?.fullName}
+                </span>
+                <span className="User__Type">
+                  {currentUserData?.user?.type}
+                </span>
+              </div>
             </Link>
           </li>
           <li>

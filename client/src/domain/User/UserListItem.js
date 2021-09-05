@@ -128,7 +128,6 @@ export default function UserListItem(props) {
     >
       <p className="User__ProfilePic-wrapper">
         <img src={`${avatarUrl}`} className="User__ProfilePic" alt="" />
-        {/* <FaUserAlt className="NavItem__Icon userAvatarIcon User__ProfilePic" /> */}
       </p>
       <div className="user__meta">
         <div className="truncate">{user?.fullName}</div>

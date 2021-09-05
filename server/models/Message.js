@@ -13,11 +13,9 @@ const MessageSchema = new Schema(
       minlength: 1,
     },
     creator: {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: "User",
       // required: true,
-      // TODO:
-      // type: Schema.Types.ObjectId,
-      // ref: "User",
     },
     type: {
       type: String,
@@ -39,7 +37,7 @@ MessageSchema.statics.latest = (count) => {
   return Message.find({}).sort({ _id: "desc" }).limit(count);
 };
 MessageSchema.statics.roomMessages = (query) => {
-  return Message.find(query).sort({ createdAt: -1 });
+  return Message.find(query).populate("creator").sort({ createdAt: -1 });
   // return Message.find(query).sort({ _id: "desc" }).limit(10);
 
   // return Message.find({ group: "454asd" }).sort({ createdAt: -1 }).limit(10);

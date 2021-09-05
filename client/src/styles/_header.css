@@ -15,6 +15,12 @@
   border: 1px solid transparent;
   transition: all 0.3s ease;
 }
+.App__header .App__header_item--UserAvtar {
+  background-color: transparent;
+  background-color: transparent;
+  border-radius: 50%;
+}
+
 .App__header .App__header_item:hover {
   background-color: var(--nav-item-hover-bg-color);
   color: var(--nav-item-hover-font-color);
@@ -34,4 +40,28 @@
 .App__header .App__header_item a {
   display: flex;
   padding: 0.3rem;
+}
+
+.App__header .App__header_item--UserAvtar .SubNavItem--UserProfileCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.App__header
+  .App__header_item--UserAvtar
+  .SubNavItem--UserProfileCard
+  .User__ProfilePic {
+  margin: 0.5rem;
+  width: 100px;
+  height: 100px;
+}
+.App__header
+  .App__header_item--UserAvtar
+  .SubNavItem--UserProfileCard
+  .User__Meta {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

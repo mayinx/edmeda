@@ -75,6 +75,11 @@
   border-bottom-right-radius: var(--CommunityListItem-border-radius);
   border-top: 2px solid var(--CommunityistItem-border-color);
 }
+.CommunityListItem .community__meta .tag {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+}
 
 .CommunityListItem .community__actions {
   position: absolute;

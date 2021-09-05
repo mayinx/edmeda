@@ -119,6 +119,22 @@ export default function UserListItem(props) {
     e.preventDefault();
   };
 
+  let userTypeTagColor = null;
+  switch (user.type) {
+    case "Student":
+      userTypeTagColor = "green";
+      break;
+    case "Teacher":
+      userTypeTagColor = "dark-blue";
+      break;
+    case "Parent":
+      userTypeTagColor = "blue";
+      break;
+    default:
+      userTypeTagColor = "blue";
+      break;
+  }
+
   return (
     <section
       className={`ResourceListItem UserListItem UserListItem--${user.type} `}
@@ -131,6 +147,9 @@ export default function UserListItem(props) {
       </p>
       <div className="user__meta">
         <div className="truncate">{user?.fullName}</div>
+        <div className="truncate">
+          <span className={`tag ${userTypeTagColor}`}>{user?.type}</span>
+        </div>
         <div className="truncate">{user?.creator?.fullName}</div>
       </div>
       <div className="user__actions">
@@ -140,7 +159,7 @@ export default function UserListItem(props) {
           // onClick={(e) => confirmResourceRemoval(e, user.name, user._id)}
           onClick={(e) =>
             notifyInfo({
-              title: "Patience you must have, my young padawan.",
+              title: "Patience you must have, my young padawan...",
               message: "...for this feature is not yet implemented",
               toastCntId: "modalNotificationCnt",
             })
@@ -154,7 +173,7 @@ export default function UserListItem(props) {
           // onClick={(e) => openEditCommunityMembersModal(e, user._id)}
           onClick={(e) =>
             notifyInfo({
-              title: "Patience you must have, my young padawan.",
+              title: "Patience you must have, my young padawan...",
               message: "...for this feature is not yet implemented",
               toastCntId: "modalNotificationCnt",
             })
@@ -162,15 +181,17 @@ export default function UserListItem(props) {
         >
           <FaRegEdit className="actionIcon editIcon" />
         </Link>
-        <Link
-          className="user__action"
-          to="#"
-          onClick={(e) =>
-            confirmResourceRemoval(e, user.fullName, user._id, community._id)
-          }
-        >
-          <FaUserMinus className="actionIcon editMembersIcon" />
-        </Link>
+        {community.type !== "Tenant" && (
+          <Link
+            className="user__action"
+            to="#"
+            onClick={(e) =>
+              confirmResourceRemoval(e, user.fullName, user._id, community._id)
+            }
+          >
+            <FaUserMinus className="actionIcon editMembersIcon" />
+          </Link>
+        )}
       </div>
     </section>
   );

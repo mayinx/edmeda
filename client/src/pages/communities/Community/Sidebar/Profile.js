@@ -1,4 +1,6 @@
-import CommunityFallbackProfilePic from "../../../../assets/happy-students.jpg";
+// import CommunityFallbackProfilePic from "../../../../assets/happy-students.jpg";
+
+import CommunityFallbackProfilePic from "../../../../assets/community/fb_profile_pics/shutterstock_1856929843_mod.jpg";
 
 import "./Profile.css";
 import { FaUserAlt } from "react-icons/fa";

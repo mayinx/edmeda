@@ -37,7 +37,7 @@ export default function MessageList({ messages }) {
     } else {
       {
         notifyInfo({
-          title: "Tumbleweeds blows across the desert...",
+          title: "Tumbleweeds blow across the desert...",
           message: "...a bit quiet in here: Start chatting!",
           toastCntId: "appNotificationCnt",
         });

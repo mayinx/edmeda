@@ -1,5 +1,6 @@
 import "./CommunityListItem.css";
-import CommunityFallbackProfilePic from "../../assets/happy-students.jpg";
+// import CommunityFallbackProfilePic from "../../assets/happy-students.jpg";
+import CommunityFallbackProfilePic from "../../assets/community/fb_profile_pics/shutterstock_1856929843_mod.jpg";
 import CommunitiesContext from "../../contexts/CommunitiesContext";
 
 import { useContext } from "react";
@@ -102,6 +103,25 @@ export default function Community({ community }) {
     e.preventDefault();
   };
 
+  let communityTypeTagColor = null;
+  switch (community.type) {
+    case "Tenant":
+      communityTypeTagColor = "dark-blue";
+      break;
+    case "Class":
+      communityTypeTagColor = "blue";
+      break;
+    case "Course":
+      communityTypeTagColor = "green";
+      break;
+    case "Custom":
+      communityTypeTagColor = "yellow";
+      break;
+    default:
+      communityTypeTagColor = "blue";
+      break;
+  }
+
   return (
     <section
       className={`ResourceListItem CommunityListItem CommunityListItem--${community.type} `}
@@ -116,20 +136,27 @@ export default function Community({ community }) {
           alt=""
         />
       </p>
+
       <div className="community__meta">
         <div className="truncate">{community.name}</div>
         <div className="truncate">{community?.creator?.fullName}</div>
+        <span className={`tag ${communityTypeTagColor}`}>
+          {community?.type}
+        </span>
       </div>
+
       <div className="community__actions">
-        <Link
-          className="community__action"
-          to="#"
-          onClick={(e) =>
-            cofirmResourceRemoval(e, community.name, community._id)
-          }
-        >
-          <FaRegTrashAlt className="actionIcon deleteIcon" />
-        </Link>
+        {community.type !== "Tenant" && (
+          <Link
+            className="community__action"
+            to="#"
+            onClick={(e) =>
+              cofirmResourceRemoval(e, community.name, community._id)
+            }
+          >
+            <FaRegTrashAlt className="actionIcon deleteIcon" />
+          </Link>
+        )}
         <Link
           className="community__action"
           to="#"

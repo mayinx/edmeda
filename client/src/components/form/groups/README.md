@@ -32,7 +32,7 @@ b) Passing formGroup-attributes via props and formConfig:
 <TextInputFormGroup
   name="name"
   formConfig={FormConfig.name}
-  label="Class Community Name"
+  label="Community Name"
   defaultValue={community?.name}
   validationRuleset={{ required: false }}
 />

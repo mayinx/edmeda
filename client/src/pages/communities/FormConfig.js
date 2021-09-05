@@ -7,7 +7,7 @@ class FormConfig {
       "You must specify a class teacher as community owner (between 3 and 60 characters long)";
 
     this.name = {
-      label: "Class Community Name",
+      label: "Community Name",
       placeholder: "E.g. 'Class Community 3a'",
       validationRuleset: {
         required: {

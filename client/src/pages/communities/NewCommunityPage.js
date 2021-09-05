@@ -61,7 +61,7 @@ export default function NewCommunityPage(props) {
           <TextInputFormGroup
             name="name"
             formConfig={FormConfig.name}
-            label="Class Community Name"
+            label="Community Name"
             placeholder="E.g. 'Class Community 3a'"
           />
 

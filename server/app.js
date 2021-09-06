@@ -119,7 +119,7 @@ io.on("connection", async (socket) => {
         query.group = groupId;
       }
       if (userId) {
-        query.user = userId;
+        // query.user = userId;
       }
 
       // TODO: Load Messages either by groupId (group chat) or userId (individual chat)
@@ -127,6 +127,7 @@ io.on("connection", async (socket) => {
       // TODO: Ask Namir:
       console.log("--- attempt to retrieve roomMessages ");
       let roomMessages = await Message.roomMessages(query).limit(10);
+      // .sort({ createdAt: 1 })
       console.log("--- roomMessages ", roomMessages);
       // Message.find(query)
       //   .sort({ createdAt: -1 })

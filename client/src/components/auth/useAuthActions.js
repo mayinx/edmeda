@@ -15,7 +15,8 @@ export default function useAuthActions() {
   const logout = (e) => {
     console.log("currentUserData", currentUserData);
     // TODO:Swqap to first name
-    const userFirstName = currentUserData?.user?.fullName;
+    const userFirstName =
+      currentUserData?.user?.firstName ?? currentUserData?.user?.fullName;
     setCurrentUserData({
       token: undefined,
       user: undefined,

@@ -16,8 +16,3 @@
   border: 1px solid #fff;
   box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%);
 }
-
-.User__ProfilePic.NavItem__Icon.userAvatarIcon {
-  width: 26px;
-  height: 26px;
-}

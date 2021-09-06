@@ -11,35 +11,81 @@ import CarouselPic6 from "../../../assets/SaferinternetatOIAT_1.jpg";
 import CarouselPic7 from "../../../assets/shutterstock_1684741660.jpg";
 
 export default () => (
-  <Carousel className="HeroCarousel" autoPlay infiniteLoop showThumbs={false}>
+  <Carousel
+    className="HeroCarousel"
+    autoPlay={false}
+    infiniteLoop
+    showThumbs={false}
+  >
     {/* <Carousel autoPlay dynamicHeight={true}> */}
     <div>
       <img alt="" src={CarouselPic1} />
-      <p className="legend">Legend 1</p>
+      <div className="legend">
+        <div className="inner">
+          <h1>Edmeda</h1>
+          <p>Easy remote communication & collaboration for Schools!</p>
+        </div>
+      </div>
     </div>
     <div>
       <img alt="" src={CarouselPic2} />
-      <p className="legend">Legend 2</p>
+      <div className="legend">
+        <div className="inner">
+          <h1>Communities</h1>
+          <p>Limitless communities for Schools - limitless possibilities!</p>
+        </div>
+      </div>
     </div>
     <div>
       <img alt="" src={CarouselPic3} />
-      <p className="legend">Legend 3</p>
+      <div className="legend">
+        <div className="inner">
+          <h1>User Groups</h1>
+          <p style={{ width: "350px" }}>
+            Each community consists of multiple user groups - for every
+            occasion: School-subjects, Students, Parents, Teachers...
+          </p>
+        </div>
+      </div>
     </div>
     <div>
       <img alt="" src={CarouselPic4} />
-      <p className="legend">Legend 4</p>
+      <div className="legend">
+        <div className="inner">
+          <h1>Group Chats</h1>
+          <p style={{ width: "350px" }}>
+            Each user group is equipped with its own Group Chat - thus enabling
+            the members to communicate and collaborate efficiently as a team!
+          </p>
+        </div>
+      </div>
     </div>
     <div>
       <img alt="" src={CarouselPic5} />
-      <p className="legend">Legend 5</p>
+      <div className="legend">
+        <div className="inner">
+          <h1>Edmeda</h1>
+          <p>Easy remote communication & collaboration for Schools!</p>
+        </div>
+      </div>
     </div>
     <div>
       <img alt="" src={CarouselPic6} />
-      <p className="legend">Legend 6</p>
+      <div className="legend">
+        <div className="inner">
+          <h1>Edmeda</h1>
+          <p>Easy remote communication & collaboration for Schools!</p>
+        </div>
+      </div>
     </div>
     <div>
       <img alt="" src={CarouselPic7} />
-      <p className="legend">Legend 7</p>
+      <div className="legend">
+        <div className="inner">
+          <h1>Edmeda</h1>
+          <p>Easy remote communication & collaboration for Schools!</p>
+        </div>
+      </div>
     </div>
   </Carousel>
 );

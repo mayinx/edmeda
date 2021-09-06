@@ -44,7 +44,9 @@ export default function Register(props) {
         email: formData.email,
         password: formData.password,
       });
-
+      const userFirstName =
+        loginResponse?.data?.user?.firstName ??
+        loginResponse?.data?.user?.fullName;
       setCurrentUserData({
         token: loginResponse.data.token,
         user: loginResponse.data.user,
@@ -53,7 +55,7 @@ export default function Register(props) {
 
       notifySuccess({
         title: "Registration successfull",
-        message: "Welcome to Edmeda - happy socializing!",
+        message: `Welcome to Edmeda, ${userFirstName} - happy socializing!`,
       });
       history.push("/communities");
     } catch (err) {

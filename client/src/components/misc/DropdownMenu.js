@@ -14,7 +14,7 @@ export default function DropdownMenu(props) {
   const { currentUserData } = useAuthActions();
   console.log("currentUserData: ", currentUserData);
   return (
-    <div className="menu-container">
+    <div className={`menu-container ${props.className ?? null}`}>
       {/* {props.triggerEl} */}
       {/* <button onClick={onClick} className="menu-trigger">
         <span>User</span>

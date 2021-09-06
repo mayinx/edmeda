@@ -92,22 +92,25 @@
 
 @media all and (min-width: 768px) {
   .ModalPage__headerCaption {
-    font-size: 1.85rem;
+    font-size: 1.75rem;
     letter-spacing: 4px;
   }
 }
 
 @media all and (min-width: 992px) {
   .ModalPage__headerCaption {
-    font-size: 1.95rem;
+    font-size: 1.75rem;
     letter-spacing: 4px;
   }
 }
 
 @media all and (min-width: 1024px) {
   .ModalPage__headerCaption {
-    font-size: 2rem;
-    letter-spacing: 6px;
+    /* font-size: 2rem;
+    letter-spacing: 6px; */
+
+    font-size: 1.75rem;
+    letter-spacing: 4px;
   }
 }
 @media all and (min-width: 1200px) {

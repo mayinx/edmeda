@@ -7,6 +7,7 @@ const Group = require("./Group");
 
 const TYPES = {
   CLASS: "Class",
+  GRADE: "Grade",
   COURSE: "Course",
   TENANT: "Tenant", // i.e. the whole school
   CUSTOM: "Custom", // i.e. the whole school
@@ -17,6 +18,7 @@ const DEFAULT_PROFILE_PICS = [
   "ComFbProfilePic2",
   "ComFbProfilePic3",
   "ComFbProfilePic4",
+  "ComFbProfilePic5",
 ];
 
 const communitiesSchema = new Schema(
@@ -26,7 +28,7 @@ const communitiesSchema = new Schema(
       required: true,
       enum: {
         values: Object.values(TYPES),
-        message: "Invalid user type",
+        message: "Invalid Community Type",
       },
     },
     name: {
@@ -84,19 +86,10 @@ communitiesSchema.statics.DEFAULT_PROFILE_PICS = DEFAULT_PROFILE_PICS;
 //   return this.firstName + this.lastName;
 // };
 
-communitiesSchema.methods.performAfterCreationChores = async function () {
-  try {
-    console.log("this: ", this);
-    // TODO: What's the instance method version of this ?
-    // i.e. something like 'req.currentUser.update(...)' - which doesn't seem to work here?
-    // EDIT: Check => 'this.populate('creator').creator.communities.push(this)';
-    const user = await User.findOneAndUpdate(
-      { _id: this.creator },
-      { $push: { communities: this } },
-      { new: true }
-    );
-
-    const defaultGroups = [
+// TODO: refactor ths ugly beast
+communitiesSchema.methods.defaultGroups = function () {
+  if (this.type == TYPES.TENANT) {
+    return [
       {
         name: "Community",
         type: "default",
@@ -125,9 +118,124 @@ communitiesSchema.methods.performAfterCreationChores = async function () {
         community: this._id,
         order: 3,
       },
+      {
+        name: "School Festival",
+        type: "custom",
+        scope: "student",
+        community: this._id,
+        order: 0,
+      },
+      {
+        name: "School Theater",
+        type: "custom",
+        scope: "student",
+        community: this._id,
+        order: 1,
+      },
+      {
+        name: "Corona",
+        type: "custom",
+        scope: "student",
+        community: this._id,
+        order: 2,
+      },
+      {
+        name: "Climate Change",
+        type: "custom",
+        scope: "student",
+        community: this._id,
+        order: 3,
+      },
+      {
+        name: "Misc",
+        type: "custom",
+        scope: "student",
+        community: this._id,
+        order: 4,
+      },
     ];
+  } else {
+    return [
+      {
+        name: "Community",
+        type: "default",
+        scope: "all",
+        community: this._id,
+        order: 0,
+      },
+      {
+        name: "Students",
+        type: "default",
+        scope: "student",
+        community: this._id,
+        order: 1,
+      },
+      {
+        name: "Teachers",
+        type: "default",
+        scope: "teacher",
+        community: this._id,
+        order: 2,
+      },
+      {
+        name: "Parents",
+        type: "default",
+        scope: "parents",
+        community: this._id,
+        order: 3,
+      },
 
-    const groups = await Group.create(defaultGroups);
+      {
+        name: "English",
+        type: "custom",
+        scope: "student",
+        community: this._id,
+        order: 0,
+      },
+      {
+        name: "Math",
+        type: "custom",
+        scope: "student",
+        community: this._id,
+        order: 1,
+      },
+      {
+        name: "Science",
+        type: "custom",
+        scope: "student",
+        community: this._id,
+        order: 2,
+      },
+      {
+        name: "Sports",
+        type: "custom",
+        scope: "student",
+        community: this._id,
+        order: 3,
+      },
+      {
+        name: "Music",
+        type: "custom",
+        scope: "student",
+        community: this._id,
+        order: 4,
+      },
+    ];
+  }
+};
+communitiesSchema.methods.performAfterCreationChores = async function () {
+  try {
+    console.log("this: ", this);
+    // TODO: What's the instance method version of this ?
+    // i.e. something like 'req.currentUser.update(...)' - which doesn't seem to work here?
+    // EDIT: Check => 'this.populate('creator').creator.communities.push(this)';
+    const user = await User.findOneAndUpdate(
+      { _id: this.creator },
+      { $push: { communities: this } },
+      { new: true }
+    );
+
+    const groups = await Group.create(this.defaultGroups());
 
     console.log("yo - groups: ", groups);
 

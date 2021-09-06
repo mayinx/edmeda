@@ -3,14 +3,18 @@ import useDetectOutsideClick from "./useDetectOutsideClick";
 import "./DropdownMenu.css";
 import { Link } from "react-router-dom";
 import { FaUserAlt } from "react-icons/fa";
+import UserAvatar from "../../domain/User/UserAvatar";
+import useAuthActions from "../auth/useAuthActions";
 
 export default function DropdownMenu(props) {
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
   const onClick = () => setIsActive(!isActive);
 
+  const { currentUserData } = useAuthActions();
+  console.log("currentUserData: ", currentUserData);
   return (
-    <div className="menu-container">
+    <div className={`menu-container ${props.className ?? null}`}>
       {/* {props.triggerEl} */}
       {/* <button onClick={onClick} className="menu-trigger">
         <span>User</span>
@@ -25,7 +29,12 @@ export default function DropdownMenu(props) {
         onClick={onClick}
         to="#"
       >
-        <FaUserAlt className="NavItem__Icon userAvatarIcon" />
+        {/* <FaUserAlt className="NavItem__Icon userAvatarIcon" /> */}
+        <UserAvatar
+          user={currentUserData.user}
+          avatarClassName="NavItem__Icon userAvatarIcon"
+          wrapper={false}
+        />
       </Link>
 
       <nav

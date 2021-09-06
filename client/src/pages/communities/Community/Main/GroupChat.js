@@ -3,7 +3,7 @@ import MessageInput from "./GroupChat/NewMessageForm";
 import "./GroupChat.css";
 
 import io from "socket.io-client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import pkgJSON from "../../../../../package.json";
 
@@ -17,6 +17,11 @@ export default function GroupChat(props) {
   const [socket, setSocket] = useState(null);
 
   const [messages, setMessages] = useState([]);
+  const messagesEndRef = useRef(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   const { currentGroup } = props;
   const groupId = currentGroup._id;
@@ -66,6 +71,8 @@ export default function GroupChat(props) {
 
       setMessages(messages);
       // TODO: scrollToBottom
+
+      scrollToBottom();
     });
 
     // TODO: User Notification!
@@ -93,7 +100,7 @@ export default function GroupChat(props) {
 
       // TODO:
       // scrollToBottom
-      window.scrollTo(0, document.body.scrollHeight);
+      // window.scrollTo(0, document.body.scrollHeight);
     });
     // return () => newSocket.close();
     return () => {
@@ -106,13 +113,17 @@ export default function GroupChat(props) {
     // }, [setSocket]);
   }, [groupId]);
 
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
   return (
     <section className="GroupChat">
       {/* <h3>Group Chat #{currentGroup.name}</h3> */}
 
       <section className="GroupChat__Hero">
         <div className="heading">
-          <h2 className="title">Group Chat</h2>
+          <h2 className="title">{currentGroup.name}: Group Chat</h2>
           <h3 className="subtitle">
             Welcome to the <strong>{currentGroup.name}'s group chat</strong>.
             Enjoy chatting!
@@ -124,6 +135,7 @@ export default function GroupChat(props) {
         <>
           <section className="GroupChat__Main">
             <MessageList messages={messages} socket={socket} />
+            <div ref={messagesEndRef} />
           </section>
           <MessageInput socket={socket} currentGroup={currentGroup} />
         </>

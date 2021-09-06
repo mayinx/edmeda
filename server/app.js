@@ -119,7 +119,7 @@ io.on("connection", async (socket) => {
         query.group = groupId;
       }
       if (userId) {
-        query.user = userId;
+        // query.user = userId;
       }
 
       // TODO: Load Messages either by groupId (group chat) or userId (individual chat)
@@ -127,6 +127,7 @@ io.on("connection", async (socket) => {
       // TODO: Ask Namir:
       console.log("--- attempt to retrieve roomMessages ");
       let roomMessages = await Message.roomMessages(query).limit(10);
+      // .sort({ createdAt: 1 })
       console.log("--- roomMessages ", roomMessages);
       // Message.find(query)
       //   .sort({ createdAt: -1 })
@@ -175,32 +176,50 @@ io.on("connection", async (socket) => {
       console.log("--- socket.id ", socket.id);
       console.log("--- msg: ", msg);
       console.log("--- args: ", args);
-      const message = new Message(msg);
+      let message = new Message(msg);
+      console.log("--- message after new: ", message);
+
+      var ObjectID = require("mongodb").ObjectID;
+      const _id = new ObjectID(message.creator);
+      message.creator = _id;
+      console.log("--- new id: ", _id);
+      console.log("--- new id: ", _id._id);
 
       const { groupId, userId } = args;
       const roomId = groupId.toString();
 
       console.log("--- current room: ", roomId);
       // Save the message to the database.
-      message.save((err) => {
+      // message.save((err) => {
+      //   if (err) return console.error(err);
+      // });
+
+      message.save(function (err, message) {
         if (err) return console.error(err);
-      });
 
-      Message.countDocuments({}, function (err, count) {
-        console.log("%d messages", count);
-      });
+        message.populate("creator", function (err, message) {
+          if (err) return console.error(err);
+          console.log("message in tralalal: ", message);
 
-      // Notify all other users about a new message.
-      // FYI: "push" can be used client-side
-      // to hook into this server side event
-      // via socket.io
-      // FYI: "socket.emit" => informs everyone incl. youself
-      // FYI: "socket.broadcast.emit" => inform everyone but youself
-      // socket.broadcast.emit("push", msg);
-      // console.log("roomId", roomId);
-      // socket.emit("push", message);
-      io.in(roomId).emit("push", message);
-      // socket.in(roomId).emit("push", message);
+          console.log("--- message after save: ", message);
+
+          Message.countDocuments({}, function (err, count) {
+            console.log("%d messages", count);
+          });
+
+          // Notify all other users about a new message.
+          // FYI: "push" can be used client-side
+          // to hook into this server side event
+          // via socket.io
+          // FYI: "socket.emit" => informs everyone incl. youself
+          // FYI: "socket.broadcast.emit" => inform everyone but youself
+          // socket.broadcast.emit("push", msg);
+          // console.log("roomId", roomId);
+          // socket.emit("push", message);
+          io.in(roomId).emit("push", message);
+          // socket.in(roomId).emit("push", message);
+        });
+      });
     } catch (e) {
       console.log("--- [error]", "creating message failed:", e);
       socket.emit(

@@ -52,10 +52,12 @@
 .CommunityList__Items {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: stretch;
-  align-items: stretch;
+  justify-content: flex-start;
+  align-items: flex-start;
+
   gap: 1.5rem;
+
+  flex: 0 1 auto;
 }
 
 .CommunityList__Items .CollectionEmpty {

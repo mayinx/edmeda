@@ -3,19 +3,16 @@
 .HeroCarousel .carousel.carousel-slider:hover .slide .legend {
   opacity: 0.5;
 }
-
 .HeroCarousel .slide {
   /* max-height: 87vh; */
   /* background: yellow; */
 }
-
 .HeroCarousel .slide img {
   width: 100%;
   height: 87vh;
   height: 84vh;
   object-fit: cover;
 }
-
 .HeroCarousel .slide .legend {
   background-blend-mode: unset;
   position: absolute;
@@ -24,5 +21,23 @@
   transform: translate(-50%, -50%);
   margin-left: 13px;
 }
+.HeroCarousel .slide .legend .inner {
+  font-size: 2rem;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.HeroCarousel .slide .legend .inner h1 {
+  border-bottom: 1px solid whitesmoke;
+  font-size: 2rem;
+  font-weight: bold;
+}
+.HeroCarousel .slide .legend .inner p {
+  padding: 1rem 0;
+  text-align: right;
+  width: 250px;
+}
 .HeroCarousel .slide .legend:hover {
+  opacity: 1;
 }

@@ -76,6 +76,7 @@ exports.register = async (req, res) => {
       fullName: newUser.fullName,
       userName: newUser.userName,
       firstName: newUser.firstName,
+      fbAvatarFileName: newUser.fbAvatarFileName,
     });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -123,6 +124,7 @@ exports.login = async (req, res) => {
         fullName: user.fullName,
         userName: user.userName,
         firstName: user.firstName,
+        fbAvatarFileName: user.fbAvatarFileName,
       },
     });
   } catch (err) {
@@ -170,6 +172,7 @@ exports.validateToken = async (req, res) => {
         fullName: user.fullName,
         userName: user.userName,
         firstName: user.firstName,
+        fbAvatarFileName: user.fbAvatarFileName,
       },
     });
   } catch (err) {

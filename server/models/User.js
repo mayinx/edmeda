@@ -5,12 +5,15 @@ const _ = require("lodash");
 
 const bcryptjs = require("bcryptjs");
 
+const genderDetect = require("gender-detection");
+
 const TYPES = {
   TEACHER: "Teacher",
   STUDENT: "Student",
   PARENT: "Parent",
 };
 const GENDERS = ["male", "female", "diverse"];
+// const GENDERS = ["male", "female"];
 const DEFAULT_AVATARS = [
   "fbAvatar1",
   "fbAvatar2",
@@ -37,14 +40,14 @@ const UserSchema = new Schema(
       maxlength: 80,
       minlength: 1,
     },
-    first_name: {
+    firstName: {
       type: String,
       required: false,
       trim: true,
       maxlength: 80,
       minlength: 1,
     },
-    last_name: {
+    lastName: {
       type: String,
       required: false,
       trim: true,
@@ -145,10 +148,19 @@ UserSchema.statics.register = async function (userAttributes) {
     }
 
     // TODO: Valdiate type + gender
+    console.log("fullName: ", fullName);
     const firstName = fullName.split(" ")[0];
     const lastName = fullName.replace(`${firstName} `, "");
+
+    console.log("fullName: ", fullName);
+    console.log("firstName: ", firstName);
+    console.log("lastName: ", lastName);
+
     //TODO: just for now - use a guessing lib for that
-    const gender = _.sample(User.GENDERS);
+    // const gender = _.sample(User.GENDERS);
+    let gender = genderDetect.detect(firstName);
+    if (gender === "unknown") gender = "diverse";
+    console.log("detectedGender: ", gender);
     const fbAvatarFileName = `${type}_${gender}_${_.sample(
       User.DEFAULT_AVATARS
     )}`;

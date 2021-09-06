@@ -45,12 +45,12 @@ export default function Modal(props) {
     <div className={`Modal ${props.className}`}>
       <div
         className="Modal__inner"
-        style={{
-          width: props.modalWidth || "90%",
-          minWidth: props.modalMinWidth || "auto",
-          height: props.modalHeight || "90%",
-          minHeight: props.modalMinHeight || "auto",
-        }}
+        // style={{
+        //   width: props.modalWidth || "90%",
+        //   minWidth: props.modalMinWidth || "auto",
+        //   height: props.modalHeight || "90%",
+        //   minHeight: props.modalMinHeight || "auto",
+        // }}
       >
         <div className="ModalPage__header d-flex">
           <h3 className="ModalPage__headerCaption">

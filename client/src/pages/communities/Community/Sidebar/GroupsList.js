@@ -4,7 +4,7 @@ import "./GroupsList.css";
 
 export default function GroupsList(props) {
   const renderGroupsListItems = () => {
-    let renderedItems = props.community.groups.map((group) => {
+    let renderedItems = props.groups.map((group) => {
       const itemClass =
         props.currentGroup._id === group._id
           ? "CommunityGroupsList__Item CommunityGroupsList__Item--current"

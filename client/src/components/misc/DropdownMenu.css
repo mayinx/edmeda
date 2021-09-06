@@ -6,15 +6,17 @@
   background: #ffffff;
   border-radius: 8px;
   position: absolute;
-  top: 60px;
+  top: 55px;
   right: 0;
-  width: 300px;
+  /* width: 300px; */
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
   opacity: 0;
   visibility: hidden;
   transform: translateY(-20px);
   transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
-  z-index: 100;
+  z-index: 10000;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
 }
 
 .menu.active {
@@ -42,7 +44,7 @@
 
 .menu-trigger {
   background: #ffffff;
-  border-radius: 90px;
+  border-radius: 100%;
   cursor: pointer;
   display: flex;
   justify-content: space-between;

@@ -6,7 +6,7 @@
 */
 
 .CommunityLayout .CommunitySidebar .SidebarHeader {
-  flex: 1 1 auto;
+  /* flex: 1 1 auto; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,6 +29,20 @@
 }
 .CommunityLayout .CommunitySidebar--expanded .SidebarContent {
   padding: 1.25rem 0.75rem 1rem 0.75rem;
+
+  overflow-y: scroll;
+
+  /* height: 75%; */
+  flex: 1;
+
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+}
+
+.CommunityLayout
+  .CommunitySidebar--expanded
+  .SidebarContent::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
 }
 
 /* Group Lists */

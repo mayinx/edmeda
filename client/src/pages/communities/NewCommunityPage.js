@@ -58,20 +58,10 @@ export default function NewCommunityPage(props) {
           className="Form"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <TextInputFormGroup
-            name="name"
-            formConfig={FormConfig.name}
-            label="Class Community Name"
-            placeholder="E.g. 'Class Community 3a'"
-          />
-
-          <SelectInputFormGroup
-            name="grade"
-            formConfig={FormConfig.grade}
-            // options={FormConfig.gradeOptionsForSelect}
-          />
-
-          <TextInputFormGroup name="creator" formConfig={FormConfig.creator} />
+          <TextInputFormGroup name="name" formConfig={FormConfig.name} />
+          <SelectInputFormGroup name="type" formConfig={FormConfig.type} />
+          <SelectInputFormGroup name="grade" formConfig={FormConfig.grade} />
+          {/* <TextInputFormGroup name="creator" formConfig={FormConfig.creator} /> */}
         </form>
       </FormProvider>
     </div>

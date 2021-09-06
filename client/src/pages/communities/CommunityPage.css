@@ -8,8 +8,9 @@
 /* default: hidden */
 .CommunityLayout .CommunitySidebar {
   background-color: var(--CommunitySidebar-bg-color);
-  flex-basis: 33%;
-  flex-grow: 1;
+  /* flex-basis: 33%;
+  flex-grow: 1; */
+  flex: 1 0 33%;
   flex-wrap: nowrap;
   opacity: 0;
   visibility: hidden;
@@ -18,6 +19,9 @@
   transition: all 0.3s ease-in-out;
   -webkit-transform-style: preserve-3d;
   -webkit-backface-visibility: hidden;
+
+  display: flex;
+  flex-direction: column;
 }
 
 .CommunityLayout .CommunityMain {

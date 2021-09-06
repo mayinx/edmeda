@@ -35,8 +35,9 @@ export default function Login(props) {
       console.log("--- Attempting to log in user ", formData);
       const loginResponse = await axios.post("/api/users/login", formData);
 
-      // TODO:Swqap to first name
-      const userFirstName = loginResponse?.data?.user?.fullName;
+      const userFirstName =
+        loginResponse?.data?.user?.firstName ??
+        loginResponse?.data?.user?.fullName;
 
       console.log(
         "--- Setting currentUserData and localStorage from loginResponse: ",

@@ -25,11 +25,11 @@ export default function Header() {
   return (
     <header className="App__header RegistrationHeader">
       <nav className="AppNav">
-        <div className="AppNav__Left">
+        <div className="AppNav__Left Brand">
           {/* <img id="app_logo" src={BrandLogo} className="BrandLogo" alt=""></img> */}
-
-          <Link className="NavItem NavItem--BtnIconOnly" to="#">
-            <BsGrid3X3Gap className="NavItem__Icon appNavIcon" />
+          <Link className="NavItem NavItem--Brand" to="/">
+            {/* <BsGrid3X3Gap className="NavItem__Icon appNavIcon" /> */}
+            Edmeda
           </Link>
         </div>
 
@@ -45,9 +45,6 @@ export default function Header() {
           </Link>
           <Link className="NavItem NavItem--Link" to="#">
             <span className="NavItem__Caption">Plans</span>
-          </Link>
-          <Link className="NavItem NavItem--Link" to="#">
-            <span className="NavItem__Caption">FAQ</span>
           </Link>
         </div>
         <div className="AppNav__Right">

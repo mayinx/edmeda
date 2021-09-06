@@ -1,6 +1,6 @@
 import "./CommunityList.css";
 import CommunityListItem from "./CommunityListItem.js";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import ReactLoading from "react-loading";
 export default function CommunityList({ resources }) {
   function renderResources() {

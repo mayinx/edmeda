@@ -1,4 +1,6 @@
-import CommunityFallbackProfilePic from "../../../../assets/happy-students.jpg";
+// import CommunityFallbackProfilePic from "../../../../assets/happy-students.jpg";
+
+import SchoolCommunityFbProfilePic from "../../../../assets/community/fb_profile_pics/shutterstock_1856929843_mod.jpg";
 
 import "./Profile.css";
 import { FaUserAlt } from "react-icons/fa";
@@ -6,8 +8,17 @@ import { FaDotCircle } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa";
 
 export default function Profile({ community }) {
-  const communityProfilePicImgSrc =
-    community?.picture ?? CommunityFallbackProfilePic;
+  let profilePicUrl = community?.picture;
+  if (!profilePicUrl) {
+    try {
+      profilePicUrl = community?.fbProfilePicFileName
+        ? require(`../../../../assets/community/fb_profile_pics/${community?.fbProfilePicFileName}.jpg`)
+            .default
+        : SchoolCommunityFbProfilePic;
+    } catch (e) {
+      profilePicUrl = SchoolCommunityFbProfilePic;
+    }
+  }
 
   return (
     <section
@@ -16,11 +27,7 @@ export default function Profile({ community }) {
       id={community.id}
     >
       <p className="CommunityProfile__Image--wrapper">
-        <img
-          src={communityProfilePicImgSrc}
-          className="CommunityProfile__Image"
-          alt=""
-        />
+        <img src={profilePicUrl} className="CommunityProfile__Image" alt="" />
       </p>
 
       <h3 className="CommunityProfile__CommunityName truncate ">

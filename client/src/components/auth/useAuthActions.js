@@ -15,7 +15,8 @@ export default function useAuthActions() {
   const logout = (e) => {
     console.log("currentUserData", currentUserData);
     // TODO:Swqap to first name
-    const userFirstName = currentUserData?.user?.fullName;
+    const userFirstName =
+      currentUserData?.user?.firstName ?? currentUserData?.user?.fullName;
     setCurrentUserData({
       token: undefined,
       user: undefined,
@@ -34,5 +35,5 @@ export default function useAuthActions() {
   // const userLoggedIn = currentUserData && currentUserData.user && currentUserData.token;
   const userLoggedIn = currentUserData && currentUserData.user ? true : false;
 
-  return { userLoggedIn, register, login, logout };
+  return { userLoggedIn, currentUserData, register, login, logout };
 }

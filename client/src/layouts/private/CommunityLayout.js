@@ -7,6 +7,7 @@ import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import CommunityContext from "../../contexts/CommunityContext";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
+import ReactLoading from "react-loading";
 
 export default function CommunityLayout() {
   const [currentCommunity, setCurrentCommunity] = useState({});
@@ -45,9 +46,17 @@ export default function CommunityLayout() {
         <AppHeader className="CommunityHeader" />
         <main className="CommunityLayout">
           {isLoading || !currentCommunity ? (
-            <div className="mt-2 fs-1_5">
-              Holy cow! Can't load that community!
-            </div>
+            // <div className="mt-2 fs-1_5">
+            //   Holy cow! Can't load that community!
+            // </div>
+
+            <ReactLoading
+              type={"bars"}
+              color={"#9773a7"}
+              height={100}
+              width={100}
+              className="PageLoadingAnimation"
+            />
           ) : (
             // <Switch>
             <Route path="/communities/:id" component={CommunityPage} />

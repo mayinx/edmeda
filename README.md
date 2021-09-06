@@ -1,69 +1,18 @@
-# MERN APP TEMPLATE
+# Edmeda
 
-Easy peasy lemon squeeze starter template for your next MERN-app. The resulting app will consist of an express and an react app living on the same machine. Express will serve both your API requests and the React files...
+Web-based remote communication & collaboration is an increasingly important subject, not only for companies, but also for Schools, especially in times of Covid-19, but also to teach team work and digital literacies.
 
-## Setup for local development
+With that in mind, Edmeda was created.
 
-- Just hit the `Use this template`-button above to use this MERN-skeleton-app as base for your new project
+Edmeda is a password protected MERN-Stack Web Application which enables Schools to communicate & collaborate easily and effectively via multiple Communities. To achieve that, Teachers, Students and Parents alike are equipped with real-time Group Chats to share information instantaneously and effortlessly. Using Edmeda, Teachers can create limitless Communities - and inside those communities, a limitless number of user groups. Those Communities and their User Groups can be centered around any target audience or subject, thus enabling users to achieve a targeted communication and information exchange, even in times of Corona.
+ 
+Edmeda is geared towards usability, so that all main tasks can be accomplished without leaving the current screen. Teachers have the ability to administer both communities and their users seamlessly right where it's needed, in the communities interface - without the need to dig through big and scary admin areas first, that tend to be apps of their own. The gender of newly registered Users is automatically recognized based on the first name - and User Avatars are assigned randomly based on user type and gender. Teachers can effortlessly create Communities of various types (e.g. Class-, Course- or Custom-Communities) and within those communities Student-, Parent and fellow Teacher-Accounts. By opening a community,   they have access to its user groups and chats. Alongside default user groups, that are targeted to communicate with specific user groups, each community can have an infinite number of custom user groups, that can be dedicated to arbitrary school subjects, projects, activities, events etc. - thus enabling the members to communicate and collaborate efficiently as a team!   
 
-- Give you new repo a name etc. and hit the btn `Create repository from template`
+## Technology Key Facts 
 
-- Clone your new repo to your local machine, cd into its root durectors and simply run:
+- Pw-proteced MERN-Stack Web Application, Hosted on Heroku
+- React-frontend & Express/Node.js-Backend encapsulated inside the same project 
+- DB-layer based on MongoDB (managed via MongoDB Atlas) 
+- User Registration & User Authorization via JWT/Bycryptjs
+- Realtime Chats via WebSockets/socket.io
 
-  `npm run iall`
-
-  This should install all the needed node packages for your app both in `/node_mpdules` and in `/client/node_mdules`
-
-- Create an `/.env`-file (or use the existing `.env.template`-file afte rremoving the `template`-appendix) and set a `PORT` and an `MONGO_URI` that specifies your (local or remote) database-uri - e.g.like this:
-
-  ```
-  MONGO_URI = mongodb+srv://<User>:<PW>@cluster0.aa5hb.mongodb.net/edmeda?retryWrites=true&w=majority
-  PORT = 4000
-  ```
-
-- Make sure that your `.env`-file is always added to your `.gitignore`-file!
-
-- run `npm run startboth` to fire up your app on localhost
-
-- Happy coding!
-
-## Deployment via Heroku
-
-- Head to your heroku account and create a new app
-- Select **Github** as deployment-method under the **Deploy**-tab and **connect** your freshly created github repo to heroku (hit the appearing **Search** button and select your repo from the appearing dropdown menu)
--
-
-## File structure Server
-
-```
-/server
-├── app.js // main entry
-├── /config // The app configuration (logger, global config, ...)
-├── /models // The model data (e.g. Mongoose model)
-├── /routes // The route definitions and implementations
-├── /services // The standalone services (Database service, Email service, ...)
-└── /views // The view rendered by the server to the client (e.g. Jade, EJS, ...)
-```
-
-## File structure Client
-
-```
-/client
-|─── /build
-|─── /node_modules
-|─── /public
-|─── /src
-|────── /assets
-|────── /components
-|────── /contexts
-|────── /domain
-|────── /hooks
-|────── /lib
-|────── /pages
-|────── /services
-|────── /styles
-|────── /utils
-|─── index.js
-|─── package.json
-|─── README.md
-```

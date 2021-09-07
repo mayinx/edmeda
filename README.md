@@ -1,5 +1,7 @@
 # Edmeda
 
+![Edmeda](misc/screencapture-edmeda-herokuapp-2021-09-06-19_47_22.png)
+
 Web-based remote communication & collaboration is an increasingly important subject, not only for companies, but also for Schools, especially in times of Covid-19, but also to teach team work and digital literacies.
 
 With that in mind, Edmeda was created.

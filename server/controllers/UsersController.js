@@ -7,16 +7,12 @@ const { NotFoundError, InternalError } = require("../errors/AppErrors");
 
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-// const auth = require("../middleware/auth");
 
 /* AUTHENTICATION RELATED ROUTES */
 exports.register = async (req, res) => {
   try {
-    // let { email, password, passwordConfirmation, userName } = req.body;
     let { email, password, passwordConfirmation, fullName } = req.body;
     const type = "Teacher";
-    console.log("[SERVER | USERS#REGISTER]");
-    console.log("--- req.body", req.body);
 
     // validate
     if (!type || !email || !password || !passwordConfirmation || !fullName) {
@@ -44,22 +40,15 @@ exports.register = async (req, res) => {
       fullName,
     });
 
-    // const savedUser = await newUser.save();
-    console.log("--- Succcessfully registered new user!");
-
     let schoolCommunity = await Community.findOne({
       type: Community.TYPES.TENANT,
     });
     if (!schoolCommunity) {
-      console.log("--- School Communty doesn't exist yet - creating one now!");
-
       schoolCommunity = await Community.create({
         name: "School Community",
         type: Community.TYPES.TENANT,
         creator: newUser._id,
       });
-      console.log("--- Succcessfully created school community!");
-
       schoolCommunity = await schoolCommunity.performAfterCreationChores();
     }
 
@@ -87,10 +76,6 @@ exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    console.log("[SERVER | USERS#LOGIN]");
-    console.log("--- req.body", req.body);
-
-    // validate
     if (!email || !password)
       return res
         .status(400)
@@ -105,16 +90,10 @@ exports.login = async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ msg: "Invalid credentials." });
 
-    // console.log("process.env: ", process.env);
-    // console.log("process.env.JWT_SECRET: ", process.env.JWT_SECRET);
-
-    // TODO: recheck: Saw otehr examples wher e a whole bunch of user attrubutes
-    // is passed in here - not just { id: user._id } ...?
     const token = jwt.sign({ id: user._id }, `${process.env.JWT_SECRET}`, {
       expiresIn: `${process.env.JWT_EXPIRES_IN}`,
     });
 
-    console.log("token", token);
     res.json({
       token,
       user: {
@@ -134,24 +113,17 @@ exports.login = async (req, res) => {
 
 exports.validateToken = async (req, res) => {
   try {
-    console.log("[SERVER | USERS#validateToken]");
-    console.log("--- req.header", req.header);
-
     // check header or url parameters or post parameters for token
     const token =
       req.header("x-auth-token") || req.body.token || req.query.token;
     if (!token) return res.status(401).json({ validToken: false });
-    console.log("--- token present!", token);
 
     // Check token that was passed by decoding token using secret
     const verified = jwt.verify(token, `${process.env.JWT_SECRET}`);
     if (!verified) return res.status(401).json({ validToken: false });
-    console.log("--- token verified!", verified);
 
     const user = await User.findById(verified.id);
     if (!user) return res.status(401).json({ validToken: false });
-    console.log("--- user found by verified id!", user);
-    console.log("--- token", token);
 
     // TODO: Check that:
     //Note: you can renew token by creating new token(i.e.
@@ -257,7 +229,6 @@ exports.update = function (req, res) {
   User.findByIdAndUpdate(id, req.body, { new: true })
     .then((updatedResource) => {
       if (!updatedResource) throw new NotFoundError("community", id, req.body);
-      console.log("updatedResource", updatedResource);
       res.send(updatedResource);
     })
     .catch((e) => {

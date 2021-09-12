@@ -14,9 +14,6 @@ const groupsSchema = new Schema(
     creator: {
       type: String,
       required: false,
-      // TODO:
-      // type: Schema.Types.ObjectId,
-      // ref: "Author",
     },
     type: {
       type: String,
@@ -30,16 +27,9 @@ const groupsSchema = new Schema(
       type: Number,
       required: false,
     },
-    // TODO: If time:
-    // picture: {
-    //   data: Buffer,
-    //   contentType: String,
-    //   required: false,
-    // },
     community: {
       type: Schema.Types.ObjectId,
       ref: "Community",
-      // required: true,
     },
     messages: [{ type: Schema.Types.ObjectId, ref: "Message" }],
   },

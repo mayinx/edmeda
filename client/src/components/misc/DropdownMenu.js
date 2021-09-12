@@ -12,24 +12,13 @@ export default function DropdownMenu(props) {
   const onClick = () => setIsActive(!isActive);
 
   const { currentUserData } = useAuthActions();
-  console.log("currentUserData: ", currentUserData);
   return (
     <div className={`menu-container ${props.className ?? null}`}>
-      {/* {props.triggerEl} */}
-      {/* <button onClick={onClick} className="menu-trigger">
-        <span>User</span>
-        <img
-          src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/df/df7789f313571604c0e4fb82154f7ee93d9989c6.jpg"
-          alt="User avatar"
-        />
-      </button> */}
-
       <Link
         className="NavItem NavItem--BtnIconOnly menu-trigger"
         onClick={onClick}
         to="#"
       >
-        {/* <FaUserAlt className="NavItem__Icon userAvatarIcon" /> */}
         <UserAvatar
           user={currentUserData.user}
           avatarClassName="NavItem__Icon userAvatarIcon"
@@ -41,19 +30,7 @@ export default function DropdownMenu(props) {
         ref={dropdownRef}
         className={`menu ${isActive ? "active" : "inactive"}`}
       >
-        <ul>
-          {/* {props.ddMenuItems} */}
-          {props.children}
-          {/* <li>
-            <a href="/messages">Messages</a>
-          </li>
-          <li>
-            <a href="/trips">Trips</a>
-          </li>
-          <li>
-            <a href="/saved">Saved</a>
-          </li> */}
-        </ul>
+        <ul>{props.children}</ul>
       </nav>
     </div>
   );

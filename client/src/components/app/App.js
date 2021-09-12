@@ -4,9 +4,6 @@ import { useState, useEffect } from "react";
 
 import axios from "axios";
 
-// import Register from "../../components/auth/Register";
-// import Login from "../../components/auth/Login";
-
 //  TODO: Ok - okei: Switch to redux already ;-)
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import CommunitiesContext from "../../contexts/CommunitiesContext";
@@ -20,10 +17,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../notifications/ReactToastifyOverrides.css";
 import ProtectedRoutes from "../auth/ProtectedRoutes";
-
-// function setToken(userToken) {}
-
-// function getToken() {}
 
 function App() {
   const [currentUserData, setCurrentUserData] = useState({
@@ -41,7 +34,6 @@ function App() {
         token = "";
       }
 
-      // TODO: Why post-request?
       const validationResp = await axios.post(
         "/api/users/validateToken",
         null,
@@ -64,8 +56,6 @@ function App() {
   useEffect(() => {
     checkLoggedIn();
   }, []);
-
-  // const token = getToken();
 
   useEffect(() => {
     axios
@@ -126,7 +116,6 @@ function App() {
               containerId={"appNotificationCnt"}
               position="top-left"
               autoClose={5000}
-              // toastClassName="Toastify__toast-theme--colored"
               hideProgressBar={false}
               newestOnTop
               closeOnClick

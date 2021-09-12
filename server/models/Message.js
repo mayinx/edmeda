@@ -15,7 +15,6 @@ const MessageSchema = new Schema(
     creator: {
       type: Schema.Types.ObjectId,
       ref: "User",
-      // required: true,
     },
     type: {
       type: String,
@@ -41,19 +40,6 @@ MessageSchema.statics.roomMessages = (query) => {
     .sort("-createdAt")
     .populate("creator")
     .sort({ createdAt: 1 });
-  // return Message.find(query).sort({ _id: "desc" }).limit(10);
-
-  // return Message.find({ group: "454asd" }).sort({ createdAt: -1 }).limit(10);
-
-  // return new Promise((resolve, reject) => {
-  //   Message.find((query, error, docs) => {
-  //     if (error) {
-  //       console.error(error);
-  //       return reject(error);
-  //     }
-  //     resolve(docs);
-  //   });
-  // });
 };
 
 // activate pagination plugin

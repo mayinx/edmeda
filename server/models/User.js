@@ -13,7 +13,6 @@ const TYPES = {
   PARENT: "Parent",
 };
 const GENDERS = ["male", "female", "diverse"];
-// const GENDERS = ["male", "female"];
 const DEFAULT_AVATARS = [
   "fbAvatar1",
   "fbAvatar2",
@@ -90,22 +89,12 @@ const UserSchema = new Schema(
     creator: {
       type: String,
       required: false,
-      // TODO:
-      // type: Schema.Types.ObjectId,
-      // ref: "User",
     },
 
-    // TODO: If time:
-    // avatar: {
-    //   data: Buffer,
-    //   contentType: String,
-    //   required: false,
-    // },
     communities: [
       {
         type: Schema.Types.ObjectId,
         ref: "Community",
-        // required: true,
       },
     ],
     groups: [{ type: Schema.Types.ObjectId, ref: "Group" }],
@@ -125,9 +114,6 @@ UserSchema.statics.DEFAULT_AVATARS = DEFAULT_AVATARS;
 
 UserSchema.statics.register = async function (userAttributes) {
   try {
-    // const salt = await bcryptjs.genSalt();
-    // const passwordHash = await bcryptjs.hash(password, salt);
-    console.log("userAttributes: ", userAttributes);
     const { fullName, userName, type, email, password } = userAttributes;
 
     if (!type || !email || !password || !fullName) {
@@ -148,19 +134,13 @@ UserSchema.statics.register = async function (userAttributes) {
     }
 
     // TODO: Valdiate type + gender
-    console.log("fullName: ", fullName);
     const firstName = fullName.split(" ")[0];
     const lastName = fullName.replace(`${firstName} `, "");
-
-    console.log("fullName: ", fullName);
-    console.log("firstName: ", firstName);
-    console.log("lastName: ", lastName);
 
     //TODO: just for now - use a guessing lib for that
     // const gender = _.sample(User.GENDERS);
     let gender = genderDetect.detect(firstName);
     if (gender === "unknown") gender = "diverse";
-    console.log("detectedGender: ", gender);
     const fbAvatarFileName = `${type}_${gender}_${_.sample(
       User.DEFAULT_AVATARS
     )}`;
@@ -192,21 +172,16 @@ UserSchema.statics.createPasswordHash = async function (password) {
     return passwordHash;
   } catch (err) {
     console.log("[ERROR] User#createPasswordHash: ", err);
-    // throw new Error(`[ERROR] User#createPasswordHash: ${err}`);
     throw err;
   }
 };
 // fetch latest versin of the current model object from db
 UserSchema.methods.reload = async function () {
   try {
-    // return this.model("User").findById(this.id);
     const reloadedUser = await User.findById(this.id);
-    console.log("reloadedUser: ", reloadedUser);
-    console.log("this: ", this);
     return reloadedUser;
   } catch (err) {
     console.log("[ERROR] User#reload: ", err);
-    // throw new Error(`[ERROR] User#reload: ${err}`);
     throw err;
   }
 };

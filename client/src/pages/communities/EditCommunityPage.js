@@ -78,33 +78,14 @@ export default function EditCommunityPage(props) {
           if (el._id === id) {
             return { ...el, ...data };
           }
-
           return el;
         });
 
         setCommunities(newList);
-        // notifySuccess({
-        //   title: "Community updated",
-        //   message: `The Community '${community?.name}' was successfully updated`,
-        // });
-
         handleFormSuccess({ objectName: community?.name });
-
         history.push("/communities");
       })
       .catch((err) => {
-        // console.log(
-        //   `Couldn't update the community with the id '${id}' - something went wrong: `,
-        //   err
-        // );
-        // notifyError({
-        //   title: "Community update failed",
-        //   message: `The Community '${
-        //     community?.name ?? id
-        //   }' couldn't be updated - an error occured: ${err}`,
-        //   toastCntId: "modalNotificationCnt",
-        // });
-
         handleFormError({ errorObject: err, objectId: id });
       });
   };

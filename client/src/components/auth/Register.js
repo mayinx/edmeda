@@ -5,7 +5,6 @@ import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 import { useForm, FormProvider } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
-// import "./Form.css";
 
 import FormConfig from "./FormConfig";
 import InputFormGroup from "../../components/form/groups/InputFormGroup";
@@ -14,7 +13,7 @@ import useFormResultHandler from "../form/useFormResultHandler";
 
 export default function Register(props) {
   const { notifyError, notifySuccess } = useNotify();
-  // const { communities, setCommunities } = useContext(CommunitiesContext);
+
   const { currentUserData, setCurrentUserData } = useContext(
     CurrentUserContext
   );
@@ -36,7 +35,6 @@ export default function Register(props) {
   });
 
   const onSubmit = async (formData) => {
-    console.log("[REGISTER] Submit!");
     try {
       await axios.post("/api/users/register", formData);
 
@@ -59,18 +57,6 @@ export default function Register(props) {
       });
       history.push("/communities");
     } catch (err) {
-      // err.response.data.msg && setError(err.response.data.msg);
-      // const errMsg = err?.response?.data?.msg ?? err;
-      // console.log(
-      //   "Couldn't register user - something went wrong: ",
-      //   err?.response?.data || err
-      // );
-      // notifyError({
-      //   title: "Registration failed",
-      //   message: `Couldn't register user: ${errMsg}`,
-      //   toastCntId: "modalNotificationCnt",
-      // });
-
       handleFormError({
         errorObject: err,
         title: "Registration failed",

@@ -1,4 +1,4 @@
-// TODO: Anwer SO question by showing that it's quite easy to deliver toasts from a custom hook (react-toastify) - no ToastProvider needed
+// TODO: Answer SO question by showing that it's quite easy to deliver toasts from a custom hook (react-toastify) - no ToastProvider needed
 // SO: https://stackoverflow.com/questions/62820758/how-can-i-use-react-toastify-from-hook
 //
 // Prerequisites:

@@ -9,8 +9,6 @@ export default function UserAvatar(props) {
     wrapper = true,
   } = props;
 
-  console.log("AVATAR - user: ", user);
-
   let avatarUrl = user?.picture;
   if (!avatarUrl) {
     try {
@@ -23,7 +21,6 @@ export default function UserAvatar(props) {
     }
   }
 
-  console.log("AVATAR - user: ", user);
   return (
     <>
       {wrapper ? (
@@ -47,28 +44,4 @@ export default function UserAvatar(props) {
       )}
     </>
   );
-
-  //   return (
-  // <>
-  // {wrapper ? (
-  // <p className={`User__ProfilePic-wrapper ${avatarWrapperClassName ?? null}`}>
-  //   <img
-  //     src={`${avatarUrl}`}
-  //     className={`User__ProfilePic ${avatarClassName ?? null}`}
-  //     alt=""
-  //   />
-  // </p>
-  //   ) : (
-  // <p className={`User__ProfilePic-wrapper ${avatarWrapperClassName ?? null}`}>
-  //   <img
-  //     src={`${avatarUrl}`}
-  //     className={`User__ProfilePic ${avatarClassName ?? null}`}
-  //     alt=""
-  //   />
-  // </p>
-  //   )
-  // }
-
-  // );
-  // </>
 }

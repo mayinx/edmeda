@@ -159,17 +159,18 @@
 }
 
 .App__header .AppNav .NavItem--Brand {
-  /* padding: 0.3rem; */
   background-color: transparent;
-  color: whitesmoke;
+  /* color: whitesmoke;
   border: 1px solid whitesmoke;
   border-radius: 8px;
   letter-spacing: 3px;
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 1rem; */
   filter: drop-shadow(2px 4px 6px rgb(247, 247, 247));
-  box-shadow: rgb(50 50 93 / 25%) 0px 13px 27px -5px,
-    rgb(0 0 0 / 30%) 0px 8px 16px -8px;
+}
+.App__header .AppNav .NavItem--Brand .BrandLogo {
+  height: 30px;
+  width: auto;
 }
 
 .App__header .AppNav .NavItem--Brand:hover {

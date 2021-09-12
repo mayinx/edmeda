@@ -1,7 +1,5 @@
 import "./UserListItem.css";
 import UserFallbackProfilePic from "../../assets/user/fb_avatars/fbAvatar.png";
-// import FemaleAvatar from "../../assets/user_default_avatars/Teacher_female_fbAvatar1.png";
-import CommunitiesContext from "../../contexts/CommunitiesContext";
 
 import { useContext } from "react";
 import { useHistory } from "react-router";
@@ -9,9 +7,9 @@ import { Link } from "react-router-dom";
 import { FaRegEdit, FaRegTrashAlt, FaUserMinus } from "react-icons/fa";
 import axios from "axios";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
-import { confirmAlert } from "react-confirm-alert"; // Import
+import { confirmAlert } from "react-confirm-alert";
 // TODO Check - move to App.js?:
-import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
+import "react-confirm-alert/src/react-confirm-alert.css";
 import "../../components/notifications/ReactConfirmAlertOverrides.css";
 
 import useNotify from "../../components/notifications/useNotify";
@@ -34,14 +32,11 @@ export default function UserListItem(props) {
     }
   }
 
-  // const { communities, setCommunities } = useContext(CommunitiesContext);
-
   const { currentUserData } = useContext(CurrentUserContext);
 
   const history = useHistory();
   const { notifySuccess, notifyError, notifyInfo } = useNotify();
 
-  // console.log("user: ", user);
   const confirmResourceRemoval = (e, memberName, memberId, communityId) => {
     e.stopPropagation();
 
@@ -74,7 +69,6 @@ export default function UserListItem(props) {
         },
       })
       .then((res) => {
-        console.log("res: ", res);
         setCommunityMembers(
           communityMembers.filter((resource) => {
             return resource._id !== memberId;

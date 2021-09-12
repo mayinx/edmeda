@@ -4,17 +4,15 @@ import "./Form.css";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
-// import CommunitiesContext from "../../contexts/CommunitiesContext";
+
 import FormConfig from "../../domain/User/FormConfig";
 import InputFormGroup from "../../components/form/groups/InputFormGroup";
 import SelectInputFormGroup from "../../components/form/groups/SelectInputFormGroup";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-// import ReactLoading from "react-loading";
-
 import useNotify from "../../components/notifications/useNotify";
 import useFormResultHandler from "../../components/form/useFormResultHandler";
-// import { UserList as CommunityMembersList } from "../../domain/User/UserList";
+
 import { default as CommunityMembersList } from "../../domain/User/UserList";
 
 import "./CommunityMembersPage.css";
@@ -25,13 +23,10 @@ import _ from "lodash";
 import { FaRegTimesCircle } from "react-icons/fa";
 
 export default function CommunityMembersPage(props) {
-  // const { communities, setCommunities } = useContext(CommunitiesContext);
-  // const history = useHistory();
   const { notifyError } = useNotify();
   const { id } = useParams();
   const [community, setCommunity] = useState({});
   const [communityMembers, setCommunityMembers] = useState([]);
-  // const [isLoading, setIsLoading] = useState(undefined);
 
   const formMethods = useForm();
   const {
@@ -65,7 +60,6 @@ export default function CommunityMembersPage(props) {
         },
       })
       .then((res) => {
-        console.log("res: ", res);
         setCommunity(res.data.community);
         setCommunityMembers(res.data.members);
       })
@@ -80,7 +74,7 @@ export default function CommunityMembersPage(props) {
       });
   }, []);
 
-  // Form related effeects
+  // Form related effects
   useEffect(() => {
     // if (community) {
     reset({ type: "", fullName: "", email: "" });
@@ -88,7 +82,6 @@ export default function CommunityMembersPage(props) {
   }, [community, communityMembers]);
 
   const onSubmit = (data) => {
-    console.log("onSubmit");
     axios
       .post(`/api/communities/${id}/members`, data, {
         headers: {
@@ -119,34 +112,17 @@ export default function CommunityMembersPage(props) {
           } was sucessfully registered and added as a new Community-member`,
           toastCntId: "modalNotificationCnt",
         });
-
-        // history.push("/communities");
       })
       .catch((err) => {
-        // console.log(
-        //   `Couldn't update the community with the id '${id}' - something went wrong: `,
-        //   err
-        // );
-        // notifyError({
-        //   title: "Community update failed",
-        //   message: `The Community '${
-        //     community?.name ?? id
-        //   }' couldn't be updated - an error occured: ${err}`,
-        //   toastCntId: "modalNotificationCnt",
-        // });
-
         handleFormError({ errorObject: err, objectId: id });
       });
   };
-  // CommunityMembersModalPage;
-
-  // onMemberRemoval;
 
   return (
     <div className="ModalPage__bodyInner CommunityMembersModalPage">
       <CommunityMembersList
         communityMembers={communityMembers}
-        // TODOD: Handle events/actions here and pass down handlers only
+        // TODO: Handle events/actions here and pass down handlers only
         setCommunityMembers={setCommunityMembers}
         community={community}
       />

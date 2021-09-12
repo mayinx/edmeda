@@ -6,7 +6,6 @@ export default function TextInputFormGroup({
   ...otherProps
 }) {
   const { register, ErrorMessage, errors } = useFormContext(); // retrieve all hook methods
-  // const attributes = { ...otherProps, ...formConfig };
   const attributes = { ...formConfig, ...otherProps };
   const {
     id,

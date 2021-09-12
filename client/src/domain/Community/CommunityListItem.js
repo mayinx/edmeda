@@ -1,44 +1,15 @@
 import "./CommunityListItem.css";
-// import CommunityFallbackProfilePic from "../../assets/happy-students.jpg";
-// import CommunityFallbackProfilePic from "../../assets/community/fb_profile_pics/shutterstock_1856929843_mod.jpg";
 import SchoolCommunityFbProfilePic from "../../assets/community/fb_profile_pics/shutterstock_1856929843_mod.jpg";
-// import ClassCommunityFbProfilePic from "../../assets/community/fb_profile_pics/shutterstock_1856929843_mod.jpg";
-
-// import OtherCommunityFbProfilePic1 from "../../assets/community/fb_profile_pics/shutterstock_1856929843.jpg";
-// import OtherCommunityFbProfilePic2 from "../../assets/community/fb_profile_pics/shutterstock_1850173759.jpg";
-// import OtherCommunityFbProfilePic3 from "../../assets/community/fb_profile_pics/shutterstock_1764969362.jpg";
-// import OtherCommunityFbProfilePic4 from "../../assets/community/fb_profile_pics/shutterstock_220343119.jpg";
-// import OtherCommunityFbProfilePic5 from "../../assets/community/fb_profile_pics/shutterstock_1634697031.jpg";
-
-// School Communiy:
-// Class Communiy:
-// - shutterstock_220343119_mod.jpg;
-// - shutterstock_220343119.jpg;
-// Course Communiy:
-// - shutterstock_1634697031_mod.jpg;
-// - shutterstock_1634697031.jpg;
-// Custom Communiy:
-// - shutterstock_220343119_mod.jpg;
-// - shutterstock_220343119.jpg;
-
-// shutterstock_1764969362_mod.jpg;
-// shutterstock_1764969362.jpg;
-// shutterstock_1850173759_mod.jpg;
-// shutterstock_1850173759.jpg;
-// shutterstock_1856929843_mod - v2.jpg;
-// shutterstock_1856929843_mod.jpg;
-// shutterstock_1856929843.jpg;
 import _ from "lodash";
 import CommunitiesContext from "../../contexts/CommunitiesContext";
-
 import { useContext } from "react";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import { FaRegEdit, FaRegTrashAlt, FaUsersCog } from "react-icons/fa";
 import axios from "axios";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
-import { confirmAlert } from "react-confirm-alert"; // Import
-import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 import "../../components/notifications/ReactConfirmAlertOverrides.css";
 
 import useNotify from "../../components/notifications/useNotify";
@@ -51,7 +22,6 @@ export default function Community({ community }) {
   const history = useHistory();
   const { notifySuccess, notifyError } = useNotify();
 
-  // console.log("community: ", community);
   const cofirmResourceRemoval = (e, resourceName, id) => {
     e.stopPropagation();
 
@@ -84,7 +54,6 @@ export default function Community({ community }) {
         },
       })
       .then((res) => {
-        console.log("res: ", res);
         setCommunities(
           communities.filter((resource) => {
             return resource._id !== id;
@@ -128,7 +97,6 @@ export default function Community({ community }) {
     e.preventDefault();
   };
 
-  // TODO: handle this like user avatars - but for now...
   let communityTypeTagColor = null;
   let communityTypeTagCaption = community.type;
 

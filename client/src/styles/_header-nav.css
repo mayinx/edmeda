@@ -1,24 +1,16 @@
 header .BrandLogo {
-  /* margin-right: auto; */
-  width: 125px;
+  /* width: 125px;
   height: 125px;
-
   border: 3px solid #3dc5f1;
-  /* border: 3px solid #fff; */
-  /* border: 3px solid #dae8e6; */
   border: 2px solid aquamarine;
   border-radius: 100%;
   background: #3dc5f1;
-  /* background: aquamarine; */
-  /* padding: 2px; */
-
   position: absolute;
   top: 15px;
   left: 20px;
-  /* right: 39px; */
   z-index: 30;
-
-  box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%);
+  box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%); */
+  /* box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%); */
 }
 
 .App__nav {

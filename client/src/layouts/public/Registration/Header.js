@@ -1,23 +1,10 @@
 import { Link } from "react-router-dom";
 import useAuthActions from "../../../components/auth/useAuthActions";
 
-// import BrandLogo from "../../assets/2973980108_ed69085414_o.jpg";
-import { BsGrid3X3Gap } from "react-icons/bs";
-import { FaPlus } from "react-icons/fa";
-import { FaUserAlt } from "react-icons/fa";
-import { ImRocket } from "react-icons/im";
-
-import AuthOptions from "../../../components/auth/AuthOptions";
-
-// import Modal from "../modal/Modal.js";
-// import NewCommunityPage from "../../pages/communities/NewCommunityPage.js";
-// import EditCommunityPage from "../../pages/communities/EditCommunityPage.js";
+import BrandLogo from "../../../assets/edmeda-logo-transparent_170x40.png";
 
 import DropdownMenu from "../../../components/misc/DropdownMenu";
 import "./Header.css";
-
-// const ADD_ACTION_FORM_ID = "newCommunity";
-// const UPDATE_ACTION_FORM_ID = "editCommunity";
 
 export default function Header() {
   const { userLoggedIn, register, login, logout } = useAuthActions();
@@ -26,10 +13,13 @@ export default function Header() {
     <header className="App__header RegistrationHeader">
       <nav className="AppNav">
         <div className="AppNav__Left Brand">
-          {/* <img id="app_logo" src={BrandLogo} className="BrandLogo" alt=""></img> */}
           <Link className="NavItem NavItem--Brand" to="/">
-            {/* <BsGrid3X3Gap className="NavItem__Icon appNavIcon" /> */}
-            Edmeda
+            <img
+              id="app_logo"
+              src={BrandLogo}
+              className="BrandLogo"
+              alt="Edmeda Logo"
+            />
           </Link>
         </div>
 

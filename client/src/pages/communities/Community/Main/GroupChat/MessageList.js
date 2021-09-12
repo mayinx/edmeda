@@ -1,18 +1,11 @@
 import "./MessageList.css";
-// import Avatar, { genConfig } from "react-nice-avatar";
-
-// import CollectionEmptyPic from "../../../../../assets/tumbleweed-rolls-in-the-desert.jpg";
 import UserAvatar from "../../../../../domain/User/UserAvatar";
 import useNotify from "../../../../../components/notifications/useNotify";
-// import CollectionEmptyPic from "../../../../../assets/tumbleweed-and-cactus.jpg";
 
 export default function MessageList({ messages }) {
   const { notifyInfo } = useNotify();
   function renderChatMessages() {
     if (Array.isArray(messages) && messages.length) {
-      // return resources.map((community) => {
-      //   return <CommunityListItem community={community} key={community._id} />;
-      // });
       const renderedMessages = messages.map((message) => {
         return (
           <div

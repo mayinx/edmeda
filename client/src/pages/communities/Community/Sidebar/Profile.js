@@ -1,7 +1,4 @@
-// import CommunityFallbackProfilePic from "../../../../assets/happy-students.jpg";
-
 import SchoolCommunityFbProfilePic from "../../../../assets/community/fb_profile_pics/shutterstock_1856929843_mod.jpg";
-
 import "./Profile.css";
 import { FaUserAlt } from "react-icons/fa";
 import { FaDotCircle } from "react-icons/fa";

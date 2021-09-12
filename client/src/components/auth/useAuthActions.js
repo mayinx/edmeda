@@ -13,8 +13,6 @@ export default function useAuthActions() {
   const register = (e) => history.push("/register");
   const login = (e) => history.push("/login");
   const logout = (e) => {
-    console.log("currentUserData", currentUserData);
-    // TODO:Swqap to first name
     const userFirstName =
       currentUserData?.user?.firstName ?? currentUserData?.user?.fullName;
     setCurrentUserData({

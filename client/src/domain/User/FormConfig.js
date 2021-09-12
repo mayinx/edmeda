@@ -7,9 +7,6 @@ class FormConfig {
       valdiationMsgFullNameRequired:
         "Please provide your full name (between 3 and 60 characters long)",
     };
-    // this.newShared = {
-    //   valdiationMsgEmailRequired: "Please provide an Email-Address",
-    // };
     this.new = {
       type: {
         label: "User Type",

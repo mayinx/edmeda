@@ -26,8 +26,6 @@ export default function GroupChat(props) {
   const { currentGroup } = props;
   const groupId = currentGroup._id;
 
-  console.log("groupId", groupId);
-
   useEffect(() => {
     if (!groupId) return;
 
@@ -42,10 +40,6 @@ export default function GroupChat(props) {
     // fired by the Socket instance upon
     // connection AND reconnection.
     newSocket.on("connect", () => {
-      console.log("[CLIENT] ON CONNECT!!");
-      console.log("--- connecteed to socket: ", newSocket.id);
-      console.log("--- attempting to join group: ", groupId);
-
       // JOIN GROUP CHAT
       // TODO: add currentUserID
       if (newSocket && groupId) {
@@ -57,21 +51,10 @@ export default function GroupChat(props) {
       }
     });
 
-    // TODO: Check - can we pass args here to
-    // the server via the socket?
-    // newSocket.emit("getGroupMessages", currentGroup._id);
-
     // On init event fired from server:
     // Load the last 10 messages in the window.
     newSocket.on("init", (messages) => {
-      // let msgReversed = messages.reverse();
-      console.log("[CLIENT] ON INIT");
-      console.log("--- setMessages");
-      console.log("--- messages: ", messages);
-
       setMessages(messages);
-      // TODO: scrollToBottom
-
       scrollToBottom();
     });
 
@@ -83,34 +66,16 @@ export default function GroupChat(props) {
 
     // Update the chat if a new message is broadcasted.
     newSocket.on("push", (msg) => {
-      console.log("[CLIENT] ON PUSH", msg);
-      console.log("--- add new message");
       setMessages((prevMessages) => {
-        // const newMessages = { ...prevMessages, msg };
-        // newMessages[message.id] = message;
-        //
-        // TODO: check!
-        // [...prevResources, ...(res.data.docs || [])];
         return [...prevMessages, msg];
       });
-
-      // newSocket.on("disconnecting", function () {
-      //   console.log("disconnecting.. ", newSocket.id);
-      // });
-
-      // TODO:
-      // scrollToBottom
-      // window.scrollTo(0, document.body.scrollHeight);
     });
-    // return () => newSocket.close();
     return () => {
       if (newSocket) {
         newSocket.emit("leave", { groupId: groupId, userId: null });
-
         newSocket.disconnect();
       }
     };
-    // }, [setSocket]);
   }, [groupId]);
 
   useEffect(() => {
@@ -119,8 +84,6 @@ export default function GroupChat(props) {
 
   return (
     <section className="GroupChat">
-      {/* <h3>Group Chat #{currentGroup.name}</h3> */}
-
       <section className="GroupChat__Hero">
         <div className="heading">
           <h2 className="title">{currentGroup.name}: Group Chat</h2>

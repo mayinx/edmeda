@@ -6,9 +6,6 @@ const _ = require("lodash");
 
 exports.index = function (req, res) {
   let query = {};
-
-  // console.log("req.currentUser.communities: ", req.currentUser.communities);
-  // let query = {userId};
   Community.find({ _id: { $in: req.currentUser.communities } })
     .find(query)
     .populate("creator")
@@ -22,12 +19,8 @@ exports.index = function (req, res) {
     });
 };
 exports.create = async function (req, res) {
-  console.log("COMMUNTIES_CONTROLLER#CREATE");
-  console.log("--- req.body: ", req.body);
   try {
-    // let resource = null;
     let community = null;
-
     const { type = Community.TYPES.CLASS, name } = req.body;
     const fbProfilePicFileName = `${type}_${_.sample(
       Community.DEFAULT_PROFILE_PICS
@@ -40,7 +33,6 @@ exports.create = async function (req, res) {
         fbProfilePicFileName,
       },
     };
-    console.log("--- attributes: ", attributes);
 
     const existingCommunity = await Community.findOne({
       name,
@@ -72,9 +64,6 @@ exports.find = function (req, res) {
   const { id } = req.params;
 
   Community.findById(id)
-    // TODO: Ask Namir: How to conditionally populate here?
-    // (to avoid implementig different api-endpoints for an
-    // popualted and unpopulated version)
     .populate("groups")
     .populate("creator")
     .then((community) => {
@@ -293,8 +282,7 @@ exports.addMember = async function (req, res) {
     } else if (e.name === "ValidationError") {
       res.status(400).json(e);
     } else {
-      console.log("ERR CATCHED IN COM CTRL");
-      console.log(e);
+      console.log("ERR CATCHED IN COM CTRL: ", e);
 
       res.status(500).json({
         error: `Something went wrong, please try again later: ${e}`,

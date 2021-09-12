@@ -19,11 +19,6 @@ export default function CommunityLayout() {
   );
 
   useEffect(() => {
-    console.log(
-      "[CLIENT > CommunityLayout > currentUserData]: ",
-      currentUserData
-    );
-
     axios
       .get(`/api/communities/${params.id}`, {
         headers: {

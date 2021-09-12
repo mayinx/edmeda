@@ -2,11 +2,9 @@ import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
-// import ErrorNotice from "../../components/notifications/ErrorNotice";
 
 import { useForm, FormProvider } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
-// import "./Form.css";
 
 import FormConfig from "./FormConfig";
 import InputFormGroup from "../../components/form/groups/InputFormGroup";
@@ -16,7 +14,6 @@ import useNotify from "../notifications/useNotify";
 export default function Login(props) {
   const { notifyError, notifySuccess } = useNotify();
 
-  // notify("Couldn't login user");
   const { setCurrentUserData } = useContext(CurrentUserContext);
   const history = useHistory();
 
@@ -28,21 +25,13 @@ export default function Login(props) {
   } = formMethods;
 
   const onSubmit = async (formData) => {
-    console.log("[LOGIN] Submit!");
     // e.preventDefault();
     try {
-      // const formData = { email, password };
-      console.log("--- Attempting to log in user ", formData);
       const loginResponse = await axios.post("/api/users/login", formData);
-
       const userFirstName =
         loginResponse?.data?.user?.firstName ??
         loginResponse?.data?.user?.fullName;
 
-      console.log(
-        "--- Setting currentUserData and localStorage from loginResponse: ",
-        loginResponse
-      );
       setCurrentUserData({
         token: loginResponse.data.token,
         user: loginResponse.data.user,

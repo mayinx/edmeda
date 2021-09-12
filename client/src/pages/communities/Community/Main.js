@@ -1,8 +1,6 @@
 import "./Main.css";
-// import { FaRegCaretSquareRight } from "react-icons/fa";
 import { FaCaretSquareRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
-
 import GroupChat from "./Main/GroupChat";
 
 export default function Main(props) {

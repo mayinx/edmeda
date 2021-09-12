@@ -59,9 +59,6 @@ export default function useFormResultHandler(props) {
     const serverErrorsObj = errorObject?.response?.data;
     if (serverErrorsObj?.errors) {
       Object.entries(serverErrorsObj.errors).forEach(([errorField, error]) => {
-        console.log("errorField: ", errorField);
-        console.log("error: ", error);
-        console.log("error.message: ", error.message);
         let errMsg = null;
         if (error) {
           errMsg = _.isString(error) ? error : error?.message;
@@ -72,7 +69,7 @@ export default function useFormResultHandler(props) {
         });
       });
     } else {
-      // TODO: logg that in an error log and notify via e-mail!
+      // TODO: log that in an error log and notify via e-mail!
       console.log(
         `Couldn't ${crudAction} '${modelName}' - something went wrong:\nError: ${errorObject}\nobjectId: ${objectId}`
       );

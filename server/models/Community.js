@@ -10,7 +10,7 @@ const TYPES = {
   GRADE: "Grade",
   COURSE: "Course",
   TENANT: "Tenant", // i.e. the whole school
-  CUSTOM: "Custom", // i.e. the whole school
+  CUSTOM: "Custom",
 };
 
 const DEFAULT_PROFILE_PICS = [
@@ -41,18 +41,18 @@ const communitiesSchema = new Schema(
     creator: {
       type: Schema.Types.ObjectId,
       ref: "User",
-      required: true, // TODO: Conditionally require
+      required: true,
     },
     members: [
       {
         type: Schema.Types.ObjectId,
         ref: "User",
-        required: false, // TODO: Conditionally require
+        required: false,
       },
     ],
     grade: {
       type: Number,
-      required: false, // Conditonally require that
+      required: false,
     },
     scope: {
       type: String,
@@ -225,10 +225,6 @@ communitiesSchema.methods.defaultGroups = function () {
 };
 communitiesSchema.methods.performAfterCreationChores = async function () {
   try {
-    console.log("this: ", this);
-    // TODO: What's the instance method version of this ?
-    // i.e. something like 'req.currentUser.update(...)' - which doesn't seem to work here?
-    // EDIT: Check => 'this.populate('creator').creator.communities.push(this)';
     const user = await User.findOneAndUpdate(
       { _id: this.creator },
       { $push: { communities: this } },
@@ -237,14 +233,8 @@ communitiesSchema.methods.performAfterCreationChores = async function () {
 
     const groups = await Group.create(this.defaultGroups());
 
-    console.log("yo - groups: ", groups);
-
-    // TODO: What's the instance method version of this ?
-    // i.e. something like 'community.update(...)' - which doesn't seem to work here?
-    // TODO: Check => this.groups.push(groups) && this.members.push(this.creator);
     const updatedCommunity = await Community.findOneAndUpdate(
       { _id: this._id },
-      // { $push: { groups: groups } },
       { $push: { groups: groups, members: this.creator } },
       { new: true }
     ).populate("creator");
@@ -252,7 +242,6 @@ communitiesSchema.methods.performAfterCreationChores = async function () {
     return updatedCommunity;
   } catch (err) {
     console.log("[ERROR] Community#performAfterCreationChores: ", err);
-    // throw new Error(`[ERROR] Community#performAfterCreationChores: ${err}`);
     throw err;
   }
 };
@@ -285,7 +274,6 @@ communitiesSchema.methods.addMember = async function (newMember) {
     return { community: updatedCommunity ?? this, member: newMember };
   } catch (err) {
     console.log("[ERROR] Community#addMember: ", err);
-    // throw new Error(`[ERROR] Community#addMember: ${err}`);
     throw err;
   }
 };
@@ -304,11 +292,6 @@ communitiesSchema.methods.removeMember = async function (
         "Users can't be removed from the school community. To remove a user from the main school community, you have to delete the user account for good"
       );
     }
-    console.log("Not school community - next >");
-
-    console.log("creator._id: ", this.creator);
-
-    console.log("member._id: ", member._id);
 
     if (this.creator._id.equals(member._id)) {
       throw new Error(
@@ -316,14 +299,6 @@ communitiesSchema.methods.removeMember = async function (
       );
     }
 
-    console.log("actonPerformer._id: ", actonPerformer._id);
-    console.log("member._id: ", member._id);
-    console.log(
-      "member._id === actonPerformer._id: ",
-      member._id === actonPerformer._id
-    );
-
-    console.log("creator and member are not identical - next >");
     // TODO: later: Distinct between class+ course communites (no self removal possible,
     // at least not for students) and free / custom communities (self removal possible)
     //- and between user types (e.g. teacher's ca remove theselves from any community
@@ -334,18 +309,6 @@ communitiesSchema.methods.removeMember = async function (
       );
     }
 
-    console.log("actonPerformer and member are not identical - next >");
-
-    console.log("--- member: ", member);
-    console.log(
-      "--- member.communities.includes(this._id): ",
-      member.communities.includes(this._id)
-    );
-    console.log(
-      "--- this.members.includes(member._id): ",
-      this.members.includes(member._id)
-    );
-
     if (member.communities.includes(this._id)) {
       member = await User.findOneAndUpdate(
         { _id: member._id },
@@ -353,9 +316,6 @@ communitiesSchema.methods.removeMember = async function (
         { new: true }
       );
     }
-
-    console.log("this: ", this);
-    console.log("next! ");
 
     if (this.members.includes(member._id)) {
       updatedCommunity = await Community.findOneAndUpdate(
@@ -368,7 +328,6 @@ communitiesSchema.methods.removeMember = async function (
     return { community: updatedCommunity ?? this, member };
   } catch (err) {
     console.log("[ERROR] Community#addMember: ", err);
-    // throw new Error(`[ERROR] Community#addMember: ${err}`);
     throw err;
   }
 };

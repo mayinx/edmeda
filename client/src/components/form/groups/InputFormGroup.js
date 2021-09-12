@@ -2,7 +2,6 @@ import { useFormContext } from "react-hook-form";
 
 export default function InputFormGroup({ name, formConfig, ...otherProps }) {
   const { register, ErrorMessage, errors } = useFormContext(); // retrieve all hook methods
-  // const attributes = { ...otherProps, ...formConfig };
   const attributes = { ...formConfig, ...otherProps };
   const {
     type,

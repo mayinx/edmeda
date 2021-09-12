@@ -1,22 +1,12 @@
 import { Link } from "react-router-dom";
 import useAuthActions from "../../components/auth/useAuthActions";
-// import BrandLogo from "../../assets/2973980108_ed69085414_o.jpg";
+import BrandLogo from "../../assets/edmeda-logo-transparent_170x40.png";
 import { BsGrid3X3Gap } from "react-icons/bs";
 import { FaPlus } from "react-icons/fa";
-// import { FaUserAlt } from "react-icons/fa";
-
-// import AuthOptions from "../auth/AuthOptions";
-
-// import Modal from "../modal/Modal.js";
-// import NewCommunityPage from "../../pages/communities/NewCommunityPage.js";
-// import EditCommunityPage from "../../pages/communities/EditCommunityPage.js";
-
 import DropdownMenu from "../../components/misc/DropdownMenu";
 import UserAvatar from "../../domain/User/UserAvatar";
 import useNotify from "../notifications/useNotify";
 import "./AppHeader.css";
-// const ADD_ACTION_FORM_ID = "newCommunity";
-// const UPDATE_ACTION_FORM_ID = "editCommunity";
 
 export default function AppHeader() {
   const { userLoggedIn, logout, currentUserData } = useAuthActions();
@@ -42,8 +32,6 @@ export default function AppHeader() {
     <header className="App__header">
       <nav className="AppNav">
         <div className="AppNav__Left">
-          {/* <img id="app_logo" src={BrandLogo} className="BrandLogo" alt=""></img> */}
-
           <Link
             className="NavItem NavItem--BtnIconOnly"
             to="#"
@@ -61,7 +49,12 @@ export default function AppHeader() {
 
         <div className="AppNav__Center Brand">
           <Link className="NavItem NavItem--Brand" to="/communities">
-            Edmeda
+            <img
+              id="app_logo"
+              src={BrandLogo}
+              className="BrandLogo"
+              alt="Edmeda Logo"
+            />
           </Link>
         </div>
 

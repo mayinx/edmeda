@@ -19,13 +19,15 @@ Edmeda is geared towards usability, so that all main tasks can be accomplished w
 
 ## Awesome! I wanna use it for my School!
 
-If you are interested in utilizing Edmeda for your School, just write me an [E-Mail](mailto:christian.daum@protonmail.com?subject=[Edmeda]) detailing your needs - I'm happy to set Edmeda up for your School as a chance to test Edmeda "in the wild".   
+If you are interested in utilizing Edmeda for your School, just drop me an [E-Mail](mailto:christian.daum@protonmail.com?subject=[Edmeda]) detailing your needs - I'm happy to set Edmeda up for your School as a chance to test Edmeda "in the wild".   
 
 ## Technology Key Facts 
 
-- Pw-proteced MERN-Stack Web Application, Hosted on Heroku
-- React-frontend & Express/Node.js-Backend encapsulated inside the same project 
-- DB-layer based on MongoDB (managed via MongoDB Atlas) 
-- User Registration & User Authorization via JWT/Bycryptjs
-- Realtime Chats via WebSockets/socket.io
+- Password-proteced MERN-Stack Web Application, deployed on Heroku (https://edmeda.herokuapp.com/)     
+- React-frontend & Express/Node.js-Backend (front- & backend encapsulated inside the same project) 
+- DB-layer based on MongoDB (managed via MongoDB Atlas), ODM with Mongoose 
+- User Registration & User Authentication with JWT/Bycryptjs
+- Realtime Group-Chats via WebSockets/Socket.io
+- Package Management with npm
+- Used React-packages: React Hook Form, React-Responsive, Axios, React-Toastify, React Icons, Gender Detection, etc. ...
 

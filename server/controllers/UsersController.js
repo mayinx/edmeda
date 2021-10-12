@@ -40,23 +40,23 @@ exports.register = async (req, res) => {
       fullName,
     });
 
-    let schoolCommunity = await Community.findOne({
-      type: Community.TYPES.TENANT,
-    });
-    if (!schoolCommunity) {
-      schoolCommunity = await Community.create({
-        name: "School Community",
-        type: Community.TYPES.TENANT,
-        creator: newUser._id,
-      });
-      schoolCommunity = await schoolCommunity.performAfterCreationChores();
-    }
+    // let schoolCommunity = await Community.findOne({
+    //   type: Community.TYPES.TENANT,
+    // });
+    // if (!schoolCommunity) {
+    //   schoolCommunity = await Community.create({
+    //     name: "School Community",
+    //     type: Community.TYPES.TENANT,
+    //     creator: newUser._id,
+    //   });
+    //   schoolCommunity = await schoolCommunity.performAfterCreationChores();
+    // }
 
-    // Either way: add user as member
-    ({
-      community: schoolCommunity,
-      member: newUser,
-    } = await schoolCommunity.addMember(newUser));
+    // // Either way: add user as member
+    // ({
+    //   community: schoolCommunity,
+    //   member: newUser,
+    // } = await schoolCommunity.addMember(newUser));
 
     res.json({
       id: newUser._id,

@@ -268,12 +268,12 @@ exports.addMember = async function (req, res) {
 
     console.log("member AFTER AFTER: ", member);
 
-    const schoolCommunity = await Community.findOne({
-      type: Community.TYPES.TENANT,
-    });
-    if (schoolCommunity && schoolCommunity._id !== community._id) {
-      ({ community, member } = await schoolCommunity.addMember(member));
-    }
+    // const schoolCommunity = await Community.findOne({
+    //   type: Community.TYPES.TENANT,
+    // });
+    // if (schoolCommunity && !schoolCommunity._id.equals(community._id)) {
+    //   ({ community, member } = await schoolCommunity.addMember(member));
+    // }
 
     res.status(201).send(member);
   } catch (e) {

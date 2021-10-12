@@ -2,9 +2,9 @@ const mongoose = require("mongoose");
 const mongoosePaginate = require("mongoose-paginate-v2");
 const { Schema } = mongoose;
 const _ = require("lodash");
+const Community = require("./Community");
 
 const bcryptjs = require("bcryptjs");
-
 const genderDetect = require("gender-detection");
 
 const TYPES = {
@@ -140,13 +140,13 @@ UserSchema.statics.register = async function (userAttributes) {
     //TODO: just for now - use a guessing lib for that
     // const gender = _.sample(User.GENDERS);
     let gender = genderDetect.detect(firstName);
-    if (gender === "unknown") gender = "diverse";
+    if (gender === "unknown" || gender === "unisex") gender = "diverse";
     const fbAvatarFileName = `${type}_${gender}_${_.sample(
       User.DEFAULT_AVATARS
     )}`;
     const passwordHash = await User.createPasswordHash(password);
 
-    const registeredUser = await User.create({
+    let registeredUser = await User.create({
       type,
       email,
       gender,
@@ -157,6 +157,25 @@ UserSchema.statics.register = async function (userAttributes) {
       lastName,
       userName: userName ?? fullName,
     });
+
+    // Create main tenant-/school-community and add new User as member
+    let schoolCommunity = await Community.findOne({
+      type: Community.TYPES.TENANT,
+    });
+    if (!schoolCommunity) {
+      schoolCommunity = await Community.create({
+        name: "School Community",
+        type: Community.TYPES.TENANT,
+        creator: registeredUser._id,
+      });
+      schoolCommunity = await schoolCommunity.performAfterCreationChores();
+    }
+
+    // Add user as member
+    ({
+      community: schoolCommunity,
+      member: registeredUser,
+    } = await schoolCommunity.addMember(registeredUser));
 
     return registeredUser;
   } catch (err) {

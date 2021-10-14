@@ -3,13 +3,9 @@
 const Community = require("../../models/Community");
 const _ = require("lodash");
 
-function CreateCommunityService() {
-  console.log("CreateCommunityService-Constructor");
-}
+function CreateCommunityService() {}
 
 CreateCommunityService.prototype.run = async function (communityAttributes) {
-  console.log("Running CreateCommunityService-Service");
-
   try {
     let community = null;
     let {
@@ -26,15 +22,16 @@ CreateCommunityService.prototype.run = async function (communityAttributes) {
       name,
     });
     if (existingCommunity) {
-      throw new Error(
-        "A Community with this name already exists - please choose a unique name!"
-      );
-      // return res.status(400).json({
-      //   errors: {
-      //     name:
-      //       "A Community with this name already exists - please choose a unique name!",
-      //   },
-      // });
+      throw {
+        name: "ValidationError",
+        status: 400,
+        code: "COMMUNITY_ALREADY_EXISTS",
+        message: "Community invalid",
+        errors: {
+          name:
+            "A Community with this name already exists - please choose a unique name!",
+        },
+      };
     }
 
     community = await Community.create({

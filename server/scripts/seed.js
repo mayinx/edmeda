@@ -7,8 +7,9 @@ const { MONGO_URI, PORT } = process.env;
 const User = require("../models/User");
 const Community = require("../models/Community");
 const Group = require("../models/Community");
+const Message = require("../models/Message");
 
-const RegisterUserService = require("../services/RegisterUserService");
+const RegisterUserService = require("../services/user/register");
 const CreateCommunityService = require("../services/community/create");
 
 mongoose
@@ -38,16 +39,16 @@ const dropDB = async function () {
     console.log("Dropping the database!");
 
     await User.remove({}, function (err) {
-      console.log("collection removed");
+      console.log("User-collection removed");
     });
     await Community.remove({}, function (err) {
-      console.log("collection removed");
+      console.log("Community-collection removed");
     });
     await Group.remove({}, function (err) {
-      console.log("collection removed");
+      console.log("Group-collection removed");
     });
     await Message.remove({}, function (err) {
-      console.log("collection removed");
+      console.log("Message-collection removed");
     });
 
     console.log("Database dropped!");
@@ -58,7 +59,7 @@ const dropDB = async function () {
 
 const seedDB = async function () {
   try {
-    console.log("Seeding the database!");
+    console.log("--- Seeding the database!");
 
     let communities = [];
 
@@ -74,7 +75,6 @@ const seedDB = async function () {
       email: "chuck@nerdherd.com",
       password: "Chuck99",
     });
-    console.log(tenantOwner);
 
     let classCommunityOne = await new CreateCommunityService().run({
       type: Community.TYPES.CLASS,
@@ -82,7 +82,6 @@ const seedDB = async function () {
       grade: 8,
       creator: tenantOwner._id,
     });
-    console.log(classCommunityOne);
     communities.push(classCommunityOne);
 
     let classCommunityTwo = await new CreateCommunityService().run({
@@ -91,7 +90,6 @@ const seedDB = async function () {
       grade: 9,
       creator: tenantOwner._id,
     });
-    console.log(classCommunityTwo);
     communities.push(classCommunityTwo);
 
     let courseCommunity = await new CreateCommunityService().run({
@@ -100,7 +98,6 @@ const seedDB = async function () {
       grade: 13,
       creator: tenantOwner._id,
     });
-    console.log(courseCommunity);
     communities.push(courseCommunity);
 
     let customCommunity = await new CreateCommunityService().run({
@@ -109,19 +106,17 @@ const seedDB = async function () {
       grade: 11,
       creator: tenantOwner._id,
     });
-    console.log(customCommunity);
     communities.push(customCommunity);
 
     // 2. Create 50 new random Users and add them randomly to the previously created groups
 
-    for (let i = 0; i <= 10; i++) {
+    for (let i = 0; i <= 50; i++) {
       let newUser = await new RegisterUserService().run({
         type: _.sample(User.TYPES),
         fullName: faker.name.findName(),
         email: faker.internet.email(),
         password: "NewUser99",
       });
-      console.log("New user registered! Yay:", newUser);
       await _.sample(communities).addMember(newUser);
     }
 

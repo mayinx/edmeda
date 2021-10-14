@@ -1,20 +1,16 @@
 // RegisterUserService
 // Registers a new user to the app and adds him to the main school/tenant-community, unless he's not already a member
 
-const User = require("../models/User");
-const Community = require("../models/Community");
+const User = require("../../models/User");
+const Community = require("../../models/Community");
 
 const genderDetect = require("gender-detection");
 const bcryptjs = require("bcryptjs");
 const _ = require("lodash");
 
-function RegisterUserService() {
-  console.log("RegisterUser-Service Constructor");
-}
+function RegisterUserService() {}
 
 RegisterUserService.prototype.run = async function (userAttributes) {
-  console.log("Running RegisterUserService-Service");
-
   try {
     const {
       fullName,

@@ -1,6 +1,6 @@
 require("dotenv").config();
 const User = require("../models/User");
-const RegisterUserService = require("../services/RegisterUserService");
+const RegisterUserService = require("../services/user/register");
 const { NotFoundError, InternalError } = require("../errors/AppErrors");
 
 const bcrypt = require("bcryptjs");

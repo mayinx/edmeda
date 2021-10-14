@@ -1,6 +1,7 @@
 const Community = require("../models/Community");
 const Group = require("../models/Group");
 const User = require("../models/User");
+const RegisterUserService = require("../services/RegisterUserService");
 const { NotFoundError, InternalError } = require("../errors/AppErrors");
 const _ = require("lodash");
 
@@ -18,6 +19,7 @@ exports.index = function (req, res) {
       });
     });
 };
+// TODO: Use community-creation service here instead!
 exports.create = async function (req, res) {
   try {
     let community = null;
@@ -47,10 +49,9 @@ exports.create = async function (req, res) {
     }
 
     community = await Community.create(attributes);
+    community = await community.performAfterCreationChores();
 
-    const updatedCommunity = await community.performAfterCreationChores();
-
-    res.status(201).send(updatedCommunity);
+    res.status(201).send(community);
   } catch (error) {
     console.log("--- error", error);
     if (error.name === "ValidationError") {
@@ -68,6 +69,7 @@ exports.find = function (req, res) {
     .populate("creator")
     .then((community) => {
       if (!community) throw new NotFoundError("community", id);
+      console.log("found community: ", community);
       res.send(community);
     })
     .catch((e) => {
@@ -248,7 +250,7 @@ exports.addMember = async function (req, res) {
     if (!member) {
       // TODO: OF COURSE this has to evolve ;-)
       // TODO: Send email with a registration confirmation token / a default random pw or something
-      member = await User.register({
+      member = await new RegisterUserService().run({
         ...memberAttributes,
         ...{ password: "NewUser99" },
       });

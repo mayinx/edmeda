@@ -1,8 +1,6 @@
 require("dotenv").config();
 const User = require("../models/User");
-const Community = require("../models/Community");
-const Group = require("../models/Group");
-const Message = require("../models/Message");
+const RegisterUserService = require("../services/RegisterUserService");
 const { NotFoundError, InternalError } = require("../errors/AppErrors");
 
 const bcrypt = require("bcryptjs");
@@ -33,8 +31,9 @@ exports.register = async (req, res) => {
         .json({ message: "Enter the same password twice for verification." });
     }
 
-    let newUser = await User.register({
+    let newUser = await new RegisterUserService().run({
       type,
+      isOwner: true,
       email,
       password,
       fullName,

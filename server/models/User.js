@@ -2,10 +2,6 @@ const mongoose = require("mongoose");
 const mongoosePaginate = require("mongoose-paginate-v2");
 const { Schema } = mongoose;
 const _ = require("lodash");
-const Community = require("./Community");
-
-const bcryptjs = require("bcryptjs");
-const genderDetect = require("gender-detection");
 
 const TYPES = {
   TEACHER: "Teacher",
@@ -81,6 +77,11 @@ const UserSchema = new Schema(
       trim: true,
       default: false,
     },
+    isOwner: {
+      type: Boolean,
+      trim: true,
+      default: false,
+    },
     registered: {
       type: Boolean,
       trim: true,
@@ -112,88 +113,6 @@ UserSchema.statics.TYPES = TYPES;
 UserSchema.statics.GENDERS = GENDERS;
 UserSchema.statics.DEFAULT_AVATARS = DEFAULT_AVATARS;
 
-UserSchema.statics.register = async function (userAttributes) {
-  try {
-    const { fullName, userName, type, email, password } = userAttributes;
-
-    if (!type || !email || !password || !fullName) {
-      throw new Error("Not all fields have been entered.");
-      // return res.status(400).json({
-      //   message: "Not all fields have been entered.",
-      // });
-    }
-
-    // User alredy registered?
-    if (await User.findOne({ email })) {
-      throw new Error("An account with this email already exists");
-      // return res.status(400).json({
-      //   errors: {
-      //     email: "An account with this email already exists.",
-      //   },
-      // });
-    }
-
-    // TODO: Valdiate type + gender
-    const firstName = fullName.split(" ")[0];
-    const lastName = fullName.replace(`${firstName} `, "");
-
-    //TODO: just for now - use a guessing lib for that
-    // const gender = _.sample(User.GENDERS);
-    let gender = genderDetect.detect(firstName);
-    if (gender === "unknown" || gender === "unisex") gender = "diverse";
-    const fbAvatarFileName = `${type}_${gender}_${_.sample(
-      User.DEFAULT_AVATARS
-    )}`;
-    const passwordHash = await User.createPasswordHash(password);
-
-    let registeredUser = await User.create({
-      type,
-      email,
-      gender,
-      fbAvatarFileName,
-      password: passwordHash,
-      fullName,
-      firstName,
-      lastName,
-      userName: userName ?? fullName,
-    });
-
-    // Create main tenant-/school-community and add new User as member
-    let schoolCommunity = await Community.findOne({
-      type: Community.TYPES.TENANT,
-    });
-    if (!schoolCommunity) {
-      schoolCommunity = await Community.create({
-        name: "School Community",
-        type: Community.TYPES.TENANT,
-        creator: registeredUser._id,
-      });
-      schoolCommunity = await schoolCommunity.performAfterCreationChores();
-    }
-
-    // Add user as member
-    ({
-      community: schoolCommunity,
-      member: registeredUser,
-    } = await schoolCommunity.addMember(registeredUser));
-
-    return registeredUser;
-  } catch (err) {
-    console.log("[ERROR] User#register: ", err);
-    throw err;
-  }
-};
-UserSchema.statics.createPasswordHash = async function (password) {
-  try {
-    const salt = await bcryptjs.genSalt();
-    const passwordHash = await bcryptjs.hash(password, salt);
-
-    return passwordHash;
-  } catch (err) {
-    console.log("[ERROR] User#createPasswordHash: ", err);
-    throw err;
-  }
-};
 // fetch latest versin of the current model object from db
 UserSchema.methods.reload = async function () {
   try {

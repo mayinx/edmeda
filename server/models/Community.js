@@ -223,6 +223,8 @@ communitiesSchema.methods.defaultGroups = function () {
     ];
   }
 };
+// Adds the new community to the creator's communities, creates and assigns default groups
+// to the community and adds the creator as member
 communitiesSchema.methods.performAfterCreationChores = async function () {
   try {
     const user = await User.findOneAndUpdate(
@@ -276,7 +278,11 @@ communitiesSchema.methods.addMember = async function (newMember) {
     let schoolCommunity = await Community.findOne({
       type: Community.TYPES.TENANT,
     }).populate("User");
-    if (schoolCommunity && !schoolCommunity._id.equals(updatedCommunity._id)) {
+    if (
+      schoolCommunity &&
+      updatedCommunity &&
+      !schoolCommunity._id.equals(updatedCommunity._id)
+    ) {
       ({ schoolCommunity, newMember } = await schoolCommunity.addMember(
         newMember
       ));

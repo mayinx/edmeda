@@ -17,6 +17,15 @@ const DEFAULT_AVATARS = [
   "fbAvatar5",
   "fbAvatar6",
 ];
+const CURRENT_USER_ATTRIBUTES = [
+  "id",
+  "type",
+  "gender",
+  "fullName",
+  "userName",
+  "firstName",
+  "fbAvatarFileName",
+];
 
 const UserSchema = new Schema(
   {
@@ -28,6 +37,8 @@ const UserSchema = new Schema(
         message: "Invalid user type",
       },
     },
+    email: { type: String, lowercase: true, unique: true, required: true },
+    password: { type: String, minlength: 5, trim: true, required: true },
     fullName: {
       type: String,
       required: true,
@@ -49,6 +60,7 @@ const UserSchema = new Schema(
       maxlength: 80,
       minlength: 1,
     },
+    userName: { type: String, required: false },
     gender: {
       type: String,
       trim: true,
@@ -64,9 +76,6 @@ const UserSchema = new Schema(
       trim: true,
       required: false,
     },
-    email: { type: String, lowercase: true, unique: true, required: true },
-    password: { type: String, minlength: 5, trim: true, required: true },
-    userName: { type: String, required: false },
     role: {
       type: String,
       trim: true,
@@ -112,6 +121,7 @@ const UserSchema = new Schema(
 UserSchema.statics.TYPES = TYPES;
 UserSchema.statics.GENDERS = GENDERS;
 UserSchema.statics.DEFAULT_AVATARS = DEFAULT_AVATARS;
+UserSchema.statics.CURRENT_USER_ATTRIBUTES = CURRENT_USER_ATTRIBUTES;
 
 // fetch latest versin of the current model object from db
 UserSchema.methods.reload = async function () {

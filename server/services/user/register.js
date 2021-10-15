@@ -8,7 +8,9 @@ const genderDetect = require("gender-detection");
 const bcryptjs = require("bcryptjs");
 const _ = require("lodash");
 
-function RegisterUserService() {}
+function RegisterUserService(confirmPw = false) {
+  this.confirmPw = confirmPw;
+}
 
 RegisterUserService.prototype.run = async function (userAttributes) {
   try {
@@ -18,8 +20,11 @@ RegisterUserService.prototype.run = async function (userAttributes) {
       type,
       email,
       password,
+      passwordConfirmation,
       isOwner,
     } = userAttributes;
+
+    console.log(this.confirmPw);
 
     if (!type || !email || !password || !fullName) {
       throw new Error("Not all fields have been entered.");
@@ -28,9 +33,35 @@ RegisterUserService.prototype.run = async function (userAttributes) {
       // });
     }
 
+    if (this.confirmPw && password !== passwordConfirmation) {
+      throw {
+        name: "ValidationError",
+        status: 400,
+        code: "PASSWORD_MISMATCH",
+        message: "User invalid",
+        errors: {
+          passwordConfirmation:
+            "Enter the same password twice for verification.",
+        },
+      };
+      // throw new Error("Enter the same password twice for verification.");
+      // return res
+      //   .status(400)
+      //   .json({ message: "Enter the same password twice for verification." });
+    }
+
     // User alredy registered?
     if (await User.findOne({ email })) {
-      throw new Error("An account with this email already exists");
+      throw {
+        name: "ValidationError",
+        status: 400,
+        code: "EMAIL_ALREADY_EXISTS",
+        message: "User invalid",
+        errors: {
+          email: "An account with this email already exists.",
+        },
+      };
+      // throw new Error("An account with this email already exists");
       // return res.status(400).json({
       //   errors: {
       //     email: "An account with this email already exists.",
@@ -65,17 +96,17 @@ RegisterUserService.prototype.run = async function (userAttributes) {
       userName: userName ?? fullName,
     });
 
-    let schoolCommunity = null;
-    if (isOwner) {
-      schoolCommunity = await this.createSchoolCommunity(registeredUser);
-    } else {
-      schoolCommunity = await Community.findOne({
-        type: Community.TYPES.TENANT,
-      });
+    let schoolCommunity = await Community.findOne({
+      type: Community.TYPES.TENANT,
+    });
+
+    if (schoolCommunity) {
       ({
         community: schoolCommunity,
         member: registeredUser,
       } = await schoolCommunity.addMember(registeredUser));
+    } else {
+      schoolCommunity = await this.createSchoolCommunity(registeredUser);
     }
 
     return registeredUser;

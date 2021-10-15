@@ -1,4 +1,5 @@
 require("dotenv").config();
+const _ = require("lodash");
 const User = require("../models/User");
 const RegisterUserService = require("../services/user/register");
 const { NotFoundError, InternalError } = require("../errors/AppErrors");
@@ -10,64 +11,23 @@ const jwt = require("jsonwebtoken");
 exports.register = async (req, res) => {
   try {
     let { email, password, passwordConfirmation, fullName } = req.body;
-    const type = "Teacher";
 
-    // validate
-    if (!type || !email || !password || !passwordConfirmation || !fullName) {
-      return res.status(400).json({
-        message: "Not all fields have been entered.",
-      });
-    }
-
-    if (password.length < 6) {
-      return res.status(400).json({
-        message: "The password needs to be at least 6 characters long.",
-      });
-    }
-
-    if (password !== passwordConfirmation) {
-      return res
-        .status(400)
-        .json({ message: "Enter the same password twice for verification." });
-    }
-
-    let newUser = await new RegisterUserService().run({
-      type,
+    let newUser = await new RegisterUserService(true).run({
+      type: "Teacher",
       isOwner: true,
       email,
       password,
+      passwordConfirmation,
       fullName,
     });
 
-    // let schoolCommunity = await Community.findOne({
-    //   type: Community.TYPES.TENANT,
-    // });
-    // if (!schoolCommunity) {
-    //   schoolCommunity = await Community.create({
-    //     name: "School Community",
-    //     type: Community.TYPES.TENANT,
-    //     creator: newUser._id,
-    //   });
-    //   schoolCommunity = await schoolCommunity.performAfterCreationChores();
-    // }
-
-    // // Either way: add user as member
-    // ({
-    //   community: schoolCommunity,
-    //   member: newUser,
-    // } = await schoolCommunity.addMember(newUser));
-
-    res.json({
-      id: newUser._id,
-      type: newUser.type,
-      gender: newUser.gender,
-      fullName: newUser.fullName,
-      userName: newUser.userName,
-      firstName: newUser.firstName,
-      fbAvatarFileName: newUser.fbAvatarFileName,
-    });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.json(_.pick(newUser, User.CURRENT_USER_ATTRIBUTES));
+  } catch (error) {
+    if (error.name === "ValidationError") {
+      res.status(400).json(error);
+    } else {
+      res.status(500).json();
+    }
   }
 };
 
@@ -93,18 +53,7 @@ exports.login = async (req, res) => {
       expiresIn: `${process.env.JWT_EXPIRES_IN}`,
     });
 
-    res.json({
-      token,
-      user: {
-        id: user._id,
-        type: user.type,
-        gender: user.gender,
-        fullName: user.fullName,
-        userName: user.userName,
-        firstName: user.firstName,
-        fbAvatarFileName: user.fbAvatarFileName,
-      },
-    });
+    res.json({ token, user: _.pick(user, User.CURRENT_USER_ATTRIBUTES) });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -136,15 +85,7 @@ exports.validateToken = async (req, res) => {
     return res.json({
       validToken: true,
       token: token,
-      user: {
-        id: user._id,
-        type: user.type,
-        gender: user.gender,
-        fullName: user.fullName,
-        userName: user.userName,
-        firstName: user.firstName,
-        fbAvatarFileName: user.fbAvatarFileName,
-      },
+      user: _.pick(user, User.CURRENT_USER_ATTRIBUTES),
     });
   } catch (err) {
     res.status(500).json({ error: err.message });

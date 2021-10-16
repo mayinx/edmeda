@@ -3,10 +3,6 @@ const mongoosePaginate = require("mongoose-paginate-v2");
 const { Schema } = mongoose;
 const _ = require("lodash");
 
-const bcryptjs = require("bcryptjs");
-
-const genderDetect = require("gender-detection");
-
 const TYPES = {
   TEACHER: "Teacher",
   STUDENT: "Student",
@@ -21,6 +17,15 @@ const DEFAULT_AVATARS = [
   "fbAvatar5",
   "fbAvatar6",
 ];
+const CURRENT_USER_ATTRIBUTES = [
+  "id",
+  "type",
+  "gender",
+  "fullName",
+  "userName",
+  "firstName",
+  "fbAvatarFileName",
+];
 
 const UserSchema = new Schema(
   {
@@ -32,6 +37,8 @@ const UserSchema = new Schema(
         message: "Invalid user type",
       },
     },
+    email: { type: String, lowercase: true, unique: true, required: true },
+    password: { type: String, minlength: 5, trim: true, required: true },
     fullName: {
       type: String,
       required: true,
@@ -53,6 +60,7 @@ const UserSchema = new Schema(
       maxlength: 80,
       minlength: 1,
     },
+    userName: { type: String, required: false },
     gender: {
       type: String,
       trim: true,
@@ -68,15 +76,17 @@ const UserSchema = new Schema(
       trim: true,
       required: false,
     },
-    email: { type: String, lowercase: true, unique: true, required: true },
-    password: { type: String, minlength: 5, trim: true, required: true },
-    userName: { type: String, required: false },
     role: {
       type: String,
       trim: true,
       default: "user",
     },
     isActive: {
+      type: Boolean,
+      trim: true,
+      default: false,
+    },
+    isOwner: {
       type: Boolean,
       trim: true,
       default: false,
@@ -111,70 +121,8 @@ const UserSchema = new Schema(
 UserSchema.statics.TYPES = TYPES;
 UserSchema.statics.GENDERS = GENDERS;
 UserSchema.statics.DEFAULT_AVATARS = DEFAULT_AVATARS;
+UserSchema.statics.CURRENT_USER_ATTRIBUTES = CURRENT_USER_ATTRIBUTES;
 
-UserSchema.statics.register = async function (userAttributes) {
-  try {
-    const { fullName, userName, type, email, password } = userAttributes;
-
-    if (!type || !email || !password || !fullName) {
-      throw new Error("Not all fields have been entered.");
-      // return res.status(400).json({
-      //   message: "Not all fields have been entered.",
-      // });
-    }
-
-    // User alredy registered?
-    if (await User.findOne({ email })) {
-      throw new Error("An account with this email already exists");
-      // return res.status(400).json({
-      //   errors: {
-      //     email: "An account with this email already exists.",
-      //   },
-      // });
-    }
-
-    // TODO: Valdiate type + gender
-    const firstName = fullName.split(" ")[0];
-    const lastName = fullName.replace(`${firstName} `, "");
-
-    //TODO: just for now - use a guessing lib for that
-    // const gender = _.sample(User.GENDERS);
-    let gender = genderDetect.detect(firstName);
-    if (gender === "unknown") gender = "diverse";
-    const fbAvatarFileName = `${type}_${gender}_${_.sample(
-      User.DEFAULT_AVATARS
-    )}`;
-    const passwordHash = await User.createPasswordHash(password);
-
-    const registeredUser = await User.create({
-      type,
-      email,
-      gender,
-      fbAvatarFileName,
-      password: passwordHash,
-      fullName,
-      firstName,
-      lastName,
-      userName: userName ?? fullName,
-    });
-
-    return registeredUser;
-  } catch (err) {
-    console.log("[ERROR] User#register: ", err);
-    throw err;
-  }
-};
-UserSchema.statics.createPasswordHash = async function (password) {
-  try {
-    const salt = await bcryptjs.genSalt();
-    const passwordHash = await bcryptjs.hash(password, salt);
-
-    return passwordHash;
-  } catch (err) {
-    console.log("[ERROR] User#createPasswordHash: ", err);
-    throw err;
-  }
-};
 // fetch latest versin of the current model object from db
 UserSchema.methods.reload = async function () {
   try {

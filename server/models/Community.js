@@ -223,6 +223,8 @@ communitiesSchema.methods.defaultGroups = function () {
     ];
   }
 };
+// Adds the new community to the creator's communities, creates and assigns default groups
+// to the community and adds the creator as member
 communitiesSchema.methods.performAfterCreationChores = async function () {
   try {
     const user = await User.findOneAndUpdate(
@@ -252,6 +254,7 @@ communitiesSchema.methods.addMember = async function (newMember) {
     // i.e. something like 'req.currentUser.update(...)' - which doesn't seem to work here?
     // EDIT: TODO: Check =>  nwMember.communities.push(this) && newMember.save();
     let updatedCommunity = null;
+    let User = mongoose.model("User"); // to avoid circular dependency warnings
 
     if (!newMember.communities.includes(this._id)) {
       newMember = await User.findOneAndUpdate(
@@ -269,6 +272,20 @@ communitiesSchema.methods.addMember = async function (newMember) {
         { $push: { members: newMember } },
         { new: true }
       ).populate("creator");
+    }
+
+    // Add to school community as well if not already present
+    let schoolCommunity = await Community.findOne({
+      type: Community.TYPES.TENANT,
+    }).populate("User");
+    if (
+      schoolCommunity &&
+      updatedCommunity &&
+      !schoolCommunity._id.equals(updatedCommunity._id)
+    ) {
+      ({ schoolCommunity, newMember } = await schoolCommunity.addMember(
+        newMember
+      ));
     }
 
     return { community: updatedCommunity ?? this, member: newMember };
@@ -327,7 +344,7 @@ communitiesSchema.methods.removeMember = async function (
 
     return { community: updatedCommunity ?? this, member };
   } catch (err) {
-    console.log("[ERROR] Community#addMember: ", err);
+    console.log("[ERROR] Community#removeMember: ", err);
     throw err;
   }
 };

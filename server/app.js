@@ -117,14 +117,18 @@ io.on("connection", async (socket) => {
   });
 
   // Listen to connected users for a new message.
+  // TODO: refactor Message creation
   socket.on("newMessage", (msg, args) => {
     try {
       let message = new Message(msg);
+      console.log("--- message", message);
       var ObjectID = require("mongodb").ObjectID;
       const _id = new ObjectID(message.creator);
       message.creator = _id;
+      message.createdAt = new Date();
       const { groupId, userId } = args;
       const roomId = groupId.toString();
+
       message.save(function (err, message) {
         if (err) return console.error(err);
 
@@ -143,7 +147,7 @@ io.on("connection", async (socket) => {
       console.log("--- [error]", "creating message failed:", e);
       socket.emit(
         "error",
-        "[SERVER > ON NEWMESSAGE]: Couldnt perform requested action (creating and returning message)"
+        "[SERVER > ON NEWMESSAGE]: Couldn't perform requested action (creating and returning message)"
       );
     }
   });

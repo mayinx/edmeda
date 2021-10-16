@@ -1,6 +1,8 @@
 const Community = require("../models/Community");
 const Group = require("../models/Group");
 const User = require("../models/User");
+const RegisterUserService = require("../services/user/register");
+const CreateCommunityService = require("../services/community/create");
 const { NotFoundError, InternalError } = require("../errors/AppErrors");
 const _ = require("lodash");
 
@@ -18,43 +20,21 @@ exports.index = function (req, res) {
       });
     });
 };
+// TODO: Use community-creation service here instead!
 exports.create = async function (req, res) {
   try {
-    let community = null;
-    const { type = Community.TYPES.CLASS, name } = req.body;
-    const fbProfilePicFileName = `${type}_${_.sample(
-      Community.DEFAULT_PROFILE_PICS
-    )}`;
-    const attributes = {
-      ...req.body,
-      ...{
-        type: type,
-        creator: req.currentUser._id,
-        fbProfilePicFileName,
-      },
-    };
-
-    const existingCommunity = await Community.findOne({
+    const { type, name, grade } = req.body;
+    let community = await new CreateCommunityService().run({
+      type,
       name,
+      grade,
+      creator: req.currentUser._id,
     });
-    if (existingCommunity) {
-      return res.status(400).json({
-        errors: {
-          name:
-            "A Community with this name already exists - please choose a unique name!",
-        },
-      });
-    }
 
-    community = await Community.create(attributes);
-
-    const updatedCommunity = await community.performAfterCreationChores();
-
-    res.status(201).send(updatedCommunity);
+    res.status(201).send(community);
   } catch (error) {
-    console.log("--- error", error);
     if (error.name === "ValidationError") {
-      res.status(400).json({ error: error });
+      res.status(400).json(error);
     } else {
       res.status(500).json();
     }
@@ -86,7 +66,6 @@ exports.update = function (req, res) {
     .populate("creator")
     .then((updatedResource) => {
       if (!updatedResource) throw new NotFoundError("community", id, req.body);
-      console.log("updatedResource", updatedResource);
       res.send(updatedResource);
     })
     .catch((e) => {
@@ -248,7 +227,7 @@ exports.addMember = async function (req, res) {
     if (!member) {
       // TODO: OF COURSE this has to evolve ;-)
       // TODO: Send email with a registration confirmation token / a default random pw or something
-      member = await User.register({
+      member = await new RegisterUserService().run({
         ...memberAttributes,
         ...{ password: "NewUser99" },
       });
@@ -268,12 +247,12 @@ exports.addMember = async function (req, res) {
 
     console.log("member AFTER AFTER: ", member);
 
-    const schoolCommunity = await Community.findOne({
-      type: Community.TYPES.TENANT,
-    });
-    if (schoolCommunity && schoolCommunity._id !== community._id) {
-      ({ community, member } = await schoolCommunity.addMember(member));
-    }
+    // const schoolCommunity = await Community.findOne({
+    //   type: Community.TYPES.TENANT,
+    // });
+    // if (schoolCommunity && !schoolCommunity._id.equals(community._id)) {
+    //   ({ community, member } = await schoolCommunity.addMember(member));
+    // }
 
     res.status(201).send(member);
   } catch (e) {

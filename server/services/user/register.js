@@ -24,13 +24,21 @@ RegisterUserService.prototype.run = async function (userAttributes) {
       isOwner,
     } = userAttributes;
 
-    console.log(this.confirmPw);
-
     if (!type || !email || !password || !fullName) {
-      throw new Error("Not all fields have been entered.");
+      // throw new Error("Not all fields have been entered.");
       // return res.status(400).json({
       //   message: "Not all fields have been entered.",
       // });
+      throw {
+        name: "ValidationError",
+        status: 400,
+        code: "MISSING_FIELDS",
+        message: "Not all fields have been entered",
+        // errors: {
+        //   passwordConfirmation:
+        //     "Enter the same password twice for verification.",
+        // },
+      };
     }
 
     if (this.confirmPw && password !== passwordConfirmation) {
@@ -44,10 +52,6 @@ RegisterUserService.prototype.run = async function (userAttributes) {
             "Enter the same password twice for verification.",
         },
       };
-      // throw new Error("Enter the same password twice for verification.");
-      // return res
-      //   .status(400)
-      //   .json({ message: "Enter the same password twice for verification." });
     }
 
     // User alredy registered?
@@ -61,12 +65,6 @@ RegisterUserService.prototype.run = async function (userAttributes) {
           email: "An account with this email already exists.",
         },
       };
-      // throw new Error("An account with this email already exists");
-      // return res.status(400).json({
-      //   errors: {
-      //     email: "An account with this email already exists.",
-      //   },
-      // });
     }
 
     // TODO: Valdiate type + gender

@@ -2,9 +2,10 @@ require("dotenv").config();
 const _ = require("lodash");
 const User = require("../models/User");
 const RegisterUserService = require("../services/user/register");
+const LoginUserService = require("../services/user/login");
 const { NotFoundError, InternalError } = require("../errors/AppErrors");
 
-const bcrypt = require("bcryptjs");
+// const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 /* AUTHENTICATION RELATED ROUTES */
@@ -35,25 +36,19 @@ exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    if (!email || !password)
-      return res.status(400).json({ msg: "Not all fields have been entered." });
-
-    const user = await User.findOne({ email: email });
-    if (!user)
-      return res
-        .status(400)
-        .json({ msg: "No account with this email has been registered." });
-
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ msg: "Invalid credentials." });
-
-    const token = jwt.sign({ id: user._id }, `${process.env.JWT_SECRET}`, {
-      expiresIn: `${process.env.JWT_EXPIRES_IN}`,
+    let { token, user } = await new LoginUserService().run({
+      email,
+      password,
     });
 
     res.json({ token, user: _.pick(user, User.CURRENT_USER_ATTRIBUTES) });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+  } catch (error) {
+    // res.status(500).json({ error: error.message });
+    if (error.name === "ValidationError") {
+      res.status(400).json(error);
+    } else {
+      res.status(500).json();
+    }
   }
 };
 

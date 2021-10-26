@@ -13,8 +13,7 @@ export default function useAuthActions() {
   const register = (e) => history.push("/register");
   const login = (e) => history.push("/login");
   const logout = (e) => {
-    const userFirstName =
-      currentUserData?.user?.firstName ?? currentUserData?.user?.fullName;
+    const userFirstName = currentUserData?.user?.firstName;
     setCurrentUserData({
       token: undefined,
       user: undefined,
@@ -23,9 +22,7 @@ export default function useAuthActions() {
     localStorage.removeItem("current-user");
     notifySuccess({
       title: "Logged out",
-      message: `You've been successfully logged out - cu soon ${
-        userFirstName ?? null
-      }!`,
+      message: `You've been successfully logged out - cu soon ${userFirstName}!`,
     });
     history.push("/");
   };

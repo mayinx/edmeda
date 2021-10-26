@@ -1,6 +1,6 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
+
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 import { useForm, FormProvider } from "react-hook-form";
@@ -10,6 +10,8 @@ import FormConfig from "./FormConfig";
 import InputFormGroup from "../../components/form/groups/InputFormGroup";
 import useNotify from "../notifications/useNotify";
 import useFormResultHandler from "../form/useFormResultHandler";
+
+import AuthService from "../../services/auth";
 
 export default function Register(props) {
   const { notifyError, notifySuccess } = useNotify();
@@ -36,24 +38,12 @@ export default function Register(props) {
 
   const onSubmit = async (formData) => {
     try {
-      await axios.post("/api/users/register", formData);
-
-      const loginResponse = await axios.post("/api/users/login", {
-        email: formData.email,
-        password: formData.password,
-      });
-      const userFirstName =
-        loginResponse?.data?.user?.firstName ??
-        loginResponse?.data?.user?.fullName;
-      setCurrentUserData({
-        token: loginResponse.data.token,
-        user: loginResponse.data.user,
-      });
-      localStorage.setItem("auth-token", loginResponse.data.token);
+      let response = await AuthService.register(formData);
+      response = await AuthService.login(formData, setCurrentUserData);
 
       notifySuccess({
         title: "Registration successfull",
-        message: `Welcome to Edmeda, ${userFirstName} - happy socializing!`,
+        message: `Welcome to Edmeda, ${response?.data?.user?.firstName} - happy socializing!`,
       });
       history.push("/communities");
     } catch (err) {

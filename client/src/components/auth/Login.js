@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
+
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 import { useForm, FormProvider } from "react-hook-form";
@@ -10,6 +10,7 @@ import FormConfig from "./FormConfig";
 import InputFormGroup from "../../components/form/groups/InputFormGroup";
 
 import useNotify from "../notifications/useNotify";
+import useFormResultHandler from "../form/useFormResultHandler";
 
 import AuthService from "../../services/auth";
 
@@ -24,7 +25,14 @@ export default function Login(props) {
     getValues,
     handleSubmit,
     formState: { errors },
+    setError,
   } = formMethods;
+
+  const { handleFormSuccess, handleFormError } = useFormResultHandler({
+    modelName: "User",
+    crudAction: "read",
+    setFieldError: setError,
+  });
 
   const onSubmit = async (formData) => {
     // // e.preventDefault();
@@ -37,14 +45,10 @@ export default function Login(props) {
       });
       history.push("/communities");
     } catch (err) {
-      console.log(
-        "Couldn't login user - something went wrong: ",
-        err?.response?.data || err
-      );
-      notifyError({
+      handleFormError({
+        errorObject: err,
         title: "Login failed",
         message: `Couldn't login user: ${err?.response?.data?.msg ?? err}`,
-        toastCntId: "modalNotificationCnt",
       });
     }
   };

@@ -1,18 +1,16 @@
 // Auth Service
 import axios from "axios";
 
-const API_URL = "http://localhost:8080/api/auth/";
-// const API_URL = "http://localhost:8080/api/auth/";
-// "/api/users/validateToken";
-
-const register = (username, email, password) => {
-  return axios.post(API_URL + "signup", {
-    username,
-    email,
-    password,
-  });
+const register = async (formData) => {
+  try {
+    return await axios.post("/api/users/register", formData);
+  } catch (err) {
+    console.log("[CLIENT] Service-Error: Auth#register", err);
+    throw err;
+  }
 };
 
+// TODO: Get rid of "setCurrentUserData"
 const login = async (formData, setCurrentUserData) => {
   try {
     const response = await axios.post("/api/users/login", formData);
@@ -38,22 +36,15 @@ const logout = () => {
   localStorage.removeItem("current-user");
 };
 
-const getCurrentUser = () => {
+const currentUser = () => {
   return JSON.parse(localStorage.getItem("current-user"));
 };
-
-// export default {
-//   register,
-//   login,
-//   logout,
-//   getCurrentUser,
-// };
 
 const authService = {
   register,
   login,
   logout,
-  getCurrentUser,
+  currentUser,
 };
 
 export default authService;

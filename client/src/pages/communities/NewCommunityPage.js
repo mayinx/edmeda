@@ -10,6 +10,7 @@ import TextInputFormGroup from "../../components/form/groups/TextInputFormGroup"
 import SelectInputFormGroup from "../../components/form/groups/SelectInputFormGroup";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import useFormResultHandler from "../../components/form/useFormResultHandler";
+import authHeader from "../../services/auth-header";
 
 export default function NewCommunityPage(props) {
   const { communities, setCommunities } = useContext(CommunitiesContext);
@@ -34,12 +35,7 @@ export default function NewCommunityPage(props) {
 
   const onSubmit = (data) => {
     axios
-      .post("/api/communities", data, {
-        headers: {
-          "x-auth-token":
-            currentUserData?.token ?? localStorage.getItem("auth-token"),
-        },
-      })
+      .post("/api/communities", data, { headers: authHeader() })
       .then((res) => {
         setCommunities([res.data, ...communities]);
         handleFormSuccess({ objectName: res?.data?.name });

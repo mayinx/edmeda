@@ -11,6 +11,8 @@ import InputFormGroup from "../../components/form/groups/InputFormGroup";
 
 import useNotify from "../notifications/useNotify";
 
+import AuthService from "../../services/auth";
+
 export default function Login(props) {
   const { notifyError, notifySuccess } = useNotify();
 
@@ -25,33 +27,23 @@ export default function Login(props) {
   } = formMethods;
 
   const onSubmit = async (formData) => {
-    // e.preventDefault();
+    // // e.preventDefault();
     try {
-      const loginResponse = await axios.post("/api/users/login", formData);
-      const userFirstName =
-        loginResponse?.data?.user?.firstName ??
-        loginResponse?.data?.user?.fullName;
-
-      setCurrentUserData({
-        token: loginResponse.data.token,
-        user: loginResponse.data.user,
-      });
-      localStorage.setItem("auth-token", loginResponse.data.token);
+      const response = await AuthService.login(formData, setCurrentUserData);
 
       notifySuccess({
         title: "Login successfull",
-        message: `Welcome to Edmeda, ${userFirstName} - happy socializing!`,
+        message: `Welcome to Edmeda, ${response?.data?.user?.firstName} - happy socializing!`,
       });
       history.push("/communities");
     } catch (err) {
-      const errMsg = err?.response?.data?.msg ?? err;
       console.log(
         "Couldn't login user - something went wrong: ",
         err?.response?.data || err
       );
       notifyError({
         title: "Login failed",
-        message: `Couldn't login user: ${errMsg}`,
+        message: `Couldn't login user: ${err?.response?.data?.msg ?? err}`,
         toastCntId: "modalNotificationCnt",
       });
     }

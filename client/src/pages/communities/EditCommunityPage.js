@@ -13,6 +13,8 @@ import CurrentUserContext from "../../contexts/CurrentUserContext";
 import useNotify from "../../components/notifications/useNotify";
 import useFormResultHandler from "../../components/form/useFormResultHandler";
 
+import authHeader from "../../services/auth-header";
+
 export default function EditCommunityPage(props) {
   const { communities, setCommunities } = useContext(CommunitiesContext);
   const history = useHistory();
@@ -39,12 +41,7 @@ export default function EditCommunityPage(props) {
 
   useEffect(() => {
     axios
-      .get(`/api/communities/${id}`, {
-        headers: {
-          "x-auth-token":
-            currentUserData?.token ?? localStorage.getItem("auth-token"),
-        },
-      })
+      .get(`/api/communities/${id}`, { headers: authHeader() })
       .then((res) => {
         setCommunity(res.data);
       })
@@ -67,12 +64,7 @@ export default function EditCommunityPage(props) {
 
   const onSubmit = (data) => {
     axios
-      .patch(`/api/communities/${id}`, data, {
-        headers: {
-          "x-auth-token":
-            currentUserData?.token ?? localStorage.getItem("auth-token"),
-        },
-      })
+      .patch(`/api/communities/${id}`, data, { headers: authHeader() })
       .then((res) => {
         const newList = communities.map((el) => {
           if (el._id === id) {

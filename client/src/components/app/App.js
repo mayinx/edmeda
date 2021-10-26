@@ -17,6 +17,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../notifications/ReactToastifyOverrides.css";
 import ProtectedRoutes from "../auth/ProtectedRoutes";
+import authHeader from "../../services/auth-header";
 
 function App() {
   const [currentUserData, setCurrentUserData] = useState({
@@ -25,21 +26,21 @@ function App() {
   });
   const [communities, setCommunities] = useState([]);
 
+  // TODO Refactor
   const checkLoggedIn = async () => {
     try {
       let token = localStorage.getItem("auth-token");
 
       if (token === null) {
         localStorage.setItem("auth-token", "");
+        localStorage.removeItem("current-user");
         token = "";
       }
 
       const validationResp = await axios.post(
         "/api/users/validateToken",
         null,
-        {
-          headers: { "x-auth-token": token },
-        }
+        { headers: authHeader() }
       );
 
       if (validationResp.data && validationResp.data.validToken) {
@@ -59,10 +60,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("/api/communities", {
-        headers: { "x-auth-token": currentUserData.token },
-      })
-
+      .get("/api/communities", { headers: authHeader() })
       .then((res) => {
         setCommunities(res.data || []);
       })

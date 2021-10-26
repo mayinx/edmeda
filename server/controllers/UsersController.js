@@ -36,9 +36,7 @@ exports.login = async (req, res) => {
     const { email, password } = req.body;
 
     if (!email || !password)
-      return res
-        .status(400)
-        .json({ msg: "[USERS#LOGIN] Not all fields have been entered." });
+      return res.status(400).json({ msg: "Not all fields have been entered." });
 
     const user = await User.findOne({ email: email });
     if (!user)

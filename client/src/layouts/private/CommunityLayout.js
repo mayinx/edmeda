@@ -9,6 +9,8 @@ import CommunityContext from "../../contexts/CommunityContext";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import ReactLoading from "react-loading";
 
+import authHeader from "../../services/auth-header";
+
 export default function CommunityLayout() {
   const [currentCommunity, setCurrentCommunity] = useState({});
   const params = useParams();
@@ -20,12 +22,7 @@ export default function CommunityLayout() {
 
   useEffect(() => {
     axios
-      .get(`/api/communities/${params.id}`, {
-        headers: {
-          "x-auth-token":
-            currentUserData?.token ?? localStorage.getItem("auth-token"),
-        },
-      })
+      .get(`/api/communities/${params.id}`, { headers: authHeader() })
       .then((res) => {
         setCurrentCommunity(res.data);
         setIsLoading(false);

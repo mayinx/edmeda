@@ -14,6 +14,8 @@ import "../../components/notifications/ReactConfirmAlertOverrides.css";
 
 import useNotify from "../../components/notifications/useNotify";
 
+import authHeader from "../../services/auth-header";
+
 export default function UserListItem(props) {
   // TODO: Refactor: Move that dependencies all up again - implement
   // event handlers on CommunityMembersPage-componenet + pass those
@@ -63,10 +65,7 @@ export default function UserListItem(props) {
 
     axios
       .delete(`/api/communities/${communityId}/members/${memberId}`, {
-        headers: {
-          "x-auth-token":
-            currentUserData?.token ?? localStorage.getItem("auth-token"),
-        },
+        headers: authHeader(),
       })
       .then((res) => {
         setCommunityMembers(

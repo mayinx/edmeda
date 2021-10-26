@@ -13,6 +13,7 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 import "../../components/notifications/ReactConfirmAlertOverrides.css";
 
 import useNotify from "../../components/notifications/useNotify";
+import authHeader from "../../services/auth-header";
 
 export default function Community({ community }) {
   const { communities, setCommunities } = useContext(CommunitiesContext);
@@ -47,12 +48,7 @@ export default function Community({ community }) {
     e.stopPropagation();
 
     axios
-      .delete(`/api/communities/${id}`, {
-        headers: {
-          "x-auth-token":
-            currentUserData?.token ?? localStorage.getItem("auth-token"),
-        },
-      })
+      .delete(`/api/communities/${id}`, { headers: authHeader() })
       .then((res) => {
         setCommunities(
           communities.filter((resource) => {

@@ -22,6 +22,8 @@ import "./CommunityMembers/media-queries.css";
 import _ from "lodash";
 import { FaRegTimesCircle } from "react-icons/fa";
 
+import authHeader from "../../services/auth-header";
+
 export default function CommunityMembersPage(props) {
   const { notifyError } = useNotify();
   const { id } = useParams();
@@ -53,12 +55,7 @@ export default function CommunityMembersPage(props) {
 
   useEffect(() => {
     axios
-      .get(`/api/communities/${id}/members`, {
-        headers: {
-          "x-auth-token":
-            currentUserData?.token ?? localStorage.getItem("auth-token"),
-        },
-      })
+      .get(`/api/communities/${id}/members`, { headers: authHeader() })
       .then((res) => {
         setCommunity(res.data.community);
         setCommunityMembers(res.data.members);
@@ -83,12 +80,7 @@ export default function CommunityMembersPage(props) {
 
   const onSubmit = (data) => {
     axios
-      .post(`/api/communities/${id}/members`, data, {
-        headers: {
-          "x-auth-token":
-            currentUserData?.token ?? localStorage.getItem("auth-token"),
-        },
-      })
+      .post(`/api/communities/${id}/members`, data, { headers: authHeader() })
       .then((res) => {
         console.log("res: ", res);
         // ON EDIT:

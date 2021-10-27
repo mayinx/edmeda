@@ -1,7 +1,5 @@
-import React, { useState, useContext } from "react";
+// import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
-
-import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 import { useForm, FormProvider } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
@@ -15,20 +13,18 @@ import useFormResultHandler from "../form/useFormResultHandler";
 import AuthService from "../../services/auth";
 
 export default function Login(props) {
-  const { notifyError, notifySuccess } = useNotify();
+  const { notifySuccess } = useNotify();
 
-  const { setCurrentUserData } = useContext(CurrentUserContext);
   const history = useHistory();
 
   const formMethods = useForm();
   const {
-    getValues,
     handleSubmit,
     formState: { errors },
     setError,
   } = formMethods;
 
-  const { handleFormSuccess, handleFormError } = useFormResultHandler({
+  const { handleFormError } = useFormResultHandler({
     modelName: "User",
     crudAction: "read",
     setFieldError: setError,
@@ -37,7 +33,7 @@ export default function Login(props) {
   const onSubmit = async (formData) => {
     // // e.preventDefault();
     try {
-      const response = await AuthService.login(formData, setCurrentUserData);
+      const response = await AuthService.login(formData);
 
       notifySuccess({
         title: "Login successfull",

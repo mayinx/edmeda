@@ -5,7 +5,7 @@ export default function AuthOptions() {
 
   return (
     <nav className="auth-options">
-      {userLoggedIn ? (
+      {userLoggedIn() ? (
         <button className="btn green" onClick={logout}>
           Logout
         </button>

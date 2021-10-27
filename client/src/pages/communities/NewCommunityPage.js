@@ -8,15 +8,12 @@ import CommunitiesContext from "../../contexts/CommunitiesContext";
 import FormConfig from "./FormConfig";
 import TextInputFormGroup from "../../components/form/groups/TextInputFormGroup";
 import SelectInputFormGroup from "../../components/form/groups/SelectInputFormGroup";
-import CurrentUserContext from "../../contexts/CurrentUserContext";
+
 import useFormResultHandler from "../../components/form/useFormResultHandler";
-import authHeader from "../../services/auth-header";
+import AuthService from "../../services/auth";
 
 export default function NewCommunityPage(props) {
   const { communities, setCommunities } = useContext(CommunitiesContext);
-  const { currentUserData, setCurrentUserData } = useContext(
-    CurrentUserContext
-  );
 
   const history = useHistory();
 
@@ -35,7 +32,7 @@ export default function NewCommunityPage(props) {
 
   const onSubmit = (data) => {
     axios
-      .post("/api/communities", data, { headers: authHeader() })
+      .post("/api/communities", data, { headers: AuthService.authHeader() })
       .then((res) => {
         setCommunities([res.data, ...communities]);
         handleFormSuccess({ objectName: res?.data?.name });

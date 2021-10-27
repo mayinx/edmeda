@@ -1,27 +1,20 @@
+// Current User Data Service
 import axios from "axios";
-import authHeader from "./auth-header";
+import AuthService from "./auth";
 
-const API_URL = "http://localhost:8080/api/test/";
-
-const getPublicContent = () => {
-  return axios.get(API_URL + "all");
+const communities = async () => {
+  try {
+    return await axios.get("/api/communities", {
+      headers: AuthService.authHeader(),
+    });
+  } catch (err) {
+    console.log("[CLIENT] Service-Error: User#communities: ", err);
+    throw err;
+  }
 };
 
-const getUserBoard = () => {
-  return axios.get(API_URL + "user", { headers: authHeader() });
+const UserDataService = {
+  communities,
 };
 
-const getModeratorBoard = () => {
-  return axios.get(API_URL + "mod", { headers: authHeader() });
-};
-
-const getAdminBoard = () => {
-  return axios.get(API_URL + "admin", { headers: authHeader() });
-};
-
-export default {
-  getPublicContent,
-  getUserBoard,
-  getModeratorBoard,
-  getAdminBoard,
-};
+export default UserDataService;

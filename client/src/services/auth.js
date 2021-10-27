@@ -10,19 +10,11 @@ const register = async (formData) => {
   }
 };
 
-// TODO: Get rid of "setCurrentUserData"
-const login = async (formData, setCurrentUserData) => {
+const login = async (formData) => {
   try {
     const response = await axios.post("/api/users/login", formData);
 
-    if (response.data && response.data.token) {
-      // TODO: Decide: Are we going to storeuser data in memory and only the jwt in localStorage - or everything in localStorage?
-      setCurrentUserData({
-        token: response.data.token,
-        user: response.data.user,
-      });
-      // TODO: Remove first - stick with second only - only one auth source of data
-      localStorage.setItem("auth-token", response.data.token);
+    if (response.data && response.data.token && response.data.user) {
       localStorage.setItem("current-user", JSON.stringify(response.data));
     }
     return response;
@@ -31,6 +23,19 @@ const login = async (formData, setCurrentUserData) => {
     throw err;
   }
 };
+// TODO: Test!
+// const validateAuthToken = async () => {
+//   try {
+//     const response = await axios.post("/api/users/validateToken", null, {
+//       headers: AuthService.authHeader(),
+//     });
+//     if (response.data && response.data.validToken) {
+//       setCurrentUser(response.data);
+//     }
+//   } catch (err) {
+//     console.log("-- verifyAuthToken: ", err);
+//   }
+// };
 
 const logout = () => {
   localStorage.removeItem("current-user");
@@ -39,12 +44,32 @@ const logout = () => {
 const currentUser = () => {
   return JSON.parse(localStorage.getItem("current-user"));
 };
+const loggedIn = () => {
+  const user = currentUser();
+  return user && user.token && user.user ? true : false;
+};
 
-const authService = {
+// authHeader Service
+// Returns auth header with jwt if user is logged in -  used to create
+// the necessary http-header part to issue requests for protected resources
+const authHeader = () => {
+  const user = currentUser();
+  const isLoggedIn = user && user.token && user.user ? true : false;
+
+  if (isLoggedIn) {
+    return { "x-auth-token": user.token };
+  } else {
+    return {};
+  }
+};
+
+const AuthService = {
   register,
   login,
   logout,
   currentUser,
+  loggedIn,
+  authHeader,
 };
 
-export default authService;
+export default AuthService;

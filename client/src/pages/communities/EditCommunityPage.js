@@ -8,12 +8,10 @@ import CommunitiesContext from "../../contexts/CommunitiesContext";
 import FormConfig from "./FormConfig";
 import TextInputFormGroup from "../../components/form/groups/TextInputFormGroup";
 import SelectInputFormGroup from "../../components/form/groups/SelectInputFormGroup";
-import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 import useNotify from "../../components/notifications/useNotify";
 import useFormResultHandler from "../../components/form/useFormResultHandler";
-
-import authHeader from "../../services/auth-header";
+import AuthService from "../../services/auth";
 
 export default function EditCommunityPage(props) {
   const { communities, setCommunities } = useContext(CommunitiesContext);
@@ -35,13 +33,9 @@ export default function EditCommunityPage(props) {
     setFieldError: setError,
   });
 
-  const { currentUserData, setCurrentUserData } = useContext(
-    CurrentUserContext
-  );
-
   useEffect(() => {
     axios
-      .get(`/api/communities/${id}`, { headers: authHeader() })
+      .get(`/api/communities/${id}`, { headers: AuthService.authHeader() })
       .then((res) => {
         setCommunity(res.data);
       })
@@ -64,7 +58,9 @@ export default function EditCommunityPage(props) {
 
   const onSubmit = (data) => {
     axios
-      .patch(`/api/communities/${id}`, data, { headers: authHeader() })
+      .patch(`/api/communities/${id}`, data, {
+        headers: AuthService.authHeader(),
+      })
       .then((res) => {
         const newList = communities.map((el) => {
           if (el._id === id) {

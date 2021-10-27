@@ -7,18 +7,16 @@ import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import { FaRegEdit, FaRegTrashAlt, FaUsersCog } from "react-icons/fa";
 import axios from "axios";
-import CurrentUserContext from "../../contexts/CurrentUserContext";
+
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import "../../components/notifications/ReactConfirmAlertOverrides.css";
 
 import useNotify from "../../components/notifications/useNotify";
-import authHeader from "../../services/auth-header";
+import AuthService from "../../services/auth";
 
 export default function Community({ community }) {
   const { communities, setCommunities } = useContext(CommunitiesContext);
-
-  const { currentUserData } = useContext(CurrentUserContext);
 
   const history = useHistory();
   const { notifySuccess, notifyError } = useNotify();
@@ -48,7 +46,7 @@ export default function Community({ community }) {
     e.stopPropagation();
 
     axios
-      .delete(`/api/communities/${id}`, { headers: authHeader() })
+      .delete(`/api/communities/${id}`, { headers: AuthService.authHeader() })
       .then((res) => {
         setCommunities(
           communities.filter((resource) => {

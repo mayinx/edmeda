@@ -1,13 +1,9 @@
-import React, { useState, useContext } from "react";
-import CurrentUserContext from "../../../../../contexts/CurrentUserContext";
+import React, { useState } from "react";
+import AuthService from "../../../../../services/auth";
 import "./NewMessageForm.css";
 
 export default function NewMessageForm(props) {
   const [messageContent, setMessageContent] = useState("");
-
-  const { currentUserData, setCurrentUserData } = useContext(
-    CurrentUserContext
-  );
 
   const submitForm = (e) => {
     e.preventDefault();
@@ -15,7 +11,7 @@ export default function NewMessageForm(props) {
       const newChatMessage = {
         content: messageContent,
         group: props.currentGroup._id,
-        creator: currentUserData?.user?.id,
+        creator: AuthService.currentUser()?.user?.id,
         createdAt: new Date().toLocaleString() + "",
       };
       props.socket.emit("newMessage", newChatMessage, {

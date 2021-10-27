@@ -1,35 +1,29 @@
-import { useContext } from "react";
+// import { useContext } from "react";
 import { useHistory } from "react-router-dom";
-import CurrentUserContext from "../../contexts/CurrentUserContext";
+
+import AuthService from "../../services/auth";
 import useNotify from "../notifications/useNotify";
 
 export default function useAuthActions() {
-  const { currentUserData, setCurrentUserData } = useContext(
-    CurrentUserContext
-  );
   const history = useHistory();
-  const { notifyError, notifySuccess } = useNotify();
+  const { notifySuccess } = useNotify();
 
   const register = (e) => history.push("/register");
   const login = (e) => history.push("/login");
   const logout = (e) => {
-    const userFirstName = currentUserData?.user?.firstName;
-    setCurrentUserData({
-      token: undefined,
-      user: undefined,
-    });
-    localStorage.setItem("auth-token", "");
-    localStorage.removeItem("current-user");
+    AuthService.logout();
     notifySuccess({
       title: "Logged out",
-      message: `You've been successfully logged out - cu soon ${userFirstName}!`,
+      message: `You've been successfully logged out - cu soon ${
+        AuthService.currentUser()?.user?.firstName
+      }!`,
     });
     history.push("/");
   };
 
-  // TODO: Check at least presence of token as well
-  // const userLoggedIn = currentUserData && currentUserData.user && currentUserData.token;
-  const userLoggedIn = currentUserData && currentUserData.user ? true : false;
+  // Helpers
+  const currentUser = () => AuthService.currentUser();
+  const userLoggedIn = () => AuthService.loggedIn();
 
-  return { userLoggedIn, currentUserData, register, login, logout };
+  return { register, login, logout, userLoggedIn, currentUser };
 }

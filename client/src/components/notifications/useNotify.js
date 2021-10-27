@@ -119,15 +119,12 @@ export default function useNotify() {
   };
 
   const notifyError = (props) => {
-    const { title, message, toastCntId } = props;
     notify({ ...props, ...{ type: "error" } });
   };
   const notifySuccess = (props) => {
-    const { title, message, toastCntId } = props;
     notify({ ...props, ...{ type: "success" } });
   };
   const notifyInfo = (props) => {
-    const { title, message, toastCntId } = props;
     notify({ ...props, ...{ type: "info" } });
   };
 

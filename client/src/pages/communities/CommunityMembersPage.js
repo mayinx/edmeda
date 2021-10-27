@@ -8,7 +8,6 @@ import { useParams } from "react-router";
 import FormConfig from "../../domain/User/FormConfig";
 import InputFormGroup from "../../components/form/groups/InputFormGroup";
 import SelectInputFormGroup from "../../components/form/groups/SelectInputFormGroup";
-import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 import useNotify from "../../components/notifications/useNotify";
 import useFormResultHandler from "../../components/form/useFormResultHandler";
@@ -21,8 +20,7 @@ import "./CommunityMembers/media-queries.css";
 
 import _ from "lodash";
 import { FaRegTimesCircle } from "react-icons/fa";
-
-import authHeader from "../../services/auth-header";
+import AuthService from "../../services/auth";
 
 export default function CommunityMembersPage(props) {
   const { notifyError } = useNotify();
@@ -45,8 +43,6 @@ export default function CommunityMembersPage(props) {
     setFieldError: setError,
   });
 
-  const { currentUserData } = useContext(CurrentUserContext);
-
   // useEffect(() => {
   //   if (community) {
   //     reset(community);
@@ -55,7 +51,9 @@ export default function CommunityMembersPage(props) {
 
   useEffect(() => {
     axios
-      .get(`/api/communities/${id}/members`, { headers: authHeader() })
+      .get(`/api/communities/${id}/members`, {
+        headers: AuthService.authHeader(),
+      })
       .then((res) => {
         setCommunity(res.data.community);
         setCommunityMembers(res.data.members);
@@ -80,7 +78,9 @@ export default function CommunityMembersPage(props) {
 
   const onSubmit = (data) => {
     axios
-      .post(`/api/communities/${id}/members`, data, { headers: authHeader() })
+      .post(`/api/communities/${id}/members`, data, {
+        headers: AuthService.authHeader(),
+      })
       .then((res) => {
         console.log("res: ", res);
         // ON EDIT:

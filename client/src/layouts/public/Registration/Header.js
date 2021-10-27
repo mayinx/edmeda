@@ -43,7 +43,7 @@ export default function Header() {
             <FaUserAlt className="NavItem__Icon userAvatarIcon" />
           </Link> */}
 
-          {userLoggedIn ? (
+          {userLoggedIn() ? (
             <>
               {/* <Link class="NavItem NavItem--BtnIconOnly" to="#">
                 <FaUserAlt className="NavItem__Icon userAvatarIcon" />

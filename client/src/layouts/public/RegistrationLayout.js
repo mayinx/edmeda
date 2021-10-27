@@ -1,4 +1,4 @@
-import { Route, Switch } from "react-router-dom";
+import { Route } from "react-router-dom";
 import Header from "./Registration/Header";
 import LandingPage from "../../pages/welcome/LandingPage";
 import "./RegistrationLayout.css";

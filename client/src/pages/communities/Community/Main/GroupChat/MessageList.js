@@ -28,13 +28,11 @@ export default function MessageList({ messages }) {
       });
       return renderedMessages;
     } else {
-      {
-        notifyInfo({
-          title: "Tumbleweeds blow across the desert...",
-          message: "...a bit quiet in here: Start chatting!",
-          toastCntId: "appNotificationCnt",
-        });
-      }
+      notifyInfo({
+        title: "Tumbleweeds blow across the desert...",
+        message: "...a bit quiet in here: Start chatting!",
+        toastCntId: "appNotificationCnt",
+      });
     }
   }
 

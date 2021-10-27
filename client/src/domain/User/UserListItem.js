@@ -6,15 +6,14 @@ import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import { FaRegEdit, FaRegTrashAlt, FaUserMinus } from "react-icons/fa";
 import axios from "axios";
-import CurrentUserContext from "../../contexts/CurrentUserContext";
+
 import { confirmAlert } from "react-confirm-alert";
 // TODO Check - move to App.js?:
 import "react-confirm-alert/src/react-confirm-alert.css";
 import "../../components/notifications/ReactConfirmAlertOverrides.css";
 
 import useNotify from "../../components/notifications/useNotify";
-
-import authHeader from "../../services/auth-header";
+import AuthService from "../../services/auth";
 
 export default function UserListItem(props) {
   // TODO: Refactor: Move that dependencies all up again - implement
@@ -33,8 +32,6 @@ export default function UserListItem(props) {
       avatarUrl = UserFallbackProfilePic;
     }
   }
-
-  const { currentUserData } = useContext(CurrentUserContext);
 
   const history = useHistory();
   const { notifySuccess, notifyError, notifyInfo } = useNotify();
@@ -65,7 +62,7 @@ export default function UserListItem(props) {
 
     axios
       .delete(`/api/communities/${communityId}/members/${memberId}`, {
-        headers: authHeader(),
+        headers: AuthService.authHeader(),
       })
       .then((res) => {
         setCommunityMembers(

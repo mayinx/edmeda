@@ -1,7 +1,4 @@
-import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
-
-import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 import { useForm, FormProvider } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
@@ -14,11 +11,7 @@ import useFormResultHandler from "../form/useFormResultHandler";
 import AuthService from "../../services/auth";
 
 export default function Register(props) {
-  const { notifyError, notifySuccess } = useNotify();
-
-  const { currentUserData, setCurrentUserData } = useContext(
-    CurrentUserContext
-  );
+  const { notifySuccess } = useNotify();
 
   const history = useHistory();
 
@@ -30,7 +23,7 @@ export default function Register(props) {
     setError,
   } = formMethods;
 
-  const { handleFormSuccess, handleFormError } = useFormResultHandler({
+  const { handleFormError } = useFormResultHandler({
     modelName: "User",
     crudAction: "create",
     setFieldError: setError,
@@ -39,7 +32,7 @@ export default function Register(props) {
   const onSubmit = async (formData) => {
     try {
       let response = await AuthService.register(formData);
-      response = await AuthService.login(formData, setCurrentUserData);
+      response = await AuthService.login(formData);
 
       notifySuccess({
         title: "Registration successfull",

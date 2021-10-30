@@ -1,6 +1,5 @@
 import "./CommunityListItem.css";
 import SchoolCommunityFbProfilePic from "../../assets/community/fb_profile_pics/shutterstock_1856929843_mod.jpg";
-import _ from "lodash";
 import CommunitiesContext from "../../contexts/CommunitiesContext";
 import { useContext } from "react";
 import { useHistory } from "react-router";

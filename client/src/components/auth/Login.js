@@ -1,16 +1,12 @@
-// import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
-
 import { useForm, FormProvider } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
-
 import FormConfig from "./FormConfig";
 import InputFormGroup from "../../components/form/groups/InputFormGroup";
-
 import useNotify from "../notifications/useNotify";
 import useFormResultHandler from "../form/useFormResultHandler";
-
 import AuthService from "../../services/auth";
+import "./Login.css";
 
 export default function Login(props) {
   const { notifySuccess } = useNotify();
@@ -58,11 +54,16 @@ export default function Login(props) {
           onSubmit={handleSubmit(onSubmit)}
         >
           <InputFormGroup name="email" formConfig={FormConfig.login.email} />
-
           <InputFormGroup
             name="password"
             formConfig={FormConfig.login.password}
           />
+          <div className="DemoInfo">
+            <h2>Demo-login</h2>
+            <p>Use the following credentials to give Edmeda a try:</p>
+            <p className="DemoCrendentialsEntry">E-Mail: chuck@nerdherd.com</p>
+            <p className="DemoCrendentialsEntry">PW: Chuck99</p>
+          </div>
         </form>
       </FormProvider>
     </div>

@@ -1,7 +1,6 @@
 import "./UserListItem.css";
 import UserFallbackProfilePic from "../../assets/user/fb_avatars/fbAvatar.png";
 
-import { useContext } from "react";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import { FaRegEdit, FaRegTrashAlt, FaUserMinus } from "react-icons/fa";
@@ -94,21 +93,21 @@ export default function UserListItem(props) {
       });
   };
 
-  const openCommunityPage = (e, id) => {
-    history.push(`/communities/${id}`);
-  };
+  // const openCommunityPage = (e, id) => {
+  //   history.push(`/communities/${id}`);
+  // };
 
-  const openEditCommunityModal = (e, id) => {
-    history.push(`/communities/${id}/edit`);
-    e.stopPropagation();
-    e.preventDefault();
-  };
+  // const openEditCommunityModal = (e, id) => {
+  //   history.push(`/communities/${id}/edit`);
+  //   e.stopPropagation();
+  //   e.preventDefault();
+  // };
 
-  const openEditCommunityMembersModal = (e, id) => {
-    history.push(`/communities/${id}/members`);
-    e.stopPropagation();
-    e.preventDefault();
-  };
+  // const openEditCommunityMembersModal = (e, id) => {
+  //   history.push(`/communities/${id}/members`);
+  //   e.stopPropagation();
+  //   e.preventDefault();
+  // };
 
   let userTypeTagColor = null;
   switch (user.type) {

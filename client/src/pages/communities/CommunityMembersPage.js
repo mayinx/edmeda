@@ -2,7 +2,7 @@ import { useForm, FormProvider } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import "./Form.css";
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 
 import FormConfig from "../../domain/User/FormConfig";
@@ -34,7 +34,6 @@ export default function CommunityMembersPage(props) {
     handleSubmit,
     formState: { errors },
     setError,
-    setFocus,
   } = formMethods;
 
   const { handleFormSuccess, handleFormError } = useFormResultHandler({

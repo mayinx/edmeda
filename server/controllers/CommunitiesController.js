@@ -226,7 +226,7 @@ exports.addMember = async function (req, res) {
 
     if (!member) {
       // TODO: OF COURSE this has to evolve ;-)
-      // TODO: Send email with a registration confirmation token / a default random pw or something
+      // TODO: Send email with a registration confirmation token / a default random pw ...
       member = await new RegisterUserService().run({
         ...memberAttributes,
         ...{ password: "NewUser99" },
@@ -241,18 +241,7 @@ exports.addMember = async function (req, res) {
       });
     }
 
-    console.log("member AFTER: ", member);
-
     ({ community, member } = await community.addMember(member));
-
-    console.log("member AFTER AFTER: ", member);
-
-    // const schoolCommunity = await Community.findOne({
-    //   type: Community.TYPES.TENANT,
-    // });
-    // if (schoolCommunity && !schoolCommunity._id.equals(community._id)) {
-    //   ({ community, member } = await schoolCommunity.addMember(member));
-    // }
 
     res.status(201).send(member);
   } catch (e) {

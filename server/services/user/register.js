@@ -14,7 +14,7 @@ function RegisterUserService(confirmPw = false) {
 
 RegisterUserService.prototype.run = async function (userAttributes) {
   try {
-    const {
+    let {
       fullName,
       userName,
       type,
@@ -22,6 +22,8 @@ RegisterUserService.prototype.run = async function (userAttributes) {
       password,
       passwordConfirmation,
       isOwner,
+      fbAvatarFileName,
+      gender,
     } = userAttributes;
 
     if (!type || !email || !password || !fullName) {
@@ -73,11 +75,9 @@ RegisterUserService.prototype.run = async function (userAttributes) {
 
     //TODO: just for now - use a guessing lib for that
     // const gender = _.sample(User.GENDERS);
-    let gender = genderDetect.detect(firstName);
+    gender ||= genderDetect.detect(firstName);
     if (gender === "unknown" || gender === "unisex") gender = "diverse";
-    const fbAvatarFileName = `${type}_${gender}_${_.sample(
-      User.DEFAULT_AVATARS
-    )}`;
+    fbAvatarFileName ||= `${type}_${gender}_${_.sample(User.DEFAULT_AVATARS)}`;
     // const passwordHash = await User.createPasswordHash(password);
     const passwordHash = await this.createPasswordHash(password);
 

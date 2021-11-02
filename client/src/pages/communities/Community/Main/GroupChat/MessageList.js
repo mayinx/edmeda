@@ -17,7 +17,7 @@ export default function MessageList({ messages }) {
           >
             <div className="user">
               <UserAvatar user={message.creator} avatarClassName="ChatAvatar" />
-              {/* <span className="user">{message.user.name}:</span> */}
+              <span className="user">{message.creator.userName}:</span>
               <span className="date">
                 {new Date(message.createdAt).toLocaleTimeString()}
               </span>

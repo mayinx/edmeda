@@ -11,6 +11,7 @@ const Message = require("../models/Message");
 
 const RegisterUserService = require("../services/user/register");
 const CreateCommunityService = require("../services/community/create");
+const CreateMessageService = require("../services/message/create");
 
 mongoose
   .connect(MONGO_URI, {
@@ -62,12 +63,8 @@ const seedDB = async function () {
     console.log("--- Seeding the database!");
 
     let communities = [];
+    let users = [];
 
-    // 1. Create a demo tenantOwner with 5 communities
-    // - default school community
-    // - 2 class communities
-    // - 1 course community
-    // - 1 custom community
     let tenantOwner = await new RegisterUserService().run({
       type: User.TYPES.TEACHER,
       isOwner: true,
@@ -75,6 +72,13 @@ const seedDB = async function () {
       email: "chuck@nerdherd.com",
       password: "Chuck99",
     });
+    users.push(tenantOwner);
+    console.log("Tenant Owner & SchoolCommunity created!");
+
+    let schoolCommunity = await Community.findOne({
+      type: Community.TYPES.TENANT,
+    });
+    communities.push(schoolCommunity);
 
     let classCommunityOne = await new CreateCommunityService().run({
       type: Community.TYPES.CLASS,
@@ -83,6 +87,7 @@ const seedDB = async function () {
       creator: tenantOwner._id,
     });
     communities.push(classCommunityOne);
+    console.log("Class Community 1 created!");
 
     let classCommunityTwo = await new CreateCommunityService().run({
       type: Community.TYPES.CLASS,
@@ -91,36 +96,71 @@ const seedDB = async function () {
       creator: tenantOwner._id,
     });
     communities.push(classCommunityTwo);
+    console.log("Class Community 2 created!");
 
-    let courseCommunity = await new CreateCommunityService().run({
+    let courseCommunityOne = await new CreateCommunityService().run({
       type: Community.TYPES.COURSE,
       name: "English Literature",
       grade: 13,
       creator: tenantOwner._id,
     });
-    communities.push(courseCommunity);
+    communities.push(courseCommunityOne);
+    console.log("Course Community 1 created!");
+
+    let courseCommunityTwo = await new CreateCommunityService().run({
+      type: Community.TYPES.COURSE,
+      name: "History",
+      grade: 13,
+      creator: tenantOwner._id,
+    });
+    communities.push(courseCommunityTwo);
+    console.log("Course Community 2 created!");
 
     let customCommunity = await new CreateCommunityService().run({
       type: Community.TYPES.CUSTOM,
-      name: "Custom Community",
+      name: "School Activities",
       grade: 11,
       creator: tenantOwner._id,
     });
     communities.push(customCommunity);
+    console.log("Custom Community 1 created!");
 
-    // 2. Create 50 new random Users and add them randomly to the previously created groups
-
-    for (let i = 0; i <= 50; i++) {
+    for (let i = 0; i < 80; i++) {
       let newUser = await new RegisterUserService().run({
         type: _.sample(User.TYPES),
         fullName: faker.name.findName(),
         email: faker.internet.email(),
         password: "NewUser99",
       });
+      users.push(newUser);
+      console.log(
+        `User ${i + 1} created - Type: `,
+        newUser.type,
+        "Name: ",
+        newUser.fullName
+      );
       await _.sample(communities).addMember(newUser);
     }
 
+    // get fresh versions
+    communities = await Community.find({});
+
+    for (let i = 0; i < communities.length; i++) {
+      let groups = communities[i].groups;
+      for (let j = 0; j < groups.length; j++) {
+        for (let k = 0; k < _.sample(_.range(3, 8)); k++) {
+          await new CreateMessageService().run({
+            content: faker.lorem.sentence(),
+            creator: _.sample(communities[i].members),
+            group: groups[j],
+          });
+        }
+      }
+    }
+
     console.log("*** Database seeded! ***");
+    console.log("--- communities created: ", communities.length);
+    console.log("--- users created: ", users.length);
   } catch (error) {
     console.log("Seeding effedup!");
     console.log("error", error);

@@ -23,10 +23,12 @@ import { FaRegTimesCircle } from "react-icons/fa";
 import AuthService from "../../services/auth";
 
 export default function CommunityMembersPage(props) {
+  const { setModalHeader, bottomBarToggled, toggleBottomBar, formId } = props;
   const { notifyError } = useNotify();
   const { id } = useParams();
   const [community, setCommunity] = useState({});
   const [communityMembers, setCommunityMembers] = useState([]);
+  const [communityMembersLoaded, setCommunityMembersLoaded] = useState(false);
 
   const formMethods = useForm();
   const {
@@ -56,23 +58,37 @@ export default function CommunityMembersPage(props) {
       .then((res) => {
         setCommunity(res.data.community);
         setCommunityMembers(res.data.members);
+        setCommunityMembersLoaded(true);
       })
       .catch((err) => {
-        console.log("err: ", err);
-        console.log("id:", id);
+        console.log("err: ", err, "Community#id: ", id);
         notifyError({
           title: "Community not found",
           message: `An unexpected error occured: ${err}`,
           toastCntId: "modalNotificationCnt",
         });
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (communityMembersLoaded) {
+      setModalHeader("Community Members (" + communityMembers.length + ")");
+    } else {
+      setModalHeader("Community Members (--)");
+    }
+
+    return () => {
+      setModalHeader("Community Members (--)");
+    };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [communityMembersLoaded, communityMembers]);
 
   // Form related effects
   useEffect(() => {
-    // if (community) {
     reset({ type: "", fullName: "", email: "" });
-    // }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [community, communityMembers]);
 
   const onSubmit = (data) => {
@@ -94,7 +110,6 @@ export default function CommunityMembersPage(props) {
         // ON NEW
         setCommunityMembers([res.data, ...communityMembers]);
         reset({ type: res.data.type });
-
         handleFormSuccess({
           objectName: community?.name,
           title: "New Community member added",
@@ -120,7 +135,7 @@ export default function CommunityMembersPage(props) {
 
       <section
         className={`BottomBar ${
-          props.bottomBarToggled ? "BottomBar--expanded" : "BottomBar--hidden"
+          bottomBarToggled ? "BottomBar--expanded" : "BottomBar--hidden"
         }`}
       >
         <div className="BottomBar__Header ">
@@ -128,7 +143,7 @@ export default function CommunityMembersPage(props) {
           <div
             className="closeBottomBarAction"
             onClick={() => {
-              props.toggleBottomBar(false);
+              toggleBottomBar(false);
             }}
           >
             <FaRegTimesCircle />
@@ -137,7 +152,7 @@ export default function CommunityMembersPage(props) {
         <div className="BottomBar__Body">
           <FormProvider {...{ ...formMethods, ErrorMessage, errors }}>
             <form
-              id={props.formId}
+              id={formId}
               className="Form NewUserForm"
               onSubmit={handleSubmit(onSubmit)}
             >
@@ -158,7 +173,7 @@ export default function CommunityMembersPage(props) {
             defaultValue={community?.creator}
           /> */}
               <button
-                form={props.formId}
+                form={formId}
                 className="btn rounded green newResourceBtn createCommunityMemberBtn"
                 type="submit"
               >

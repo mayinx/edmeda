@@ -5,7 +5,7 @@ import BrandLogo from "../../../assets/edmeda-logo-transparent_170x40.png";
 
 import DropdownMenu from "../../../components/misc/DropdownMenu";
 import "./Header.css";
-import { Counter } from "./../../../features/counter/Counter";
+// import { Counter } from "./../../../features/counter/Counter";
 
 export default function Header() {
   const { userLoggedIn, register, login, logout } = useAuthActions();
@@ -23,7 +23,7 @@ export default function Header() {
             />
           </Link>
         </div>
-        <Counter />
+        {/* <Counter /> */}
         <div className="AppNav__Center">
           <Link className="NavItem NavItem--Link" to="#">
             <span className="NavItem__Caption">Features</span>

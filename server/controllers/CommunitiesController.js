@@ -212,6 +212,7 @@ exports.indexMembers = function (req, res) {
 //  Add/create new community member
 //  POST api/communities/:id/members
 // TODO: Wrap adding and removing of community memebrs in transactions!
+// TODO: Use services for that
 exports.addMember = async function (req, res) {
   try {
     const { id } = req.params;
@@ -242,6 +243,18 @@ exports.addMember = async function (req, res) {
     }
 
     ({ community, member } = await community.addMember(member));
+
+    // Add to school community as well if not already present
+    // (FYI: 'addMember' takes care of that check )
+    let schoolCommunity = await Community.findOne({
+      type: Community.TYPES.TENANT,
+    });
+
+    if (schoolCommunity) {
+      ({ community: schoolCommunity, member } = await schoolCommunity.addMember(
+        member
+      ));
+    }
 
     res.status(201).send(member);
   } catch (e) {

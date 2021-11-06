@@ -39,6 +39,7 @@ export default function Modal(props) {
     return () => {
       setModalOpen(false);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return createPortal(

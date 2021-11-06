@@ -2,10 +2,19 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
+
+/* Load mongoose and global plugins */
+/* (FYI: global mongoose plugins should be reuired before the usage
+   of mongoose models of course - and thus before the creation of
+   express-routes (which use mongoose models).*/
 const mongoose = require("mongoose");
+mongoose.plugin(require("./models/plugins/reload"));
+
+const Message = require("./models/Message");
+
 const communitiesRouter = require("./routes/communities");
 const usersRouter = require("./routes/users");
-const Message = require("./models/Message");
+
 /*
   We create an express app calling
   the express function.
@@ -121,7 +130,6 @@ io.on("connection", async (socket) => {
   socket.on("newMessage", (msg, args) => {
     try {
       let message = new Message(msg);
-      console.log("--- message", message);
       var ObjectID = require("mongodb").ObjectID;
       const _id = new ObjectID(message.creator);
       message.creator = _id;

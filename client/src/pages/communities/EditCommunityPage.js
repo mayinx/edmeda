@@ -40,20 +40,21 @@ export default function EditCommunityPage(props) {
         setCommunity(res.data);
       })
       .catch((err) => {
-        console.log("err: ", err);
-        console.log("id:", id);
+        console.log("err: ", err, "communities#id: ", id);
         notifyError({
           title: "Community not found",
-          message: `A Community with this couldn't be found - an error occured: ${err}`,
+          message: `A Community with this id couldn't be found - an error occured: ${err}`,
           toastCntId: "modalNotificationCnt",
         });
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (community) {
       reset(community);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [community]);
 
   const onSubmit = (data) => {

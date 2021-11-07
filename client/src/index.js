@@ -6,6 +6,7 @@ import App from "./components/app/App.js";
 // To provide the Redux Store to React
 import { store } from "./components/app/store";
 import { Provider } from "react-redux";
+import "./constants/global";
 
 ReactDOM.render(
   <React.StrictMode>

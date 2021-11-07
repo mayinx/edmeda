@@ -13,22 +13,6 @@ export default function AppHeader() {
   const { notifyInfo } = useNotify();
   const cUser = currentUser();
 
-  let userTypeTagColor = null;
-  switch (cUser?.user?.type) {
-    case "Student":
-      userTypeTagColor = "green";
-      break;
-    case "Teacher":
-      userTypeTagColor = "dark-blue";
-      break;
-    case "Parent":
-      userTypeTagColor = "blue";
-      break;
-    default:
-      userTypeTagColor = "blue";
-      break;
-  }
-
   return (
     <header className="App__header">
       <nav className="AppNav">
@@ -74,7 +58,11 @@ export default function AppHeader() {
                 <UserAvatar user={cUser.user} />
                 <div className="User__Meta">
                   <span className="User__Name">{cUser?.user?.fullName}</span>
-                  <span className={`User__Type tag ${userTypeTagColor}`}>
+                  <span
+                    className={`User__Type tag ${global.config.user.typeTagColorFor(
+                      cUser?.user?.type
+                    )}`}
+                  >
                     {cUser?.user?.type}
                   </span>
                 </div>

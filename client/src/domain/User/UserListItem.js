@@ -110,22 +110,6 @@ export default function UserListItem(props) {
   //   e.preventDefault();
   // };
 
-  let userTypeTagColor = null;
-  switch (user.type) {
-    case "Student":
-      userTypeTagColor = "green";
-      break;
-    case "Teacher":
-      userTypeTagColor = "dark-blue";
-      break;
-    case "Parent":
-      userTypeTagColor = "blue";
-      break;
-    default:
-      userTypeTagColor = "blue";
-      break;
-  }
-
   return (
     <section
       className={`ResourceListItem UserListItem UserListItem--${user.type} `}
@@ -139,7 +123,11 @@ export default function UserListItem(props) {
       <div className="user__meta">
         <div className="truncate">{user?.fullName}</div>
         <div className="truncate">
-          <span className={`tag ${userTypeTagColor}`}>{user?.type}</span>
+          <span
+            className={`tag ${global.config.user.typeTagColorFor(user?.type)}`}
+          >
+            {user?.type}
+          </span>
         </div>
         <div className="truncate">{user?.creator?.fullName}</div>
       </div>

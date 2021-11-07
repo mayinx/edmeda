@@ -90,30 +90,6 @@ export default function Community({ community }) {
     e.preventDefault();
   };
 
-  let communityTypeTagColor = null;
-  let communityTypeTagCaption = community.type;
-
-  switch (community.type) {
-    case "Tenant":
-      communityTypeTagColor = "dark-blue";
-      communityTypeTagCaption = "School";
-
-      break;
-    case "Class":
-      communityTypeTagColor = "blue";
-
-      break;
-    case "Course":
-      communityTypeTagColor = "green";
-      break;
-    case "Custom":
-      communityTypeTagColor = "yellow";
-      break;
-    default:
-      communityTypeTagColor = "blue";
-      break;
-  }
-
   let profilePicUrl = community?.picture;
   if (!profilePicUrl) {
     try {
@@ -140,8 +116,12 @@ export default function Community({ community }) {
       <div className="community__meta">
         <div className="truncate">{community.name}</div>
         <div className="truncate">{community?.creator?.fullName}</div>
-        <span className={`tag ${communityTypeTagColor}`}>
-          {communityTypeTagCaption}
+        <span
+          className={`tag ${global.config.community.typeTagColorFor(
+            community?.type
+          )}`}
+        >
+          {global.config.community.typeTagCaptionFor(community?.type)}
         </span>
       </div>
 

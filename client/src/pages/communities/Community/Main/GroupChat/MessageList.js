@@ -2,6 +2,8 @@ import "./MessageList.css";
 import UserAvatar from "../../../../../domain/User/UserAvatar";
 import useNotify from "../../../../../components/notifications/useNotify";
 
+import ReactTimeAgo from "react-time-ago";
+
 export default function MessageList({ messages }) {
   const { notifyInfo } = useNotify();
   function renderChatMessages() {
@@ -21,14 +23,17 @@ export default function MessageList({ messages }) {
                 {message?.creator?.type}
               </span>
             </div>
-            {/* <div className="content">{message.content}</div> */}
+
             <div className="content">
               <div className="Message__header">
                 <span>
                   <span className="Message__sender--name">
                     {message.creator.userName}
                   </span>{" "}
-                  <span className="Message__sent--ago">vor 10 Minuten</span>
+                  <span className="Message__sent--ago">
+                    {" "}
+                    <ReactTimeAgo date={date} locale="en-US" />
+                  </span>
                 </span>
                 <span className="Message__sent--date">
                   {" "}

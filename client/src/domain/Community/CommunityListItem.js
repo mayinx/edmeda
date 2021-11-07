@@ -11,6 +11,8 @@ import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import "../../components/notifications/ReactConfirmAlertOverrides.css";
 
+import UserAvatar from "../../domain/User/UserAvatar";
+
 import useNotify from "../../components/notifications/useNotify";
 import AuthService from "../../services/auth";
 
@@ -114,10 +116,16 @@ export default function Community({ community }) {
       </p>
 
       <div className="community__meta">
-        <div className="truncate">{community.name}</div>
-        <div className="truncate">{community?.creator?.fullName}</div>
+        <div className="community__name truncate">{community.name}</div>
+        <div className="community__owner truncate">
+          <UserAvatar
+            user={community?.creator}
+            wrapper={false}
+            avatarClassName="CommunityCreatorAvatar rounded"
+          />
+        </div>
         <span
-          className={`tag ${global.config.community.typeTagColorFor(
+          className={`community__type tag ${global.config.community.typeTagColorFor(
             community?.type
           )}`}
         >

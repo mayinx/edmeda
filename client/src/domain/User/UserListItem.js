@@ -121,15 +121,15 @@ export default function UserListItem(props) {
         <img src={`${avatarUrl}`} className="User__ProfilePic" alt="" />
       </p>
       <div className="user__meta">
-        <div className="truncate">{user?.fullName}</div>
-        <div className="truncate">
+        <div className="user__name truncate">{user?.fullName}</div>
+        <div className="user__type truncate">
           <span
             className={`tag ${global.config.user.typeTagColorFor(user?.type)}`}
           >
             {user?.type}
           </span>
         </div>
-        <div className="truncate">{user?.creator?.fullName}</div>
+        {/* <div className="truncate">{user?.creator?.fullName}</div> */}
       </div>
       <div className="user__actions">
         <Link

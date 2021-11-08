@@ -45,10 +45,10 @@
 }
 
 .ModalPage__headerCaption {
-  font-size: 2rem;
+  font-size: 1.25rem;
   font-weight: lighter;
-  letter-spacing: 6px;
-  margin-left: 1rem;
+  letter-spacing: 3px;
+  text-align: center;
 }
 
 .ModalPage__header .closeDlgAction {

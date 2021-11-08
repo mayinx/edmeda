@@ -1,6 +1,6 @@
 @media all and (min-width: 400px) {
   .CommunityMembersModalPage .UserListItem {
-    flex: 0 1 100px;
+    flex: 0 1 150px;
   }
 
   .CommunityMembersModalPage
@@ -8,24 +8,34 @@
     .User__ProfilePic-wrapper
     .User__ProfilePic {
     display: block;
-    margin: 0.5rem;
-    width: 75px;
-    height: 75px;
+
+    margin: 0.75rem;
+    width: 100px;
+    height: 100px;
   }
 
   .CommunityMembersModalPage .UserListItem .user__meta {
-    flex: 1 1 115px; /* flex: 1 1 150px;*/
+    flex: 1 1 160px; /* flex: 1 1 150px;*/
     padding: 0.5rem; /* 1rem;*/
+    gap: 0.3rem;
+  }
+
+  .CommunityMembersModalPage .UserListItem .user__meta .user__name {
+    font-size: 1rem;
+  }
+  .CommunityMembersModalPage .UserListItem .user__meta .user__type .tag {
+    font-size: 0.85rem;
+    font-weight: bold;
   }
 
   /*  TODO: transform into pulldown / meatball menu instead - until then we shrink / start (too) tiny   */
   .CommunityMembersModalPage .UserListItem .user__actions {
-    gap: 0.25rem; /*0.5rem*/
-    padding: 0.25rem; /*0.5rem*/
+    gap: 0.5rem; /*0.5rem*/
+    padding: 0.5rem; /*0.5rem*/
   }
   .CommunityMembersModalPage .UserListItem .user__actions a.user__action {
-    font-size: 0.9rem; /*1rem*/
-    padding: 0.25rem; /*0.3rem*/
+    font-size: 1.2rem; /*1rem*/
+    padding: 0.3rem; /*0.3rem*/
   }
 
   .CommunityMembersModalPage .BottomBar--hidden {
@@ -44,7 +54,7 @@
 
 @media all and (min-width: 768px) {
   .CommunityMembersModalPage .UserListItem {
-    flex: 0 1 125px;
+    flex: 0 1 190px;
   }
 
   .CommunityMembersModalPage
@@ -52,55 +62,37 @@
     .User__ProfilePic-wrapper
     .User__ProfilePic {
     display: block;
-    margin: 0.5rem;
-    width: 85px;
-    height: 85px;
+
+    margin: 1rem;
+    width: 125px;
+    height: 125px;
   }
 
   .CommunityMembersModalPage .UserListItem .user__meta {
-    flex: 1 1 125px; /* flex: 1 1 150px;*/
-    padding: 0.5rem; /* 1rem;*/
+    flex: 1 1 160px; /* flex: 1 1 150px;*/
+    padding: 0.75rem; /* 1rem;*/
+    gap: 0.5rem;
+  }
+}
+
+@media all and (min-width: 800px) {
+  .CommunityMembersModalPage .UserListItem {
+    flex: 0 1 200px;
   }
 
-  /*  TODO: transform into pulldown / meatball menu instead - until then we shrink / start (too) tiny   */
-  .CommunityMembersModalPage .UserListItem .user__actions {
-    gap: 0.3rem; /*0.5rem*/
-    padding: 0.3rem; /*0.5rem*/
-  }
-  .CommunityMembersModalPage .UserListItem .user__actions a.user__action {
-    font-size: 1rem; /*1rem*/
-    padding: 0.3rem; /*0.3rem*/
+  .CommunityMembersModalPage
+    .UserListItem
+    .User__ProfilePic-wrapper
+    .User__ProfilePic {
+    display: block;
+
+    margin: 1rem;
+    width: 125px;
+    height: 125px;
   }
 }
 
 @media all and (min-width: 992px) {
-  .CommunityMembersModalPage .UserListItem {
-    flex: 0 1 150px;
-  }
-  .CommunityMembersModalPage
-    .UserListItem
-    .User__ProfilePic-wrapper
-    .User__ProfilePic {
-    display: block;
-    margin: 0.5rem;
-    width: 100px;
-    height: 100px;
-  }
-
-  .CommunityMembersModalPage .UserListItem .user__meta {
-    flex: 1 1 150px; /* flex: 1 1 150px;*/
-    padding: 0.75rem; /* 1rem;*/
-  }
-
-  .CommunityMembersModalPage .UserListItem .user__actions {
-    gap: 0.4rem; /*0.5rem*/
-    padding: 0.4rem; /*0.5rem*/
-  }
-  .CommunityMembersModalPage .UserListItem .user__actions a.user__action {
-    font-size: 1.1rem; /*1rem*/
-    padding: 0.3rem; /*0.3rem*/
-  }
-
   .CommunityMembersModalPage .BottomBar--hidden {
     margin-bottom: -270px;
   }
@@ -114,14 +106,14 @@
 
 @media all and (min-width: 1024px) {
   .CommunityMembersModalPage .UserListItem {
-    flex: 0 1 175px;
+    flex: 0 1 200px;
   }
 
   .CommunityMembersModalPage
     .UserListItem
     .User__ProfilePic-wrapper
     .User__ProfilePic {
-    margin: 0.75rem;
+    margin: 1.25rem;
     width: 125px;
     height: 125px;
   }

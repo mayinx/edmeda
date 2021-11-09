@@ -8,10 +8,10 @@ import CommunitiesContext from "../../contexts/CommunitiesContext";
 import FormConfig from "./FormConfig";
 import TextInputFormGroup from "../../components/form/groups/TextInputFormGroup";
 import SelectInputFormGroup from "../../components/form/groups/SelectInputFormGroup";
-import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 import useNotify from "../../components/notifications/useNotify";
 import useFormResultHandler from "../../components/form/useFormResultHandler";
+import AuthService from "../../services/auth";
 
 export default function EditCommunityPage(props) {
   const { communities, setCommunities } = useContext(CommunitiesContext);
@@ -33,45 +33,34 @@ export default function EditCommunityPage(props) {
     setFieldError: setError,
   });
 
-  const { currentUserData, setCurrentUserData } = useContext(
-    CurrentUserContext
-  );
-
   useEffect(() => {
     axios
-      .get(`/api/communities/${id}`, {
-        headers: {
-          "x-auth-token":
-            currentUserData?.token ?? localStorage.getItem("auth-token"),
-        },
-      })
+      .get(`/api/communities/${id}`, { headers: AuthService.authHeader() })
       .then((res) => {
         setCommunity(res.data);
       })
       .catch((err) => {
-        console.log("err: ", err);
-        console.log("id:", id);
+        console.log("err: ", err, "communities#id: ", id);
         notifyError({
           title: "Community not found",
-          message: `A Community with this couldn't be found - an error occured: ${err}`,
+          message: `A Community with this id couldn't be found - an error occured: ${err}`,
           toastCntId: "modalNotificationCnt",
         });
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (community) {
       reset(community);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [community]);
 
   const onSubmit = (data) => {
     axios
       .patch(`/api/communities/${id}`, data, {
-        headers: {
-          "x-auth-token":
-            currentUserData?.token ?? localStorage.getItem("auth-token"),
-        },
+        headers: AuthService.authHeader(),
       })
       .then((res) => {
         const newList = communities.map((el) => {

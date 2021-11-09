@@ -1,7 +1,4 @@
-import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
-import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 import { useForm, FormProvider } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
@@ -11,12 +8,10 @@ import InputFormGroup from "../../components/form/groups/InputFormGroup";
 import useNotify from "../notifications/useNotify";
 import useFormResultHandler from "../form/useFormResultHandler";
 
-export default function Register(props) {
-  const { notifyError, notifySuccess } = useNotify();
+import AuthService from "../../services/auth";
 
-  const { currentUserData, setCurrentUserData } = useContext(
-    CurrentUserContext
-  );
+export default function Register(props) {
+  const { notifySuccess } = useNotify();
 
   const history = useHistory();
 
@@ -28,7 +23,7 @@ export default function Register(props) {
     setError,
   } = formMethods;
 
-  const { handleFormSuccess, handleFormError } = useFormResultHandler({
+  const { handleFormError } = useFormResultHandler({
     modelName: "User",
     crudAction: "create",
     setFieldError: setError,
@@ -36,24 +31,12 @@ export default function Register(props) {
 
   const onSubmit = async (formData) => {
     try {
-      await axios.post("/api/users/register", formData);
-
-      const loginResponse = await axios.post("/api/users/login", {
-        email: formData.email,
-        password: formData.password,
-      });
-      const userFirstName =
-        loginResponse?.data?.user?.firstName ??
-        loginResponse?.data?.user?.fullName;
-      setCurrentUserData({
-        token: loginResponse.data.token,
-        user: loginResponse.data.user,
-      });
-      localStorage.setItem("auth-token", loginResponse.data.token);
+      let response = await AuthService.register(formData);
+      response = await AuthService.login(formData);
 
       notifySuccess({
         title: "Registration successfull",
-        message: `Welcome to Edmeda, ${userFirstName} - happy socializing!`,
+        message: `Welcome to Edmeda, ${response?.data?.user?.firstName} - happy socializing!`,
       });
       history.push("/communities");
     } catch (err) {

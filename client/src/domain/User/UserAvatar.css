@@ -16,3 +16,10 @@
   border: 1px solid #fff;
   box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%);
 }
+
+.User__ProfilePic {
+}
+
+.User__ProfilePic.rounded {
+  border-radius: 100%;
+}

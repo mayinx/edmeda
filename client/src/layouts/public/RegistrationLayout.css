@@ -20,12 +20,28 @@
 }
 
 @media all and (min-width: 992px) {
+  .LoginModal .Modal__inner,
+  .Register .Modal__inner {
+    min-width: 50%;
+  }
 }
 
 @media all and (min-width: 1024px) {
 }
 @media all and (min-width: 1200px) {
+  .LoginModal .Modal__inner,
+  .Register .Modal__inner {
+    min-width: 40%;
+
+    min-height: 60%;
+  }
 }
 
 @media all and (min-width: 1400px) {
+  .LoginModal .Modal__inner,
+  .Register .Modal__inner {
+    min-width: 35%;
+
+    min-height: 60%;
+  }
 }

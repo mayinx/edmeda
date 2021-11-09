@@ -1,30 +1,24 @@
-import { Route, Switch } from "react-router-dom";
+import { Route } from "react-router-dom";
 import AppHeader from "../../components/app/AppHeader";
 import CommunityPage from "../../pages/communities/CommunityPage";
 import "./CommunityLayout.css";
 import { useParams } from "react-router-dom";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import CommunityContext from "../../contexts/CommunityContext";
-import CurrentUserContext from "../../contexts/CurrentUserContext";
+
 import ReactLoading from "react-loading";
+import AuthService from "../../services/auth";
 
 export default function CommunityLayout() {
   const [currentCommunity, setCurrentCommunity] = useState({});
   const params = useParams();
   const [isLoading, setIsLoading] = useState(true);
 
-  const { currentUserData, setCurrentUserData } = useContext(
-    CurrentUserContext
-  );
-
   useEffect(() => {
     axios
       .get(`/api/communities/${params.id}`, {
-        headers: {
-          "x-auth-token":
-            currentUserData?.token ?? localStorage.getItem("auth-token"),
-        },
+        headers: AuthService.authHeader(),
       })
       .then((res) => {
         setCurrentCommunity(res.data);

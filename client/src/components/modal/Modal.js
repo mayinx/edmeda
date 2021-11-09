@@ -25,13 +25,13 @@ import { useHistory } from "react-router";
 import { createPortal } from "react-dom";
 import { FaRegTimesCircle } from "react-icons/fa";
 import ModalContext from "../../contexts/ModalContext";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 export default function Modal(props) {
   const history = useHistory();
   const goBackTo = props.goBackTo || "/";
 
-  const { modalOpen, setModalOpen } = useContext(ModalContext);
+  const { setModalOpen } = useContext(ModalContext);
 
   useEffect(() => {
     setModalOpen(true);
@@ -39,6 +39,7 @@ export default function Modal(props) {
     return () => {
       setModalOpen(false);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return createPortal(

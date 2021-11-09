@@ -1,23 +1,23 @@
 import "./CommunityListItem.css";
 import SchoolCommunityFbProfilePic from "../../assets/community/fb_profile_pics/shutterstock_1856929843_mod.jpg";
-import _ from "lodash";
 import CommunitiesContext from "../../contexts/CommunitiesContext";
 import { useContext } from "react";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import { FaRegEdit, FaRegTrashAlt, FaUsersCog } from "react-icons/fa";
 import axios from "axios";
-import CurrentUserContext from "../../contexts/CurrentUserContext";
+
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import "../../components/notifications/ReactConfirmAlertOverrides.css";
 
+import UserAvatar from "../../domain/User/UserAvatar";
+
 import useNotify from "../../components/notifications/useNotify";
+import AuthService from "../../services/auth";
 
 export default function Community({ community }) {
   const { communities, setCommunities } = useContext(CommunitiesContext);
-
-  const { currentUserData } = useContext(CurrentUserContext);
 
   const history = useHistory();
   const { notifySuccess, notifyError } = useNotify();
@@ -47,12 +47,7 @@ export default function Community({ community }) {
     e.stopPropagation();
 
     axios
-      .delete(`/api/communities/${id}`, {
-        headers: {
-          "x-auth-token":
-            currentUserData?.token ?? localStorage.getItem("auth-token"),
-        },
-      })
+      .delete(`/api/communities/${id}`, { headers: AuthService.authHeader() })
       .then((res) => {
         setCommunities(
           communities.filter((resource) => {
@@ -97,30 +92,6 @@ export default function Community({ community }) {
     e.preventDefault();
   };
 
-  let communityTypeTagColor = null;
-  let communityTypeTagCaption = community.type;
-
-  switch (community.type) {
-    case "Tenant":
-      communityTypeTagColor = "dark-blue";
-      communityTypeTagCaption = "School";
-
-      break;
-    case "Class":
-      communityTypeTagColor = "blue";
-
-      break;
-    case "Course":
-      communityTypeTagColor = "green";
-      break;
-    case "Custom":
-      communityTypeTagColor = "yellow";
-      break;
-    default:
-      communityTypeTagColor = "blue";
-      break;
-  }
-
   let profilePicUrl = community?.picture;
   if (!profilePicUrl) {
     try {
@@ -145,10 +116,20 @@ export default function Community({ community }) {
       </p>
 
       <div className="community__meta">
-        <div className="truncate">{community.name}</div>
-        <div className="truncate">{community?.creator?.fullName}</div>
-        <span className={`tag ${communityTypeTagColor}`}>
-          {communityTypeTagCaption}
+        <div className="community__name truncate">{community.name}</div>
+        <div className="community__owner truncate">
+          <UserAvatar
+            user={community?.creator}
+            wrapper={false}
+            avatarClassName="CommunityCreatorAvatar rounded"
+          />
+        </div>
+        <span
+          className={`community__type tag ${global.config.community.typeTagColorFor(
+            community?.type
+          )}`}
+        >
+          {global.config.community.typeTagCaptionFor(community?.type)}
         </span>
       </div>
 

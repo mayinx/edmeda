@@ -1,58 +1,46 @@
-import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
-import CurrentUserContext from "../../contexts/CurrentUserContext";
-
 import { useForm, FormProvider } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
-
 import FormConfig from "./FormConfig";
 import InputFormGroup from "../../components/form/groups/InputFormGroup";
-
 import useNotify from "../notifications/useNotify";
+import useFormResultHandler from "../form/useFormResultHandler";
+import AuthService from "../../services/auth";
+import "./Login.css";
 
 export default function Login(props) {
-  const { notifyError, notifySuccess } = useNotify();
+  const { notifySuccess } = useNotify();
 
-  const { setCurrentUserData } = useContext(CurrentUserContext);
   const history = useHistory();
 
   const formMethods = useForm();
   const {
-    getValues,
     handleSubmit,
     formState: { errors },
+    setError,
   } = formMethods;
 
-  const onSubmit = async (formData) => {
-    // e.preventDefault();
-    try {
-      const loginResponse = await axios.post("/api/users/login", formData);
-      const userFirstName =
-        loginResponse?.data?.user?.firstName ??
-        loginResponse?.data?.user?.fullName;
+  const { handleFormError } = useFormResultHandler({
+    modelName: "User",
+    crudAction: "read",
+    setFieldError: setError,
+  });
 
-      setCurrentUserData({
-        token: loginResponse.data.token,
-        user: loginResponse.data.user,
-      });
-      localStorage.setItem("auth-token", loginResponse.data.token);
+  const onSubmit = async (formData) => {
+    // // e.preventDefault();
+    try {
+      const response = await AuthService.login(formData);
 
       notifySuccess({
         title: "Login successfull",
-        message: `Welcome to Edmeda, ${userFirstName} - happy socializing!`,
+        message: `Welcome to Edmeda, ${response?.data?.user?.firstName} - happy socializing!`,
       });
       history.push("/communities");
     } catch (err) {
-      const errMsg = err?.response?.data?.msg ?? err;
-      console.log(
-        "Couldn't login user - something went wrong: ",
-        err?.response?.data || err
-      );
-      notifyError({
+      handleFormError({
+        errorObject: err,
         title: "Login failed",
-        message: `Couldn't login user: ${errMsg}`,
-        toastCntId: "modalNotificationCnt",
+        message: `Couldn't login user: ${err?.response?.data?.msg ?? err}`,
       });
     }
   };
@@ -66,11 +54,16 @@ export default function Login(props) {
           onSubmit={handleSubmit(onSubmit)}
         >
           <InputFormGroup name="email" formConfig={FormConfig.login.email} />
-
           <InputFormGroup
             name="password"
             formConfig={FormConfig.login.password}
           />
+          <div className="DemoInfo">
+            <h2>Demo-login</h2>
+            <p>Use the following credentials to give Edmeda a try:</p>
+            <p className="DemoCrendentialsEntry">E-Mail: chuck@nerdherd.com</p>
+            <p className="DemoCrendentialsEntry">PW: Chuck99</p>
+          </div>
         </form>
       </FormProvider>
     </div>

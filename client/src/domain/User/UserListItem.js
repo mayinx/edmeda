@@ -1,25 +1,26 @@
 import "./UserListItem.css";
 import UserFallbackProfilePic from "../../assets/user/fb_avatars/fbAvatar.png";
 
-import { useContext } from "react";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import { FaRegEdit, FaRegTrashAlt, FaUserMinus } from "react-icons/fa";
 import axios from "axios";
-import CurrentUserContext from "../../contexts/CurrentUserContext";
+
 import { confirmAlert } from "react-confirm-alert";
 // TODO Check - move to App.js?:
 import "react-confirm-alert/src/react-confirm-alert.css";
 import "../../components/notifications/ReactConfirmAlertOverrides.css";
 
 import useNotify from "../../components/notifications/useNotify";
+import AuthService from "../../services/auth";
 
 export default function UserListItem(props) {
   // TODO: Refactor: Move that dependencies all up again - implement
-  // event handlers on CommunityMembersPage-componenet + pass those
+  // event handlers on CommunityMembersPage-component + pass those
   // handlers down here - or use a context or whatever
 
   const { user, community, communityMembers, setCommunityMembers } = props;
+
   let avatarUrl = user?.picture;
   if (!avatarUrl) {
     try {
@@ -31,8 +32,6 @@ export default function UserListItem(props) {
       avatarUrl = UserFallbackProfilePic;
     }
   }
-
-  const { currentUserData } = useContext(CurrentUserContext);
 
   const history = useHistory();
   const { notifySuccess, notifyError, notifyInfo } = useNotify();
@@ -63,10 +62,7 @@ export default function UserListItem(props) {
 
     axios
       .delete(`/api/communities/${communityId}/members/${memberId}`, {
-        headers: {
-          "x-auth-token":
-            currentUserData?.token ?? localStorage.getItem("auth-token"),
-        },
+        headers: AuthService.authHeader(),
       })
       .then((res) => {
         setCommunityMembers(
@@ -98,37 +94,21 @@ export default function UserListItem(props) {
       });
   };
 
-  const openCommunityPage = (e, id) => {
-    history.push(`/communities/${id}`);
-  };
+  // const openCommunityPage = (e, id) => {
+  //   history.push(`/communities/${id}`);
+  // };
 
-  const openEditCommunityModal = (e, id) => {
-    history.push(`/communities/${id}/edit`);
-    e.stopPropagation();
-    e.preventDefault();
-  };
+  // const openEditCommunityModal = (e, id) => {
+  //   history.push(`/communities/${id}/edit`);
+  //   e.stopPropagation();
+  //   e.preventDefault();
+  // };
 
-  const openEditCommunityMembersModal = (e, id) => {
-    history.push(`/communities/${id}/members`);
-    e.stopPropagation();
-    e.preventDefault();
-  };
-
-  let userTypeTagColor = null;
-  switch (user.type) {
-    case "Student":
-      userTypeTagColor = "green";
-      break;
-    case "Teacher":
-      userTypeTagColor = "dark-blue";
-      break;
-    case "Parent":
-      userTypeTagColor = "blue";
-      break;
-    default:
-      userTypeTagColor = "blue";
-      break;
-  }
+  // const openEditCommunityMembersModal = (e, id) => {
+  //   history.push(`/communities/${id}/members`);
+  //   e.stopPropagation();
+  //   e.preventDefault();
+  // };
 
   return (
     <section
@@ -141,11 +121,15 @@ export default function UserListItem(props) {
         <img src={`${avatarUrl}`} className="User__ProfilePic" alt="" />
       </p>
       <div className="user__meta">
-        <div className="truncate">{user?.fullName}</div>
-        <div className="truncate">
-          <span className={`tag ${userTypeTagColor}`}>{user?.type}</span>
+        <div className="user__name truncate">{user?.fullName}</div>
+        <div className="user__type truncate">
+          <span
+            className={`tag ${global.config.user.typeTagColorFor(user?.type)}`}
+          >
+            {user?.type}
+          </span>
         </div>
-        <div className="truncate">{user?.creator?.fullName}</div>
+        {/* <div className="truncate">{user?.creator?.fullName}</div> */}
       </div>
       <div className="user__actions">
         <Link

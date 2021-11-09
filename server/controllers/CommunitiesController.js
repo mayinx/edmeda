@@ -212,6 +212,7 @@ exports.indexMembers = function (req, res) {
 //  Add/create new community member
 //  POST api/communities/:id/members
 // TODO: Wrap adding and removing of community memebrs in transactions!
+// TODO: Use services for that
 exports.addMember = async function (req, res) {
   try {
     const { id } = req.params;
@@ -226,7 +227,7 @@ exports.addMember = async function (req, res) {
 
     if (!member) {
       // TODO: OF COURSE this has to evolve ;-)
-      // TODO: Send email with a registration confirmation token / a default random pw or something
+      // TODO: Send email with a registration confirmation token / a default random pw ...
       member = await new RegisterUserService().run({
         ...memberAttributes,
         ...{ password: "NewUser99" },
@@ -241,18 +242,19 @@ exports.addMember = async function (req, res) {
       });
     }
 
-    console.log("member AFTER: ", member);
-
     ({ community, member } = await community.addMember(member));
 
-    console.log("member AFTER AFTER: ", member);
+    // Add to school community as well if not already present
+    // (FYI: 'addMember' takes care of that check )
+    let schoolCommunity = await Community.findOne({
+      type: Community.TYPES.TENANT,
+    });
 
-    // const schoolCommunity = await Community.findOne({
-    //   type: Community.TYPES.TENANT,
-    // });
-    // if (schoolCommunity && !schoolCommunity._id.equals(community._id)) {
-    //   ({ community, member } = await schoolCommunity.addMember(member));
-    // }
+    if (schoolCommunity) {
+      ({ community: schoolCommunity, member } = await schoolCommunity.addMember(
+        member
+      ));
+    }
 
     res.status(201).send(member);
   } catch (e) {

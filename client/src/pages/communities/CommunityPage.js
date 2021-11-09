@@ -74,6 +74,7 @@ export default function CommunityPage() {
     }
 
     setSidebarStateClass(sidebarClass);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sidebarToggled, mediaQueryToggled]);
 
   return (

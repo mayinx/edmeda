@@ -28,6 +28,7 @@ export default function UserAvatar(props) {
           className={`User__ProfilePic-wrapper ${
             avatarWrapperClassName ?? null
           }`}
+          title={`${user.userName} (${user.type})`}
         >
           <img
             src={`${avatarUrl}`}

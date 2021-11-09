@@ -247,45 +247,29 @@ communitiesSchema.methods.performAfterCreationChores = async function () {
     throw err;
   }
 };
-
+// 1mal komplett durch 1-4
+// 1mal nur bis 3
+// 1mal komplett durch 1-4
+// 1mal nur 4?!
 communitiesSchema.methods.addMember = async function (newMember) {
   try {
-    // TODO: What's the instance method version of this ?
-    // i.e. something like 'req.currentUser.update(...)' - which doesn't seem to work here?
-    // EDIT: TODO: Check =>  nwMember.communities.push(this) && newMember.save();
     let updatedCommunity = null;
     let User = mongoose.model("User"); // to avoid circular dependency warnings
 
-    if (!newMember.communities.includes(this._id)) {
+    if (!(await newMember.reload()).communities.includes(this._id)) {
       newMember = await User.findOneAndUpdate(
         { _id: newMember._id },
         { $push: { communities: this } },
         { new: true }
       );
     }
-    // TODO: What's the instance method version of this ?
-    // i.e. something like 'community.update(...)' - which doesn't seem to work here?
-    // TODO: Check => this.members.push(newMember); && this.save
-    if (!this.members.includes(newMember._id)) {
+
+    if (!(await this.reload()).members.includes(newMember._id)) {
       updatedCommunity = await Community.findOneAndUpdate(
         { _id: this._id },
         { $push: { members: newMember } },
         { new: true }
       ).populate("creator");
-    }
-
-    // Add to school community as well if not already present
-    let schoolCommunity = await Community.findOne({
-      type: Community.TYPES.TENANT,
-    }).populate("User");
-    if (
-      schoolCommunity &&
-      updatedCommunity &&
-      !schoolCommunity._id.equals(updatedCommunity._id)
-    ) {
-      ({ schoolCommunity, newMember } = await schoolCommunity.addMember(
-        newMember
-      ));
     }
 
     return { community: updatedCommunity ?? this, member: newMember };

@@ -26,6 +26,7 @@
   flex-direction: row;
   padding: 0.5rem 0.5rem 0.5rem 0;
   border-bottom: 1px solid #eeeeee;
+  min-height: 175px;
 
   align-items: flex-start;
 
@@ -51,27 +52,8 @@
   .GroupChat
   .MessageList
   .Message
-  .user,
-.CommunityLayout
-  .CommunityMain
-  .MainContent
-  .GroupChat
-  .MessageList
-  .Message
-  .date {
-  font-size: 0.625rem;
-  color: #888888;
-}
-
-.CommunityLayout
-  .CommunityMain
-  .MainContent
-  .GroupChat
-  .MessageList
-  .Message
   .user {
-  min-width: 120px;
-  min-width: 120px;
+  min-width: 130px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -86,8 +68,9 @@
   .Message
   .user
   .ChatAvatar {
-  width: 65px;
-  height: 65px;
+  width: 85px;
+  height: 85px;
+  margin: 0.5rem 1rem 0.5rem 1rem;
 }
 
 .CommunityLayout
@@ -98,8 +81,72 @@
   .Message
   .content {
   flex-grow: 1;
-
   padding: 0.5rem 1rem 0.5rem 0;
+}
+
+.CommunityLayout
+  .CommunityMain
+  .MainContent
+  .GroupChat
+  .MessageList
+  .Message
+  .content
+  .Message__header {
+  font-size: 70%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 6px;
+  /* border-bottom: 1px solid #b7c6d0; */
+}
+
+.CommunityLayout
+  .CommunityMain
+  .MainContent
+  .GroupChat
+  .MessageList
+  .Message
+  .content
+  .Message__header
+  .Message__sender--name {
+  font-weight: bold;
+  font-size: 0.75rem;
+  color: #536f82;
+}
+
+.CommunityLayout
+  .CommunityMain
+  .MainContent
+  .GroupChat
+  .MessageList
+  .Message
+  .content
+  .Message__header
+  .Message__sent--ago {
+  color: #888888;
+}
+
+.CommunityLayout
+  .CommunityMain
+  .MainContent
+  .GroupChat
+  .MessageList
+  .Message
+  .content
+  .Message__header
+  .Message__sent--date {
+  color: #888888;
+}
+
+.CommunityLayout
+  .CommunityMain
+  .MainContent
+  .GroupChat
+  .MessageList
+  .Message
+  .content
+  .Message__body {
+  color: var(--ChatMessage-font-color);
 }
 
 .CollectionEmpty {
@@ -108,4 +155,46 @@
   text-align: center;
   flex-direction: column;
   align-items: center;
+}
+
+@media all and (min-width: 400px) {
+  .CommunityLayout
+    .CommunityMain
+    .MainContent
+    .GroupChat
+    .MessageList
+    .Message
+    .content
+    .Message__header
+    .Message__sent--date {
+    display: none;
+  }
+}
+
+@media all and (min-width: 576px) {
+}
+
+@media all and (min-width: 768px) {
+}
+
+@media all and (min-width: 992px) {
+}
+
+@media all and (min-width: 1024px) {
+  .CommunityLayout
+    .CommunityMain
+    .MainContent
+    .GroupChat
+    .MessageList
+    .Message
+    .content
+    .Message__header
+    .Message__sent--date {
+    display: block;
+  }
+}
+@media all and (min-width: 1200px) {
+}
+
+@media all and (min-width: 1400px) {
 }

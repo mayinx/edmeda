@@ -87,7 +87,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 1rem 0;
+  padding: 0.5rem 0 1rem 0;
 }
 .App__header
   .AppNav
@@ -95,8 +95,8 @@
   .SubNavItem--UserProfileCard
   .User__ProfilePic {
   margin: 0.5rem;
-  width: 100px;
-  height: 100px;
+  width: 125px;
+  height: 125px;
 }
 .App__header
   .AppNav
@@ -125,8 +125,8 @@
 }
 
 .User__ProfilePic.NavItem__Icon.userAvatarIcon {
-  width: 40px;
-  height: 40px;
+  width: 41px;
+  height: 41px;
 }
 
 .App__header .AppNav .NavItem--Link:hover {

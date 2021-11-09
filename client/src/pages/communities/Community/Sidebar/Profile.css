@@ -29,6 +29,10 @@
   visibility: visible;
   opacity: 1;
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   width: 100%;
   font-size: 1rem;
   font-weight: normal;

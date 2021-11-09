@@ -54,10 +54,11 @@
   color: white;
 }
 
-.CommunityListItem.CommunityListItem:hover img {
+.CommunityListItem.CommunityListItem:hover img.Community__ProfilePic {
   z-index: -1;
 }
-.CommunityListItem.CommunityListItem:hover img {
+
+.CommunityListItem.CommunityListItem:hover img.Community__ProfilePic {
   transition: all 0.5s ease-in-out;
   -webkit-transform-style: preserve-3d;
   -webkit-backface-visibility: hidden;
@@ -70,13 +71,26 @@
   width: 100%;
   /* flex: 1; */
   flex: 1 1 100px;
-  padding: var(--r-spacing-md);
+  /* padding: var(--r-spacing-md); */
+  padding: 0.5rem;
   background-color: var(--CommunityistItem-bg-color);
   border-bottom-left-radius: var(--CommunityListItem-border-radius);
   border-bottom-right-radius: var(--CommunityListItem-border-radius);
   border-top: 2px solid var(--CommunityistItem-border-color);
 }
-.CommunityListItem .community__meta .tag {
+.CommunityListItem .community__meta .community__owner {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  font-size: 80%;
+  display: flex;
+}
+.CommunityListItem .community__meta .community__owner .CommunityCreatorAvatar {
+  width: 42px;
+  height: 42px;
+  border: 1px solid #7e919e;
+}
+.CommunityListItem .community__meta .community__type {
   position: absolute;
   right: 10px;
   bottom: 10px;
@@ -106,7 +120,7 @@
   align-items: center;
   justify-content: center;
 }
-.CommunityListItem:hover img {
+.CommunityListItem:hover img.Community__ProfilePic {
   transform: scale(1.75) translateY(2rem);
   border-radius: var(--CommunityListItem-border-radius);
 }
@@ -144,6 +158,23 @@
 
   .CommunityListItem .community__meta {
     flex: 1 1 100px;
+    padding: 1rem;
+  }
+  .CommunityListItem .community__meta .community__name {
+    font-size: 1.35rem;
+    letter-spacing: 0.25rem;
+  }
+
+  .CommunityListItem
+    .community__meta
+    .community__owner
+    .CommunityCreatorAvatar {
+    width: 65px;
+    height: 65px;
+  }
+
+  .CommunityListItem .community__meta .community__type {
+    font-size: 1.15rem;
   }
 }
 
@@ -158,7 +189,8 @@
   }
 
   .CommunityListItem .community__meta {
-    flex: 1 1 100px;
+    flex: 1 1 110px;
+    padding: 0.75rem;
   }
 }
 
@@ -174,6 +206,23 @@
 
   .CommunityListItem .community__meta {
     flex: 1 1 100px;
+  }
+
+  .CommunityListItem .community__meta .community__name {
+    font-size: 1.15rem;
+    letter-spacing: 0.25rem;
+  }
+
+  .CommunityListItem
+    .community__meta
+    .community__owner
+    .CommunityCreatorAvatar {
+    width: 42px;
+    height: 42px;
+  }
+
+  .CommunityListItem .community__meta .community__type {
+    font-size: 1rem;
   }
 }
 
@@ -205,6 +254,14 @@
   .CommunityListItem .community__meta {
     flex: 1 1 100px;
   }
+
+  .CommunityListItem
+    .community__meta
+    .community__owner
+    .CommunityCreatorAvatar {
+    width: 46px;
+    height: 46px;
+  }
 }
 
 @media all and (min-width: 992px) {
@@ -235,6 +292,14 @@
   .CommunityListItem .community__meta {
     flex: 1 1 100px;
   }
+
+  .CommunityListItem
+    .community__meta
+    .community__owner
+    .CommunityCreatorAvatar {
+    width: 50px;
+    height: 50px;
+  }
 }
 
 @media all and (min-width: 1100px) {
@@ -249,6 +314,23 @@
 
   .CommunityListItem .community__meta {
     flex: 1 1 100px;
+  }
+
+  .CommunityListItem .community__meta .community__name {
+    font-size: 1rem;
+    letter-spacing: 0.2rem;
+  }
+
+  .CommunityListItem
+    .community__meta
+    .community__owner
+    .CommunityCreatorAvatar {
+    width: 42px;
+    height: 42px;
+  }
+
+  .CommunityListItem .community__meta .community__type {
+    font-size: 0.9rem;
   }
 }
 
@@ -280,20 +362,42 @@
   .CommunityListItem .community__meta {
     flex: 1 1 100px;
   }
+
+  .CommunityListItem
+    .community__meta
+    .community__owner
+    .CommunityCreatorAvatar {
+    width: 46px;
+    height: 46px;
+  }
+
+  .CommunityListItem .community__meta .community__name {
+    font-size: 1rem;
+    letter-spacing: 0.25rem;
+  }
 }
 
 @media all and (min-width: 1400px) {
   .CommunityListItem {
-    flex: 0 1 290px;
-    min-width: 290px;
+    flex: 0 1 300px;
+    min-width: 300px;
   }
   .CommunityListItem .Community__ProfilePic-wrapper img {
-    flex: 1 1 200px;
-    min-height: 200px;
+    flex: 1 1 220px;
+    min-height: 210px;
   }
 
   .CommunityListItem .community__meta {
-    flex: 1 1 100px;
+    flex: 1 1 110px;
+  }
+
+  .CommunityListItem .community__meta .community__name {
+    font-size: 1rem;
+    letter-spacing: 0.2rem;
+  }
+
+  .CommunityListItem .community__meta .community__type {
+    font-size: 0.9rem;
   }
 }
 
@@ -303,12 +407,21 @@
     min-width: 315px;
   }
   .CommunityListItem .Community__ProfilePic-wrapper img {
-    flex: 1 1 200px;
-    min-height: 200px;
+    flex: 1 1 220px;
+    min-height: 220px;
   }
 
   .CommunityListItem .community__meta {
-    flex: 1 1 100px;
+    flex: 1 1 110px;
+  }
+
+  .CommunityListItem .community__meta .community__name {
+    font-size: 1rem;
+    letter-spacing: 0.25rem;
+  }
+
+  .CommunityListItem .community__meta .community__type {
+    font-size: 0.9rem;
   }
 }
 
@@ -318,12 +431,21 @@
     min-width: 325px;
   }
   .CommunityListItem .Community__ProfilePic-wrapper img {
-    flex: 1 1 200px;
-    min-height: 200px;
+    flex: 1 1 220px;
+    min-height: 220px;
   }
 
   .CommunityListItem .community__meta {
-    flex: 1 1 100px;
+    flex: 1 1 110px;
+  }
+
+  .CommunityListItem .community__meta .community__name {
+    font-size: 1rem;
+    letter-spacing: 0.25rem;
+  }
+
+  .CommunityListItem .community__meta .community__type {
+    font-size: 0.9rem;
   }
 }
 
@@ -332,27 +454,26 @@
     flex: 0 1 360px;
     min-width: 360px;
   }
-  .CommunityListItem .Community__ProfilePic-wrapper img {
-    flex: 1 1 200px;
-    min-height: 200px;
-  }
 
-  .CommunityListItem .community__meta {
-    flex: 1 1 100px;
+  .CommunityListItem .community__meta .community__name {
+    font-size: 1.1rem;
+    letter-spacing: 0.25rem;
   }
 }
 
-@media all and (min-width: 1700px) {
+@media all and (min-width: 1800px) {
   .CommunityListItem {
-    flex: 0 1 380px;
-    min-width: 380px;
-  }
-  .CommunityListItem .Community__ProfilePic-wrapper img {
-    flex: 1 1 200px;
-    min-height: 200px;
+    flex: 0 1 390px;
+    min-width: 390px;
   }
 
-  .CommunityListItem .community__meta {
-    flex: 1 1 100px;
+  .CommunityListItem .Community__ProfilePic-wrapper img {
+    flex: 1 1 230px;
+    min-height: 230px;
+  }
+
+  .CommunityListItem .community__meta .community__name {
+    font-size: 1.1rem;
+    letter-spacing: 0.25rem;
   }
 }

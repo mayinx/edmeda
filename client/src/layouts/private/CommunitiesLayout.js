@@ -1,4 +1,4 @@
-import { Route, Switch } from "react-router-dom";
+import { Route } from "react-router-dom";
 import AppHeader from "../../components/app/AppHeader";
 import MyCommunitiesPage from "../../pages/communities/MyCommunitiesPage";
 import "./CommunitiesLayout.css";
@@ -17,6 +17,10 @@ export default function CommunitiesLayout() {
   const [membersPageBottomBarToggled, toggleMembersPageBottomBar] = useState(
     false
   );
+  const [
+    communityMembersModalHeader,
+    setCommunityMembersModalHeader,
+  ] = useState("Community Members (0)");
 
   return (
     <>
@@ -37,7 +41,7 @@ export default function CommunitiesLayout() {
         </Route>
         <Route exact path="/communities/:id/members">
           <Modal
-            modalCaption="Community Members"
+            modalCaption={communityMembersModalHeader}
             crudAction="custom"
             formId={CREATE_ACTION_NEW_MEMBER_FORM_ID}
             goBackTo="/communities"
@@ -56,6 +60,7 @@ export default function CommunitiesLayout() {
               formId={CREATE_ACTION_NEW_MEMBER_FORM_ID}
               toggleBottomBar={toggleMembersPageBottomBar}
               bottomBarToggled={membersPageBottomBarToggled}
+              setModalHeader={setCommunityMembersModalHeader}
             />
           </Modal>
         </Route>

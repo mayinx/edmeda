@@ -9,24 +9,9 @@ import useNotify from "../notifications/useNotify";
 import "./AppHeader.css";
 
 export default function AppHeader() {
-  const { userLoggedIn, logout, currentUserData } = useAuthActions();
+  const { logout, currentUser } = useAuthActions();
   const { notifyInfo } = useNotify();
-
-  let userTypeTagColor = null;
-  switch (currentUserData?.user?.type) {
-    case "Student":
-      userTypeTagColor = "green";
-      break;
-    case "Teacher":
-      userTypeTagColor = "dark-blue";
-      break;
-    case "Parent":
-      userTypeTagColor = "blue";
-      break;
-    default:
-      userTypeTagColor = "blue";
-      break;
-  }
+  const cUser = currentUser();
 
   return (
     <header className="App__header">
@@ -70,13 +55,15 @@ export default function AppHeader() {
           <DropdownMenu className="ddMenu ddMenue--UserAvatar">
             <li>
               <Link className="SubNavItem SubNavItem--UserProfileCard" to="#">
-                <UserAvatar user={currentUserData.user} />
+                <UserAvatar user={cUser.user} />
                 <div className="User__Meta">
-                  <span className="User__Name">
-                    {currentUserData?.user?.fullName}
-                  </span>
-                  <span className={`User__Type tag ${userTypeTagColor}`}>
-                    {currentUserData?.user?.type}
+                  <span className="User__Name">{cUser?.user?.fullName}</span>
+                  <span
+                    className={`User__Type tag ${global.config.user.typeTagColorFor(
+                      cUser?.user?.type
+                    )}`}
+                  >
+                    {cUser?.user?.type}
                   </span>
                 </div>
               </Link>

@@ -1,6 +1,5 @@
 import "./UserList.css";
 import UserListItem from "./UserListItem.js";
-import { Link } from "react-router-dom";
 import ReactLoading from "react-loading";
 
 export default function UserList(props) {

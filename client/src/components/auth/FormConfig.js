@@ -8,7 +8,7 @@ class FormConfig {
       email: {
         type: "email",
         label: "Your E-Mail-Address",
-        placeholder: "E.g. 'jonny.mcguire@gmail.com'",
+        placeholder: "Demo: 'chuck@nerdherd.com'",
         validationRuleset: {
           required: {
             value: true,
@@ -28,7 +28,7 @@ class FormConfig {
       password: {
         type: "password",
         label: "Your Password",
-        placeholder: "NOT 'jonny123' ;-)",
+        placeholder: "Demo: 'Chuck99'",
         validationRuleset: {
           required: {
             value: true,

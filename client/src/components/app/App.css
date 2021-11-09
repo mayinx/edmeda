@@ -3,6 +3,8 @@
 
 .App--modalOpened {
   filter: blur(4px);
+  /* necessary to avoid trouble when using responsive-nav-overlay + modal side by side: */
+  overflow-y: hidden;
 }
 
 .PageLoadingAnimation {

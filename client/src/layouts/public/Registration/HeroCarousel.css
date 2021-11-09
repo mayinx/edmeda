@@ -1,5 +1,9 @@
 .HeroCarousel {
 }
+.HeroCarousel .carousel .carousel-status {
+  display: none;
+}
+
 .HeroCarousel .carousel.carousel-slider:hover .slide .legend {
   opacity: 0.5;
 }

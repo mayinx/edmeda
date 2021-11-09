@@ -7,9 +7,11 @@
   color: var(--header-font-color);
   background-color: var(--header-bg-color);
 
-  padding: 0.5rem 0.75rem;
-  padding: 1rem 1.5rem;
+  padding: 0 1rem;
   font-size: 1rem;
+
+  height: 65px;
+  min-height: 65px;
 
   gap: 0;
 }
@@ -24,23 +26,50 @@
   width: 100%;
 }
 
-.App__header .RegistrationHeader .AppNav .AppNav__Left {
+.App__header.RegistrationHeader .AppNav .AppNav__Left {
   display: flex;
   justify-content: flex-start;
   align-items: center;
   flex: 1;
   align-items: stretch;
 }
-.App__header .RegistrationHeader .AppNav .AppNav__Center {
+.App__header.RegistrationHeader .AppNav .AppNav__Center {
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-  /* flex: 1; */
   flex: auto;
   align-items: stretch;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  position: fixed;
+  top: 60px;
+  left: 0;
+  right: 0;
+  z-index: 10;
+
+  visibility: hidden;
+  opacity: 0;
+
+  margin: 10px;
+  border-radius: 10px;
+  transition: visibility 0.3s linear, opacity 0.3s linear;
+
+  background-color: #7393a7;
+
+  padding: 0.5rem;
 }
-.App__header .RegistrationHeader .AppNav .AppNav__Right {
+
+.App__header.RegistrationHeader .AppNav.toggled .AppNav__Center {
+  display: flex;
+  visibility: visible;
+  opacity: 1;
+}
+.App__header.RegistrationHeader .AppNav .AppNav__Center .NavItem {
+  padding: 1rem 1.5rem;
+  justify-content: flex-start;
+}
+
+.App__header.RegistrationHeader .AppNav .AppNav__Right {
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -49,7 +78,7 @@
   align-items: stretch;
 }
 
-.App__header .RegistrationHeader .AppNav .NavItem {
+.App__header.RegistrationHeader .AppNav .NavItem {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -61,30 +90,62 @@
   transition: all 0.3s ease;
 
   display: flex;
-  padding: 0.2rem 0.5rem;
+
   text-decoration: none;
 
   color: whitesmoke;
 }
-.App__header .RegistrationHeader .AppNav .NavItem:hover {
+
+.App__header.RegistrationHeader .AppNav .NavItem:hover {
   background-color: var(--nav-item-hover-bg-color);
   color: var(--nav-item-hover-font-color);
   border: 1px solid #80baee;
 }
 
-.App__header .RegistrationHeader .AppNav .NavItem--LoginBtn {
+.App__header.RegistrationHeader .AppNav .NavItem--Brand {
+  background-color: transparent;
+  filter: drop-shadow(2px 4px 6px rgb(247, 247, 247));
+}
+.App__header.RegistrationHeader .AppNav .NavItem--Brand:hover {
+  color: var(--nav-item-hover-font-color);
+  background-color: unset !important;
+
+  /* border: 1px solid #80baee;
+  color: whitesmoke;
+  border: 1px solid whitesmoke; */
+}
+.App__header.RegistrationHeader .AppNav .NavItem--ToggleNavBtn {
+  display: flex;
+  cursor: pointer;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+
+  transition: all 0.5s ease-in-out;
+  padding: 0.5rem 1rem;
+}
+
+.App__header.RegistrationHeader .AppNav .NavItem--ToggleNavBtn:hover {
+  border: 1px solid #6191af;
+  background-color: #82a8c0;
+  color: #fff;
+  font-size: 200%;
+}
+
+.App__header.RegistrationHeader .AppNav .NavItem--LoginBtn {
   /* background-color: ##9773a7; */
 
-  background-color: var(--nav-item-bg-color);
-  border: 1px solid #16878c;
+  background-color: #517a95;
+  border: 1px solid #466a81;
 }
-.App__header .RegistrationHeader .AppNav .NavItem--LoginBtn:hover {
+.App__header.RegistrationHeader .AppNav .NavItem--LoginBtn:hover {
   background-color: #466a81;
   color: #fff;
-  border: 1px solid #80baee;
-  border: 1px solid #16878c;
+  /* border: 1px solid #80baee;
+  border: 1px solid #16878c; */
+  border: 1px solid #466a81;
 }
-.App__header .RegistrationHeader .AppNav .NavItem--SignUpBtn {
+.App__header.RegistrationHeader .AppNav .NavItem--SignUpBtn {
   background-color: #9773a7;
   border: 1px solid #9773a7;
   border: 1px solid #16878c;
@@ -92,76 +153,105 @@
   /* background-color: #7393a7; */
 }
 
-.App__header .RegistrationHeader .AppNav .NavItem--SignUpBtn:hover {
+.App__header.RegistrationHeader .AppNav .NavItem--SignUpBtn:hover {
   background-color: #77458d;
 
   border: 1px solid #774090;
   border: 1px solid #77458d;
 }
 
-.App__header .RegistrationHeader .AppNav .NavItem--Link:hover {
+.App__header.RegistrationHeader .AppNav .NavItem--Link:hover {
   background-color: var(--nav-item-bg-color);
   border: 1px solid var(--nav-item-bg-color);
 }
 
-.App__header .RegistrationHeader .AppNav .NavItem .NavItem__Icon {
+.App__header.RegistrationHeader .AppNav .NavItem .NavItem__Icon {
   color: whitesmoke;
   transition: all 0.3s ease-in;
   font-size: 1.5rem;
 }
+.App__header.RegistrationHeader .AppNav .NavItem .NavItem__Icon.toggleNavIcon {
+  font-size: 1.5rem;
+}
 
-.App__header .RegistrationHeader .AppNav .NavItem:hover .NavItem__Icon {
+.App__header.RegistrationHeader .AppNav .NavItem:hover .NavItem__Icon {
   color: white;
   transform: scale(1.1);
 }
 
-.App__header .RegistrationHeader .AppNav .NavItem--Btn {
+.App__header.RegistrationHeader .AppNav .NavItem--Btn {
   padding: 0.2rem 0.5rem;
   width: max-content;
 }
-.App__header .RegistrationHeader .AppNav .NavItem--Link {
+.App__header.RegistrationHeader .AppNav .NavItem--Link {
   background-color: #7393a7;
   padding: 0.2rem 0.5rem;
 }
 
-.App__header .RegistrationHeader .AppNav .NavItem--BtnIconOnly {
+.App__header.RegistrationHeader .AppNav .NavItem--BtnIconOnly {
   padding: 0.3rem;
 }
 
-.App__header .RegistrationHeader .AppNav .NavItem--Brand {
-  padding: 0.3rem;
-  background-color: transparent;
-  color: whitesmoke;
-  border: 1px solid whitesmoke;
-  border-radius: 8px;
-  letter-spacing: 3px;
-  font-weight: bold;
-  font-size: 1rem;
-  filter: drop-shadow(2px 4px 6px rgb(247, 247, 247));
-  box-shadow: rgb(50 50 93 / 25%) 0px 13px 27px -5px,
-    rgb(0 0 0 / 30%) 0px 8px 16px -8px;
-}
-
-.App__header .RegistrationHeader .AppNav .NavItem--Brand:hover {
-  background-color: unset !important;
-  color: whitesmoke;
-  border: 1px solid whitesmoke;
-}
-
-.App__header .RegistrationHeader .AppNav .NavItem--Link {
-}
-
-/* .App__header  .RegistrationHeader .AppNav .NavItem--Btn--withCaption {
-  padding: 0.2rem 0.5rem;
-} */
-
-.App__header .RegistrationHeader .AppNav .NavItem--Btn .NavItem__Caption {
+.App__header.RegistrationHeader .AppNav .NavItem--Btn .NavItem__Caption {
   font-size: 1rem;
   font-weight: bold;
   letter-spacing: 1px;
 }
-.App__header .RegistrationHeader .AppNav .NavItem--Link .NavItem__Caption {
+.App__header.RegistrationHeader .AppNav .NavItem--Link .NavItem__Caption {
   font-size: 1rem;
   font-weight: bold;
   letter-spacing: 1px;
+}
+
+.App__header.RegistrationHeader .AppNav.toggled + .NavOverlay {
+  visibility: visible;
+  opacity: 1;
+}
+
+.App__header.RegistrationHeader .NavOverlay {
+  position: fixed;
+  display: block;
+  visibility: hidden;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  top: 65px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.25);
+  z-index: 3;
+  cursor: pointer;
+}
+
+@media all and (min-width: 800px) {
+  .App__header.RegistrationHeader .AppNav .NavItem--ToggleNavBtn {
+    display: none;
+  }
+  .App__header.RegistrationHeader {
+    height: 75px;
+  }
+  .App__header.RegistrationHeader .AppNav .AppNav__Center {
+    display: flex;
+    visibility: visible;
+    opacity: 1;
+
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+
+    flex-direction: row;
+    position: inherit;
+    top: 80px;
+    left: 50%;
+    z-index: 10;
+    background-color: inherit;
+
+    align-items: center;
+  }
+
+  .App__header.RegistrationHeader .AppNav .AppNav__Center .NavItem {
+    padding: 0.2rem 0.5rem;
+    justify-content: flex-start;
+  }
 }

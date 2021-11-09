@@ -143,7 +143,8 @@
   color: #fff;
   /* border: 1px solid #80baee;
   border: 1px solid #16878c; */
-  border: 1px solid #466a81;
+  /* border: 1px solid #466a81; */
+  border: 1px solid #16878c;
 }
 .App__header.RegistrationHeader .AppNav .NavItem--SignUpBtn {
   background-color: #9773a7;

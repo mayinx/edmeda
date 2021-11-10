@@ -37,7 +37,7 @@ If you are interested in utilizing Edmeda for your School, just drop me an [E-Ma
 - Package Management with npm
 - React-packages: React Hook Form, React-Responsive, Axios, React-Toastify, React Icons, Gender Detection, etc. ...
 
-## Peak inside 
+## Peek inside 
 
 ![sc-02](https://user-images.githubusercontent.com/126368/141141255-71854e50-0f54-4416-be34-b9e17e497fe9.png)
 *Communities View - lists the current user's communities*

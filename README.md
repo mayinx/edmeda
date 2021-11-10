@@ -2,7 +2,7 @@
 
 **Easy remote communication & collaboration for Schools!**
 
-![Edmeda](misc/screencapture-edmeda-herokuapp-2021-09-06-19_47_22.png)
+![Edmeda](https://user-images.githubusercontent.com/126368/141141252-f9a82e20-f22e-4ead-9b61-08e82b3bec2e.png)
 
 ## Edmeda Demo-Login
 
@@ -36,3 +36,23 @@ If you are interested in utilizing Edmeda for your School, just drop me an [E-Ma
 - Realtime Group-Chats via WebSockets/Socket.io
 - Package Management with npm
 - React-packages: React Hook Form, React-Responsive, Axios, React-Toastify, React Icons, Gender Detection, etc. ...
+
+## Peak inside 
+
+![sc-02](https://user-images.githubusercontent.com/126368/141141255-71854e50-0f54-4416-be34-b9e17e497fe9.png)
+*Communities View - lists the current user's communities*
+
+![sc-03](https://user-images.githubusercontent.com/126368/141141258-0e345be8-75f6-41d1-bfa5-20500a7dde57.png)
+*Communities View - another user's communities*
+
+![sc-04](https://user-images.githubusercontent.com/126368/141141260-d4d03854-f7de-4ca5-a4bb-90a87fc06611.png)
+*Community Members View*
+
+![sc-05](https://user-images.githubusercontent.com/126368/141141262-a652b0f2-cda7-4d9e-94e3-0019ef9f195c.png)
+*Community Members View*
+
+![sc-06](https://user-images.githubusercontent.com/126368/141141263-27abf2b4-e192-48fa-a842-ffc6f0032230.png)
+*Community view - with a list of group chats on the left in an collapsed sidebar and the currently opened Group Chat on the right*
+
+![sc-077](https://user-images.githubusercontent.com/126368/141141265-77490be3-a8ca-4592-bb84-4f74ef147a8d.png)
+*Community view - dito - but with extended sidebar*

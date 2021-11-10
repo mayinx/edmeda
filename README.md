@@ -39,20 +39,20 @@ If you are interested in utilizing Edmeda for your School, just drop me an [E-Ma
 
 ## Peek inside 
 
-![sc-02](https://user-images.githubusercontent.com/126368/141141255-71854e50-0f54-4416-be34-b9e17e497fe9.png)
+![Communities View_1](https://user-images.githubusercontent.com/126368/141141255-71854e50-0f54-4416-be34-b9e17e497fe9.png)
 *Communities View - lists the current user's communities*
 
-![sc-03](https://user-images.githubusercontent.com/126368/141141258-0e345be8-75f6-41d1-bfa5-20500a7dde57.png)
+![Communities View_2](https://user-images.githubusercontent.com/126368/141147317-d40d6519-c597-4442-9903-0ea87b219724.png)
 *Communities View - another user's communities*
 
-![sc-04](https://user-images.githubusercontent.com/126368/141141260-d4d03854-f7de-4ca5-a4bb-90a87fc06611.png)
+![Community_Members_View_1](https://user-images.githubusercontent.com/126368/141141260-d4d03854-f7de-4ca5-a4bb-90a87fc06611.png)
 *Community Members View*
 
-![sc-05](https://user-images.githubusercontent.com/126368/141141262-a652b0f2-cda7-4d9e-94e3-0019ef9f195c.png)
+![Community_Members_View_2](https://user-images.githubusercontent.com/126368/141141262-a652b0f2-cda7-4d9e-94e3-0019ef9f195c.png)
 *Community Members View*
 
-![sc-06](https://user-images.githubusercontent.com/126368/141141263-27abf2b4-e192-48fa-a842-ffc6f0032230.png)
+![Community View_1](https://user-images.githubusercontent.com/126368/141141263-27abf2b4-e192-48fa-a842-ffc6f0032230.png)
 *Community view - with a list of group chats on the left in an collapsed sidebar and the currently opened Group Chat on the right*
 
-![sc-077](https://user-images.githubusercontent.com/126368/141141265-77490be3-a8ca-4592-bb84-4f74ef147a8d.png)
+![Community View_2](https://user-images.githubusercontent.com/126368/141141265-77490be3-a8ca-4592-bb84-4f74ef147a8d.png)
 *Community view - dito - but with extended sidebar*

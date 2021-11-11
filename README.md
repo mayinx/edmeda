@@ -41,10 +41,10 @@ If you are interested in utilizing Edmeda for your School, just drop me an [E-Ma
 
 ## Peek inside 
 
-![Communities View_1](https://user-images.githubusercontent.com/126368/141141255-71854e50-0f54-4416-be34-b9e17e497fe9.png)
+![Communities View_1](https://user-images.githubusercontent.com/126368/141147317-d40d6519-c597-4442-9903-0ea87b219724.png)
 *Communities View - lists the current user's communities*
 
-![Communities View_2](https://user-images.githubusercontent.com/126368/141147317-d40d6519-c597-4442-9903-0ea87b219724.png)
+![Communities View_2](https://user-images.githubusercontent.com/126368/141141255-71854e50-0f54-4416-be34-b9e17e497fe9.png)
 *Communities View - another user's communities*
 
 ![Community_Members_View_1](https://user-images.githubusercontent.com/126368/141141260-d4d03854-f7de-4ca5-a4bb-90a87fc06611.png)

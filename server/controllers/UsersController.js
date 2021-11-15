@@ -87,102 +87,84 @@ exports.validateToken = async (req, res) => {
 
 /* DEFAULT RESTFUL ROUTES */
 
-exports.find = function (req, res) {
-  const { id } = req.params;
+// exports.find = function (req, res) {
+//   const { id } = req.params;
 
-  //TODO: FIlter al sensitive stuff out
-  // - check what the conventions are in the js/express community
+//   //TODO: FIlter al sensitive stuff out (like pw etc.)
+//   // - check what the conventions are in teh js/express community
 
-  User.findById(id)
-    .then((resource) => {
-      if (!resource) throw new NotFoundError("user", id);
-      res.send(resource);
-    })
-    .catch((e) => {
-      if (e.name === "NotFoundError") {
-        res.status(404).json({ error: e });
-      } else {
-        res.status(500).json({
-          error: `Something went wrong, please try again later: ${e}`,
-        });
-      }
-    });
-};
+//   User.findById(id)
+//     .then((resource) => {
+//       if (!resource) throw new NotFoundError("user", id);
+//       res.send(resource);
+//     })
+//     .catch((e) => {
+//       if (e.name === "NotFoundError") {
+//         res.status(404).json({ error: e });
+//       } else {
+//         res.status(500).json({
+//           error: `Something went wrong: ${e}`,
+//         });
+//       }
+//     });
+// };
 
-exports.index = function (req, res) {
-  let query = {};
-  User.find(query)
-    .then((resources) => {
-      res.send(resources);
-    })
-    .catch(() => {
-      res.status(500).json({
-        error: "Something went wrong, please try again later",
-      });
-    });
-};
-exports.create = function (req, res) {
-  User.create(req.body)
-    .then((newResource) => {
-      res.status(201).send(newResource);
-    })
-    .catch((error) => {
-      if (error.name === "ValidationError") {
-        res.status(400).json(error);
-      } else {
-        res.status(500).json(error);
-      }
-    });
-};
-exports.find = function (req, res) {
-  const { id } = req.params;
+// exports.index = function (req, res) {
+//   let query = {};
+//   User.find(query)
+//     .then((resources) => {
+//       res.send(resources);
+//     })
+//     .catch(() => {
+//       res.status(500).json({
+//         error: "Something went wrong, please try again later",
+//       });
+//     });
+// };
 
-  //TODO: FIlter al sensitive stuff out (like pw etc.)
-  // - check what the conventions are in teh js/express community
+// TODO: Authorize: current user is community creator / owner and adult
+// EDIT: Is handles as nested resource of communities
+// exports.create = function (req, res) {
+//   User.create(req.body)
+//     .then((newResource) => {
+//       res.status(201).send(newResource);
+//     })
+//     .catch((error) => {
+//       if (error.name === "ValidationError") {
+//         res.status(400).json(error);
+//       } else {
+//         res.status(500).json(error);
+//       }
+//     });
+// };
 
-  User.findById(id)
-    .then((resource) => {
-      if (!resource) throw new NotFoundError("user", id);
-      res.send(resource);
-    })
-    .catch((e) => {
-      if (e.name === "NotFoundError") {
-        res.status(404).json({ error: e });
-      } else {
-        res.status(500).json({
-          error: `Something went wrong, please try again later: ${e}`,
-        });
-      }
-    });
-};
+// exports.update = function (req, res) {
+//   const { id } = req.params;
 
-exports.update = function (req, res) {
-  const { id } = req.params;
-
-  User.findByIdAndUpdate(id, req.body, { new: true })
-    .then((updatedResource) => {
-      if (!updatedResource) throw new NotFoundError("community", id, req.body);
-      res.send(updatedResource);
-    })
-    .catch((e) => {
-      if (e.name === "NotFoundError") {
-        res.status(404).json({ error: e });
-      } else {
-        res.status(500).json({
-          error: `Something went wrong, please try again later: ${e}`,
-        });
-      }
-    });
-};
-exports.delete = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const deletedUser = await User.findByIdAndDelete(id);
-    res.json(deletedUser);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-};
+//   User.findByIdAndUpdate(id, req.body, { new: true })
+//     .then((updatedResource) => {
+//       if (!updatedResource) throw new NotFoundError("community", id, req.body);
+//       res.send(updatedResource);
+//     })
+//     .catch((e) => {
+//       if (e.name === "NotFoundError") {
+//         res.status(404).json({ error: e });
+//       } else {
+//         res.status(500).json({
+//           error: `Something went wrong, please try again later: ${e}`,
+//         });
+//       }
+//     });
+// };
+// exports.delete = async (req, res) => {
+//   try {
+//     const { id } = req.params;
+//     const deletedUser = await User.findByIdAndDelete(id);
+//     res.json(deletedUser);
+//   } catch (err) {
+//     res.status(500).json({ error: err.message });
+//   }
+// };
 
 /* NESTED USERS RESOURCES */
 

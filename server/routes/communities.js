@@ -26,6 +26,11 @@ router.get("/:id/groups/:groupId", auth, CommunitiesController.findGroup);
 router.get("/:id/members", auth, CommunitiesController.indexMembers);
 router.post("/:id/members", auth, CommunitiesController.addMember);
 router.get("/:id/members/:memberId", auth, CommunitiesController.findMember);
+router.patch(
+  "/:id/members/:memberId",
+  auth,
+  CommunitiesController.updateMember
+);
 router.delete(
   "/:id/members/:memberId",
   auth,

@@ -60,6 +60,8 @@ export default function UserListItem(props) {
   const removeResource = (e, memberName, memberId, communityId) => {
     e.stopPropagation();
 
+    // TODO: Refactor this into a pathes-module - e.g. deleteCommunitiesMembersPath(communityId, memberId)
+
     axios
       .delete(`/api/communities/${communityId}/members/${memberId}`, {
         headers: AuthService.authHeader(),
@@ -104,11 +106,12 @@ export default function UserListItem(props) {
   //   e.preventDefault();
   // };
 
-  // const openEditCommunityMembersModal = (e, id) => {
-  //   history.push(`/communities/${id}/members`);
-  //   e.stopPropagation();
-  //   e.preventDefault();
-  // };
+  const openEditCommunityMembersModal = (e, communityId, memberId) => {
+    // TODO: Refactor this into a pathes-module - e.g. editCommunitiesMembersPath(communityId, memberId)
+    history.push(`/communities/${communityId}/members/${memberId}/edit`);
+    e.stopPropagation();
+    e.preventDefault();
+  };
 
   return (
     <section
@@ -149,13 +152,8 @@ export default function UserListItem(props) {
         <Link
           className="user__action"
           to="#"
-          // onClick={(e) => openEditCommunityMembersModal(e, user._id)}
           onClick={(e) =>
-            notifyInfo({
-              title: "Patience you must have, my young padawan...",
-              message: "...for this feature is not yet implemented",
-              toastCntId: "modalNotificationCnt",
-            })
+            openEditCommunityMembersModal(e, community._id, user._id)
           }
         >
           <FaRegEdit className="actionIcon editIcon" />

@@ -39,6 +39,11 @@ function App() {
               path="/communities/:id/members"
               component={CommunitiesLayout}
             />
+            <Route
+              exact
+              path="/communities/:id/members/:memberId/edit"
+              component={CommunitiesLayout}
+            />
             <Route exact path="/communities/:id" component={CommunityLayout} />
             <Route path="/communities" component={CommunitiesLayout} />
           </ProtectedRoutes>

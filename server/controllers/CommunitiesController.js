@@ -211,8 +211,9 @@ exports.indexMembers = function (req, res) {
 
 //  Add/create new community member
 //  POST api/communities/:id/members
-// TODO: Wrap adding and removing of community memebrs in transactions!
+// TODO: Wrap adding, removing + updating of community members in transactions!
 // TODO: Use services for that
+// TODO: Authorize: current user is community creator/owner + teacher
 exports.addMember = async function (req, res) {
   try {
     const { id } = req.params;
@@ -263,8 +264,6 @@ exports.addMember = async function (req, res) {
     } else if (e.name === "ValidationError") {
       res.status(400).json(e);
     } else {
-      console.log("ERR CATCHED IN COM CTRL: ", e);
-
       res.status(500).json({
         error: `Something went wrong, please try again later: ${e}`,
       });
@@ -275,6 +274,9 @@ exports.addMember = async function (req, res) {
 // Scoped find of a given community member
 // api/communities/:id/members/:memberId
 exports.findMember = function (req, res) {
+  console.log("findMember");
+  console.log("--- req.parrams: ", req.params);
+
   const { id, memberId } = req.params;
   User.findOne({ _id: memberId, communities: id })
     .then((user) => {
@@ -292,10 +294,38 @@ exports.findMember = function (req, res) {
     });
 };
 
+// patch("/:id/members/:memberId
+// TODO: Wrap adding, removing + updating of community members in transactions!
+exports.updateMember = async function (req, res) {
+  const { id, memberId } = req.params;
+
+  try {
+    const user = await User.findOneAndUpdate(
+      { _id: memberId, communities: id },
+      req.body,
+      { new: true, runValidators: true }
+    );
+
+    console.log("user: ", user);
+    console.log("req.params: ", req.params);
+
+    if (!user) throw new NotFoundError("user", memberId, req.body);
+    res.send(user);
+  } catch (e) {
+    if (e.name === "NotFoundError") {
+      res.status(404).json({ error: e });
+    } else {
+      res.status(500).json({
+        error: `Something went wrong: ${e}`,
+      });
+    }
+  }
+};
+
 // Scoped delete / remove of a given community member from the current community
 // (!= destroying the user for good)
 // DELETE api/communities/:id/members/:memberId
-// TODO: Wrap adding and removing of community memebrs in transactions!
+// TODO: Wrap adding, removing + updating of community members in transactions!
 exports.removeMember = async function (req, res) {
   try {
     const { id, memberId } = req.params;

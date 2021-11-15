@@ -29,7 +29,13 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 export default function Modal(props) {
   const history = useHistory();
-  const goBackTo = props.goBackTo || "/";
+  // const goBackTo = props.goBackTo || "/";
+  const goBack = (e) => {
+    e.stopPropagation();
+    // props.goBackTo ? history.push(props.goBackTo) : history.goBack();
+    // history.goBack();
+    history.goBack();
+  };
 
   const { setModalOpen } = useContext(ModalContext);
 
@@ -59,7 +65,8 @@ export default function Modal(props) {
           </h3>
           <div
             className="closeDlgAction"
-            onClick={() => history.push(goBackTo)}
+            // onClick={() => history.push(goBackTo)}
+            onClick={goBack}
           >
             <FaRegTimesCircle />
           </div>
@@ -69,7 +76,8 @@ export default function Modal(props) {
           <div className="ModalActions">
             <button
               className="btn rounded light-red"
-              onClick={() => history.push(goBackTo)}
+              // onClick={() => history.push(goBackTo)}
+              onClick={goBack}
             >
               Close
             </button>

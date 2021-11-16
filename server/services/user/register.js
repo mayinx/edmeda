@@ -92,6 +92,7 @@ RegisterUserService.prototype.run = async function (userAttributes) {
       firstName,
       lastName,
       userName: userName ?? fullName,
+      initials: `${firstName[0]}${lastName[0]}`.toUpperCase(),
     });
 
     let schoolCommunity = await Community.findOne({

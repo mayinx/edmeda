@@ -120,6 +120,7 @@ export default function useNotify() {
 
   const notifyError = (props) => {
     notify({ ...props, ...{ type: "error" } });
+    if (props.error) console.log("Error-Details: ", props.error);
   };
   const notifySuccess = (props) => {
     notify({ ...props, ...{ type: "success" } });

@@ -1,7 +1,7 @@
 import { useForm, FormProvider } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import "./Form.css";
-import axios from "axios";
+
 import { useContext, useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import CommunitiesContext from "../../contexts/CommunitiesContext";
@@ -11,7 +11,7 @@ import SelectInputFormGroup from "../../components/form/groups/SelectInputFormGr
 
 import useNotify from "../../components/notifications/useNotify";
 import useFormResultHandler from "../../components/form/useFormResultHandler";
-import AuthService from "../../services/auth";
+import CommunityDataService from "../../services/community";
 
 export default function EditCommunityPage(props) {
   const { communities, setCommunities } = useContext(CommunitiesContext);
@@ -34,8 +34,7 @@ export default function EditCommunityPage(props) {
   });
 
   useEffect(() => {
-    axios
-      .get(`/api/communities/${id}`, { headers: AuthService.authHeader() })
+    CommunityDataService.get(id)
       .then((res) => {
         setCommunity(res.data);
       })
@@ -58,10 +57,7 @@ export default function EditCommunityPage(props) {
   }, [community]);
 
   const onSubmit = (data) => {
-    axios
-      .patch(`/api/communities/${id}`, data, {
-        headers: AuthService.authHeader(),
-      })
+    CommunityDataService.update(id, data)
       .then((res) => {
         const newList = communities.map((el) => {
           if (el._id === id) {

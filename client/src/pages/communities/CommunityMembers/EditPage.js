@@ -1,7 +1,6 @@
 import { useForm, FormProvider } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import "../Form.css";
-import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 
@@ -11,17 +10,16 @@ import SelectInputFormGroup from "../../../components/form/groups/SelectInputFor
 
 import useNotify from "../../../components/notifications/useNotify";
 import useFormResultHandler from "../../../components/form/useFormResultHandler";
-import AuthService from "../../../services/auth";
+
+import CommunityDataService from "../../../services/community";
 
 export default function EditPage(props) {
-  // export default function EditCommunityMemberPage(props) {
   const { formId, setModalHeader } = props;
   const history = useHistory();
   const { notifyError } = useNotify();
   const { id, memberId } = useParams();
   const [user, setUser] = useState({});
   const [userLoaded, setUserLoaded] = useState(false);
-
   const formMethods = useForm();
   const {
     reset,
@@ -29,7 +27,6 @@ export default function EditPage(props) {
     formState: { errors },
     setError,
   } = formMethods;
-
   const { handleFormSuccess, handleFormError } = useFormResultHandler({
     modelName: "User",
     crudAction: "update",
@@ -37,10 +34,7 @@ export default function EditPage(props) {
   });
 
   useEffect(() => {
-    axios
-      .get(`/api/communities/${id}/members/${memberId}`, {
-        headers: AuthService.authHeader(),
-      })
+    CommunityDataService.getMember(id, memberId)
       .then((res) => {
         setUser(res.data);
         setUserLoaded(true);
@@ -77,45 +71,26 @@ export default function EditPage(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userLoaded, user]);
 
-  // const onSubmit = (data) => {
-  //   axios
-  //     .patch(`/api/communities/${id}`, data, {
-  //       headers: AuthService.authHeader(),
-  //     })
-  //     .then((res) => {
-  //       const newList = communities.map((el) => {
-  //         if (el._id === id) {
-  //           return { ...el, ...data };
-  //         }
-  //         return el;
-  //       });
-
-  //       setCommunities(newList);
-  //       handleFormSuccess({ objectName: user?.name });
-  //       history.push("/communities");
-  //     })
-  //     .catch((err) => {
-  //       handleFormError({ errorObject: err, objectId: id });
-  //     });
-  // };
-
+  // on edit form submit
   const onSubmit = (data) => {
-    axios
-      .patch(`/api/communities/${id}/members/${memberId}`, data, {
-        headers: AuthService.authHeader(),
-      })
+    CommunityDataService.updateMember(id, memberId, data)
       .then((res) => {
-        // const newList = communities.map((el) => {
+        // TODO:
+        // const newList = communityMembers.map((el) => {
         //   if (el._id === id) {
         //     return { ...el, ...data };
         //   }
         //   return el;
         // });
+        // setCommunityMembers(newList);
+        handleFormSuccess({
+          objectName: res?.data?.fullName,
+          toastCntId: "modalNotificationCnt",
+        });
 
-        // setCommunities(newList);
-        handleFormSuccess({ objectName: user?.name });
-        // history.push("/communities");
-        history.goBack();
+        setTimeout(() => {
+          history.goBack();
+        }, 3000);
       })
       .catch((err) => {
         handleFormError({ errorObject: err, objectId: id });

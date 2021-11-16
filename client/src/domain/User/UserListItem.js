@@ -4,7 +4,6 @@ import UserFallbackProfilePic from "../../assets/user/fb_avatars/fbAvatar.png";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import { FaRegEdit, FaRegTrashAlt, FaUserMinus } from "react-icons/fa";
-import axios from "axios";
 
 import { confirmAlert } from "react-confirm-alert";
 // TODO Check - move to App.js?:
@@ -12,7 +11,7 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 import "../../components/notifications/ReactConfirmAlertOverrides.css";
 
 import useNotify from "../../components/notifications/useNotify";
-import AuthService from "../../services/auth";
+import CommunityDataService from "../../services/community";
 
 export default function UserListItem(props) {
   // TODO: Refactor: Move that dependencies all up again - implement
@@ -60,12 +59,7 @@ export default function UserListItem(props) {
   const removeResource = (e, memberName, memberId, communityId) => {
     e.stopPropagation();
 
-    // TODO: Refactor this into a pathes-module - e.g. deleteCommunitiesMembersPath(communityId, memberId)
-
-    axios
-      .delete(`/api/communities/${communityId}/members/${memberId}`, {
-        headers: AuthService.authHeader(),
-      })
+    CommunityDataService.removeMember(communityId, memberId)
       .then((res) => {
         setCommunityMembers(
           communityMembers.filter((resource) => {

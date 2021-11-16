@@ -60,12 +60,18 @@ const UserSchema = new Schema(
       maxlength: 80,
       minlength: 1,
     },
+    intials: {
+      type: String,
+      required: false,
+      trim: true,
+      maxlength: 2,
+      minlength: 1,
+    },
     userName: { type: String, required: false },
     gender: {
       type: String,
       trim: true,
       required: false,
-
       enum: {
         values: GENDERS,
         message: "Invalid gender",

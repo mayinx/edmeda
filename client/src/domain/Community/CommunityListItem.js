@@ -5,16 +5,14 @@ import { useContext } from "react";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import { FaRegEdit, FaRegTrashAlt, FaUsersCog } from "react-icons/fa";
-import axios from "axios";
 
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import "../../components/notifications/ReactConfirmAlertOverrides.css";
 
 import UserAvatar from "../../domain/User/UserAvatar";
-
 import useNotify from "../../components/notifications/useNotify";
-import AuthService from "../../services/auth";
+import CommunityDataService from "../../services/community";
 
 export default function Community({ community }) {
   const { communities, setCommunities } = useContext(CommunitiesContext);
@@ -46,8 +44,7 @@ export default function Community({ community }) {
   const removeResource = (e, resourceName, id) => {
     e.stopPropagation();
 
-    axios
-      .delete(`/api/communities/${id}`, { headers: AuthService.authHeader() })
+    CommunityDataService.destroy(id)
       .then((res) => {
         setCommunities(
           communities.filter((resource) => {
@@ -61,17 +58,12 @@ export default function Community({ community }) {
         history.goBack();
       })
       .catch((err) => {
-        console.log(
-          `Failed to delete community ${
-            resourceName ?? id ?? null
-          } - something went wrong: `,
-          err
-        );
         notifyError({
           title: "Community not deleted",
           message: `Failed to delete community ${
             resourceName ?? id ?? null
           } - an unexpeted error occured`,
+          error: err,
         });
       });
   };

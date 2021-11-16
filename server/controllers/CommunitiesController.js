@@ -2,6 +2,7 @@ const Community = require("../models/Community");
 const Group = require("../models/Group");
 const User = require("../models/User");
 const RegisterUserService = require("../services/user/register");
+const UpdateUserService = require("../services/user/update");
 const CreateCommunityService = require("../services/community/create");
 const { NotFoundError, InternalError } = require("../errors/AppErrors");
 const _ = require("lodash");
@@ -297,20 +298,15 @@ exports.findMember = function (req, res) {
 // patch("/:id/members/:memberId
 // TODO: Wrap adding, removing + updating of community members in transactions!
 exports.updateMember = async function (req, res) {
-  const { id, memberId } = req.params;
-
   try {
-    const user = await User.findOneAndUpdate(
-      { _id: memberId, communities: id },
-      req.body,
-      { new: true, runValidators: true }
+    const { id, memberId } = req.params;
+
+    res.send(
+      await new UpdateUserService().run(
+        { _id: memberId, communities: id },
+        req.body
+      )
     );
-
-    console.log("user: ", user);
-    console.log("req.params: ", req.params);
-
-    if (!user) throw new NotFoundError("user", memberId, req.body);
-    res.send(user);
   } catch (e) {
     if (e.name === "NotFoundError") {
       res.status(404).json({ error: e });

@@ -34,6 +34,7 @@ export default function CommunitiesLayout() {
         {/* <Switch> */}
 
         <Route exact path="/communities" component={MyCommunitiesPage} />
+
         <Route exact path="/communities/:id/edit">
           <Modal
             modalCaption="Edit Community"

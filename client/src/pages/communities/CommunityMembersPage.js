@@ -1,6 +1,5 @@
 import { useForm, FormProvider } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
-import "./Form.css";
 
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
@@ -15,7 +14,7 @@ import useFormResultHandler from "../../components/form/useFormResultHandler";
 import { default as CommunityMembersList } from "../../domain/User/UserList";
 
 import "./CommunityMembersPage.css";
-// TODO: Once the varios forms are extracted, ensure that media queries are pulled in last - or by component ...
+// TODO: Once the various forms are extracted, ensure that media queries are pulled in last - or by component ...
 import "./CommunityMembers/media-queries.css";
 
 import _ from "lodash";
@@ -24,14 +23,18 @@ import { FaRegTimesCircle } from "react-icons/fa";
 import CommunityDataService from "../../services/community";
 
 import CommunityMembersContext from "../../contexts/CommunityMembersContext";
+import { useContext } from "react";
+import ModalContext from "../../contexts/ModalContext";
 
 export default function CommunityMembersPage(props) {
-  const { setModalHeader, bottomBarToggled, toggleBottomBar, formId } = props;
+  const { bottomBarToggled, toggleBottomBar, formId } = props;
   const { notifyError } = useNotify();
   const { id } = useParams();
   const [community, setCommunity] = useState({});
   const [communityMembers, setCommunityMembers] = useState([]);
   const [communityMembersLoaded, setCommunityMembersLoaded] = useState(false);
+
+  const { setModalCaption } = useContext(ModalContext);
 
   const formMethods = useForm();
   const {
@@ -73,13 +76,13 @@ export default function CommunityMembersPage(props) {
 
   useEffect(() => {
     if (communityMembersLoaded) {
-      setModalHeader("Community Members (" + communityMembers.length + ")");
+      setModalCaption("Community Members (" + communityMembers.length + ")");
     } else {
-      setModalHeader("Community Members (--)");
+      setModalCaption("Community Members (--)");
     }
 
     return () => {
-      setModalHeader("Community Members (--)");
+      setModalCaption("Community Members (--)");
     };
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -114,7 +117,7 @@ export default function CommunityMembersPage(props) {
     <CommunityMembersContext.Provider
       value={{ communityMembers, setCommunityMembers }}
     >
-      <div className="ModalPage__bodyInner CommunityMembersModalPage">
+      <div className="ModalPage__body--inner CommunityModalPage CommunityMembersModalPage">
         <CommunityMembersList
           communityMembers={communityMembers}
           // TODO: Handle events/actions here and pass down handlers only

@@ -7,8 +7,11 @@ import Modal from "../../components/modal/Modal.js";
 import NewCommunityPage from "../../pages/communities/NewCommunityPage.js";
 import EditCommunityPage from "../../pages/communities/EditCommunityPage.js";
 import CommunityMembersPage from "../../pages/communities/CommunityMembersPage.js";
+import CommunityMemberPage from "../../pages/communities/CommunityMembers/ShowPage.js";
 import EditCommunityMemberPage from "../../pages/communities/CommunityMembers/EditPage.js";
 import { useState } from "react";
+import { useContext } from "react";
+import ModalContext from "../../contexts/ModalContext";
 
 export default function CommunitiesLayout() {
   const CREATE_ACTION_FORM_ID = "newCommunity";
@@ -22,19 +25,22 @@ export default function CommunitiesLayout() {
     communityMembersModalHeader,
     setCommunityMembersModalHeader,
   ] = useState("Community Members (0)");
+  // const [communityMemberModalHeader, setCommunityMemberModalHeader] = useState(
+  //   "Community Member"
+  // );
   const [
     editCommunityMemberModalHeader,
     setEditCommunityMemberModalHeader,
   ] = useState("Edit Community Member");
+
+  const { modalCaption, setModalCaption } = useContext(ModalContext);
 
   return (
     <>
       <AppHeader className="CommunitiesHeader" />
       <main className="CommunitiesLayout">
         {/* <Switch> */}
-
         <Route exact path="/communities" component={MyCommunitiesPage} />
-
         <Route exact path="/communities/:id/edit">
           <Modal
             modalCaption="Edit Community"
@@ -70,13 +76,20 @@ export default function CommunitiesLayout() {
             />
           </Modal>
         </Route>
-
+        <Route exact path="/communities/:id/members/:memberId">
+          <Modal
+            modalCaption="Member Profile"
+            crudAction="update"
+            formId={UPDATE_ACTION_FORM_ID}
+          >
+            <CommunityMemberPage formId={UPDATE_ACTION_FORM_ID} />
+          </Modal>
+        </Route>
         <Route exact path="/communities/:id/members/:memberId/edit">
           <Modal
             modalCaption={editCommunityMemberModalHeader}
             crudAction="update"
             formId={UPDATE_ACTION_FORM_ID}
-            // goBackTo="/communities/6186c98fc5bc642cd6236573/members"
           >
             <EditCommunityMemberPage
               formId={UPDATE_ACTION_FORM_ID}
@@ -84,7 +97,6 @@ export default function CommunitiesLayout() {
             />
           </Modal>
         </Route>
-
         <Route exact path="/communities/new">
           <Modal
             modalCaption="New Community"

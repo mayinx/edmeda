@@ -1,7 +1,7 @@
 import { useForm, FormProvider } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
-import "../Form.css";
-import { useContext, useEffect, useState } from "react";
+import "./EditPage.css";
+import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 
 import FormConfig from "../../../domain/User/FormConfig";
@@ -40,11 +40,11 @@ export default function EditPage(props) {
         setUserLoaded(true);
       })
       .catch((err) => {
-        console.log("err: ", err, "communities#id: ", id);
         notifyError({
           title: "User not found",
           message: `A User with this id couldn't be found - an error occured: ${err}`,
           toastCntId: "modalNotificationCnt",
+          error: err,
         });
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -90,7 +90,7 @@ export default function EditPage(props) {
 
         setTimeout(() => {
           history.goBack();
-        }, 3000);
+        }, 2000);
       })
       .catch((err) => {
         handleFormError({ errorObject: err, objectId: id });
@@ -98,7 +98,7 @@ export default function EditPage(props) {
   };
 
   return (
-    <div className="ModalPage__bodyInner CommunityModalFormPage EditCommunityModalFormPage">
+    <div className="ModalPage__body--inner   CommunityModalPage EditPage">
       <FormProvider {...{ ...formMethods, ErrorMessage, errors }}>
         <form id={formId} className="Form" onSubmit={handleSubmit(onSubmit)}>
           <TextInputFormGroup

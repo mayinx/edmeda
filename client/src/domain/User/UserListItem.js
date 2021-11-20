@@ -90,9 +90,11 @@ export default function UserListItem(props) {
       });
   };
 
-  // const openCommunityPage = (e, id) => {
-  //   history.push(`/communities/${id}`);
-  // };
+  const openCommunityMemberModal = (e, communityId, memberId) => {
+    history.push(`/communities/${communityId}/members/${memberId}`);
+    e.stopPropagation();
+    e.preventDefault();
+  };
 
   // const openEditCommunityModal = (e, id) => {
   //   history.push(`/communities/${id}/edit`);
@@ -109,10 +111,10 @@ export default function UserListItem(props) {
 
   return (
     <section
-      className={`ResourceListItem UserListItem UserListItem--${user.type} `}
+      className={`UserListItem UserListItem--${user.type} `}
       key={user._id}
       id={user._id}
-      // onClick={(e) => openCommunityPage(e, user._id)}
+      onClick={(e) => openCommunityMemberModal(e, community._id, user._id)}
     >
       <p className="User__ProfilePic-wrapper">
         <img src={`${avatarUrl}`} className="User__ProfilePic" alt="" />

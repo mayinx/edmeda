@@ -37,7 +37,7 @@ export default function Modal(props) {
     history.goBack();
   };
 
-  const { setModalOpen } = useContext(ModalContext);
+  const { setModalOpen, modalCaption } = useContext(ModalContext);
 
   useEffect(() => {
     setModalOpen(true);
@@ -61,7 +61,7 @@ export default function Modal(props) {
       >
         <div className="ModalPage__header d-flex">
           <h3 className="ModalPage__headerCaption">
-            {props.modalCaption || "Modal Dialog"}
+            {modalCaption || props.modalCaption || "Modal Dialog"}
           </h3>
           <div
             className="closeDlgAction"

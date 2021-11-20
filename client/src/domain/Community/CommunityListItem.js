@@ -98,7 +98,7 @@ export default function Community({ community }) {
 
   return (
     <section
-      className={`ResourceListItem CommunityListItem CommunityListItem--${community.type} `}
+      className={`CommunityListItem CommunityListItem--${community.type} `}
       key={community._id}
       id={community._id}
       onClick={(e) => openCommunityPage(e, community._id)}

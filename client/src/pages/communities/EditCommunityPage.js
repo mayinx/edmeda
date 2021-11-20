@@ -1,6 +1,5 @@
 import { useForm, FormProvider } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
-import "./Form.css";
 
 import { useContext, useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
@@ -76,7 +75,7 @@ export default function EditCommunityPage(props) {
   };
 
   return (
-    <div className="ModalPage__bodyInner CommunityModalFormPage EditCommunityModalFormPage">
+    <div className="ModalPage__body--inner CommunityModalPage ">
       <FormProvider {...{ ...formMethods, ErrorMessage, errors }}>
         <form
           id={props.formId}

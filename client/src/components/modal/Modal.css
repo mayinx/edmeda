@@ -63,6 +63,23 @@
   flex: auto;
   overflow: auto;
 }
+
+.ModalPage__body--inner {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+/* .ModalPage__body--inner.ModalFormPage {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 1rem;
+} */
+
 .ModalPage__footer {
   border-top: 1px solid #dad7d7;
   padding: 1rem;

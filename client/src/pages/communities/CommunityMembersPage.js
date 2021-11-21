@@ -25,12 +25,17 @@ import CommunityDataService from "../../services/community";
 import CommunityMembersContext from "../../contexts/CommunityMembersContext";
 import { useContext } from "react";
 import ModalContext from "../../contexts/ModalContext";
+import CommunityContext from "../../contexts/CommunityContext";
 
 export default function CommunityMembersPage(props) {
   const { bottomBarToggled, toggleBottomBar, formId } = props;
   const { notifyError } = useNotify();
   const { id } = useParams();
-  const [community, setCommunity] = useState({});
+
+  const { currentCommunity, setCurrentCommunity } = useContext(
+    CommunityContext
+  );
+
   const [communityMembers, setCommunityMembers] = useState([]);
   const [communityMembersLoaded, setCommunityMembersLoaded] = useState(false);
 
@@ -51,15 +56,15 @@ export default function CommunityMembersPage(props) {
   });
 
   // useEffect(() => {
-  //   if (community) {
-  //     reset(community);
+  //   if (currentCommunity) {
+  //     reset(currentCommunity);
   //   }
-  // }, [community]);
+  // }, [currentCommunity]);
 
   useEffect(() => {
     CommunityDataService.getMembers(id)
       .then((res) => {
-        setCommunity(res.data.community);
+        setCurrentCommunity(res.data.community);
         setCommunityMembers(res.data.members);
         setCommunityMembersLoaded(true);
       })
@@ -92,7 +97,7 @@ export default function CommunityMembersPage(props) {
   useEffect(() => {
     reset({ type: "", fullName: "", email: "" });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [community, communityMembers]);
+  }, [currentCommunity, communityMembers]);
 
   const onNewUserSubmit = (data) => {
     CommunityDataService.addMember(id, data)
@@ -100,7 +105,7 @@ export default function CommunityMembersPage(props) {
         setCommunityMembers([res.data, ...communityMembers]);
         reset({ type: res.data.type });
         handleFormSuccess({
-          objectName: community?.name,
+          objectName: currentCommunity?.name,
           title: "New Community member added",
           message: `The ${_.camelCase(res?.data?.type) ?? "user"} ${
             res?.data?.fullName ?? null
@@ -122,7 +127,8 @@ export default function CommunityMembersPage(props) {
           communityMembers={communityMembers}
           // TODO: Handle events/actions here and pass down handlers only
           setCommunityMembers={setCommunityMembers}
-          community={community}
+          community={currentCommunity}
+          listStyle="cards"
         />
 
         <section
@@ -165,7 +171,7 @@ export default function CommunityMembersPage(props) {
                 {/* <TextInputFormGroup
             name="creator"
             formConfig={FormConfig.creator}
-            defaultValue={community?.creator}
+            defaultValue={currentCommunity?.creator}
           /> */}
                 <button
                   form={formId}

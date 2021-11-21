@@ -2,9 +2,12 @@
 import axios from "axios";
 import AuthService from "./auth";
 
-const communities = async () => {
+const communities = async (userId) => {
+  const requestUri = userId
+    ? `/api/communities?userId=${userId}`
+    : "/api/communities";
   try {
-    return await axios.get("/api/communities", {
+    return await axios.get(requestUri, {
       headers: AuthService.authHeader(),
     });
   } catch (err) {

@@ -5,22 +5,36 @@ const RegisterUserService = require("../services/user/register");
 const UpdateUserService = require("../services/user/update");
 const CreateCommunityService = require("../services/community/create");
 const { NotFoundError, InternalError } = require("../errors/AppErrors");
-const _ = require("lodash");
 
-exports.index = function (req, res) {
-  let query = {};
-  Community.find({ _id: { $in: req.currentUser.communities } })
-    .find(query)
-    .populate("creator")
-    .then((resources) => {
-      res.send(resources);
-    })
-    .catch(() => {
+exports.index = async function (req, res) {
+  try {
+    const { userId } = req.query;
+    let communities = null;
+    if (!userId) {
+      communities = req.currentUser.communities;
+    } else {
+      const user = await User.findOne({ _id: userId });
+      if (!user) throw new NotFoundError("user", userId);
+      communities = user.communities;
+    }
+
+    // let query = {};
+    const resources = await Community.find({ _id: { $in: communities } })
+      // .find(query)
+      .populate("creator");
+
+    res.send(resources);
+  } catch (e) {
+    if (e.name === "NotFoundError") {
+      res.status(404).json({ error: e });
+    } else {
       res.status(500).json({
-        error: "Something went wrong, please try again later",
+        error: `Something went wrong, please try again later: ${e}`,
       });
-    });
+    }
+  }
 };
+
 // TODO: Use community-creation service here instead!
 exports.create = async function (req, res) {
   try {

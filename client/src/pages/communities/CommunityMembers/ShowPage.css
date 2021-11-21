@@ -2,7 +2,7 @@
   padding: 0;
   display: flex;
 }
-.MemberPage .banner {
+.MemberPage .MemberPage__Banner {
   width: 100%;
   height: 300px;
   /* background: linear-gradient(181deg, #4981b2, transparent); */
@@ -38,7 +38,7 @@
   background-size: 172%;
   background-position: -202px -119px;
 }
-.MemberPage .UserProfileCard {
+.MemberPage .MemberPage__Banner .UserProfileCard {
   width: 250px;
   flex: 0 1 425px;
   position: absolute;
@@ -46,7 +46,33 @@
   top: 25%;
 }
 
-.MemberPage .UserProfileCard .User__ProfilePic-wrapper .User__ProfilePic {
+.MemberPage
+  .MemberPage__Banner
+  .UserProfileCard
+  .User__ProfilePic-wrapper
+  .User__ProfilePic {
   width: 200px;
   height: 200px;
+}
+
+.MemberPage .MemberPage__Main {
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.MemberPage .MemberPage__Main .MemberPage__Content {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  width: 75%;
+}
+.MemberPage .MemberPage__Main .MemberPage__Content .CommunityList {
+  width: 100%;
+}
+.MemberPage .MemberPage__Main .MemberPage__Sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  padding-top: 10rem;
 }

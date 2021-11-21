@@ -5,8 +5,38 @@
 .MemberPage .banner {
   width: 100%;
   height: 300px;
-  background: linear-gradient(181deg, #4981b2, transparent);
+  /* background: linear-gradient(181deg, #4981b2, transparent); */
+
+  /* background: linear-gradient(
+    90deg,
+    rgba(76, 175, 80, 1) 0%,
+    rgba(49, 220, 255, 1) 100%
+  ); */
+
+  /* background: radial-gradient(
+    circle at 50% 50%,
+    rgba(76, 175, 80, 1) 0%,
+    rgba(49, 220, 255, 1) 100%
+  ); */
+
+  /* border-bottom: 2px solid #9773a7;
+  border-top: 2px solid #9773a7; */
+  /*
+  cadetblue
+  darseegreen
+  gainsboro
+  #f8f2fa (magnolia)
+
+  */
+  background-color: #adbdc7;
   position: relative;
+  /* background-image: url(https://image.shutterstock.com/shutterstock/photos/1039471057/display_1500/stock-vector-abstract-vector-banners-with-bright-geometric-background-annual-report-design-templates-1039471057.jpg); */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  background-size: 172%;
+  background-position: -202px -119px;
 }
 .MemberPage .UserProfileCard {
   width: 250px;

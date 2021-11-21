@@ -37,13 +37,16 @@ export default function Modal(props) {
     history.goBack();
   };
 
-  const { setModalOpen, modalCaption } = useContext(ModalContext);
+  const { setModalOpen, modalCaption, setModalCaption } = useContext(
+    ModalContext
+  );
 
   useEffect(() => {
     setModalOpen(true);
 
     return () => {
       setModalOpen(false);
+      setModalCaption("");
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -61,7 +64,7 @@ export default function Modal(props) {
       >
         <div className="ModalPage__header d-flex">
           <h3 className="ModalPage__headerCaption">
-            {modalCaption || props.modalCaption || "Modal Dialog"}
+            {props.modalCaption || modalCaption}
           </h3>
           <div
             className="closeDlgAction"

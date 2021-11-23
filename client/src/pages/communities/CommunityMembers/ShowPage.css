@@ -55,6 +55,10 @@
   height: 200px;
 }
 
+.MemberPage .MemberPage__Banner .UserProfileCard .user__meta {
+  flex: 200px;
+}
+
 .MemberPage .MemberPage__Main {
   padding: 1rem;
   display: flex;
@@ -64,8 +68,10 @@
 .MemberPage .MemberPage__Main .MemberPage__Content {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: column;
+
+  flex-direction: row;
   width: 75%;
+  /* flex: 2; */
 }
 .MemberPage .MemberPage__Main .MemberPage__Content .CommunityList {
   width: 100%;
@@ -73,6 +79,10 @@
 .MemberPage .MemberPage__Main .MemberPage__Sidebar {
   display: flex;
   flex-direction: column;
-  width: 20%;
+  width: 25%;
+  /* flex: 1; */
   padding-top: 10rem;
+}
+
+@media all and (min-width: 400px) {
 }

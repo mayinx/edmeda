@@ -1,12 +1,7 @@
 .CommunityList {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: stretch;
-  gap: 1.5rem;
-
-  padding-bottom: 2rem;
-  width: 90vw;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-gap: 1rem;
 }
 .CommunityList__FilterBar {
   display: flex;
@@ -46,32 +41,6 @@
 }
 
 .CommunityList__FilterBar.FilterBarSticky + .CommunityList__Items {
-  margin-top: 2rem;
-}
-
-.CommunityList__Items {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: flex-start;
-
-  gap: 1.5rem;
-
-  flex: 0 1 auto;
-}
-
-.CommunityList__Items .CollectionEmpty {
-  width: 100%;
-  text-align: center;
-  padding: 2rem;
-}
-
-.CommunityList__Items .CollectionEmpty .LoadSampleCommunityhelfButton {
-  font-size: 1.5rem;
-
-  letter-spacing: 3px;
-  font-size: 1.5rem;
-  letter-spacing: 3px;
   margin-top: 2rem;
 }
 

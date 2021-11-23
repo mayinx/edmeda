@@ -109,20 +109,22 @@ export default function Community({ community }) {
 
       <div className="community__meta">
         <div className="community__name truncate">{community.name}</div>
-        <div className="community__owner truncate">
-          <UserAvatar
-            user={community?.creator}
-            wrapper={false}
-            avatarClassName="CommunityCreatorAvatar rounded"
-          />
+        <div className="community__labels">
+          <div className="community__owner truncate">
+            <UserAvatar
+              user={community?.creator}
+              wrapper={false}
+              avatarClassName="CommunityCreatorAvatar rounded"
+            />
+          </div>
+          <span
+            className={`community__type tag ${global.config.community.typeTagColorFor(
+              community?.type
+            )}`}
+          >
+            {global.config.community.typeTagCaptionFor(community?.type)}
+          </span>
         </div>
-        <span
-          className={`community__type tag ${global.config.community.typeTagColorFor(
-            community?.type
-          )}`}
-        >
-          {global.config.community.typeTagCaptionFor(community?.type)}
-        </span>
       </div>
 
       <div className="community__actions">

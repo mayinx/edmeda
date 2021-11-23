@@ -2,6 +2,7 @@
   flex: 1 1 auto;
   padding: 1rem;
   display: flex;
+  flex-flow: row wrap;
   justify-content: center;
   overflow-y: auto;
   overflow-x: hidden;

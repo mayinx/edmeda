@@ -1,5 +1,18 @@
+.fs-0_25 {
+  font-size: 0.25rem;
+}
+.fs-0_5 {
+  font-size: 0.5rem;
+}
+.fs-0_75 {
+  font-size: 0.75rem;
+}
+
 .fs-1 {
   font-size: 1rem;
+}
+.fs-1_25 {
+  font-size: 1.25rem;
 }
 .fs-1_5 {
   font-size: 1.5rem;
@@ -68,8 +81,21 @@
   text-overflow: ellipsis;
 }
 
+.wrapword {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-all;
+  white-space: normal;
+}
+
 .font-upper {
   text-transform: uppercase;
+}
+.font-bold {
+  font-weight: bold;
+}
+.font-italic {
+  font-style: italic;
 }
 
 .ta-left {
@@ -161,7 +187,7 @@
 /* UTILS FOR FLEX */
 
 .d-inline-flex {
-  display: flex;
+  display: inline-flex;
 }
 
 .d-flex {

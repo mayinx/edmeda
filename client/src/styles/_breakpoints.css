@@ -12,7 +12,7 @@
 
   --body-min-width: 310px;
 
-  /* not respnsive base vars - needed for fluid typography formula etc. */
+  /* not responsive base vars - needed for fluid typography formula etc. */
   --min-device-width-no: 400;
   --max-device-width-no: 1399;
   --min-device-width: calc(1px * var(--min-device-width-no));
@@ -25,7 +25,7 @@
   /* will be recalculated later on (see below) */
   --r-base-font-size: var(--min-base-font-size);
 
-  --r-base-multiplier: 1; /* we can more rlrmrnt specific multipliers if needed */
+  --r-base-multiplier: 1; /* we can add more multipliers if needed */
 
   --r-pd: 1rem; /* padding */
 

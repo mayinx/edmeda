@@ -5,7 +5,7 @@ import CommunityDataService from "../../../services/community";
 
 import useNotify from "../../../components/notifications/useNotify";
 
-import UserProfileCard from "../../../domain/User/UserProfileCard";
+import UserProfileCardSidebar from "../../../domain/User/UserProfileCardSidebar";
 
 import CommunityContext from "../../../contexts/CommunityContext";
 import { useContext } from "react";
@@ -60,13 +60,20 @@ export default function ShowPage(props) {
   return (
     <div className="ModalPage__body--inner CommunityModalPage MemberPage">
       <div className="MemberPage__Banner">
-        <UserProfileCard user={user} community={currentCommunity} />
+        {/* <UserProfileCard user={user} community={currentCommunity} /> */}
       </div>
       <div className="MemberPage__Main">
         <div className="MemberPage__Content">
-          <CommunityList resources={communities} />
+          <div className="MemberPage__Content--Inner">
+            <CommunityList resources={communities} />
+          </div>
         </div>
-        <div className="MemberPage__Sidebar">{"Name:"}</div>
+        <div className="MemberPage__Sidebar">
+          <div className="MemberPage__Sidebar--Inner">
+            {/* <UserProfileCard user={user} community={currentCommunity} /> */}
+            <UserProfileCardSidebar user={user} community={currentCommunity} />
+          </div>
+        </div>
       </div>
     </div>
   );

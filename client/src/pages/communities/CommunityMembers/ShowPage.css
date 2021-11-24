@@ -29,7 +29,7 @@
 
   */
   background-color: #adbdc7;
-  position: relative;
+  /* position: relative; */
   /* background-image: url(https://image.shutterstock.com/shutterstock/photos/1039471057/display_1500/stock-vector-abstract-vector-banners-with-bright-geometric-background-annual-report-design-templates-1039471057.jpg); */
   background-size: cover;
   background-position: center;
@@ -38,51 +38,116 @@
   background-size: 172%;
   background-position: -202px -119px;
 }
-.MemberPage .MemberPage__Banner .UserProfileCard {
-  width: 250px;
-  flex: 0 1 425px;
-  position: absolute;
-  right: 10%;
-  top: 25%;
-}
-
-.MemberPage
-  .MemberPage__Banner
-  .UserProfileCard
-  .User__ProfilePic-wrapper
-  .User__ProfilePic {
-  width: 200px;
-  height: 200px;
-}
-
-.MemberPage .MemberPage__Banner .UserProfileCard .user__meta {
-  flex: 200px;
-}
 
 .MemberPage .MemberPage__Main {
   padding: 1rem;
   display: flex;
-  flex-direction: row;
-  width: 100%;
+  gap: 1rem;
+  flex-direction: column;
 }
 .MemberPage .MemberPage__Main .MemberPage__Content {
+  flex: 1;
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
+  order: 1;
+}
 
-  flex-direction: row;
-  width: 75%;
-  /* flex: 2; */
-}
-.MemberPage .MemberPage__Main .MemberPage__Content .CommunityList {
-  width: 100%;
-}
 .MemberPage .MemberPage__Main .MemberPage__Sidebar {
   display: flex;
   flex-direction: column;
-  width: 25%;
-  /* flex: 1; */
-  padding-top: 10rem;
+  align-items: stretch;
+  flex: 1;
+  order: 0;
+  position: static;
 }
 
-@media all and (min-width: 400px) {
+.MemberPage .MemberPage__Main .MemberPage__Sidebar--Inner {
+  position: static;
+  margin: -16.5rem 1rem 1rem;
+
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+@media all and (min-width: 576px) {
+  .MemberPage .MemberPage__Main .MemberPage__Sidebar--Inner {
+    margin: -16rem 1rem 1rem;
+  }
+}
+
+@media all and (min-width: 800px) {
+  .MemberPage .MemberPage__Main {
+    flex-direction: row;
+    gap: 1rem;
+  }
+  .MemberPage .MemberPage__Main .MemberPage__Content {
+    flex: 1.61;
+    order: 0;
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
+
+  .MemberPage .MemberPage__Main .MemberPage__Content--Inner {
+    margin-left: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .MemberPage .MemberPage__Main .MemberPage__Content .CommunityList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 1rem;
+  }
+
+  .MemberPage .MemberPage__Main .MemberPage__Sidebar {
+    flex-direction: column;
+    flex: 1;
+    order: 1;
+
+    align-items: stretch;
+  }
+
+  .MemberPage .MemberPage__Main .MemberPage__Sidebar--Inner {
+    margin: -15rem 1rem 1rem;
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+}
+
+@media all and (min-width: 930px) {
+  .MemberPage .MemberPage__Main .MemberPage__Content .CommunityList {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 1rem;
+  }
+}
+@media all and (min-width: 1024px) {
+  .MemberPage .MemberPage__Main .MemberPage__Content .CommunityList {
+    grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
+    grid-gap: 1rem;
+  }
+}
+
+/**/
+
+@media all and (min-width: 1200px) {
+  .MemberPage .MemberPage__Main .MemberPage__Sidebar--Inner {
+    margin: -14rem 1rem 1rem;
+  }
+}
+
+@media all and (min-width: 1800px) {
+  .MemberPage .MemberPage__Main .MemberPage__Sidebar--Inner {
+    margin: -13rem 1rem 1rem;
+  }
+}
+
+@media all and (min-width: 2000px) {
+  .MemberPage .MemberPage__Main .MemberPage__Sidebar--Inner {
+    margin: -12rem 1rem 1rem;
+  }
 }

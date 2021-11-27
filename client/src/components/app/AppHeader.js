@@ -3,7 +3,7 @@ import useAuthActions from "../../components/auth/useAuthActions";
 import BrandLogo from "../../assets/edmeda-logo-transparent_170x40.png";
 import { BsGrid3X3Gap } from "react-icons/bs";
 import { FaPlus } from "react-icons/fa";
-import DropdownMenu from "../../components/misc/DropdownMenu";
+import HeaderUserDropdownMenu from "../../layouts/shared/HeaderUserDropdownMenu";
 import UserAvatar from "../../domain/User/UserAvatar";
 import useNotify from "../notifications/useNotify";
 import "./AppHeader.css";
@@ -52,7 +52,7 @@ export default function AppHeader() {
           </Link>
 
           {/* <div className="NavItem NavItem--UserAvtar"> */}
-          <DropdownMenu className="ddMenu ddMenue--UserAvatar">
+          <HeaderUserDropdownMenu className="ddMenu ddMenu--UserAvatar">
             <li>
               <Link className="SubNavItem SubNavItem--UserProfileCard" to="#">
                 <UserAvatar user={cUser.user} />
@@ -78,7 +78,7 @@ export default function AppHeader() {
                 Logout
               </Link>
             </li>
-          </DropdownMenu>
+          </HeaderUserDropdownMenu>
           {/* </div> */}
         </div>
       </nav>

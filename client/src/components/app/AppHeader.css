@@ -71,10 +71,10 @@
   border: 1px solid #80baee;
 }
 
-.App__header .AppNav .ddMenue {
+.App__header .AppNav .ddMenu {
   display: flex;
 }
-.App__header .AppNav .ddMenue--UserAvatar .menu-trigger {
+.App__header .AppNav .ddMenu--UserAvatar .menu-trigger {
   padding: 0;
   background-color: transparent;
   background-color: transparent;
@@ -82,7 +82,7 @@
   border: none;
 }
 
-.App__header .AppNav .ddMenue--UserAvatar .SubNavItem--UserProfileCard {
+.App__header .AppNav .ddMenu--UserAvatar .SubNavItem--UserProfileCard {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -91,7 +91,7 @@
 }
 .App__header
   .AppNav
-  .ddMenue--UserAvatar
+  .ddMenu--UserAvatar
   .SubNavItem--UserProfileCard
   .User__ProfilePic {
   margin: 0.5rem;
@@ -100,7 +100,7 @@
 }
 .App__header
   .AppNav
-  .ddMenue--UserAvatar
+  .ddMenu--UserAvatar
   .SubNavItem--UserProfileCard
   .User__Meta {
   display: flex;
@@ -111,14 +111,14 @@
 }
 .App__header
   .AppNav
-  .ddMenue--UserAvatar
+  .ddMenu--UserAvatar
   .SubNavItem--UserProfileCard
   .User__Meta
   .User__Name {
 }
 .App__header
   .AppNav
-  .ddMenue--UserAvatar
+  .ddMenu--UserAvatar
   .SubNavItem--UserProfileCard
   .User__Meta
   .User__Type {

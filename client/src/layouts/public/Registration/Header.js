@@ -3,7 +3,7 @@ import useAuthActions from "../../../components/auth/useAuthActions";
 
 import BrandLogo from "../../../assets/edmeda-logo-transparent_170x40.png";
 
-import DropdownMenu from "../../../components/misc/DropdownMenu";
+import HeaderUserDropdownMenu from "../../shared/HeaderUserDropdownMenu";
 import { FaBars, FaTimes } from "react-icons/fa";
 import "./Header.css";
 import { useEffect, useState } from "react";
@@ -61,7 +61,7 @@ export default function Header() {
                 <FaUserAlt className="NavItem__Icon userAvatarIcon" />
               </Link> */}
 
-              <DropdownMenu>
+              <HeaderUserDropdownMenu>
                 <li>
                   <Link className="SubNavItem" to="#">
                     Profile
@@ -77,7 +77,7 @@ export default function Header() {
                     Logout
                   </Link>
                 </li>
-              </DropdownMenu>
+              </HeaderUserDropdownMenu>
             </>
           ) : (
             <>

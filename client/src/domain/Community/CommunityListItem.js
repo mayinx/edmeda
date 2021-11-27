@@ -4,7 +4,12 @@ import CommunitiesContext from "../../contexts/CommunitiesContext";
 import { useContext } from "react";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
-import { FaRegEdit, FaRegTrashAlt, FaUsersCog } from "react-icons/fa";
+import {
+  FaRegEdit,
+  FaRegTrashAlt,
+  FaUsersCog,
+  FaEllipsisV,
+} from "react-icons/fa";
 
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
@@ -13,6 +18,8 @@ import "../../components/notifications/ReactConfirmAlertOverrides.css";
 import UserAvatar from "../../domain/User/UserAvatar";
 import useNotify from "../../components/notifications/useNotify";
 import CommunityDataService from "../../services/community";
+// import DropdownMenu from "../../components/misc/DropdownMenu";
+import { DropdownMenu, DropdownItem } from "../../components/misc/DropdownMenu";
 
 export default function Community({ community }) {
   const { communities, setCommunities } = useContext(CommunitiesContext);
@@ -96,6 +103,8 @@ export default function Community({ community }) {
     }
   }
 
+  const toggleIcon = () => {};
+
   return (
     <section
       className={`CommunityListItem CommunityListItem--${community.type} `}
@@ -128,31 +137,41 @@ export default function Community({ community }) {
       </div>
 
       <div className="community__actions">
-        {community.type !== "Tenant" && (
-          <Link
-            className="community__action"
-            to="#"
-            onClick={(e) =>
-              cofirmResourceRemoval(e, community.name, community._id)
-            }
+        <DropdownMenu
+          toggleIcon={<FaEllipsisV />}
+          toggleLinkClassName="community__action"
+        >
+          {community.type !== "Tenant" && (
+            <DropdownItem
+              onClick={(e) =>
+                cofirmResourceRemoval(e, community.name, community._id)
+              }
+            >
+              <span>
+                <FaRegTrashAlt />
+              </span>
+              <span>Delete Community</span>
+            </DropdownItem>
+          )}
+
+          <DropdownItem
+            onClick={(e) => openEditCommunityModal(e, community._id)}
           >
-            <FaRegTrashAlt className="actionIcon deleteIcon" />
-          </Link>
-        )}
-        <Link
-          className="community__action"
-          to="#"
-          onClick={(e) => openEditCommunityModal(e, community._id)}
-        >
-          <FaRegEdit className="actionIcon editIcon" />
-        </Link>
-        <Link
-          className="community__action"
-          to="#"
-          onClick={(e) => openEditCommunityMembersModal(e, community._id)}
-        >
-          <FaUsersCog className="actionIcon editMembersIcon" />
-        </Link>
+            <span>
+              <FaRegEdit />
+            </span>
+            <span>Edit Community</span>
+          </DropdownItem>
+
+          <DropdownItem
+            onClick={(e) => openEditCommunityMembersModal(e, community._id)}
+          >
+            <span>
+              <FaUsersCog />
+            </span>
+            <span>Edit Members </span>
+          </DropdownItem>
+        </DropdownMenu>
       </div>
     </section>
   );

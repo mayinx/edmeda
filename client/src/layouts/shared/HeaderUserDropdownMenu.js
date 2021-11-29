@@ -22,7 +22,7 @@ export default function HeaderUserDropdownMenu(props) {
       >
         <UserAvatar
           user={currentUser.user}
-          avatarClassName="NavItem__Icon userAvatarIcon"
+          className="NavItem__Icon userAvatarIcon"
           wrapper={false}
         />
       </Link>

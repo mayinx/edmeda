@@ -3,7 +3,7 @@ import SchoolCommunityFbProfilePic from "../../assets/community/fb_profile_pics/
 import CommunitiesContext from "../../contexts/CommunitiesContext";
 import { useContext } from "react";
 import { useHistory } from "react-router";
-import { Link } from "react-router-dom";
+
 import {
   FaRegEdit,
   FaRegTrashAlt,
@@ -103,14 +103,16 @@ export default function Community({ community }) {
     }
   }
 
-  const toggleIcon = () => {};
-
   return (
     <section
       className={`CommunityListItem CommunityListItem--${community.type} `}
       key={community._id}
       id={community._id}
-      onClick={(e) => openCommunityPage(e, community._id)}
+      onClick={(e) => {
+        if (e.defaultPrevented) return; // Exits here if event has been handled
+
+        openCommunityPage(e, community._id);
+      }}
     >
       <p className="Community__ProfilePic-wrapper">
         <img src={profilePicUrl} className="Community__ProfilePic" alt="" />
@@ -123,7 +125,8 @@ export default function Community({ community }) {
             <UserAvatar
               user={community?.creator}
               wrapper={false}
-              avatarClassName="CommunityCreatorAvatar rounded"
+              className="CommunityCreatorAvatar rounded"
+              title={`Community creator ${community?.creator?.userName} (${community?.creator?.type})`}
             />
           </div>
           <span
@@ -138,39 +141,31 @@ export default function Community({ community }) {
 
       <div className="community__actions">
         <DropdownMenu
+          id={community._id}
           toggleIcon={<FaEllipsisV />}
           toggleLinkClassName="community__action"
         >
+          <DropdownItem
+            caption={"Community Members"}
+            icon={<FaUsersCog />}
+            onClick={(e) => openEditCommunityMembersModal(e, community._id)}
+          ></DropdownItem>
+
+          <DropdownItem
+            caption={"Edit Community"}
+            icon={<FaRegEdit />}
+            onClick={(e) => openEditCommunityModal(e, community._id)}
+          />
+
           {community.type !== "Tenant" && (
             <DropdownItem
+              caption={"Delete Community"}
+              icon={<FaRegTrashAlt />}
               onClick={(e) =>
                 cofirmResourceRemoval(e, community.name, community._id)
               }
-            >
-              <span>
-                <FaRegTrashAlt />
-              </span>
-              <span>Delete Community</span>
-            </DropdownItem>
+            />
           )}
-
-          <DropdownItem
-            onClick={(e) => openEditCommunityModal(e, community._id)}
-          >
-            <span>
-              <FaRegEdit />
-            </span>
-            <span>Edit Community</span>
-          </DropdownItem>
-
-          <DropdownItem
-            onClick={(e) => openEditCommunityMembersModal(e, community._id)}
-          >
-            <span>
-              <FaUsersCog />
-            </span>
-            <span>Edit Members </span>
-          </DropdownItem>
         </DropdownMenu>
       </div>
     </section>

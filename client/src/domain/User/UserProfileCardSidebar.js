@@ -1,36 +1,11 @@
 import "./UserProfileCardSidebar.css";
-import UserFallbackProfilePic from "../../assets/user/fb_avatars/fbAvatar.png";
 
 import { Link } from "react-router-dom";
 import { FaRegEdit, FaRegTrashAlt, FaUserMinus } from "react-icons/fa";
+import UserAvatar from "./UserAvatar";
 
 export default function UserProfileCard(props) {
-  // TODO: Refactor: Move that dependencies all up again - implement
-  // event handlers on CommunityMembersPage-component + pass those
-  // handlers down here - or use a context or whatever
-
-  const {
-    listStyle,
-    user,
-    community,
-
-    onShow,
-    onEdit,
-    onRemove,
-    onDelete,
-  } = props;
-
-  let avatarUrl = user?.picture;
-  if (!avatarUrl) {
-    try {
-      avatarUrl = user?.fbAvatarFileName
-        ? require(`../../assets/user/fb_avatars/${user?.fbAvatarFileName}.png`)
-            .default
-        : UserFallbackProfilePic;
-    } catch (e) {
-      avatarUrl = UserFallbackProfilePic;
-    }
-  }
+  const { user, community, onShow, onEdit, onRemove, onDelete } = props;
 
   return (
     <section
@@ -40,9 +15,8 @@ export default function UserProfileCard(props) {
       onClick={(e) => onShow(e, community._id, user._id)}
     >
       <div className="UserProfileCardSidebar--Inner">
-        <p className="User__ProfilePic-wrapper">
-          <img src={`${avatarUrl}`} className="User__ProfilePic" alt="" />
-        </p>
+        <UserAvatar user={user} />
+
         <div className="user__meta">
           <div className="user__name truncate wrapword fs-1_25 font-bold">
             {user?.fullName}
@@ -71,7 +45,7 @@ export default function UserProfileCard(props) {
         <ul className="user__statistics">
           <li>
             <div>Communities</div>
-            <div>10</div>
+            <div>{user?.communities?.length}</div>
           </li>
           <li>
             <div>Conections</div>

@@ -53,6 +53,10 @@
   order: 1;
 }
 
+.MemberPage .MemberPage__Main .MemberPage__Content--Inner {
+  margin: 1rem;
+}
+
 .MemberPage .MemberPage__Main .MemberPage__Sidebar {
   display: flex;
   flex-direction: column;
@@ -92,8 +96,7 @@
   }
 
   .MemberPage .MemberPage__Main .MemberPage__Content--Inner {
-    margin-left: 1rem;
-    margin-top: 0.5rem;
+    margin: 0.5rem 0 0 1rem;
   }
 
   .MemberPage .MemberPage__Main .MemberPage__Content .CommunityList {
@@ -126,21 +129,36 @@
   }
 }
 @media all and (min-width: 1024px) {
+  .MemberPage .MemberPage__Main .MemberPage__Content--Inner {
+    margin: 0.5rem 0 0 0.25rem;
+  }
+
   .MemberPage .MemberPage__Main .MemberPage__Content .CommunityList {
-    grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
+    grid-template-columns: repeat(2, minmax(225px, 1fr));
     grid-gap: 1rem;
   }
 }
 
-/**/
+/* ... */
 
 @media all and (min-width: 1200px) {
+  .MemberPage .MemberPage__Main .MemberPage__Content--Inner {
+    margin: 0.5rem 0 0 1rem;
+  }
+  .MemberPage .MemberPage__Main .MemberPage__Content .CommunityList {
+    grid-template-columns: repeat(2, minmax(225px, 1fr));
+    grid-gap: 1rem;
+  }
   .MemberPage .MemberPage__Main .MemberPage__Sidebar--Inner {
     margin: -14rem 1rem 1rem;
   }
 }
 
 @media all and (min-width: 1800px) {
+  .MemberPage .MemberPage__Main .MemberPage__Content .CommunityList {
+    grid-template-columns: repeat(3, minmax(225px, 1fr));
+    grid-gap: 1rem;
+  }
   .MemberPage .MemberPage__Main .MemberPage__Sidebar--Inner {
     margin: -13rem 1rem 1rem;
   }

@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import useDetectOutsideClick from "./useDetectOutsideClick";
 import "./DropdownMenu.css";
 import { Link } from "react-router-dom";
@@ -7,23 +7,23 @@ export function DropdownMenu(props) {
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
   const onClick = (e) => {
-    setIsActive(!isActive);
-    e.stopPropagation();
     e.preventDefault();
+    setIsActive(!isActive);
   };
 
   return (
-    <div className={`Dropdown ${props.className ?? null}`}>
+    <div ref={dropdownRef} className={`Dropdown ${props.className ?? null}`}>
       <Link
         className={`Dropdown__Toggler  ${props.toggleLinkClassName ?? null}`}
         onClick={onClick}
-        to="#"
+        to={null}
       >
         {props.toggleIcon}
       </Link>
 
       <nav
-        ref={dropdownRef}
+        // ref={dropdownRef}
+        id={`Dropdown__Menu_${props.id}`}
         className={`Dropdown__Menu ${isActive ? "active" : "inactive"}`}
       >
         <ul className="Dropdown__Items">{props.children}</ul>
@@ -33,7 +33,13 @@ export function DropdownMenu(props) {
 }
 
 export function DropdownItem(props) {
-  const { className, linkClassName, to, onClick } = props;
+  const { icon, caption, className, linkClassName, to, onClick } = props;
+
+  // let itemInner = "";
+  // itemInner += icon;
+  // itemInner += caption;
+
+  // console.log("yo: ", itemInner);
 
   return (
     <li className={`DropdownItem ${className ?? null}`}>
@@ -42,7 +48,10 @@ export function DropdownItem(props) {
         to={to ?? "#"}
         onClick={onClick}
       >
-        {props.children}
+        {/* {props.children} */}
+
+        <span>{icon}</span>
+        <span>{caption}</span>
       </Link>
     </li>
   );

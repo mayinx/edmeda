@@ -13,7 +13,7 @@ export default function MessageList({ messages }) {
         return (
           <div key={message._id} className="Message">
             <div className="user">
-              <UserAvatar user={message.creator} avatarClassName="ChatAvatar" />
+              <UserAvatar user={message.creator} className="ChatAvatar" />
 
               <span
                 className={`Sender__Type tag smaller bold ${global.config.user.typeTagColorFor(

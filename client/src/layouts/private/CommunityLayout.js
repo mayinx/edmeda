@@ -1,5 +1,5 @@
 import { Route } from "react-router-dom";
-import AppHeader from "../../components/app/AppHeader";
+import AppHeader from "./AppHeader";
 import CommunityPage from "../../pages/communities/CommunityPage";
 import "./CommunityLayout.css";
 import { useParams } from "react-router-dom";

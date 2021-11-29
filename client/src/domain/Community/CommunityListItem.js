@@ -109,7 +109,8 @@ export default function Community({ community }) {
       key={community._id}
       id={community._id}
       onClick={(e) => {
-        if (e.defaultPrevented) return; // Exits here if event has been handled
+        // Exit early if event has alreda been handled by dropdown menu !
+        if (e.defaultPrevented) return;
 
         openCommunityPage(e, community._id);
       }}

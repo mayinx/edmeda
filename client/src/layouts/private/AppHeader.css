@@ -71,38 +71,51 @@
   border: 1px solid #80baee;
 }
 
-.App__header .AppNav .ddMenu {
+/*EDIT: Added: */
+
+/* AppNav MUST keep height of 41px - and Appheader height of 58.56px */
+
+.App__header .AppNav .Dropdown {
   display: flex;
 }
-.App__header .AppNav .ddMenu--UserAvatar .menu-trigger {
+
+.App__header .AppNav .Dropdown.ddMenu--UserAvatar .Dropdown__Toggler {
   padding: 0;
-  background-color: transparent;
   background-color: transparent;
   border-radius: 50%;
   border: none;
 }
+.App__header
+  .AppNav
+  .Dropdown.ddMenu--UserAvatar
+  .Dropdown__Toggler
+  .User__ProfilePic {
+  border-radius: 90px;
+}
 
-.App__header .AppNav .ddMenu--UserAvatar .SubNavItem--UserProfileCard {
+.App__header .AppNav .Dropdown nav.Dropdown__Menu {
+  padding: 1rem 0.5rem 1rem 0.5rem;
+}
+
+.App__header .AppNav .Dropdown.ddMenu--UserAvatar .DropdownHeader {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 0.5rem 0 1rem 0;
+  padding: 0 0 1rem 0;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #dddddd;
 }
 .App__header
   .AppNav
-  .ddMenu--UserAvatar
-  .SubNavItem--UserProfileCard
+  .Dropdown.ddMenu--UserAvatar
+  .DropdownHeader
   .User__ProfilePic {
   margin: 0.5rem;
   width: 125px;
   height: 125px;
 }
-.App__header
-  .AppNav
-  .ddMenu--UserAvatar
-  .SubNavItem--UserProfileCard
-  .User__Meta {
+.App__header .AppNav .Dropdown.ddMenu--UserAvatar .DropdownHeader .User__Meta {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -111,18 +124,20 @@
 }
 .App__header
   .AppNav
-  .ddMenu--UserAvatar
-  .SubNavItem--UserProfileCard
+  .Dropdown.ddMenu--UserAvatar
+  .DropdownHeader
   .User__Meta
   .User__Name {
 }
 .App__header
   .AppNav
-  .ddMenu--UserAvatar
-  .SubNavItem--UserProfileCard
+  .Dropdown.ddMenu--UserAvatar
+  .DropdownHeader
   .User__Meta
   .User__Type {
 }
+
+/* till here */
 
 .User__ProfilePic.NavItem__Icon.userAvatarIcon {
   width: 41px;

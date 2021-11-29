@@ -11,6 +11,12 @@ export function DropdownMenu(props) {
     setIsActive(!isActive);
   };
 
+  const renderDdMenuHeader =
+    props.children[0].type.name === DropdownHeader.name;
+  const ddMenuItems = renderDdMenuHeader
+    ? props.children.slice(1)
+    : props.children;
+
   return (
     <div ref={dropdownRef} className={`Dropdown ${props.className ?? null}`}>
       <Link
@@ -26,8 +32,25 @@ export function DropdownMenu(props) {
         id={`Dropdown__Menu_${props.id}`}
         className={`Dropdown__Menu ${isActive ? "active" : "inactive"}`}
       >
-        <ul className="Dropdown__Items">{props.children}</ul>
+        {props.children[0].type.name === DropdownHeader.name && (
+          <>{props.children[0]}</>
+        )}
+        <ul className="Dropdown__Items">{ddMenuItems}</ul>
       </nav>
+    </div>
+  );
+}
+
+export function DropdownHeader(props) {
+  const { className, to, onClick } = props;
+
+  return (
+    <div
+      className={`DropdownHeader ${className ?? null}`}
+      to={to}
+      onClick={onClick}
+    >
+      {props.children}
     </div>
   );
 }
@@ -35,21 +58,14 @@ export function DropdownMenu(props) {
 export function DropdownItem(props) {
   const { icon, caption, className, linkClassName, to, onClick } = props;
 
-  // let itemInner = "";
-  // itemInner += icon;
-  // itemInner += caption;
-
-  // console.log("yo: ", itemInner);
-
   return (
     <li className={`DropdownItem ${className ?? null}`}>
       <Link
         className={`DropdownItem__Link ${linkClassName ?? null}`}
-        to={to ?? "#"}
+        to={to ?? null}
         onClick={onClick}
       >
         {/* {props.children} */}
-
         <span>{icon}</span>
         <span>{caption}</span>
       </Link>

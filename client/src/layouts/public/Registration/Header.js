@@ -3,10 +3,10 @@ import useAuthActions from "../../../components/auth/useAuthActions";
 
 import BrandLogo from "../../../assets/edmeda-logo-transparent_170x40.png";
 
-import HeaderUserDropdownMenu from "../../shared/HeaderUserDropdownMenu";
 import { FaBars, FaTimes } from "react-icons/fa";
 import "./Header.css";
 import { useEffect, useState } from "react";
+import UserOptionsNavItem from "../../shared/header/UserOptionsNavItem";
 // import { Counter } from "./../../../features/counter/Counter";
 
 export default function Header() {
@@ -52,16 +52,10 @@ export default function Header() {
           </Link>
         </div>
         <div className="AppNav__Right">
-          {/* <Link class="NavItem NavItem--BtnIconOnly" to="#">
-            <FaUserAlt className="NavItem__Icon userAvatarIcon" />
-          </Link> */}
           {userLoggedIn() ? (
             <>
-              {/* <Link class="NavItem NavItem--BtnIconOnly" to="#">
-                <FaUserAlt className="NavItem__Icon userAvatarIcon" />
-              </Link> */}
-
-              <HeaderUserDropdownMenu>
+              <UserOptionsNavItem />
+              {/* <HeaderUserDropdownMenu>
                 <li>
                   <Link className="SubNavItem" to="#">
                     Profile
@@ -77,7 +71,7 @@ export default function Header() {
                     Logout
                   </Link>
                 </li>
-              </HeaderUserDropdownMenu>
+              </HeaderUserDropdownMenu> */}
             </>
           ) : (
             <>

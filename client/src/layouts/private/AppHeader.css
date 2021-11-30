@@ -79,7 +79,10 @@
   display: flex;
 }
 
-.App__header .AppNav .Dropdown.ddMenu--UserAvatar .Dropdown__Toggler {
+.App__header
+  .AppNav
+  .Dropdown.Dropdown--HeaderBarUserOptions
+  .Dropdown__Toggler {
   padding: 0;
   background-color: transparent;
   border-radius: 50%;
@@ -87,7 +90,7 @@
 }
 .App__header
   .AppNav
-  .Dropdown.ddMenu--UserAvatar
+  .Dropdown.Dropdown--HeaderBarUserOptions
   .Dropdown__Toggler
   .User__ProfilePic {
   border-radius: 90px;
@@ -97,7 +100,10 @@
   padding: 1rem 0.5rem 1rem 0.5rem;
 }
 
-.App__header .AppNav .Dropdown.ddMenu--UserAvatar .DropdownHeader {
+.App__header
+  .AppNav
+  .Dropdown.Dropdown--HeaderBarUserOptions
+  .Dropdown__Header {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -108,14 +114,18 @@
 }
 .App__header
   .AppNav
-  .Dropdown.ddMenu--UserAvatar
-  .DropdownHeader
+  .Dropdown.Dropdown--HeaderBarUserOptions
+  .Dropdown__Header
   .User__ProfilePic {
   margin: 0.5rem;
   width: 125px;
   height: 125px;
 }
-.App__header .AppNav .Dropdown.ddMenu--UserAvatar .DropdownHeader .User__Meta {
+.App__header
+  .AppNav
+  .Dropdown.Dropdown--HeaderBarUserOptions
+  .Dropdown__Header
+  .User__Meta {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -124,15 +134,15 @@
 }
 .App__header
   .AppNav
-  .Dropdown.ddMenu--UserAvatar
-  .DropdownHeader
+  .Dropdown.Dropdown--HeaderBarUserOptions
+  .Dropdown__Header
   .User__Meta
   .User__Name {
 }
 .App__header
   .AppNav
-  .Dropdown.ddMenu--UserAvatar
-  .DropdownHeader
+  .Dropdown.Dropdown--HeaderBarUserOptions
+  .Dropdown__Header
   .User__Meta
   .User__Type {
 }

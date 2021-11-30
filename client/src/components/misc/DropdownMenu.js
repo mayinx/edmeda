@@ -11,30 +11,23 @@ export function DropdownMenu(props) {
     setIsActive(!isActive);
   };
 
-  const renderDdMenuHeader =
-    props.children[0].type.name === DropdownHeader.name;
-  const ddMenuItems = renderDdMenuHeader
-    ? props.children.slice(1)
-    : props.children;
+  const { children, className, toggleLinkClassName } = props;
+
+  const renderDropdowndHeader = children[0].type.name === DropdownHeader.name;
+  const ddMenuItems = renderDropdowndHeader ? children.slice(1) : children;
 
   return (
-    <div ref={dropdownRef} className={`Dropdown ${props.className ?? null}`}>
+    <div ref={dropdownRef} className={`Dropdown ${className ?? null}`}>
       <Link
-        className={`Dropdown__Toggler  ${props.toggleLinkClassName ?? null}`}
+        className={`Dropdown__Toggler  ${toggleLinkClassName ?? null}`}
         onClick={onClick}
         to={null}
       >
         {props.toggleIcon}
       </Link>
 
-      <nav
-        // ref={dropdownRef}
-        id={`Dropdown__Menu_${props.id}`}
-        className={`Dropdown__Menu ${isActive ? "active" : "inactive"}`}
-      >
-        {props.children[0].type.name === DropdownHeader.name && (
-          <>{props.children[0]}</>
-        )}
+      <nav className={`Dropdown__Menu ${isActive ? "active" : "inactive"}`}>
+        {renderDropdowndHeader && <>{children[0]}</>}
         <ul className="Dropdown__Items">{ddMenuItems}</ul>
       </nav>
     </div>
@@ -46,7 +39,7 @@ export function DropdownHeader(props) {
 
   return (
     <div
-      className={`DropdownHeader ${className ?? null}`}
+      className={`Dropdown__Header ${className ?? null}`}
       to={to}
       onClick={onClick}
     >
@@ -59,15 +52,15 @@ export function DropdownItem(props) {
   const { icon, caption, className, linkClassName, to, onClick } = props;
 
   return (
-    <li className={`DropdownItem ${className ?? null}`}>
+    <li className={`Dropdown__Item ${className ?? null}`}>
       <Link
-        className={`DropdownItem__Link ${linkClassName ?? null}`}
+        className={`Dropdown__ItemLink ${linkClassName ?? null}`}
         to={to ?? null}
         onClick={onClick}
       >
         {/* {props.children} */}
-        <span>{icon}</span>
-        <span>{caption}</span>
+        <span className="Dropdown__ItemIcon">{icon}</span>
+        <span className="Dropdown__ItemCaption">{caption}</span>
       </Link>
     </li>
   );

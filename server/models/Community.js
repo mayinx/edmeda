@@ -63,7 +63,7 @@ const communitiesSchema = new Schema(
       trim: true,
       required: false,
     },
-    // TODO: If time:
+    // TODO:
     picture: {
       data: Buffer,
       contentType: String,

@@ -1,7 +1,7 @@
 // Current Community Data Service
 //
 // CREATE: create; addMember;
-// RETRIEVE: getAll, get, getMembers, getMember;
+// RETRIEVE: getAll, get, getTenant, getMembers, getMember;
 // UPDATE: update, updateMember;
 // DELETE: destroy, destroyAll, removeMember, destroyMember;
 // FINDER: find, findMember;
@@ -16,6 +16,16 @@ const get = async (id) => {
     });
   } catch (err) {
     console.log("[CLIENT] Service-Error: Community#get: ", err);
+    throw err;
+  }
+};
+const getTenant = async (id) => {
+  try {
+    return await axios.get(`/api/communities/tenant`, {
+      headers: AuthService.authHeader(),
+    });
+  } catch (err) {
+    console.log("[CLIENT] Service-Error: Community#getTenant: ", err);
     throw err;
   }
 };
@@ -127,6 +137,7 @@ const removeMember = async (id, memberId) => {
 
 const CommunityDataService = {
   get,
+  getTenant,
   getAll,
   create,
   update,

@@ -25,8 +25,7 @@ export default function ShowPage(props) {
     // setModalCaption("Community Member Profile");
     CommunityDataService.getMember(id, memberId)
       .then((data) => {
-        console.log("Happy Data: ", data);
-        setUser(data.data);
+        setUser(data.data || {});
         setUserLoaded(true);
       })
       .catch((err) => {
@@ -43,12 +42,9 @@ export default function ShowPage(props) {
     if (user) {
       UserDataService.communities(user._id)
         .then((res) => {
-          console.log("yohooo !!!!! - data: ", res.data);
-          console.log("user: ", user);
           setCommunities(res.data || []);
         })
         .catch((err) => {
-          console.log("nohoooooo !!!!! - err: ", err);
           notifyError({
             title: "Communities not accessible",
             message: `Your communities can't be accessed - an error occured: ${err}`,

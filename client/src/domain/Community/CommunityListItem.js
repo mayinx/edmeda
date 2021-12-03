@@ -3,6 +3,7 @@ import SchoolCommunityFbProfilePic from "../../assets/community/fb_profile_pics/
 import CommunitiesContext from "../../contexts/CommunitiesContext";
 import { useContext } from "react";
 import { useHistory } from "react-router";
+import pluralize from "./../../lib/pluralize";
 
 import {
   FaRegEdit,
@@ -103,15 +104,16 @@ export default function Community({ community }) {
     }
   }
 
+  console.log("pluralize: ", pluralize(1, "member"));
+
   return (
     <section
-      className={`CommunityListItem CommunityListItem--${community.type} `}
+      className={`CommunityListItem CommunityListItem--${community.type} no-flicker`}
       key={community._id}
       id={community._id}
       onClick={(e) => {
-        // Exit early if event has alreda been handled by dropdown menu !
+        // Exit early if event has already been handled by dropdown menu toggler!
         if (e.defaultPrevented) return;
-
         openCommunityPage(e, community._id);
       }}
     >
@@ -119,8 +121,13 @@ export default function Community({ community }) {
         <img src={profilePicUrl} className="Community__ProfilePic" alt="" />
       </p>
 
-      <div className="community__meta">
-        <div className="community__name truncate">{community.name}</div>
+      <div className="community__meta no-flicker">
+        <div className="community__name truncate">
+          <span>{community.name} </span>
+          <span className="community__membersCount">
+            {pluralize(community?.members?.length || 0, "member")}
+          </span>{" "}
+        </div>
         <div className="community__labels">
           <div className="community__owner truncate">
             <UserAvatar
@@ -130,11 +137,7 @@ export default function Community({ community }) {
               title={`Community creator ${community?.creator?.userName} (${community?.creator?.type})`}
             />
           </div>
-          <span
-            className={`community__type tag ${global.config.community.typeTagColorFor(
-              community?.type
-            )}`}
-          >
+          <span className={`community__type tag`}>
             {global.config.community.typeTagCaptionFor(community?.type)}
           </span>
         </div>

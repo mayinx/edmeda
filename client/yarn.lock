@@ -8378,11 +8378,6 @@
   dependencies:
     "find-up" "^3.0.0"
 
-"pluralize@^8.0.0":
-  "integrity" "sha512-Nc3IT5yHzflTfbjgqWcCPpo7DaKy4FnpB0l/zCAW0Tc7jxAiuqSxHasntB3D7887LSrA93kDJ9IXovxJYxyLCA=="
-  "resolved" "https://registry.npmjs.org/pluralize/-/pluralize-8.0.0.tgz"
-  "version" "8.0.0"
-
 "pnp-webpack-plugin@1.6.4":
   "integrity" "sha512-7Wjy+9E3WwLOEL30D+m8TSTF7qJJUJLONBnwQp0518siuMxUQUbgZwssaFX+QKlZkjHZcw/IpZCt/H0srrntSg=="
   "resolved" "https://registry.npmjs.org/pnp-webpack-plugin/-/pnp-webpack-plugin-1.6.4.tgz"

@@ -9,3 +9,42 @@
   color: var(--main-font-color);
   background-color: var(--main-bg-color);
 }
+
+:root {
+  /* ------------------ colors -----------------------------------*/
+
+  /* community types  */
+  --school-tag-bg-color: #7393a7;
+  --school-tag-color: #fff;
+  --school-tag-bg-color-darker: #58798d;
+
+  --class-tag-bg-color: #3e8ed0;
+  --class-tag-color: #fff;
+  --class-tag-bg-color-darker: #2b74b1;
+
+  /* TODO: Pick a green already ;-) */
+  /* --course-tag-bg-color: #00d1b2;
+  --course-tag-bg-color: #60a561;
+  --course-tag-bg-color: #589d59;
+  --course-tag-bg-color: #26a96c;
+  --course-tag-bg-color: #229660;
+  --course-tag-bg-color: #519749;
+  --course-tag-bg-color: #548a8c;
+  --course-tag-bg-color: #4d7e80;
+  --course-tag-bg-color: cadetblue;
+  --course-tag-bg-color: teal;
+  --course-tag-bg-color: lightseagreen; */
+  --course-tag-bg-color: darkcyan;
+  --course-tag-color: #fff;
+  --course-tag-bg-color-darker: #006666;
+
+  /* --custom-tag-bg-color: indianred; */
+  --custom-tag-bg-color: salmon;
+  --custom-tag-color: #fff;
+  --custom-tag-bg-color-darker: #f85a49;
+
+  /* nice reds*/
+  /*#f25f5c*/
+  /*#db5461*/
+  /*#fc6471*/
+}

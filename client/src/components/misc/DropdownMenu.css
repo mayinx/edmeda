@@ -17,8 +17,14 @@
   transition: box-shadow 0.4s ease;
 }
 
+.Dropdown.Dropdown--active a.Dropdown__Toggler {
+  /* background: #ffffff; */
+  filter: brightness(1.2);
+}
+
 .Dropdown a.Dropdown__Toggler:hover {
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+  filter: brightness(1.2);
 }
 
 .Dropdown a.Dropdown__Toggler span {
@@ -43,13 +49,22 @@
   font-size: 1rem;
   padding: 0.5rem;
   width: 300px;
+  border: 1px solid slategray;
   border-radius: 6px;
 }
 
-.Dropdown nav.Dropdown__Menu.active {
+.Dropdown.Dropdown--with-caption nav.Dropdown__Menu {
+  padding: 0 0.5rem;
+}
+
+.Dropdown.Dropdown--active nav.Dropdown__Menu {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
+}
+
+.Dropdown .DropdownTitleBar {
+  border-bottom: 1px solid #dddddd;
 }
 
 .Dropdown nav.Dropdown__Menu .Dropdown__Header {

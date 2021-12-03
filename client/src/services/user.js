@@ -16,8 +16,20 @@ const communities = async (userId) => {
   }
 };
 
+const tenantCommunity = async () => {
+  try {
+    return await axios.get("/api/communities/tenant", {
+      headers: AuthService.authHeader(),
+    });
+  } catch (err) {
+    console.log("[CLIENT] Service-Error: User#tenantCommunity: ", err);
+    throw err;
+  }
+};
+
 const UserDataService = {
   communities,
+  tenantCommunity,
 };
 
 export default UserDataService;

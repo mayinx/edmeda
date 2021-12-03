@@ -11,13 +11,23 @@ export function DropdownMenu(props) {
     setIsActive(!isActive);
   };
 
-  const { children, className, toggleLinkClassName } = props;
+  const {
+    children,
+    className,
+    caption = "Account",
+    toggleLinkClassName,
+  } = props;
 
   const renderDropdowndHeader = children[0].type.name === DropdownHeader.name;
   const ddMenuItems = renderDropdowndHeader ? children.slice(1) : children;
 
   return (
-    <div ref={dropdownRef} className={`Dropdown ${className ?? null}`}>
+    <div
+      ref={dropdownRef}
+      className={`Dropdown ${className ?? null} ${
+        isActive ? "Dropdown--active" : "Dropdown--inactive"
+      } ${caption ? "Dropdown--with-caption" : ""}`}
+    >
       <Link
         className={`Dropdown__Toggler  ${toggleLinkClassName ?? null}`}
         onClick={onClick}
@@ -26,7 +36,8 @@ export function DropdownMenu(props) {
         {props.toggleIcon}
       </Link>
 
-      <nav className={`Dropdown__Menu ${isActive ? "active" : "inactive"}`}>
+      <nav className={`Dropdown__Menu`}>
+        {caption && <div className="DropdownTitleBar">{caption}</div>}
         {renderDropdowndHeader && <>{children[0]}</>}
         <ul className="Dropdown__Items">{ddMenuItems}</ul>
       </nav>

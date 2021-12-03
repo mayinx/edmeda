@@ -62,6 +62,7 @@ main .App__Page {
   flex-direction: column;
   padding: 1rem;
   gap: 1rem;
+  width: 100%;
 }
 main .App__Page__Head {
   font-weight: normal;

@@ -7,15 +7,14 @@ import UserAvatar from "../../../domain/User/UserAvatar";
 import { FaSignOutAlt, FaUsers, FaUserAlt } from "react-icons/fa";
 import useAuthActions from "../../../components/auth/useAuthActions";
 import { useHistory } from "react-router";
-import CommunityDataService from "../../../services/community";
 import { useEffect, useState } from "react";
+import UserDataService from "../../../services/user";
 
 export default function UserOptionsNavItem(props) {
   const { logout, currentUser } = useAuthActions();
   const cUser = currentUser().user;
-  console.log("cUser: ", cUser);
-  console.log("currentUser(): ", currentUser());
   const history = useHistory();
+
   const showUserProfile = (e, communityId, memberId) => {
     history.push(`/communities/${communityId}/members/${memberId}`);
     e.stopPropagation();
@@ -25,9 +24,8 @@ export default function UserOptionsNavItem(props) {
   const [tenantCommunity, setTenantCommunity] = useState({});
 
   useEffect(() => {
-    CommunityDataService.getTenant()
+    UserDataService.tenantCommunity()
       .then((tenantCommunity) => {
-        console.log("tenantCommunity: ", tenantCommunity.data);
         setTenantCommunity(tenantCommunity.data || {});
       })
       .catch((e) => console.log("uah - err: ", e));

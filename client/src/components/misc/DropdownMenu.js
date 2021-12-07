@@ -1,7 +1,8 @@
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import useDetectOutsideClick from "./useDetectOutsideClick";
 import "./DropdownMenu.css";
 import { Link } from "react-router-dom";
+// import { FaRegTimesCircle } from "react-icons/fa";
 
 export function DropdownMenu(props) {
   const dropdownRef = useRef(null);
@@ -11,12 +12,7 @@ export function DropdownMenu(props) {
     setIsActive(!isActive);
   };
 
-  const {
-    children,
-    className,
-    caption = "Account",
-    toggleLinkClassName,
-  } = props;
+  const { children, className, caption, toggleLinkClassName } = props;
 
   const renderDropdowndHeader = children[0].type.name === DropdownHeader.name;
   const ddMenuItems = renderDropdowndHeader ? children.slice(1) : children;

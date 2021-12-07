@@ -57,19 +57,9 @@ h3 {
   --header-font-color: var(--page-font-color);
   --header-border-bottom-color: var(--secondary-color);
 
-  /* LEFT SIDEBAR */
-
-  /* --left-sb-bg-color: #40798cff;
-  --left-sb-font-color: var(--page-font-color); */
-
   /* MAIN */
   --main-bg-color: var(--secondary-color);
   --main-font-color: var(--page-font-color);
-
-  /* RIGHT SIDEBAR */
-
-  /* --right-sb-bg-color: #70a9a1ff;
-  --right-sb-font-color: var(--page-font-color); */
 
   /* FOOTER */
   --footer-bg-color: var(--tertiary-color);
@@ -88,31 +78,6 @@ h3 {
   --form-inputs-focus-bg-color: #f0f0f0;
   --form-inputs-focus-border-color: #00bcd4;
 
-  /* question cards */
+  /* cards */
   --card-bg-color: #fff;
-  --question-card-answer-bg-color: var(--form-inputs-bg-color);
-  --question-card-bookmark-icon-color: var(--page-font-color);
-  --question-card-bookmarked-bookmark-icon-color: var(--secondary-color);
-  --question-card-bookmark-icon-bg-color: var(--card-bg-color);
-  --question-card-bookmark-icon-hover-color: var(--secondary-color);
-  --question-card-toggle-answer-btn-hover-font-color: var(--secondary-color);
-
-  /* --question-card-toggle-answer-btn-hover-bg-color: var(--secondary-color); */
-  --question-card-toggle-answer-btn-hover-border-color: var(--tertiary-color);
-  --question-card-answer-overlay-bg-color: #e7e7e7;
-}
-
-[data-theme="dark"] {
-  --primary-color: #3f3f3f;
-  --secondary-color: #999;
-  --tertiary-color: #ccc;
-  --quinary-color: #fff;
-  --senary-color: #e5eaf5;
-
-  /* question cards */
-  --card-bg-color: #3f3f3f;
-
-  /* form */
-  --form-inputs-bg-color: var(--tertiary-color);
-  --form-inputs-focus-bg-color: var(--secondary-color);
 }

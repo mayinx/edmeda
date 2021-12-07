@@ -107,7 +107,7 @@ export default function Community({ community }) {
 
   return (
     <section
-      className={`CommunityListItem CommunityListItem--${community.type} scalable no-flicker`}
+      className={`CommunityListItem CommunityListItem--${community.type} scalable-100 no-flicker`}
       key={community._id}
       id={community._id}
       onClick={(e) => {
@@ -147,7 +147,7 @@ export default function Community({ community }) {
           id={community._id}
           toggleIcon={<FaEllipsisV />}
           toggleLinkClassName="community__action"
-          caption="Community"
+          caption="Community Actions "
         >
           <DropdownItem
             caption={"Members"}

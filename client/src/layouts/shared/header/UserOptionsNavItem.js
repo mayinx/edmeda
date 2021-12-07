@@ -33,6 +33,7 @@ export default function UserOptionsNavItem(props) {
 
   return (
     <DropdownMenu
+      caption="Account"
       className="Dropdown--HeaderBarUserOptions"
       toggleIcon={
         <UserAvatar

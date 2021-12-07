@@ -46,7 +46,7 @@ export default function UserOptionsNavItem(props) {
       <DropdownHeader>
         <UserAvatar user={cUser} />
         <div className="User__Meta">
-          <span className="User__Name">{cUser?.fullName}</span>
+          <span className="User__Name wrapword">{cUser?.fullName}</span>
           <span
             className={`User__Type tag ${global.config.user.typeTagColorFor(
               cUser?.type

@@ -28,6 +28,7 @@ export default function Community({ community }) {
   const history = useHistory();
   const { notifySuccess, notifyError } = useNotify();
 
+  // TODO: Move handlers 1 1evel up!
   const cofirmResourceRemoval = (e, resourceName, id) => {
     e.stopPropagation();
 
@@ -104,11 +105,9 @@ export default function Community({ community }) {
     }
   }
 
-  console.log("pluralize: ", pluralize(1, "member"));
-
   return (
     <section
-      className={`CommunityListItem CommunityListItem--${community.type} no-flicker`}
+      className={`CommunityListItem CommunityListItem--${community.type} scalable no-flicker`}
       key={community._id}
       id={community._id}
       onClick={(e) => {
@@ -148,22 +147,23 @@ export default function Community({ community }) {
           id={community._id}
           toggleIcon={<FaEllipsisV />}
           toggleLinkClassName="community__action"
+          caption="Community"
         >
           <DropdownItem
-            caption={"Community Members"}
+            caption={"Members"}
             icon={<FaUsersCog />}
             onClick={(e) => openEditCommunityMembersModal(e, community._id)}
           ></DropdownItem>
 
           <DropdownItem
-            caption={"Edit Community"}
+            caption={"Edit"}
             icon={<FaRegEdit />}
             onClick={(e) => openEditCommunityModal(e, community._id)}
           />
 
           {community.type !== "Tenant" && (
             <DropdownItem
-              caption={"Delete Community"}
+              caption={"Delete"}
               icon={<FaRegTrashAlt />}
               onClick={(e) =>
                 cofirmResourceRemoval(e, community.name, community._id)

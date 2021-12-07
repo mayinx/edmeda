@@ -1,91 +1,100 @@
 .no-flicker {
+  backface-visibility: hidden;
+  perspective: 1000;
+
   /* -webkit-transform: translate3d(0, 0, 0); */
+
   /* -webkit-transform-style: preserve-3d; */
+
   /* -webkit-backface-visibility: hidden; */
+
   /* backface-visibility: hidden; */
+
   /* -webkit-perspective: 1000; */
 
-  -webkit-transform: translate3d(0, 0, 0);
-  -webkit-transform-style: preserve-3d;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  -webkit-perspective: 1000;
+  transform: translate3d(0, 0, 0);
+  transform-style: preserve-3d;
+}
+
+.scalable {
+  box-shadow: 0 6px 10px rgb(0 0 0 / 14%);
+
+  /* transform: perspective(100px); */
+  transform: perspective(100px) translateZ(-5px);
+  transition: 0.3s ease-in-out;
+}
+
+.scalable:hover {
+  box-shadow: 0 8px 40px rgb(0 0 0 / 25%);
+
+  /* transform: perspective(100px) translateZ(5px); */
+  transform: perspective(100px) translateZ(0);
 }
 
 .CommunityListItem {
-  --CommunityistItem-font-color: #556e7e;
-  --CommunityistItem-bg-color: whitesmoke;
-  --CommunityistItem-border-color: #b5cfd8;
-  --CommunityListItem-border-radius: 10px;
+  --community-list-item-font-color: #556e7e;
+  --community-list-item-bg-color: whitesmoke;
+  --community-list-item-border-color: #b5cfd8;
+  --community-list-item-border-radius: 10px;
+  position: relative;
 
-  /* aspect-ratio: 1; */
-  aspect-ratio: 4/3;
   /* aspect-ratio: 3/2; */
+
   /* aspect-ratio: 5/8; */
+
   /* aspect-ratio: 16/9; */
 
   display: flex;
+  overflow: hidden;
+  width: 100%;
   flex-direction: column;
   align-items: stretch;
   justify-content: flex-end;
-  text-align: center;
-  width: 100%;
-  position: relative;
-  overflow: hidden;
-  box-shadow: rgb(50 50 93 / 25%) 0px 13px 27px -5px,
-    rgb(0 0 0 / 30%) 0px 8px 16px -8px;
-  border-radius: var(--CommunityListItem-border-radius);
-  background-color: var(--CommunityistItem-bg-color);
-  color: var(--CommunityistItem-font-color);
-  border: 2px solid var(--CommunityistItem-border-color);
-  cursor: pointer;
+  border: 2px solid var(--community-list-item-border-color);
 
-  transition: transform 0.3s ease;
+  /* aspect-ratio: 1; */
+  aspect-ratio: 4/3;
+  background-color: var(--community-list-item-bg-color);
+  border-radius: var(--community-list-item-border-radius);
+  box-shadow: rgb(50 50 93 / 25%) 0 13px 27px -5px,
+    rgb(0 0 0 / 30%) 0 8px 16px -8px;
+  color: var(--community-list-item-font-color);
+  cursor: pointer;
+  text-align: center;
+
+  /* transition: transform 0.3s ease; */
 }
 
 .CommunityListItem:hover {
-  box-shadow: rgb(50 50 93 / 25%) 0px 18px 27px -5px,
-    rgb(0 0 0 / 30%) 0px 8px 16px -8px;
   border: 2px solid #6e9ab8;
-
-  /* TRANSFORMING EL */
-  /* transform: scale(1.03); */
-
-  /* backface-visibility: hidden !important;
-  transform: translateZ(0) scale(1.03) !important; */
-  transform: scale(1.03);
+  box-shadow: rgb(50 50 93 / 25%) 0 18px 27px -5px,
+    rgb(0 0 0 / 30%) 0 8px 16px -8px;
 }
 
 .CommunityListItem .Community__ProfilePic-wrapper {
-  flex: 5;
   display: flex;
+  flex: 5;
   flex-direction: column;
   align-items: stretch;
   padding: 0;
 }
+
 .CommunityListItem .Community__ProfilePic-wrapper img {
   display: block;
-  object-fit: cover;
   flex: 1 1 100%;
+  object-fit: cover;
 }
 
 .CommunityListItem .community__meta {
-  flex: 1;
   display: flex;
+  flex: 1;
   flex-direction: column;
-  gap: 0.5rem;
 
-  /* TRANSITION CNT  */
-  /* transition: all 1s ease-in-out; */
-  /* transition: all 0.3s ease-in; */
-
-  /* transition: background-color 0.3s ease-in; */
-
-  /* transition: all 0.2s ease-in-out; */
   /* padding: var(--r-spacing-md); */
-  padding: 0.75rem 1rem 0.75rem 1rem;
-  background-color: var(--CommunityistItem-bg-color);
+  padding: 0.75rem 1rem;
   border-top: 2px solid transparent;
+  background-color: var(--community-list-item-bg-color);
+  gap: 0.5rem;
 }
 
 .CommunityListItem:hover .community__meta {
@@ -95,33 +104,35 @@
 
 .CommunityListItem .community__meta .community__name {
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-
-  font-weight: bold;
   min-width: 66.66%;
   max-width: 75%;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
 
   font-size: 1.2rem;
+
+  font-weight: bold;
 }
+
 .CommunityListItem .community__meta .community__membersCount {
-  font-weight: normal;
   font-size: 80%;
+  font-weight: normal;
 }
 
 .CommunityListItem .community__meta .community__labels {
-  flex: 1;
   display: flex;
+  flex: 1;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
 }
 
 .CommunityListItem .community__meta .community__labels .community__owner {
-  font-size: 80%;
   display: flex;
+  font-size: 80%;
 }
+
 .CommunityListItem
   .community__meta
   .community__labels
@@ -131,6 +142,7 @@
   height: 3rem;
   border: 1px solid #7e919e;
 }
+
 .CommunityListItem .community__meta .community__labels .community__type {
   font-size: 1.2rem;
 }
@@ -139,25 +151,26 @@
   position: absolute;
   top: 5px;
   right: 5px;
-  background: #c3d1dcdb;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
   padding: 0.5rem;
+  background: #c3d1dcdb;
   border-radius: 6px;
+  gap: 0.5rem;
 }
+
 .CommunityListItem .community__actions a.community__action {
   display: flex;
-  color: lightslategray;
-  background-color: whitesmoke;
-  padding: 0.3rem;
   flex: 0;
-  border-radius: 6px;
-  font-size: 1.5rem;
   align-items: center;
   justify-content: center;
+  padding: 0.3rem;
+  background-color: whitesmoke;
+  border-radius: 6px;
+  color: lightslategray;
+  font-size: 1.5rem;
 }
 
 /* COMMUNITY TYOE SPECIFIC STYLES */
@@ -167,10 +180,12 @@
   background-color: var(--school-tag-bg-color);
   color: var(--school-tag-color);
 }
+
 .CommunityListItem.CommunityListItem--School:hover,
 .CommunityListItem.CommunityListItem--Tenant:hover {
   border-color: var(--school-tag-bg-color-darker);
 }
+
 .CommunityListItem.CommunityListItem--School:hover .community__meta,
 .CommunityListItem.CommunityListItem--Tenant:hover .community__meta {
   background-color: var(--school-tag-bg-color);
@@ -190,18 +205,30 @@
   border-color: var(--school-tag-bg-color-darker);
 }
 
+.CommunityListItem.CommunityListItem--Class .tag {
+  background-color: var(--class-tag-bg-color);
+  color: var(--class-tag-color);
+}
+
+.CommunityListItem.CommunityListItem--Course .tag {
+  background-color: var(--course-tag-bg-color);
+  color: var(--course-tag-color);
+}
+
+.CommunityListItem.CommunityListItem--Custom .tag {
+  background-color: var(--custom-tag-bg-color);
+  color: var(--custom-tag-color);
+}
+
 .CommunityListItem.CommunityListItem--School:hover .tag,
 .CommunityListItem.CommunityListItem--Tenant:hover .tag {
   background-color: var(--school-tag-bg-color-darker);
 }
 
-.CommunityListItem.CommunityListItem--Class .tag {
-  background-color: var(--class-tag-bg-color);
-  color: var(--class-tag-color);
-}
 .CommunityListItem.CommunityListItem--Class:hover {
   border-color: var(--class-tag-bg-color-darker);
 }
+
 .CommunityListItem.CommunityListItem--Class:hover .community__meta {
   background-color: var(--class-tag-bg-color);
   color: whitesmoke;
@@ -219,13 +246,10 @@
   background-color: var(--class-tag-bg-color-darker);
 }
 
-.CommunityListItem.CommunityListItem--Course .tag {
-  background-color: var(--course-tag-bg-color);
-  color: var(--course-tag-color);
-}
 .CommunityListItem.CommunityListItem--Course:hover {
   border-color: var(--course-tag-bg-color-darker);
 }
+
 .CommunityListItem.CommunityListItem--Course:hover .community__meta {
   background-color: var(--course-tag-bg-color);
   color: whitesmoke;
@@ -246,13 +270,11 @@
 .CommunityListItem.CommunityListItem--Custom {
   background-color: var(--custom-tag-bg-color);
 }
-.CommunityListItem.CommunityListItem--Custom .tag {
-  background-color: var(--custom-tag-bg-color);
-  color: var(--custom-tag-color);
-}
+
 .CommunityListItem.CommunityListItem--Custom:hover {
   border-color: var(--custom-tag-bg-color-darker);
 }
+
 .CommunityListItem.CommunityListItem--Custom:hover .community__meta {
   background-color: var(--custom-tag-bg-color);
   color: whitesmoke;
@@ -291,6 +313,7 @@
     width: 62px;
     height: 62px;
   }
+
   .CommunityListItem .community__meta .community__labels .community__type {
     font-size: 1.3rem;
   }

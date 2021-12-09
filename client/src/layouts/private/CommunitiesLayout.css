@@ -1,28 +1,28 @@
 .CommunitiesLayout {
-  flex: 1 1 auto;
-  padding: 1rem;
   display: flex;
+  flex: 1 1 auto;
   flex-flow: row wrap;
   justify-content: center;
-  overflow-y: auto;
-  overflow-x: hidden;
-  color: var(--main-font-color);
+  padding: 0.5rem 0.25rem;
   background-color: var(--main-bg-color);
+  color: var(--main-font-color);
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 :root {
-  /* ------------------ colors -----------------------------------*/
+  /* ------------------ colors ----------------------------------- */
 
   /* community types  */
   --school-tag-bg-color: #7393a7;
   --school-tag-color: #fff;
   --school-tag-bg-color-darker: #58798d;
-
   --class-tag-bg-color: #3e8ed0;
   --class-tag-color: #fff;
   --class-tag-bg-color-darker: #2b74b1;
 
   /* TODO: Pick a green already ;-) */
+
   /* --course-tag-bg-color: #00d1b2;
   --course-tag-bg-color: #60a561;
   --course-tag-bg-color: #589d59;
@@ -36,15 +36,104 @@
   --course-tag-bg-color: lightseagreen; */
   --course-tag-bg-color: darkcyan;
   --course-tag-color: #fff;
-  --course-tag-bg-color-darker: #006666;
+  --course-tag-bg-color-darker: #066;
 
   /* --custom-tag-bg-color: indianred; */
   --custom-tag-bg-color: salmon;
   --custom-tag-color: #fff;
   --custom-tag-bg-color-darker: #f85a49;
 
-  /* nice reds*/
-  /*#f25f5c*/
-  /*#db5461*/
-  /*#fc6471*/
+  /* nice reds */
+
+  /* #f25f5c */
+
+  /* #db5461 */
+
+  /* #fc6471 */
+}
+
+.CommunitiesLayout .App__Page {
+  padding: 0;
+}
+
+.CommunitiesLayout .CommunityList {
+  /* grid-auto-rows: minmax(350px, 1fr); */
+  grid-auto-rows: 1fr;
+  grid-gap: 0.25rem;
+
+  grid-template-columns: 1fr;
+}
+
+.CommunitiesLayout .CommunityList .CommunityListItem {
+  aspect-ratio: auto;
+}
+
+@media all and (min-width: 500px) {
+  .CommunitiesLayout .CommunityList {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .CommunitiesLayout .CommunityList .CommunityListItem {
+    /* aspect-ratio: 5/8; */
+  }
+}
+
+@media all and (min-width: 768px) {
+  .CommunitiesLayout .App__Page {
+    padding: 0.5rem;
+  }
+
+  .CommunitiesLayout .CommunityList {
+    /* grid-auto-rows: minmax(350px, 1fr); */
+    grid-gap: 0.5rem;
+  }
+
+  .CommunitiesLayout .CommunityList .CommunityListItem {
+    aspect-ratio: auto;
+  }
+}
+
+@media all and (min-width: 1024px) {
+  .CommunitiesLayout .CommunityList {
+    grid-auto-rows: 335px;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+@media all and (min-width: 1200px) {
+  .CommunitiesLayout .CommunityList {
+    grid-auto-rows: 1fr;
+  }
+}
+
+@media all and (min-width: 1366px) {
+  .CommunitiesLayout .App__Page {
+    padding: 0.75rem;
+  }
+
+  .CommunitiesLayout .CommunityList {
+    grid-gap: 0.75rem;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+@media all and (min-width: 2000px) {
+  .CommunitiesLayout .App__Page {
+    padding: 1rem;
+  }
+
+  .CommunitiesLayout .CommunityList {
+    grid-gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+  }
+}
+
+@media all and (min-width: 4000px) {
+  .CommunitiesLayout .App__Page {
+    padding: 1rem;
+  }
+
+  .CommunitiesLayout .CommunityList {
+    grid-gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(550px, 1fr));
+  }
 }

@@ -64,7 +64,11 @@
 
   color: whitesmoke;
   text-decoration: none;
-  transition: all 0.3s ease;
+
+  /* transition: all 0.3s ease; */
+  transition-duration: 0.3s;
+  transition-property: background-color, border, color;
+  transition-timing-function: ease;
 }
 
 .App__header .AppNav .NavItem:hover {
@@ -81,12 +85,19 @@
   display: flex;
 }
 
+.App__header .AppNav .Dropdown.Dropdown--active a.Dropdown__Toggler,
+.App__header .AppNav .Dropdown a.Dropdown__Toggler:hover {
+  /* border: 1px solid #80baee; */
+
+  /* box-shadow: 0 1px 8px rgb(0 0 0 / 30%); */
+  filter: none;
+}
+
 .App__header .AppNav .Dropdown nav.Dropdown__Menu {
   width: 16rem;
   min-width: unset;
   max-width: unset;
   padding: 0 1rem 1rem;
-  border: none;
 }
 
 .App__header
@@ -136,18 +147,32 @@
 /* till here */
 
 .User__ProfilePic.NavItem__Icon.userAvatarIcon {
-  width: 41px;
-  height: 41px;
+  width: 42px;
+  height: 42px;
 }
 
 .App__header .AppNav .NavItem .NavItem__Icon {
+  backface-visibility: hidden;
   color: whitesmoke;
-  font-size: 1.5rem;
-  transition: all 0.3s ease-in;
+
+  /* font-size: 1.5rem; */
+  font-size: 30px;
+  perspective: 1000;
+  transition-duration: 0.3s;
+  transition-property: transform;
+  transition-timing-function: ease-in-out;
+}
+
+.App__header .AppNav .NavItem .NavItem__Icon:hover {
+  backface-visibility: hidden;
+  perspective: 1000;
+  transform: scale(1.1);
 }
 
 .App__header .AppNav .NavItem:hover .NavItem__Icon {
+  backface-visibility: hidden;
   color: white;
+  perspective: 1000;
   transform: scale(1.1);
 }
 
@@ -156,30 +181,14 @@
   padding: 0.2rem 0.5rem;
 }
 
-.App__header .AppNav .NavItem--Link {
-  padding: 0.2rem 0.5rem;
-  background-color: #7393a7;
-}
-
 .App__header .AppNav .NavItem--BtnIconOnly {
-  padding: 0.3rem;
+  width: 42px;
+  height: 42px;
+  padding: 0;
 }
 
 .App__header .AppNav .NavItem--Brand {
   background-color: transparent;
-
-  /* color: whitesmoke;
-  border: 1px solid whitesmoke;
-  border-radius: 8px;
-  letter-spacing: 3px;
-  font-weight: bold;
-  font-size: 1rem; */
-  filter: drop-shadow(2px 4px 6px rgb(247 247 247));
-}
-
-.App__header .AppNav .NavItem--Link:hover {
-  border: 1px solid var(--nav-item-bg-color);
-  background-color: var(--nav-item-bg-color);
 }
 
 .App__header .AppNav .NavItem--Brand .BrandLogo {
@@ -188,22 +197,12 @@
 }
 
 .App__header .AppNav .NavItem--Brand:hover {
-  border: 1px solid whitesmoke;
+  border: 1px solid #d0d3da;
   background-color: unset !important;
   color: whitesmoke;
 }
 
-/* .App__header .AppNav .NavItem--Btn--withCaption {
-  padding: 0.2rem 0.5rem;
-} */
-
 .App__header .AppNav .NavItem--Btn .NavItem__Caption {
-  font-size: 1rem;
-  font-weight: bold;
-  letter-spacing: 1px;
-}
-
-.App__header .AppNav .NavItem--Link .NavItem__Caption {
   font-size: 1rem;
   font-weight: bold;
   letter-spacing: 1px;

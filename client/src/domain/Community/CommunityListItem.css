@@ -1,15 +1,10 @@
 .CommunityListItem {
   --community-list-item-font-color: #556e7e;
   --community-list-item-bg-color: whitesmoke;
-  --community-list-item-border-color: #b5cfd8;
+  --community-list-item-border-color: #acc5ce;
   --community-list-item-border-radius: 10px;
+
   position: relative;
-
-  /* aspect-ratio: 3/2; */
-
-  /* aspect-ratio: 5/8; */
-
-  /* aspect-ratio: 16/9; */
 
   display: flex;
   overflow: hidden;
@@ -18,6 +13,12 @@
   align-items: stretch;
   justify-content: flex-end;
   border: 2px solid var(--community-list-item-border-color);
+
+  /* aspect-ratio: 3/2; */
+
+  /* aspect-ratio: 5/8; */
+
+  /* aspect-ratio: 16/9; */
 
   /* aspect-ratio: 1; */
   aspect-ratio: 4/3;
@@ -28,8 +29,6 @@
   color: var(--community-list-item-font-color);
   cursor: pointer;
   text-align: center;
-
-  /* transition: transform 0.3s ease; */
 }
 
 .CommunityListItem:hover {
@@ -61,6 +60,9 @@
   padding: 0.75rem 1rem;
   border-top: 2px solid transparent;
   background-color: var(--community-list-item-bg-color);
+
+  border-bottom-left-radius: var(--community-list-item-border-radius);
+  border-bottom-right-radius: var(--community-list-item-border-radius);
   gap: 0.5rem;
 }
 
@@ -71,8 +73,7 @@
 
 .CommunityListItem .community__meta .community__name {
   display: flex;
-  min-width: 66.66%;
-  max-width: 75%;
+
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;

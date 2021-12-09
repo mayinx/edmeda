@@ -16,7 +16,7 @@ export default function AppHeader() {
       <nav className="AppNav">
         <div className="AppNav__Left">
           <Link
-            className="NavItem NavItem--BtnIconOnly"
+            className="NavItem NavItem--BtnIconOnly no-flicker"
             to="#"
             onClick={(e) =>
               notifyInfo({
@@ -26,7 +26,7 @@ export default function AppHeader() {
               })
             }
           >
-            <BsGrid3X3Gap className="NavItem__Icon appNavIcon" />
+            <BsGrid3X3Gap className="NavItem__Icon appNavIcon " />
           </Link>
         </div>
 
@@ -42,8 +42,8 @@ export default function AppHeader() {
         </div>
 
         <div className="AppNav__Right">
-          <Link className="NavItem NavItem--BtnIconOnly" to="/communities/new">
-            <FaPlus className="NavItem__Icon addIcon" />
+          <Link className="NavItem NavItem--BtnIconOnly " to="/communities/new">
+            <FaPlus className="NavItem__Icon addIcon " />
           </Link>
 
           <UserOptionsNavItem />

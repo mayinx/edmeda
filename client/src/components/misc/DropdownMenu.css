@@ -5,7 +5,7 @@
   --dd-toggler-bg-color: whitesmoke;
   --dd-toggler-font-size: 1rem;
   --dd-menu-font-size: 0.85rem;
-  --dd-menu-border-color: slategray;
+  --dd-menu-border-color: #d0d3da;
   --dd-titlebar-color: slategray;
   --dd-section-divider-border-color: #ddd;
   --dd-item-link-font-size: var(--dd-menu-font-size);
@@ -186,7 +186,6 @@
   line-height: 30px;
   text-align: center;
   transition: background-color 0.3s ease;
-  vertical-align: middle;
 }
 
 .Dropdown
@@ -208,4 +207,13 @@
   background: var(--dd-item-icon-hover-bg-color);
 
   /* background: #466a81; */
+}
+
+.Dropdown
+  nav.Dropdown__Menu
+  ul.Dropdown__Items
+  li.Dropdown__Item
+  a.Dropdown__ItemLink
+  span.Dropdown__ItemCaption {
+  text-align: left;
 }

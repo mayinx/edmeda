@@ -66,6 +66,10 @@ h3 {
   --footer-font-color: var(--hover-font-color);
 
   /* MAIN NAV */
+  --nav-item-line-height: 1.3rem;
+  --nav-item-caption-line-height: var(--nav-item-line-height);
+  --nav-item-brand-width: auto;
+  --nav-item-brand-height: 36px;
   --nav-item-link-color: var(--page-font-color);
   --nav-item-bg-color: var(--quinary-color);
   --nav-item-hover-bg-color: var(--senary-color);

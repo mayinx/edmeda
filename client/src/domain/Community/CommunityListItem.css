@@ -14,14 +14,7 @@
   justify-content: flex-end;
   border: 2px solid var(--community-list-item-border-color);
 
-  /* aspect-ratio: 3/2; */
-
-  /* aspect-ratio: 5/8; */
-
-  /* aspect-ratio: 16/9; */
-
-  /* aspect-ratio: 1; */
-  aspect-ratio: 4/3;
+  aspect-ratio: auto;
   background-color: var(--community-list-item-bg-color);
   border-radius: var(--community-list-item-border-radius);
   box-shadow: rgb(50 50 93 / 25%) 0 13px 27px -5px,
@@ -39,7 +32,9 @@
 
 .CommunityListItem .Community__ProfilePic-wrapper {
   display: flex;
+
   flex: 5;
+
   flex-direction: column;
   align-items: stretch;
   padding: 0;
@@ -47,7 +42,12 @@
 
 .CommunityListItem .Community__ProfilePic-wrapper img {
   display: block;
+  width: 100%;
+
+  max-width: 100%;
+  height: auto;
   flex: 1 1 100%;
+
   object-fit: cover;
 }
 
@@ -69,6 +69,8 @@
 .CommunityListItem:hover .community__meta {
   /* filter: brightness(1.2); */
   border-top: 2px solid whitesmoke;
+  border-bottom-left-radius: unset;
+  border-bottom-right-radius: unset;
 }
 
 .CommunityListItem .community__meta .community__name {

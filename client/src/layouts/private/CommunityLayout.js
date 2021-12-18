@@ -1,5 +1,5 @@
 import { Route } from "react-router-dom";
-import AppHeader from "./AppHeader";
+import Header from "./Header";
 import CommunityPage from "../../pages/communities/CommunityPage";
 import "./CommunityLayout.css";
 import { useParams } from "react-router-dom";
@@ -30,7 +30,7 @@ export default function CommunityLayout() {
   return (
     <>
       <CommunityContext.Provider value={{ currentCommunity }}>
-        <AppHeader className="CommunityHeader" />
+        <Header className="CommunityHeader" />
         <main className="CommunityLayout">
           {isLoading || !currentCommunity ? (
             // <div className="mt-2 fs-1_5">

@@ -1,5 +1,5 @@
 import { Route } from "react-router-dom";
-import AppHeader from "./AppHeader";
+import Header from "./Header";
 import MyCommunitiesPage from "../../pages/communities/MyCommunitiesPage";
 import "./CommunitiesLayout.css";
 
@@ -42,7 +42,7 @@ export default function CommunitiesLayout() {
       <CommunityContext.Provider
         value={{ currentCommunity, setCurrentCommunity }}
       >
-        <AppHeader className="CommunitiesHeader" />
+        <Header className="CommunitiesHeader" />
         <main className="CommunitiesLayout">
           {/* <Switch> */}
           <Route exact path="/communities" component={MyCommunitiesPage} />

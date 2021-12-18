@@ -24,7 +24,7 @@ export default function Header() {
   }, [navToggled]);
 
   return (
-    <header className="App__header RegistrationHeader">
+    <header className="Header Header--public">
       <nav className={`AppNav ${navToggleStateClass}`}>
         <div className="AppNav__Left Brand">
           <Link className="NavItem NavItem--Brand" to="/">

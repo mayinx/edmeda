@@ -10,6 +10,8 @@ import { useHistory } from "react-router";
 import { useEffect, useState } from "react";
 import UserDataService from "../../../services/user";
 
+import "./UserOptionsNavItem.css";
+
 export default function UserOptionsNavItem(props) {
   const { logout, currentUser } = useAuthActions();
   const cUser = currentUser().user;

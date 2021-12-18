@@ -1,258 +1,329 @@
-.App__header.RegistrationHeader {
+.Header.Header--public {
+  --public-app-header-height: 75px;
+  --nav-item-link-padding: 0.4rem 0.7rem;
+
+  /* --nav-item-link-padding: 0.5rem 0.75rem;  */
+  --nav-item-btn-padding: var(--nav-item-link-padding);
+  --nav-item-center-padding: var(--nav-item-link-padding);
+
+  position: relative;
+  z-index: 10;
   display: flex;
+
+  min-height: var(--public-app-header-height);
+  max-height: var(--public-app-header-height);
   align-items: center;
   justify-content: space-between;
 
-  text-align: center;
-  color: var(--header-font-color);
-  background-color: var(--header-bg-color);
-
   padding: 0 1rem;
+  background-color: var(--header-bg-color);
+  box-shadow: rgb(0 0 0 / 7%) 0 1px 2px, rgb(0 0 0 / 7%) 0 2px 4px,
+    rgb(0 0 0 / 7%) 0 4px 8px, rgb(0 0 0 / 7%) 0 8px 16px,
+    rgb(0 0 0 / 7%) 0 16px 32px, rgb(0 0 0 / 7%) 0 32px 64px;
+  color: var(--header-font-color);
   font-size: 1rem;
 
-  height: 65px;
-  min-height: 65px;
-
   gap: 0;
+
+  text-align: center;
 }
 
-.App__header.RegistrationHeader .AppNav {
+.Header.Header--public .AppNav {
   display: flex;
+  width: 100%;
 
-  justify-content: space-between;
   /* gap: 1rem; */
   align-items: flex-end;
   align-items: center;
-  width: 100%;
+
+  justify-content: space-between;
 }
 
-.App__header.RegistrationHeader .AppNav .AppNav__Left {
+.Header.Header--public .AppNav .AppNav__Left {
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
   flex: 1;
+  align-items: center;
   align-items: stretch;
+  justify-content: flex-start;
 }
-.App__header.RegistrationHeader .AppNav .AppNav__Center {
-  display: flex;
-  justify-content: center;
-  flex: auto;
-  align-items: stretch;
-  flex-direction: column;
-  gap: 0.5rem;
 
+.Header.Header--public .AppNav .AppNav__Center {
   position: fixed;
-  top: 60px;
-  left: 0;
-  right: 0;
   z-index: 10;
 
-  visibility: hidden;
-  opacity: 0;
+  /* top: 60px; */
 
-  margin: 10px;
-  border-radius: 10px;
-  transition: visibility 0.3s linear, opacity 0.3s linear;
+  top: calc(var(--public-app-header-height) - 5px);
 
-  background-color: #7393a7;
+  /* top: calc(10px - 5px); */
+  right: 0;
+  left: 0;
+  display: flex;
+  flex: auto;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
 
   padding: 0.5rem;
-}
 
-.App__header.RegistrationHeader .AppNav.toggled .AppNav__Center {
-  display: flex;
-  visibility: visible;
-  opacity: 1;
-}
-.App__header.RegistrationHeader .AppNav .AppNav__Center .NavItem {
-  padding: 1rem 1.5rem;
-  justify-content: flex-start;
-}
+  margin: 10px;
 
-.App__header.RegistrationHeader .AppNav .AppNav__Right {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
+  background-color: #7393a7;
+  border-radius: 10px;
   gap: 0.5rem;
-  flex: 1;
-  align-items: stretch;
+  opacity: 0;
+  transition: visibility 0.3s linear, opacity 0.3s linear;
+
+  visibility: hidden;
 }
 
-.App__header.RegistrationHeader .AppNav .NavItem {
+.Header.Header--public .AppNav.toggled .AppNav__Center {
+  display: flex;
+  opacity: 1;
+  visibility: visible;
+}
+
+.Header.Header--public .AppNav .NavItem {
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 1px solid transparent;
 
   background-color: var(--nav-item-bg-color);
-  color: var(--nav-item-hover-font-color);
   border-radius: 6px;
-  border: 1px solid transparent;
-  transition: all 0.3s ease;
 
-  display: flex;
+  /* color: var(--nav-item-hover-font-color); */
+  color: whitesmoke;
+
+  line-height: var(--nav-item-line-height);
 
   text-decoration: none;
 
-  color: whitesmoke;
+  /* transition: all 0.3s ease; */
+
+  transition-duration: 0.3s;
+  transition-property: background-color, border, color;
+  transition-timing-function: ease;
 }
 
-.App__header.RegistrationHeader .AppNav .NavItem:hover {
+.Header.Header--public .AppNav .AppNav__Center .NavItem {
+  justify-content: flex-start;
+  padding: 1rem 1.5rem;
+}
+
+.Header.Header--public .AppNav .AppNav__Right {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  align-items: stretch;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.Header.Header--public .AppNav .NavItem:hover {
+  border: 1px solid #80baee;
   background-color: var(--nav-item-hover-bg-color);
   color: var(--nav-item-hover-font-color);
-  border: 1px solid #80baee;
 }
 
-.App__header.RegistrationHeader .AppNav .NavItem--Brand {
+.Header.Header--public .AppNav .NavItem--Brand {
   background-color: transparent;
-  filter: drop-shadow(2px 4px 6px rgb(247, 247, 247));
+
+  /* filter: drop-shadow(2px 4px 6px rgb(247 247 247)); */
 }
-.App__header.RegistrationHeader .AppNav .NavItem--Brand:hover {
-  color: var(--nav-item-hover-font-color);
+
+.Header.Header--public .AppNav .NavItem--Brand .BrandLogo {
+  width: var(--nav-item-brand-width);
+  height: var(--nav-item-brand-height);
+  backface-visibility: hidden;
+
+  perspective: 1000;
+  transition-duration: 0.3s;
+  transition-property: transform, color, filter;
+  transition-timing-function: ease-in-out;
+}
+
+.Header.Header--public .AppNav .NavItem--Brand:hover {
+  border: 1px solid transparent;
   background-color: unset !important;
 
-  /* border: 1px solid #80baee;
-  color: whitesmoke;
-  border: 1px solid whitesmoke; */
+  color: var(--nav-item-hover-font-color);
+
+  filter: drop-shadow(2px 4px 6px rgb(247 247 247));
 }
-.App__header.RegistrationHeader .AppNav .NavItem--ToggleNavBtn {
+
+.Header.Header--public .AppNav .NavItem--Brand:hover .BrandLogo {
+  backface-visibility: hidden;
+  background-color: unset !important;
+  color: whitesmoke;
+
+  /* color: white; */
+  perspective: 1000;
+  transform: scale(1.05);
+}
+
+.Header.Header--public .AppNav .NavItem--ToggleNavBtn {
   display: flex;
-  cursor: pointer;
-  background-color: transparent;
+  padding: 0.5rem 1rem;
   border: 1px solid transparent;
+  background-color: transparent;
   border-radius: 0.25rem;
+  cursor: pointer;
 
   transition: all 0.5s ease-in-out;
-  padding: 0.5rem 1rem;
 }
 
-.App__header.RegistrationHeader .AppNav .NavItem--ToggleNavBtn:hover {
+.Header.Header--public .AppNav .NavItem--ToggleNavBtn:hover {
   border: 1px solid #6191af;
   background-color: #82a8c0;
   color: #fff;
   font-size: 200%;
 }
 
-.App__header.RegistrationHeader .AppNav .NavItem--LoginBtn {
+.Header.Header--public .AppNav .NavItem--LoginBtn {
+  border: 1px solid #466a81;
+
   /* background-color: ##9773a7; */
 
   background-color: #517a95;
-  border: 1px solid #466a81;
 }
-.App__header.RegistrationHeader .AppNav .NavItem--LoginBtn:hover {
-  background-color: #466a81;
-  color: #fff;
+
+.Header.Header--public .AppNav .NavItem--LoginBtn:hover {
   /* border: 1px solid #80baee;
   border: 1px solid #16878c; */
+
   /* border: 1px solid #466a81; */
   border: 1px solid #16878c;
+  background-color: #466a81;
+  color: #fff;
 }
-.App__header.RegistrationHeader .AppNav .NavItem--SignUpBtn {
-  background-color: #9773a7;
+
+.Header.Header--public .AppNav .NavItem--SignUpBtn {
   border: 1px solid #9773a7;
   border: 1px solid #16878c;
+  background-color: #9773a7;
 
   /* background-color: #7393a7; */
 }
 
-.App__header.RegistrationHeader .AppNav .NavItem--SignUpBtn:hover {
-  background-color: #77458d;
-
+.Header.Header--public .AppNav .NavItem--SignUpBtn:hover {
   border: 1px solid #774090;
   border: 1px solid #77458d;
+  background-color: #77458d;
 }
 
-.App__header.RegistrationHeader .AppNav .NavItem--Link:hover {
-  background-color: var(--nav-item-bg-color);
+.Header.Header--public .AppNav .NavItem--Link {
+  padding: var(--nav-item-link-padding);
+
+  background-color: #7393a7;
+}
+
+.Header.Header--public .AppNav .NavItem--Link:hover {
   border: 1px solid var(--nav-item-bg-color);
+  background-color: var(--nav-item-bg-color);
 }
 
-.App__header.RegistrationHeader .AppNav .NavItem .NavItem__Icon {
+.Header.Header--public .AppNav .NavItem .NavItem__Icon {
+  /* color: whitesmoke;
+  font-size: 1.5rem;
+  transition: all 0.3s ease-in; */
+
+  backface-visibility: hidden;
   color: whitesmoke;
-  transition: all 0.3s ease-in;
-  font-size: 1.5rem;
-}
-.App__header.RegistrationHeader .AppNav .NavItem .NavItem__Icon.toggleNavIcon {
-  font-size: 1.5rem;
+
+  /* font-size: 1.5rem; */
+  font-size: 30px;
+  perspective: 1000;
+  transition-duration: 0.3s;
+  transition-property: transform;
+  transition-timing-function: ease-in;
 }
 
-.App__header.RegistrationHeader .AppNav .NavItem:hover .NavItem__Icon {
-  color: white;
+.Header.Header--public .AppNav .NavItem .NavItem__Icon.toggleNavIcon {
+  font-size: 25px;
+}
+
+.Header.Header--public .AppNav .NavItem .NavItem__Icon:hover {
+  backface-visibility: hidden;
+  perspective: 1000;
   transform: scale(1.1);
 }
 
-.App__header.RegistrationHeader .AppNav .NavItem--Btn {
-  padding: 0.2rem 0.5rem;
-  width: max-content;
-}
-.App__header.RegistrationHeader .AppNav .NavItem--Link {
-  background-color: #7393a7;
-  padding: 0.2rem 0.5rem;
+.Header.Header--public .AppNav .NavItem:hover .NavItem__Icon {
+  backface-visibility: hidden;
+  color: white;
+  perspective: 1000;
+  transform: scale(1.1);
 }
 
-.App__header.RegistrationHeader .AppNav .NavItem--BtnIconOnly {
+.Header.Header--public .AppNav .NavItem--Btn {
+  width: max-content;
+  padding: var(--nav-item-btn-padding);
+}
+
+.Header.Header--public .AppNav .NavItem--BtnIconOnly {
   padding: 0.3rem;
 }
 
-.App__header.RegistrationHeader .AppNav .NavItem--Btn .NavItem__Caption {
+.Header.Header--public .AppNav .NavItem .NavItem__Caption {
   font-size: 1rem;
   font-weight: bold;
   letter-spacing: 1px;
-}
-.App__header.RegistrationHeader .AppNav .NavItem--Link .NavItem__Caption {
-  font-size: 1rem;
-  font-weight: bold;
-  letter-spacing: 1px;
+  line-height: var(--nav-item-caption-line-height);
 }
 
-.App__header.RegistrationHeader .AppNav.toggled + .NavOverlay {
-  visibility: visible;
-  opacity: 1;
-}
-
-.App__header.RegistrationHeader .NavOverlay {
+.Header.Header--public .NavOverlay {
   position: fixed;
-  display: block;
-  visibility: hidden;
-  opacity: 0;
-  width: 100%;
-  height: 100%;
+  z-index: 3;
   top: 65px;
-  left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.25);
-  z-index: 3;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0 0 0 / 25%);
   cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.Header.Header--public .AppNav.toggled + .NavOverlay {
+  opacity: 1;
+  visibility: visible;
 }
 
 @media all and (min-width: 800px) {
-  .App__header.RegistrationHeader .AppNav .NavItem--ToggleNavBtn {
+  .Header.Header--public .AppNav .NavItem--ToggleNavBtn {
     display: none;
   }
-  .App__header.RegistrationHeader {
+
+  /* .Header.Header--public {
     height: 75px;
-  }
-  .App__header.RegistrationHeader .AppNav .AppNav__Center {
-    display: flex;
-    visibility: visible;
-    opacity: 1;
+  } */
 
-    margin: 0;
-    padding: 0;
-    border-radius: 0;
-
-    flex-direction: row;
+  .Header.Header--public .AppNav .AppNav__Center {
     position: inherit;
+    z-index: 10;
     top: 80px;
     left: 50%;
-    z-index: 10;
-    background-color: inherit;
+    display: flex;
+
+    flex-direction: row;
 
     align-items: center;
+    padding: 0;
+
+    margin: 0;
+    background-color: inherit;
+    border-radius: 0;
+    opacity: 1;
+    visibility: visible;
   }
 
-  .App__header.RegistrationHeader .AppNav .AppNav__Center .NavItem {
-    padding: 0.2rem 0.5rem;
+  .Header.Header--public .AppNav .AppNav__Center .NavItem {
     justify-content: flex-start;
+
+    padding: var(--nav-item-center-padding);
   }
 }

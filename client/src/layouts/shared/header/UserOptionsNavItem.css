@@ -1,0 +1,65 @@
+.Header .AppNav .Dropdown {
+  display: flex;
+}
+
+.Header .AppNav .Dropdown.Dropdown--active a.Dropdown__Toggler,
+.Header .AppNav .Dropdown a.Dropdown__Toggler:hover {
+  /* border: 1px solid #80baee; */
+
+  /* box-shadow: 0 1px 8px rgb(0 0 0 / 30%); */
+  filter: none;
+}
+
+.Header .AppNav .Dropdown nav.Dropdown__Menu {
+  width: 16rem;
+  min-width: unset;
+  max-width: unset;
+  padding: 0 1rem 1rem;
+}
+
+.Header .AppNav .Dropdown.Dropdown--HeaderBarUserOptions .Dropdown__Toggler {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  border-radius: 50%;
+}
+
+.Header
+  .AppNav
+  .Dropdown.Dropdown--HeaderBarUserOptions
+  .Dropdown__Toggler
+  .User__ProfilePic {
+  width: 44px;
+  height: 44px;
+  border-radius: 90px;
+
+  box-shadow: rgb(0 0 0 / 7%) 0 1px 2px, rgb(0 0 0 / 7%) 0 2px 4px,
+    rgb(0 0 0 / 7%) 0 4px 8px, rgb(0 0 0 / 7%) 0 8px 16px,
+    rgb(0 0 0 / 7%) 0 16px 32px, rgb(0 0 0 / 7%) 0 32px 64px;
+}
+
+.Header
+  .AppNav
+  .Dropdown.Dropdown--HeaderBarUserOptions
+  .Dropdown__Header
+  .User__ProfilePic {
+  width: 125px;
+  height: 125px;
+  margin: 0.5rem;
+}
+
+.Header
+  .AppNav
+  .Dropdown.Dropdown--HeaderBarUserOptions
+  .Dropdown__Header
+  .User__Meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  font-family: "News Cycle", sans-serif;
+
+  font-size: 1rem;
+  gap: 0.5rem;
+}

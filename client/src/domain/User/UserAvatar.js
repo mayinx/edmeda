@@ -11,7 +11,7 @@ export default function UserAvatar(props) {
     wrapper = true,
   } = props;
 
-  let avatarUrl = user?.picture;
+  let avatarUrl = user?.avatar;
   if (!avatarUrl) {
     try {
       avatarUrl = user?.fbAvatarFileName

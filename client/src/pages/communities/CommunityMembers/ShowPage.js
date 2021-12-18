@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import "./ShowPage.css";
 import CommunityDataService from "../../../services/community";
 
+import BannerFallbackPic from "../../../assets/user/banner/pic-12-2kx845.png";
+
 import useNotify from "../../../components/notifications/useNotify";
 
 import UserProfileCardSidebar from "../../../domain/User/UserProfileCardSidebar";
@@ -53,10 +55,27 @@ export default function ShowPage(props) {
     }
   }, [user, userLoaded]);
 
+  let bannerImgUrl = user?.bannerImage;
+  if (!bannerImgUrl) {
+    try {
+      bannerImgUrl = user?.fbAvatarFileName
+        ? require(`../../../assets/user/banner/${user?.fbBannerPicFileName}`)
+            .default
+        : BannerFallbackPic;
+    } catch (e) {
+      bannerImgUrl = BannerFallbackPic;
+    }
+  }
+
   return (
     <div className="ModalPage__body--inner CommunityModalPage MemberPage">
       <div className="MemberPage__Banner">
-        {/* <UserProfileCard user={user} community={currentCommunity} /> */}
+        <img
+          src={bannerImgUrl}
+          className="BannerImage"
+          alt="Member Page Banner"
+        />
+        <div className="BannerImage__Overlay"> {user.fullName}</div>
       </div>
       <div className="MemberPage__Main">
         <div className="MemberPage__Content">

@@ -5,14 +5,14 @@ import { BsGrid3X3Gap } from "react-icons/bs";
 import { FaPlus } from "react-icons/fa";
 
 import useNotify from "../../components/notifications/useNotify";
-import "./AppHeader.css";
+import "./Header.css";
 import UserOptionsNavItem from "../../layouts/shared/header/UserOptionsNavItem";
 
 export default function AppHeader() {
   const { notifyInfo } = useNotify();
 
   return (
-    <header className="App__header">
+    <header className="Header Header--private">
       <nav className="AppNav">
         <div className="AppNav__Left">
           <Link

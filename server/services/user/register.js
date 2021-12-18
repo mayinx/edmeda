@@ -23,6 +23,7 @@ RegisterUserService.prototype.run = async function (userAttributes) {
       passwordConfirmation,
       isOwner,
       fbAvatarFileName,
+      fbBannerPicFileName,
       gender,
     } = userAttributes;
 
@@ -78,6 +79,7 @@ RegisterUserService.prototype.run = async function (userAttributes) {
     gender ||= genderDetect.detect(firstName);
     if (gender === "unknown" || gender === "unisex") gender = "diverse";
     fbAvatarFileName ||= `${type}_${gender}_${_.sample(User.DEFAULT_AVATARS)}`;
+    fbBannerPicFileName ||= _.sample(User.DEFAULT_BANNER_PICS);
     // const passwordHash = await User.createPasswordHash(password);
     const passwordHash = await this.createPasswordHash(password);
 
@@ -87,6 +89,7 @@ RegisterUserService.prototype.run = async function (userAttributes) {
       email,
       gender,
       fbAvatarFileName,
+      fbBannerPicFileName,
       password: passwordHash,
       fullName,
       firstName,

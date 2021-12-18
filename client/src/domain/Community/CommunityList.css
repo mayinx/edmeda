@@ -1,5 +1,7 @@
 .CommunityList {
   display: grid;
+
+  width: 100%;
   align-items: stretch;
 
   /* grid-auto-rows: minmax(350px, 1fr); */

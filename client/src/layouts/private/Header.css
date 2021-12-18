@@ -1,0 +1,168 @@
+.Header.Header--private {
+  --private-app-header-height: 70px;
+  position: relative;
+  z-index: 10;
+  display: flex;
+
+  min-height: var(--private-app-header-height);
+  max-height: var(--private-app-header-height);
+  align-items: center;
+  justify-content: space-between;
+
+  /* padding: 0.5rem 0.75rem; */
+  padding: 0.65rem 0.75rem;
+  background-color: var(--header-bg-color);
+
+  box-shadow: rgb(0 0 0 / 7%) 0 1px 2px, rgb(0 0 0 / 7%) 0 2px 4px,
+    rgb(0 0 0 / 7%) 0 4px 8px, rgb(0 0 0 / 7%) 0 8px 16px,
+    rgb(0 0 0 / 7%) 0 16px 32px, rgb(0 0 0 / 7%) 0 32px 64px;
+  color: var(--header-font-color);
+
+  font-size: 1rem;
+
+  gap: 0;
+
+  text-align: center;
+}
+
+.Header.Header--private .AppNav {
+  display: flex;
+  width: 100%;
+
+  /* gap: 1rem; */
+  align-items: flex-end;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Header.Header--private .AppNav .AppNav__Left {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+.Header.Header--private .AppNav .AppNav__Center {
+  display: flex;
+
+  /* flex: 1; */
+  flex: auto;
+  align-items: center;
+  align-items: stretch;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.Header.Header--private .AppNav .AppNav__Right {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  align-items: stretch;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.Header.Header--private .AppNav .NavItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.2rem 0.5rem;
+  border: 1px solid transparent;
+
+  background-color: var(--nav-item-bg-color);
+  border-radius: 6px;
+
+  /* color: var(--nav-item-hover-font-color); */
+
+  color: whitesmoke;
+
+  line-height: var(--nav-item-line-height);
+  text-decoration: none;
+
+  /* transition: all 0.3s ease; */
+  transition-duration: 0.3s;
+  transition-property: background-color, border, color;
+  transition-timing-function: ease;
+}
+
+.Header.Header--private .AppNav .NavItem:hover {
+  border: 1px solid #80baee;
+  background-color: var(--nav-item-hover-bg-color);
+  color: var(--nav-item-hover-font-color);
+}
+
+.Header.Header--private .AppNav .NavItem .NavItem__Icon {
+  backface-visibility: hidden;
+  color: whitesmoke;
+
+  /* font-size: 1.5rem; */
+  font-size: 30px;
+  perspective: 1000;
+  transition-duration: 0.3s;
+  transition-property: transform;
+  transition-timing-function: ease-in-out;
+}
+
+.Header.Header--private .AppNav .NavItem .NavItem__Icon:hover {
+  backface-visibility: hidden;
+  perspective: 1000;
+  transform: scale(1.1);
+}
+
+.Header.Header--private .AppNav .NavItem:hover .NavItem__Icon {
+  backface-visibility: hidden;
+  color: white;
+  perspective: 1000;
+  transform: scale(1.1);
+}
+
+.Header.Header--private .AppNav .NavItem--Btn {
+  width: max-content;
+  padding: 0.2rem 0.5rem;
+}
+
+.Header.Header--private .AppNav .NavItem--BtnIconOnly {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+}
+
+.Header.Header--private .AppNav .NavItem--Brand {
+  background-color: transparent;
+}
+
+.Header.Header--private .AppNav .NavItem--Brand .BrandLogo {
+  width: var(--nav-item-brand-width);
+  height: var(--nav-item-brand-height);
+
+  perspective: 1000;
+  transition-duration: 0.3s;
+  transition-property: transform, color, filter;
+  transition-timing-function: ease-in-out;
+}
+
+.Header.Header--private .AppNav .NavItem--Brand:hover {
+  /* border: 1px solid #d0d3da; */
+  border: 1px solid transparent;
+  background-color: unset !important;
+  color: var(--nav-item-hover-font-color);
+  filter: drop-shadow(2px 4px 6px rgb(247 247 247));
+}
+
+.Header.Header--private .AppNav .NavItem--Brand:hover .BrandLogo {
+  backface-visibility: hidden;
+  background-color: unset !important;
+  color: whitesmoke;
+
+  /* color: white; */
+  perspective: 1000;
+  transform: scale(1.05);
+}
+
+.Header.Header--private .AppNav .NavItem .NavItem__Caption {
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  line-height: var(--nav-item-caption-line-height);
+}

@@ -1,6 +1,7 @@
 :root {
   /* CSS PROPERTIES TO CONTROL RESPONSIVENESS  */
 
+  /* mobile first: Everything below 399px is considered the default in styling */
   --xxs: 399px; /* max-width:  399px */
   --xs: 400px; /* min-width:  400px */
   --sm: 576px; /* min-width:  576px */
@@ -9,7 +10,6 @@
   --xl: 1024px; /* min-width:  1024px */
   --xxl: 1200px; /* min-width:  1200px */
   --hd: 1400px; /* min-width:  1400px */
-
   --body-min-width: 310px;
 
   /* not responsive base vars - needed for fluid typography formula etc. */
@@ -24,9 +24,7 @@
 
   /* will be recalculated later on (see below) */
   --r-base-font-size: var(--min-base-font-size);
-
   --r-base-multiplier: 1; /* we can add more multipliers if needed */
-
   --r-pd: 1rem; /* padding */
 
   /* responsive font sizes */
@@ -34,9 +32,11 @@
   --r-font-size-sm: calc(
     var(--r-base-multiplier) * 0.75 * var(--r-base-font-size)
   ); /* font-size-sm */
+
   --r-font-size-md: calc(
     var(--r-base-multiplier) * 1 * var(--r-base-font-size)
   ); /* font-size-md */
+
   --r-font-size-lg: calc(
     var(--r-base-multiplier) * 1.5 * var(--r-base-font-size)
   ); /* font-size-lg */
@@ -48,19 +48,28 @@
 }
 
 /* Calculate base font size using fluid typography formula                                                */
+
 /* Apply fluid typography formula in range of min device width (399) up to max-device width (1399) */
+
 /* blwo we set the minimum font size as base font sze - and above the maximum font size */
+
 /*                                                                                                        */
+
 /* Below (until max-width of 399px) */
 @media all and (max-width: var(--xxs)) {
   :root {
     --r-base-font-size: var(--min-base-font-size);
   }
 }
-/* Between (400 - 1399)*/
+
+/* Between (400 - 1399) */
+
 /* @media (min-width: var(--min-device-width)) and (max-width: var(--max-device-width)) { */
+
 /* @media (min-width: var(--min-device-width)) and (max-width: var(--max-device-width)) { */
+
 /* @media all and (min-width: var((--min-device-width)) { */
+
 /* @media all and (min-width: var(--min-device-width)) { */
 @media screen and (min-width: 400px) {
   :root {
@@ -72,6 +81,7 @@
     );
   }
 }
+
 /* Above (from 1400) */
 @media all and (min-width: var(--hd)) {
   :root {
@@ -167,7 +177,6 @@
   --r-heading-lg: calc(2 * var(--r-base-font-size)); /* heading-lg */
   --r-heading-xl: calc(2.5 * var(--r-base-font-size)); /* heading-lg */
   --r-heading-xxl: calc(3 * var(--r-base-font-size)); /* heading-lg */
-
   --xxs: 399px; /* max-width:  399px */
   --xs: 400px; /* min-width:  400px */
   --sm: 576px; /* min-width:  576px */

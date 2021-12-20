@@ -1,7 +1,7 @@
 import { useForm, FormProvider } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import "./EditPage.css";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 
 import FormConfig from "../../../domain/User/FormConfig";
@@ -12,9 +12,11 @@ import useNotify from "../../../components/notifications/useNotify";
 import useFormResultHandler from "../../../components/form/useFormResultHandler";
 
 import CommunityDataService from "../../../services/community";
+import ModalContext from "../../../contexts/ModalContext";
 
 export default function EditPage(props) {
-  const { formId, setModalHeader } = props;
+  const { formId } = props;
+  const { setModalCaption } = useContext(ModalContext);
   const history = useHistory();
   const { notifyError } = useNotify();
   const { id, memberId } = useParams();
@@ -59,13 +61,13 @@ export default function EditPage(props) {
 
   useEffect(() => {
     if (userLoaded) {
-      setModalHeader("Edit Community Member " + user.fullName + "");
+      setModalCaption("Edit Community Member " + user.fullName + "");
     } else {
-      setModalHeader("Edit Community Member");
+      setModalCaption("Edit Community Member");
     }
 
     return () => {
-      setModalHeader("Edit Community Member");
+      setModalCaption("Edit Community Member");
     };
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

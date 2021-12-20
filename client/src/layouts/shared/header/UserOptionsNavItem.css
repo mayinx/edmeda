@@ -31,11 +31,24 @@
   .User__ProfilePic {
   width: 44px;
   height: 44px;
+
+  backface-visibility: hidden;
   border-radius: 90px;
 
-  box-shadow: rgb(0 0 0 / 7%) 0 1px 2px, rgb(0 0 0 / 7%) 0 2px 4px,
+  /* box-shadow: rgb(0 0 0 / 7%) 0 1px 2px, rgb(0 0 0 / 7%) 0 2px 4px,
     rgb(0 0 0 / 7%) 0 4px 8px, rgb(0 0 0 / 7%) 0 8px 16px,
-    rgb(0 0 0 / 7%) 0 16px 32px, rgb(0 0 0 / 7%) 0 32px 64px;
+    rgb(0 0 0 / 7%) 0 16px 32px, rgb(0 0 0 / 7%) 0 32px 64px; */
+
+  filter: var(--nav-brand-drop-shadow);
+
+  perspective: 1000;
+  transform-style: preserve-3d;
+
+  transition-duration: 0.3s;
+  transition-property: transform, filter, box-shadow;
+  transition-timing-function: ease-in-out;
+
+  /* transition: all 0.5s ease-in-out; */
 }
 
 .Header
@@ -46,6 +59,19 @@
   width: 125px;
   height: 125px;
   margin: 0.5rem;
+}
+
+.Header
+  .AppNav
+  .Dropdown.Dropdown--HeaderBarUserOptions
+  .Dropdown__Toggler
+  .User__ProfilePic:hover {
+  backface-visibility: hidden;
+
+  /* filter: var(--nav-brand-hover-drop-shadow); */
+  perspective: 1000;
+
+  /* transform: scale(1.01); */
 }
 
 .Header

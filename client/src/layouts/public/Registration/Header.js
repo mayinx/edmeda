@@ -10,7 +10,7 @@ import UserOptionsNavItem from "../../shared/header/UserOptionsNavItem";
 // import { Counter } from "./../../../features/counter/Counter";
 
 export default function Header() {
-  const { userLoggedIn, register, login, logout } = useAuthActions();
+  const { userLoggedIn, register, login } = useAuthActions();
 
   const [navToggled, setNavToggled] = useState(false);
   const [navToggleStateClass, setNavToggleStateClass] = useState(false);
@@ -55,23 +55,6 @@ export default function Header() {
           {userLoggedIn() ? (
             <>
               <UserOptionsNavItem />
-              {/* <HeaderUserDropdownMenu>
-                <li>
-                  <Link className="SubNavItem" to="#">
-                    Profile
-                  </Link>
-                </li>
-                <li>
-                  <Link className="SubNavItem" to="/communities">
-                    MyCommunities
-                  </Link>
-                </li>
-                <li>
-                  <Link className="SubNavItem" to="#" onClick={logout}>
-                    Logout
-                  </Link>
-                </li>
-              </HeaderUserDropdownMenu> */}
             </>
           ) : (
             <>
@@ -105,7 +88,6 @@ export default function Header() {
           </Link>
         </div>
       </nav>
-      {/* <div className="NavOverlay"></div> */}
     </header>
   );
 }

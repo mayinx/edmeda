@@ -10,15 +10,17 @@ export default function useAuthActions() {
 
   const register = (e) => history.push("/register");
   const login = (e) => history.push("/login");
-  const logout = (e) => {
+  // const logout = (e) => {
+  function logout(e) {
     const userFirstName = AuthService.currentUser()?.user?.firstName;
+    console.log("Logging out ", userFirstName);
     AuthService.logout();
     notifySuccess({
       title: "Logged out",
       message: `You've been successfully logged out - cu soon ${userFirstName}!`,
     });
     history.push("/");
-  };
+  }
 
   // Helpers
   const currentUser = () => AuthService.currentUser();

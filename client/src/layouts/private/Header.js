@@ -6,7 +6,7 @@ import { FaPlus } from "react-icons/fa";
 
 import useNotify from "../../components/notifications/useNotify";
 import "./Header.css";
-import UserOptionsNavItem from "../../layouts/shared/header/UserOptionsNavItem";
+import UserOptionsNavItem from "../shared/header/UserOptionsNavItem";
 
 export default function AppHeader() {
   const { notifyInfo } = useNotify();

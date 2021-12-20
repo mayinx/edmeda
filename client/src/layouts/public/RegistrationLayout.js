@@ -28,9 +28,6 @@ export default function RegistrationLayout() {
             crudAction="create"
             formId={REGISTER_ACTION_FORM_ID}
             goBackTo="/"
-            // modalWidth="35%"
-            // modalMinWidth="350px"
-            // modalHeight="80%"
           >
             <Register formId={REGISTER_ACTION_FORM_ID} />
           </Modal>
@@ -43,9 +40,6 @@ export default function RegistrationLayout() {
             crudAction="update"
             formId={LOGIN_ACTION_FORM_ID}
             goBackTo="/"
-            // modalWidth="35%"
-            // modalMinWidth="350px"
-            // modalHeight="80%"
           >
             <Login formId={LOGIN_ACTION_FORM_ID} />
           </Modal>

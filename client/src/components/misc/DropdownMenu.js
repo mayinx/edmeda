@@ -27,7 +27,8 @@ export function DropdownMenu(props) {
       <Link
         className={`Dropdown__Toggler  ${toggleLinkClassName ?? null}`}
         onClick={onClick}
-        to={null}
+        // to={null}
+        to="#"
       >
         {props.toggleIcon}
       </Link>
@@ -62,7 +63,8 @@ export function DropdownItem(props) {
     <li className={`Dropdown__Item ${className ?? null}`}>
       <Link
         className={`Dropdown__ItemLink ${linkClassName ?? null}`}
-        to={to ?? null}
+        // to={to ?? null}
+        to={to ?? "#"}
         onClick={onClick}
       >
         {/* {props.children} */}

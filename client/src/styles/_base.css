@@ -75,6 +75,18 @@ h3 {
   --nav-item-hover-bg-color: var(--senary-color);
   --nav-item-hover-border-color: #6b8fdb;
   --nav-item-hover-font-color: var(--hover-font-color);
+  --nav-item-text-shadow-color: #466a81;
+  --nav-item-text-shadow: 2px 4px 6px var(--nav-item-text-shadow-color);
+  --nav-brand-drop-shadow: drop-shadow(
+    2px 4px 6px var(--nav-item-text-shadow-color)
+  );
+  --nav-brand-hover-drop-shadow: drop-shadow(2px 4px 6px rgb(247 247 247));
+  --nav-login-btn-text-shadow: 2px 4px 6px #365263;
+  --nav-login-btn-hover-text-shadow: 2px 4px 6px #1b2932;
+  --nav-signup-btn-text-shadow: 2px 4px 6px #653b78;
+  --nav-signup-btn-hover-text-shadow: 2px 4px 6px #2c1934;
+
+  /* FORMS */
   --form-inputs-bg-color: #f5f5f5;
   --form-inputs-color: var(--page-font-color);
   --form-inputs-border-color: #eee;

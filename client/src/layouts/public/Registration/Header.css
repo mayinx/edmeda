@@ -1,8 +1,6 @@
 .Header.Header--public {
   --public-app-header-height: 75px;
   --nav-item-link-padding: 0.4rem 0.7rem;
-
-  /* --nav-item-link-padding: 0.5rem 0.75rem;  */
   --nav-item-btn-padding: var(--nav-item-link-padding);
   --nav-item-center-padding: var(--nav-item-link-padding);
 
@@ -99,10 +97,10 @@
 
   text-decoration: none;
 
-  /* transition: all 0.3s ease; */
+  text-shadow: var(--nav-item-text-shadow);
 
   transition-duration: 0.3s;
-  transition-property: background-color, border, color;
+  transition-property: border, color, background-color;
   transition-timing-function: ease;
 }
 
@@ -126,10 +124,16 @@
   color: var(--nav-item-hover-font-color);
 }
 
+/* .Header.Header--public .AppNav .NavItem:hover .NavItem__Caption {
+  text-shadow: 2px 3px 5px rgb(0 0 0 / 50%);
+} */
+
 .Header.Header--public .AppNav .NavItem--Brand {
   background-color: transparent;
 
   /* filter: drop-shadow(2px 4px 6px rgb(247 247 247)); */
+
+  /* filter: drop-shadow(2px 10px 18px black); */
 }
 
 .Header.Header--public .AppNav .NavItem--Brand .BrandLogo {
@@ -137,6 +141,7 @@
   height: var(--nav-item-brand-height);
   backface-visibility: hidden;
 
+  filter: var(--nav-brand-drop-shadow);
   perspective: 1000;
   transition-duration: 0.3s;
   transition-property: transform, color, filter;
@@ -147,9 +152,7 @@
   border: 1px solid transparent;
   background-color: unset !important;
 
-  color: var(--nav-item-hover-font-color);
-
-  filter: drop-shadow(2px 4px 6px rgb(247 247 247));
+  /* color: var(--nav-item-hover-font-color); */
 }
 
 .Header.Header--public .AppNav .NavItem--Brand:hover .BrandLogo {
@@ -157,9 +160,11 @@
   background-color: unset !important;
   color: whitesmoke;
 
+  filter: var(--nav-brand-hover-drop-shadow);
+
   /* color: white; */
   perspective: 1000;
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 
 .Header.Header--public .AppNav .NavItem--ToggleNavBtn {
@@ -183,9 +188,11 @@
 .Header.Header--public .AppNav .NavItem--LoginBtn {
   border: 1px solid #466a81;
 
+  background-color: #517a95;
+
   /* background-color: ##9773a7; */
 
-  background-color: #517a95;
+  text-shadow: var(--nav-login-btn-text-shadow);
 }
 
 .Header.Header--public .AppNav .NavItem--LoginBtn:hover {
@@ -196,12 +203,16 @@
   border: 1px solid #16878c;
   background-color: #466a81;
   color: #fff;
+
+  /* text-shadow: 2px 4px 6px #1b2932; */
+  text-shadow: var(--nav-login-btn-hover-text-shadow);
 }
 
 .Header.Header--public .AppNav .NavItem--SignUpBtn {
   border: 1px solid #9773a7;
   border: 1px solid #16878c;
   background-color: #9773a7;
+  text-shadow: var(--nav-signup-btn-text-shadow);
 
   /* background-color: #7393a7; */
 }
@@ -210,6 +221,7 @@
   border: 1px solid #774090;
   border: 1px solid #77458d;
   background-color: #77458d;
+  text-shadow: var(--nav-signup-btn-hover-text-shadow);
 }
 
 .Header.Header--public .AppNav .NavItem--Link {

@@ -1,11 +1,9 @@
 import "./MessageList.css";
 import UserAvatar from "../../../../../domain/User/UserAvatar";
-import useNotify from "../../../../../components/notifications/useNotify";
 
 import ReactTimeAgo from "react-time-ago";
 
 export default function MessageList({ messages }) {
-  const { notifyInfo } = useNotify();
   function renderChatMessages() {
     if (Array.isArray(messages) && messages.length) {
       const renderedMessages = messages.map((message) => {
@@ -53,11 +51,11 @@ export default function MessageList({ messages }) {
       });
       return renderedMessages;
     } else {
-      notifyInfo({
-        title: "Tumbleweeds blow across the desert...",
-        message: "...a bit quiet in here: Start chatting!",
-        toastCntId: "appNotificationCnt",
-      });
+      // notifyInfo({
+      //   title: "Tumbleweeds blow across the desert...",
+      //   message: "...a bit quiet in here: Start chatting!",
+      //   toastCntId: "appNotificationCnt",
+      // });
     }
   }
 

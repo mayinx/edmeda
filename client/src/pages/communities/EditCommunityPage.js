@@ -11,6 +11,7 @@ import SelectInputFormGroup from "../../components/form/groups/SelectInputFormGr
 import useNotify from "../../components/notifications/useNotify";
 import useFormResultHandler from "../../components/form/useFormResultHandler";
 import CommunityDataService from "../../services/community";
+import ModalContext from "../../contexts/ModalContext";
 
 export default function EditCommunityPage(props) {
   const { communities, setCommunities } = useContext(CommunitiesContext);
@@ -18,6 +19,8 @@ export default function EditCommunityPage(props) {
   const { notifyError } = useNotify();
   const { id } = useParams();
   const [community, setCommunity] = useState({});
+  const [communityLoaded, setCommunityLoaded] = useState(false);
+  const { setModalCaption } = useContext(ModalContext);
   const formMethods = useForm();
   const {
     reset,
@@ -36,6 +39,7 @@ export default function EditCommunityPage(props) {
     CommunityDataService.get(id)
       .then((res) => {
         setCommunity(res.data);
+        setCommunityLoaded(true);
       })
       .catch((err) => {
         console.log("err: ", err, "communities#id: ", id);
@@ -54,6 +58,20 @@ export default function EditCommunityPage(props) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [community]);
+
+  useEffect(() => {
+    if (communityLoaded) {
+      setModalCaption("Edit Community *" + community.name + "*");
+    } else {
+      setModalCaption("Edit Community");
+    }
+
+    return () => {
+      setModalCaption("Edit Community");
+    };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [communityLoaded, community]);
 
   const onSubmit = (data) => {
     CommunityDataService.update(id, data)

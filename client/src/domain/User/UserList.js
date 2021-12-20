@@ -144,6 +144,7 @@ export default function UserList(props) {
   };
 
   // TODO: Implememnt at least list-view as well
+  // (to handle/overview large amounts of students)
   function renderResourceItem(user) {
     const props = {
       user: user,

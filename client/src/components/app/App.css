@@ -29,3 +29,17 @@
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
 }
+
+.ErrorIndicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  left: 50%;
+
+  /* border: 2px solid #d95252; */
+  background-color: #d95252;
+  border-radius: 16px;
+  color: #fff;
+  font-weight: normal;
+  transform: translateX(-50%) translateY(-50%);
+}

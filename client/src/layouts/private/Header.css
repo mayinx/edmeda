@@ -135,6 +135,7 @@
 .Header.Header--private .AppNav .NavItem--Brand .BrandLogo {
   width: var(--nav-item-brand-width);
   height: var(--nav-item-brand-height);
+  filter: var(--nav-brand-drop-shadow);
 
   perspective: 1000;
   transition-duration: 0.3s;
@@ -146,8 +147,10 @@
   /* border: 1px solid #d0d3da; */
   border: 1px solid transparent;
   background-color: unset !important;
-  color: var(--nav-item-hover-font-color);
-  filter: drop-shadow(2px 4px 6px rgb(247 247 247));
+
+  /* color: var(--nav-item-hover-font-color); */
+
+  /* filter: drop-shadow(2px 4px 6px rgb(247 247 247)); */
 }
 
 .Header.Header--private .AppNav .NavItem--Brand:hover .BrandLogo {
@@ -155,9 +158,11 @@
   background-color: unset !important;
   color: whitesmoke;
 
+  filter: var(--nav-brand-hover-drop-shadow);
+
   /* color: white; */
   perspective: 1000;
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 
 .Header.Header--private .AppNav .NavItem .NavItem__Caption {

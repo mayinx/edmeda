@@ -5,11 +5,13 @@ export default function UserAvatar(props) {
   const {
     user,
     avatarWrapperClassName,
-    avatarClassName,
+    className,
+    title = `${user.userName} (${user.type})`,
+    alt = `{user.userName}'s avatar (user profile picture) on Edmeda`,
     wrapper = true,
   } = props;
 
-  let avatarUrl = user?.picture;
+  let avatarUrl = user?.avatar;
   if (!avatarUrl) {
     try {
       avatarUrl = user?.fbAvatarFileName
@@ -28,19 +30,20 @@ export default function UserAvatar(props) {
           className={`User__ProfilePic-wrapper ${
             avatarWrapperClassName ?? null
           }`}
-          title={`${user.userName} (${user.type})`}
+          title={title}
         >
           <img
             src={`${avatarUrl}`}
-            className={`User__ProfilePic ${avatarClassName ?? null}`}
-            alt=""
+            className={`User__ProfilePic ${className ?? null}`}
+            alt={alt}
           />
         </p>
       ) : (
         <img
           src={`${avatarUrl}`}
-          className={`User__ProfilePic ${avatarClassName ?? null}`}
-          alt=""
+          className={`User__ProfilePic ${className ?? null}`}
+          alt={alt}
+          title={title}
         />
       )}
     </>

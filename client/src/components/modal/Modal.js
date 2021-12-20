@@ -28,16 +28,27 @@ import ModalContext from "../../contexts/ModalContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 export default function Modal(props) {
-  const history = useHistory();
-  const goBackTo = props.goBackTo || "/";
+  const { showCrudActions = true } = props;
 
-  const { setModalOpen } = useContext(ModalContext);
+  const history = useHistory();
+  // const goBackTo = props.goBackTo || "/";
+  const goBack = (e) => {
+    e.stopPropagation();
+    props.goBackTo ? history.push(props.goBackTo) : history.goBack();
+    // history.goBack();
+    // history.push("/");
+  };
+
+  const { setModalOpen, modalCaption, setModalCaption } = useContext(
+    ModalContext
+  );
 
   useEffect(() => {
     setModalOpen(true);
 
     return () => {
       setModalOpen(false);
+      setModalCaption("");
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -55,44 +66,58 @@ export default function Modal(props) {
       >
         <div className="ModalPage__header d-flex">
           <h3 className="ModalPage__headerCaption">
-            {props.modalCaption || "Modal Dialog"}
+            {props.modalCaption || modalCaption}
           </h3>
           <div
             className="closeDlgAction"
-            onClick={() => history.push(goBackTo)}
+            // onClick={() => history.push(goBackTo)}
+            onClick={goBack}
           >
             <FaRegTimesCircle />
           </div>
         </div>
         <div className="ModalPage__body">{props.children}</div>
         <div className="ModalPage__footer">
-          <div className="ModalActions">
-            <button
-              className="btn rounded light-red"
-              onClick={() => history.push(goBackTo)}
-            >
-              Close
-            </button>
-            {props.crudAction === "create" && (
-              <button
-                form={props.formId || "newResource"}
-                className="btn rounded green newResourceBtn"
-                type="submit"
-              >
-                {`${props.crudActionBtnCaption ?? "Create"}`}
-              </button>
-            )}
-            {props.crudAction === "update" && (
-              <button
-                form={props.formId || "updateResource"}
-                className="btn rounded green updateResourceBtn"
-                type="submit"
-              >
-                {`${props.crudActionBtnCaption ?? "Update"}`}
-              </button>
-            )}
-            {props.crudAction === "custom" && props.modalFooterActions}
-          </div>
+          {showCrudActions && (
+            <div className="ModalActions">
+              {props.crudAction === "create" && (
+                <>
+                  <button className="btn rounded light-red" onClick={goBack}>
+                    Close
+                  </button>
+                  <button
+                    form={props.formId || "newResource"}
+                    className="btn rounded green newResourceBtn"
+                    type="submit"
+                  >
+                    {`${props.crudActionBtnCaption ?? "Create"}`}
+                  </button>
+                </>
+              )}
+              {props.crudAction === "update" && (
+                <>
+                  <button className="btn rounded light-red" onClick={goBack}>
+                    Close
+                  </button>
+                  <button
+                    form={props.formId || "updateResource"}
+                    className="btn rounded green updateResourceBtn"
+                    type="submit"
+                  >
+                    {`${props.crudActionBtnCaption ?? "Update"}`}
+                  </button>
+                </>
+              )}
+              {props.crudAction === "custom" && (
+                <>
+                  <button className="btn rounded light-red" onClick={goBack}>
+                    Close
+                  </button>
+                  {props.modalFooterActions}
+                </>
+              )}
+            </div>
+          )}
         </div>
       </div>
       <ToastContainer

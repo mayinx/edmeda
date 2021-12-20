@@ -8,6 +8,7 @@ const CommunitiesController = require("../controllers/CommunitiesController.js")
 /* DEFAULT RESTFUL COMMUNITIES API INTERFACE */
 router.get("/", auth, CommunitiesController.index);
 router.post("/", auth, CommunitiesController.create);
+router.get("/tenant", auth, CommunitiesController.findTenant);
 router.get("/:id", auth, CommunitiesController.find);
 router.patch("/:id", auth, CommunitiesController.update);
 router.delete("/:id", auth, CommunitiesController.delete);
@@ -26,6 +27,11 @@ router.get("/:id/groups/:groupId", auth, CommunitiesController.findGroup);
 router.get("/:id/members", auth, CommunitiesController.indexMembers);
 router.post("/:id/members", auth, CommunitiesController.addMember);
 router.get("/:id/members/:memberId", auth, CommunitiesController.findMember);
+router.patch(
+  "/:id/members/:memberId",
+  auth,
+  CommunitiesController.updateMember
+);
 router.delete(
   "/:id/members/:memberId",
   auth,

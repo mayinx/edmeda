@@ -1,0 +1,195 @@
+.UserProfileCardSidebar {
+  --UserProfileCardSidebar-font-color: #556e7e;
+  --UserProfileCardSidebar-bg-color: #e8ecf1;
+  --UserProfileCardSidebar-border-color: #b5cfd8;
+  --UserProfileCardSidebar-border-radius: 10px;
+
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  min-width: 85%;
+  overflow: hidden;
+  /* box-shadow: rgb(50 50 93 / 25%) 0px 13px 27px -5px,
+    rgb(0 0 0 / 30%) 0px 8px 16px -8px; */
+  box-shadow: none;
+  border-radius: var(--UserProfileCardSidebar-border-radius);
+  /* background-color: var(--UserProfileCardSidebar-bg-color); */
+  background-color: aliceblue;
+  background-color: #eff2f5;
+  color: var(--UserProfileCardSidebar-font-color);
+  /* border: 2px solid var(--UserProfileCardSidebar-border-color); */
+  /* border: 10px solid white; */
+  border: none;
+  transition: all 0.3s ease-in-out;
+  -webkit-transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+  cursor: pointer;
+}
+
+.UserProfileCardSidebar--Inner {
+  margin: 1rem;
+}
+
+.UserProfileCardSidebar a {
+  text-decoration: none;
+  width: 100%;
+  color: #556e7e;
+}
+
+.UserProfileCardSidebar.UserProfileCardSidebar--student {
+  /* background-color: green; */
+  /* border-color: green; */
+}
+.UserProfileCardSidebar.UserProfileCardSidebar--student,
+.UserProfileCardSidebar.UserProfileCardSidebar--student a {
+  /* color: white; */
+}
+.UserProfileCardSidebar.UserProfileCardSidebar--student
+  .User__ProfilePic-wrapper
+  img {
+  /* border-color: green; */
+}
+
+.UserProfileCardSidebar.UserProfileCardSidebar--teacher {
+  /* background-color: green; */
+  /* border-color: green; */
+}
+.UserProfileCardSidebar.UserProfileCardSidebar--teacher,
+.UserProfileCardSidebar.UserProfileCardSidebar--teacher a {
+  /* color: white; */
+}
+.UserProfileCardSidebar.UserProfileCardSidebar--teacher
+  .User__ProfilePic-wrapper
+  img {
+  /* border-color: green; */
+}
+
+.UserProfileCardSidebar.UserProfileCardSidebar--parent {
+  /* background-color: green; */
+  /* border-color: green; */
+}
+.UserProfileCardSidebar.UserProfileCardSidebar--parent,
+.UserProfileCardSidebar.UserProfileCardSidebar--parent a {
+  /* color: white; */
+}
+.UserProfileCardSidebar.UserProfileCardSidebar--parent
+  .User__ProfilePic-wrapper
+  img {
+  /* border-color: green; */
+}
+
+.UserProfileCardSidebar.UserProfileCardSidebar--unknown {
+  background-color: yellow;
+}
+.UserProfileCardSidebar.UserProfileCardSidebar--unknown,
+.UserProfileCardSidebar.UserProfileCardSidebar--unknown a {
+  color: #893838;
+}
+
+.UserProfileCardSidebar.UserProfileCardSidebar img {
+  transition: all 0.5s ease-in-out;
+  -webkit-transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+}
+.UserProfileCardSidebar.UserProfileCardSidebar:hover img {
+  z-index: -1;
+}
+
+.UserProfileCardSidebar .user__meta {
+  transition: all 1s ease-in-out;
+  /* width: 100%; */
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  /* background-color: var(--UserProfileCardSidebar-bg-color);
+
+  background-color: aliceblue; */
+  background-color: #eff2f5;
+
+  border-bottom-left-radius: var(--UserProfileCardSidebar-border-radius);
+  border-bottom-right-radius: var(--UserProfileCardSidebar-border-radius);
+  /* border-top: 2px solid var(--UserProfileCardSidebar-border-color); */
+}
+
+.UserProfileCardSidebar ul.user__statistics {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 1.5rem;
+  list-style-type: none;
+}
+.UserProfileCardSidebar ul.user__statistics li {
+  display: flex;
+  justify-content: space-between;
+  letter-spacing: 0;
+}
+
+.UserProfileCardSidebar .user__meta .user__name {
+  font-size: 1.25rem;
+  letter-spacing: 2px;
+}
+.UserProfileCardSidebar .user__meta .user__user__userName {
+  letter-spacing: 1px;
+}
+.UserProfileCardSidebar .user__meta .user__type .tag {
+  font-size: 1.25rem;
+}
+.UserProfileCardSidebar .user__meta .user__membership_start {
+  letter-spacing: 1px;
+}
+
+.UserProfileCardSidebar .user__actions {
+  /* background: #c3d1dcdb; */
+  background-color: #e8ecf1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  border-radius: var(--UserProfileCardSidebar-border-radius);
+}
+.UserProfileCardSidebar .user__actions a.user__action {
+  display: flex;
+  color: lightslategray;
+  background-color: whitesmoke;
+  padding: 0.3rem;
+  flex: 0;
+  border-radius: 6px;
+  font-size: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+.UserProfileCardSidebar:hover img {
+  transform: scale(1.1);
+  border-radius: var(--UserProfileCardSidebar-border-radius);
+}
+
+.UserProfileCardSidebar .User__ProfilePic-wrapper {
+  /* padding: 0; */
+  padding: 1rem 1rem 0.25rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.UserProfileCardSidebar .User__ProfilePic-wrapper .User__ProfilePic {
+  display: block;
+  margin: 1rem;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 100%;
+  z-index: 30;
+  border: 1px solid #fff;
+  box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%);
+}
+
+/**/

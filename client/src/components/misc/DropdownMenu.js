@@ -2,37 +2,75 @@ import { useRef } from "react";
 import useDetectOutsideClick from "./useDetectOutsideClick";
 import "./DropdownMenu.css";
 import { Link } from "react-router-dom";
+// import { FaRegTimesCircle } from "react-icons/fa";
 
-import UserAvatar from "../../domain/User/UserAvatar";
-
-import AuthService from "../../services/auth";
-
-export default function DropdownMenu(props) {
+export function DropdownMenu(props) {
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
-  const onClick = () => setIsActive(!isActive);
+  const onClick = (e) => {
+    e.preventDefault();
+    setIsActive(!isActive);
+  };
 
-  const currentUser = AuthService.currentUser();
+  const { children, className, caption, toggleLinkClassName } = props;
+
+  const renderDropdowndHeader = children[0].type.name === DropdownHeader.name;
+  const ddMenuItems = renderDropdowndHeader ? children.slice(1) : children;
+
   return (
-    <div className={`menu-container ${props.className ?? null}`}>
+    <div
+      ref={dropdownRef}
+      className={`Dropdown ${className ?? null} ${
+        isActive ? "Dropdown--active" : "Dropdown--inactive"
+      } ${caption ? "Dropdown--with-caption" : ""}`}
+    >
       <Link
-        className="NavItem NavItem--BtnIconOnly menu-trigger"
+        className={`Dropdown__Toggler  ${toggleLinkClassName ?? null}`}
         onClick={onClick}
+        // to={null}
         to="#"
       >
-        <UserAvatar
-          user={currentUser.user}
-          avatarClassName="NavItem__Icon userAvatarIcon"
-          wrapper={false}
-        />
+        {props.toggleIcon}
       </Link>
 
-      <nav
-        ref={dropdownRef}
-        className={`menu ${isActive ? "active" : "inactive"}`}
-      >
-        <ul>{props.children}</ul>
+      <nav className={`Dropdown__Menu`}>
+        {caption && <div className="DropdownTitleBar">{caption}</div>}
+        {renderDropdowndHeader && <>{children[0]}</>}
+        <ul className="Dropdown__Items">{ddMenuItems}</ul>
       </nav>
     </div>
+  );
+}
+
+export function DropdownHeader(props) {
+  const { className, to, onClick } = props;
+
+  return (
+    <div
+      className={`Dropdown__Header ${className ?? null}`}
+      to={to}
+      onClick={onClick}
+    >
+      {props.children}
+    </div>
+  );
+}
+
+export function DropdownItem(props) {
+  const { icon, caption, className, linkClassName, to, onClick } = props;
+
+  return (
+    <li className={`Dropdown__Item ${className ?? null}`}>
+      <Link
+        className={`Dropdown__ItemLink ${linkClassName ?? null}`}
+        // to={to ?? null}
+        to={to ?? "#"}
+        onClick={onClick}
+      >
+        {/* {props.children} */}
+        <span className="Dropdown__ItemIcon">{icon}</span>
+        <span className="Dropdown__ItemCaption">{caption}</span>
+      </Link>
+    </li>
   );
 }

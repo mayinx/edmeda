@@ -1,0 +1,269 @@
+.MemberPage {
+  display: flex;
+  padding: 0;
+}
+
+.MemberPage .MemberPage__Banner {
+  position: relative;
+  width: 100%;
+  height: 300px;
+
+  /* background: linear-gradient(181deg, #4981b2, transparent); */
+
+  /* background: linear-gradient(
+    90deg,
+    rgba(76, 175, 80, 1) 0%,
+    rgba(49, 220, 255, 1) 100%
+  ); */
+
+  /* background: radial-gradient(
+    circle at 50% 50%,
+    rgba(76, 175, 80, 1) 0%,
+    rgba(49, 220, 255, 1) 100%
+  ); */
+
+  /* border-bottom: 2px solid #9773a7;
+  border-top: 2px solid #9773a7; */
+
+  /*
+  cadetblue
+  darseegreen
+  gainsboro
+  #f8f2fa (magnolia)
+
+  */
+  background-color: #adbdc7;
+  background-position: center;
+  background-position: -202px -119px;
+  background-repeat: no-repeat;
+
+  /* position: relative; */
+
+  /* background-image: url(https://image.shutterstock.com/shutterstock/photos/1039471057/display_1500/stock-vector-abstract-vector-banners-with-bright-geometric-background-annual-report-design-templates-1039471057.jpg); */
+  background-size: cover;
+
+  background-size: 172%;
+}
+
+.MemberPage .BannerImage {
+  width: 100%;
+  height: 100%;
+
+  /* filter: brightness(0.65); */
+  object-fit: cover;
+  object-position: top;
+}
+
+.MemberPage .BannerImage__Overlay {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #aec1cc;
+  background-color: #95b3c6;
+  background-color: #9773a7;
+  opacity: 0.66;
+
+  /* position: absolute;
+  top: 50%;
+  left: 25%;
+  color: #fff;
+
+  font-size: 3rem;
+  font-weight: bold;
+  transform: translate(-50%, -50%); */
+}
+
+.MemberPage .MemberPage__Main {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.MemberPage .MemberPage__Main .MemberPage__Content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+  order: 1;
+}
+
+.MemberPage .MemberPage__Main .MemberPage__Content--Inner {
+  /* margin: 1rem; */
+  margin: 0;
+}
+
+.MemberPage .MemberPage__Main .MemberPage__Content .CommunityList {
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: 1fr;
+}
+
+.MemberPage .MemberPage__Main .MemberPage__Sidebar {
+  position: static;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: stretch;
+  order: 0;
+}
+
+.MemberPage .MemberPage__Main .MemberPage__Sidebar--Inner {
+  position: static;
+  display: flex;
+
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin: -19.5rem 1rem 1rem;
+}
+
+@media all and (min-width: 320px) {
+  .MemberPage .MemberPage__Main .MemberPage__Sidebar--Inner {
+    margin: -19rem 1rem 1rem;
+  }
+}
+@media all and (min-width: 360px) {
+  .MemberPage .MemberPage__Main .MemberPage__Sidebar--Inner {
+    margin: -18rem 1rem 1rem;
+  }
+}
+
+@media all and (min-width: 400px) {
+  .MemberPage .MemberPage__Main .MemberPage__Sidebar--Inner {
+    margin: -17rem 1rem 1rem;
+  }
+}
+
+@media all and (min-width: 576px) {
+  .MemberPage .MemberPage__Main .MemberPage__Sidebar--Inner {
+    margin: -16.5rem 1rem 1rem;
+  }
+
+  .MemberPage .MemberPage__Main .MemberPage__Content .CommunityList {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .MemberPage .MemberPage__Main .MemberPage__Sidebar--Inner {
+    margin: -16rem 1rem 1rem;
+  }
+
+  .MemberPage
+    .MemberPage__Main
+    .MemberPage__Sidebar--Inner
+    .UserProfileCardSidebar {
+    min-width: 80%;
+  }
+}
+
+@media all and (min-width: 768px) {
+  .MemberPage
+    .MemberPage__Main
+    .MemberPage__Sidebar--Inner
+    .UserProfileCardSidebar {
+    min-width: 65%;
+  }
+}
+
+@media all and (min-width: 1024px) {
+  .MemberPage .MemberPage__Main {
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  .MemberPage .MemberPage__Main .MemberPage__Content {
+    flex: 1.61;
+    flex-direction: row;
+    flex-wrap: wrap;
+    order: 0;
+  }
+
+  .MemberPage .MemberPage__Main .MemberPage__Content--Inner {
+    margin: 0.5rem 0 0 0.25rem;
+  }
+
+  .MemberPage
+    .MemberPage__Main
+    .MemberPage__Content
+    .CommunityList
+    .Dropdown
+    nav.Dropdown__Menu {
+    width: 9rem;
+    min-width: min-content;
+    max-width: max-content;
+  }
+
+  .MemberPage .MemberPage__Main .MemberPage__Content .CommunityList {
+    grid-auto-rows: minmax(325px, 1fr);
+    grid-gap: 1rem;
+
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+
+  .MemberPage .MemberPage__Main .MemberPage__Sidebar {
+    flex: 1;
+    flex-direction: column;
+
+    align-items: stretch;
+    order: 1;
+  }
+
+  .MemberPage .MemberPage__Main .MemberPage__Sidebar--Inner {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin: -15rem 1rem 1rem;
+  }
+
+  .MemberPage
+    .MemberPage__Main
+    .MemberPage__Sidebar--Inner
+    .UserProfileCardSidebar {
+    min-width: 85%;
+  }
+}
+
+/* ... */
+
+@media all and (min-width: 1280px) {
+  .MemberPage .MemberPage__Main .MemberPage__Content--Inner {
+    margin: 0.5rem 0 0 1rem;
+  }
+
+  .MemberPage .MemberPage__Main .MemberPage__Content .CommunityList {
+    grid-auto-rows: minmax(350px, 1fr);
+
+    grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+  }
+
+  .MemberPage .MemberPage__Main .MemberPage__Sidebar--Inner {
+    margin: -14rem 1rem 1rem;
+  }
+}
+
+@media all and (min-width: 1920px) {
+  .MemberPage .MemberPage__Main .MemberPage__Content .CommunityList {
+    grid-auto-rows: minmax(375px, 1fr);
+
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+
+  .MemberPage .MemberPage__Main .MemberPage__Sidebar--Inner {
+    margin: -13rem 1rem 1rem;
+  }
+}
+
+@media all and (min-width: 2500px) {
+  .MemberPage .MemberPage__Main .MemberPage__Content .CommunityList {
+    grid-auto-rows: minmax(400px, 1fr);
+
+    grid-template-columns: repeat(auto-fill, minmax(325px, 1fr));
+  }
+
+  .MemberPage .MemberPage__Main .MemberPage__Sidebar--Inner {
+    margin: -12rem 1rem 1rem;
+  }
+}

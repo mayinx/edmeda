@@ -46,7 +46,7 @@ export default function Login(props) {
   };
 
   return (
-    <div className="ModalPage__bodyInner CommunityModalFormPage NewCommunityModalFormPage">
+    <div className="ModalPage__body--inner   LoginPage">
       <FormProvider {...{ ...formMethods, ErrorMessage, errors }}>
         <form
           id={props.formId}

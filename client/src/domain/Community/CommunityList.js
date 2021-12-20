@@ -29,11 +29,5 @@ export default function CommunityList({ resources }) {
     }
   }
 
-  return (
-    <section className="ResourcesList CommunityList">
-      <div className="ResourcesList__Items CommunityList__Items">
-        {renderResources()}
-      </div>
-    </section>
-  );
+  return <section className="CommunityList">{renderResources()}</section>;
 }

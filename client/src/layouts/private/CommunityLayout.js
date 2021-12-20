@@ -1,14 +1,15 @@
 import { Route } from "react-router-dom";
-import AppHeader from "../../components/app/AppHeader";
+import Header from "./Header";
 import CommunityPage from "../../pages/communities/CommunityPage";
 import "./CommunityLayout.css";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import axios from "axios";
+
 import CommunityContext from "../../contexts/CommunityContext";
 
 import ReactLoading from "react-loading";
-import AuthService from "../../services/auth";
+
+import CommunityDataService from "../../services/community";
 
 export default function CommunityLayout() {
   const [currentCommunity, setCurrentCommunity] = useState({});
@@ -16,10 +17,7 @@ export default function CommunityLayout() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    axios
-      .get(`/api/communities/${params.id}`, {
-        headers: AuthService.authHeader(),
-      })
+    CommunityDataService.get(params.id)
       .then((res) => {
         setCurrentCommunity(res.data);
         setIsLoading(false);
@@ -32,7 +30,7 @@ export default function CommunityLayout() {
   return (
     <>
       <CommunityContext.Provider value={{ currentCommunity }}>
-        <AppHeader className="CommunityHeader" />
+        <Header className="CommunityHeader" />
         <main className="CommunityLayout">
           {isLoading || !currentCommunity ? (
             // <div className="mt-2 fs-1_5">

@@ -1,7 +1,5 @@
 import { useForm, FormProvider } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
-import "./Form.css";
-import axios from "axios";
 import { useContext } from "react";
 import { useHistory } from "react-router";
 import CommunitiesContext from "../../contexts/CommunitiesContext";
@@ -10,7 +8,8 @@ import TextInputFormGroup from "../../components/form/groups/TextInputFormGroup"
 import SelectInputFormGroup from "../../components/form/groups/SelectInputFormGroup";
 
 import useFormResultHandler from "../../components/form/useFormResultHandler";
-import AuthService from "../../services/auth";
+
+import CommunityDataService from "../../services/community";
 
 export default function NewCommunityPage(props) {
   const { communities, setCommunities } = useContext(CommunitiesContext);
@@ -31,8 +30,7 @@ export default function NewCommunityPage(props) {
   });
 
   const onSubmit = (data) => {
-    axios
-      .post("/api/communities", data, { headers: AuthService.authHeader() })
+    CommunityDataService.create(data)
       .then((res) => {
         setCommunities([res.data, ...communities]);
         handleFormSuccess({ objectName: res?.data?.name });
@@ -44,7 +42,7 @@ export default function NewCommunityPage(props) {
   };
 
   return (
-    <div className="ModalPage__bodyInner CommunityModalFormPage NewCommunityModalFormPage">
+    <div className="ModalPage__body--inner   CommunityModalPage NewCommunityPage">
       <FormProvider {...{ ...formMethods, ErrorMessage, errors }}>
         <form
           id={props.formId}

@@ -15,9 +15,12 @@ import ProtectedRoutes from "../auth/ProtectedRoutes";
 
 function App() {
   const [modalOpen, setModalOpen] = useState();
+  const [modalCaption, setModalCaption] = useState();
 
   return (
-    <ModalContext.Provider value={{ modalOpen, setModalOpen }}>
+    <ModalContext.Provider
+      value={{ modalOpen, setModalOpen, modalCaption, setModalCaption }}
+    >
       <div className={`App ${modalOpen ? "App--modalOpened" : ""}`}>
         <Switch>
           <Route exact path="/" component={RegistrationLayout} />
@@ -37,6 +40,11 @@ function App() {
             <Route
               exact
               path="/communities/:id/members"
+              component={CommunitiesLayout}
+            />
+            <Route
+              exact
+              path="/communities/:id/members/:memberId/edit"
               component={CommunitiesLayout}
             />
             <Route exact path="/communities/:id" component={CommunityLayout} />

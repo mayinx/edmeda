@@ -1,10 +1,10 @@
 @media all and (min-width: 400px) {
-  .CommunityMembersModalPage .UserListItem {
+  .CommunityMembersModalPage .UserProfileCard {
     flex: 0 1 150px;
   }
 
   .CommunityMembersModalPage
-    .UserListItem
+    .UserProfileCard
     .User__ProfilePic-wrapper
     .User__ProfilePic {
     display: block;
@@ -14,26 +14,26 @@
     height: 100px;
   }
 
-  .CommunityMembersModalPage .UserListItem .user__meta {
+  .CommunityMembersModalPage .UserProfileCard .user__meta {
     flex: 1 1 160px; /* flex: 1 1 150px;*/
     padding: 0.5rem; /* 1rem;*/
     gap: 0.3rem;
   }
 
-  .CommunityMembersModalPage .UserListItem .user__meta .user__name {
+  .CommunityMembersModalPage .UserProfileCard .user__meta .user__name {
     font-size: 1rem;
   }
-  .CommunityMembersModalPage .UserListItem .user__meta .user__type .tag {
+  .CommunityMembersModalPage .UserProfileCard .user__meta .user__type .tag {
     font-size: 0.85rem;
     font-weight: bold;
   }
 
   /*  TODO: transform into pulldown / meatball menu instead - until then we shrink / start (too) tiny   */
-  .CommunityMembersModalPage .UserListItem .user__actions {
+  .CommunityMembersModalPage .UserProfileCard .user__actions {
     gap: 0.5rem; /*0.5rem*/
     padding: 0.5rem; /*0.5rem*/
   }
-  .CommunityMembersModalPage .UserListItem .user__actions a.user__action {
+  .CommunityMembersModalPage .UserProfileCard .user__actions a.user__action {
     font-size: 1.2rem; /*1rem*/
     padding: 0.3rem; /*0.3rem*/
   }
@@ -53,12 +53,12 @@
 }
 
 @media all and (min-width: 768px) {
-  .CommunityMembersModalPage .UserListItem {
+  .CommunityMembersModalPage .UserProfileCard {
     flex: 0 1 190px;
   }
 
   .CommunityMembersModalPage
-    .UserListItem
+    .UserProfileCard
     .User__ProfilePic-wrapper
     .User__ProfilePic {
     display: block;
@@ -67,7 +67,7 @@
     height: 125px;
   }
 
-  .CommunityMembersModalPage .UserListItem .user__meta {
+  .CommunityMembersModalPage .UserProfileCard .user__meta {
     flex: 1 1 160px; /* flex: 1 1 150px;*/
     padding: 0.75rem; /* 1rem;*/
     gap: 0.5rem;
@@ -75,12 +75,12 @@
 }
 
 @media all and (min-width: 800px) {
-  .CommunityMembersModalPage .UserListItem {
+  .CommunityMembersModalPage .UserProfileCard {
     flex: 0 1 200px;
   }
 
   .CommunityMembersModalPage
-    .UserListItem
+    .UserProfileCard
     .User__ProfilePic-wrapper
     .User__ProfilePic {
     display: block;
@@ -104,12 +104,12 @@
 }
 
 @media all and (min-width: 1024px) {
-  .CommunityMembersModalPage .UserListItem {
+  .CommunityMembersModalPage .UserProfileCard {
     flex: 0 1 200px;
   }
 
   .CommunityMembersModalPage
-    .UserListItem
+    .UserProfileCard
     .User__ProfilePic-wrapper
     .User__ProfilePic {
     margin: 1.25rem;
@@ -117,25 +117,25 @@
     height: 125px;
   }
 
-  .CommunityMembersModalPage .UserListItem .user__meta {
+  .CommunityMembersModalPage .UserProfileCard .user__meta {
     flex: 1 1 160px; /* flex: 1 1 150px;*/
     padding: 0.85rem; /* 1rem;*/
   }
-  .CommunityMembersModalPage .UserListItem .user__actions {
+  .CommunityMembersModalPage .UserProfileCard .user__actions {
     gap: 0.5rem; /*0.5rem*/
     padding: 0.5rem; /*0.5rem*/
   }
-  .CommunityMembersModalPage .UserListItem .user__actions a.user__action {
+  .CommunityMembersModalPage .UserProfileCard .user__actions a.user__action {
     font-size: 1.2rem; /*1rem*/
     padding: 0.3rem; /*0.3rem*/
   }
 }
 @media all and (min-width: 1200px) {
-  .CommunityMembersModalPage .UserListItem {
+  .CommunityMembersModalPage .UserProfileCard {
     flex: 0 1 200px;
   }
   .CommunityMembersModalPage
-    .UserListItem
+    .UserProfileCard
     .User__ProfilePic-wrapper
     .User__ProfilePic {
     margin: 0.75rem;
@@ -143,26 +143,26 @@
     height: 125px;
   }
 
-  .CommunityMembersModalPage .UserListItem .user__meta {
+  .CommunityMembersModalPage .UserProfileCard .user__meta {
     flex: 1 1 175px; /* flex: 1 1 150px;*/
     padding: 1rem; /* 1rem;*/
   }
-  .CommunityMembersModalPage .UserListItem .user__actions {
+  .CommunityMembersModalPage .UserProfileCard .user__actions {
     gap: 0.5rem; /*0.5rem*/
     padding: 0.5rem; /*0.5rem*/
   }
-  .CommunityMembersModalPage .UserListItem .user__actions a.user__action {
+  .CommunityMembersModalPage .UserProfileCard .user__actions a.user__action {
     font-size: 1.3rem; /*1rem*/
     padding: 0.4rem; /*0.3rem*/
   }
 }
 
 @media all and (min-width: 1400px) {
-  .CommunityMembersModalPage .UserListItem {
+  .CommunityMembersModalPage .UserProfileCard {
     flex: 0 1 225px;
   }
   .CommunityMembersModalPage
-    .UserListItem
+    .UserProfileCard
     .User__ProfilePic-wrapper
     .User__ProfilePic {
     margin: 1rem;
@@ -170,15 +170,15 @@
     height: 150px;
   }
 
-  .CommunityMembersModalPage .UserListItem .user__meta {
+  .CommunityMembersModalPage .UserProfileCard .user__meta {
     flex: 1 1 200px; /* flex: 1 1 150px;*/
     padding: 1rem; /* 1rem;*/
   }
-  .CommunityMembersModalPage .UserListItem .user__actions {
+  .CommunityMembersModalPage .UserProfileCard .user__actions {
     gap: 0.6rem; /*0.5rem*/
     padding: 0.6rem; /*0.5rem*/
   }
-  .CommunityMembersModalPage .UserListItem .user__actions a.user__action {
+  .CommunityMembersModalPage .UserProfileCard .user__actions a.user__action {
     font-size: 1.5rem; /*1rem*/
     padding: 0.4rem; /*0.3rem*/
   }

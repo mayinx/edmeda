@@ -2,20 +2,21 @@
 *::before,
 *::after {
   box-sizing: border-box;
-  margin: 0;
   padding: 0;
+  margin: 0;
 }
 
 html {
-  font-size: var(--r-base-font-size);
-  font-family: "News Cycle";
-  letter-spacing: 3px;
-  /* to prevent scrolling of the body - we just want scrolling in the main container  */
-  height: 100%;
   overflow: hidden;
-  color: var(--page-font-color);
 
   min-width: var(--body-min-width);
+
+  /* to prevent scrolling of the body - we just want scrolling in the main container  */
+  height: 100%;
+  color: var(--page-font-color);
+  font-family: "News Cycle", sans-serif;
+  font-size: var(--r-base-font-size);
+  letter-spacing: 3px;
 }
 
 p {
@@ -26,26 +27,27 @@ p {
 h1 {
   font-size: var(--r-heading-lg);
 }
+
 h2 {
   font-size: var(--r-heading-md);
 }
+
 h3 {
   font-size: var(--r-heading-sm);
 }
 
 :root {
   /* CSS HEX */
-  --primary-color: #7393a7; /* #57a2e5;*/ /* header */
+  --primary-color: #7393a7; /* #57a2e5; */ /* header */
   --secondary-color: #dae8e6; /* main */
   --tertiary-color: #3b857e; /* footer */
   --quaternary-color: #5d7889; /* main font color */
-  --quinary-color: #94b3c6; /* #00c4f1;*/ /*  bg nav item */
-  --senary-color: #b0c5d3; /* #00c4f1;*/ /* hover bg nav item */
+  --quinary-color: #94b3c6; /* #00c4f1; */ /*  bg nav item */
+  --senary-color: #b0c5d3; /* #00c4f1; */ /* hover bg nav item */
 
   /* quaternary, quinary, senary, septenary, octonary, nonary */
 
   --header-height-mobile: 75px;
-
   --page-bg-color: var(--secondary-color);
   --page-font-color: var(--quaternary-color);
   --hover-font-color: #eee;
@@ -55,63 +57,43 @@ h3 {
   --header-font-color: var(--page-font-color);
   --header-border-bottom-color: var(--secondary-color);
 
-  /* LEFT SIDEBAR */
-  /* --left-sb-bg-color: #40798cff;
-  --left-sb-font-color: var(--page-font-color); */
-
   /* MAIN */
   --main-bg-color: var(--secondary-color);
   --main-font-color: var(--page-font-color);
 
-  /* RIGHT SIDEBAR */
-  /* --right-sb-bg-color: #70a9a1ff;
-  --right-sb-font-color: var(--page-font-color); */
-
-  /* FOOTER*/
+  /* FOOTER */
   --footer-bg-color: var(--tertiary-color);
   --footer-font-color: var(--hover-font-color);
 
   /* MAIN NAV */
+  --nav-item-line-height: 1.3rem;
+  --nav-item-caption-line-height: var(--nav-item-line-height);
+  --nav-item-brand-width: auto;
+  --nav-item-brand-height: 36px;
   --nav-item-link-color: var(--page-font-color);
   --nav-item-bg-color: var(--quinary-color);
   --nav-item-hover-bg-color: var(--senary-color);
   --nav-item-hover-border-color: #6b8fdb;
   --nav-item-hover-font-color: var(--hover-font-color);
+  --nav-item-text-shadow-color: #466a81;
+  --nav-item-text-shadow: 2px 4px 6px var(--nav-item-text-shadow-color);
+  --nav-brand-drop-shadow: drop-shadow(
+    2px 4px 6px var(--nav-item-text-shadow-color)
+  );
+  --nav-brand-hover-drop-shadow: drop-shadow(2px 4px 6px rgb(247 247 247));
+  --nav-login-btn-text-shadow: 2px 4px 6px #365263;
+  --nav-login-btn-hover-text-shadow: 2px 4px 6px #1b2932;
+  --nav-signup-btn-text-shadow: 2px 4px 6px #653b78;
+  --nav-signup-btn-hover-text-shadow: 2px 4px 6px #2c1934;
 
+  /* FORMS */
   --form-inputs-bg-color: #f5f5f5;
   --form-inputs-color: var(--page-font-color);
   --form-inputs-border-color: #eee;
-
   --form-inputs-placeholder-color: #9eb1bd;
-
   --form-inputs-focus-bg-color: #f0f0f0;
   --form-inputs-focus-border-color: #00bcd4;
 
-  /* question cards */
+  /* cards */
   --card-bg-color: #fff;
-  --question-card-answer-bg-color: var(--form-inputs-bg-color);
-  --question-card-bookmark-icon-color: var(--page-font-color);
-  --question-card-bookmarked-bookmark-icon-color: var(--secondary-color);
-  --question-card-bookmark-icon-bg-color: var(--card-bg-color);
-  --question-card-bookmark-icon-hover-color: var(--secondary-color);
-  --question-card-toggle-answer-btn-hover-font-color: var(--secondary-color);
-  /* --question-card-toggle-answer-btn-hover-bg-color: var(--secondary-color); */
-  --question-card-toggle-answer-btn-hover-border-color: var(--tertiary-color);
-  --question-card-answer-overlay-bg-color: #e7e7e7;
-}
-
-[data-theme="dark"] {
-  --primary-color: #3f3f3f;
-
-  --secondary-color: #999999;
-  --tertiary-color: #cccccc;
-  --quinary-color: #fff;
-  --senary-color: #e5eaf5;
-
-  /* question cards */
-  --card-bg-color: #3f3f3f;
-
-  /* form */
-  --form-inputs-bg-color: var(--tertiary-color);
-  --form-inputs-focus-bg-color: var(--secondary-color);
 }

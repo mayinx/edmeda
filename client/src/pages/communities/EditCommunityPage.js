@@ -1,7 +1,6 @@
 import { useForm, FormProvider } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
-import "./Form.css";
-import axios from "axios";
+
 import { useContext, useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import CommunitiesContext from "../../contexts/CommunitiesContext";
@@ -11,7 +10,8 @@ import SelectInputFormGroup from "../../components/form/groups/SelectInputFormGr
 
 import useNotify from "../../components/notifications/useNotify";
 import useFormResultHandler from "../../components/form/useFormResultHandler";
-import AuthService from "../../services/auth";
+import CommunityDataService from "../../services/community";
+import ModalContext from "../../contexts/ModalContext";
 
 export default function EditCommunityPage(props) {
   const { communities, setCommunities } = useContext(CommunitiesContext);
@@ -19,6 +19,8 @@ export default function EditCommunityPage(props) {
   const { notifyError } = useNotify();
   const { id } = useParams();
   const [community, setCommunity] = useState({});
+  const [communityLoaded, setCommunityLoaded] = useState(false);
+  const { setModalCaption } = useContext(ModalContext);
   const formMethods = useForm();
   const {
     reset,
@@ -34,10 +36,10 @@ export default function EditCommunityPage(props) {
   });
 
   useEffect(() => {
-    axios
-      .get(`/api/communities/${id}`, { headers: AuthService.authHeader() })
+    CommunityDataService.get(id)
       .then((res) => {
         setCommunity(res.data);
+        setCommunityLoaded(true);
       })
       .catch((err) => {
         console.log("err: ", err, "communities#id: ", id);
@@ -57,11 +59,22 @@ export default function EditCommunityPage(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [community]);
 
+  useEffect(() => {
+    if (communityLoaded) {
+      setModalCaption("Edit Community *" + community.name + "*");
+    } else {
+      setModalCaption("Edit Community");
+    }
+
+    return () => {
+      setModalCaption("Edit Community");
+    };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [communityLoaded, community]);
+
   const onSubmit = (data) => {
-    axios
-      .patch(`/api/communities/${id}`, data, {
-        headers: AuthService.authHeader(),
-      })
+    CommunityDataService.update(id, data)
       .then((res) => {
         const newList = communities.map((el) => {
           if (el._id === id) {
@@ -80,7 +93,7 @@ export default function EditCommunityPage(props) {
   };
 
   return (
-    <div className="ModalPage__bodyInner CommunityModalFormPage EditCommunityModalFormPage">
+    <div className="ModalPage__body--inner CommunityModalPage ">
       <FormProvider {...{ ...formMethods, ErrorMessage, errors }}>
         <form
           id={props.formId}

@@ -17,6 +17,27 @@ const DEFAULT_AVATARS = [
   "fbAvatar5",
   "fbAvatar6",
 ];
+const DEFAULT_BANNER_PICS = [
+  "pic-1-2kx845.png",
+  "pic-2-2kx845.png",
+  "pic-3-2kx845.png",
+  "pic-4-2kx845.png",
+  "pic-5-2kx845.png",
+  "pic-6-v2-2kx845.png",
+  "pic-7-2kx845.png",
+  "pic-8-2kx845.png",
+  "pic-9v2-2kx845.png",
+  "pic-10-2kx845.png",
+  "pic-12-2kx845.png",
+  "pic-13-2kx845.png",
+  "pic-14-2kx845.png",
+  "pic-15-2kx845.png",
+  "pic-16-2kx845.png",
+  "pic-17-2kx845.png",
+  "pic-18-2kx845.png",
+  "pic-19-2kx845.png",
+  "pic-20-2kx845.png",
+];
 const CURRENT_USER_ATTRIBUTES = [
   "id",
   "type",
@@ -25,6 +46,7 @@ const CURRENT_USER_ATTRIBUTES = [
   "userName",
   "firstName",
   "fbAvatarFileName",
+  "fbBannerPicFileName",
 ];
 
 const UserSchema = new Schema(
@@ -60,18 +82,29 @@ const UserSchema = new Schema(
       maxlength: 80,
       minlength: 1,
     },
+    intials: {
+      type: String,
+      required: false,
+      trim: true,
+      maxlength: 2,
+      minlength: 1,
+    },
     userName: { type: String, required: false },
     gender: {
       type: String,
       trim: true,
       required: false,
-
       enum: {
         values: GENDERS,
         message: "Invalid gender",
       },
     },
     fbAvatarFileName: {
+      type: String,
+      trim: true,
+      required: false,
+    },
+    fbBannerPicFileName: {
       type: String,
       trim: true,
       required: false,
@@ -121,6 +154,7 @@ const UserSchema = new Schema(
 UserSchema.statics.TYPES = TYPES;
 UserSchema.statics.GENDERS = GENDERS;
 UserSchema.statics.DEFAULT_AVATARS = DEFAULT_AVATARS;
+UserSchema.statics.DEFAULT_BANNER_PICS = DEFAULT_BANNER_PICS;
 UserSchema.statics.CURRENT_USER_ATTRIBUTES = CURRENT_USER_ATTRIBUTES;
 
 // fetch latest versin of the current model object from db

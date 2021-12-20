@@ -3,14 +3,14 @@ import useAuthActions from "../../../components/auth/useAuthActions";
 
 import BrandLogo from "../../../assets/edmeda-logo-transparent_170x40.png";
 
-import DropdownMenu from "../../../components/misc/DropdownMenu";
 import { FaBars, FaTimes } from "react-icons/fa";
 import "./Header.css";
 import { useEffect, useState } from "react";
+import UserOptionsNavItem from "../../shared/header/UserOptionsNavItem";
 // import { Counter } from "./../../../features/counter/Counter";
 
 export default function Header() {
-  const { userLoggedIn, register, login, logout } = useAuthActions();
+  const { userLoggedIn, register, login } = useAuthActions();
 
   const [navToggled, setNavToggled] = useState(false);
   const [navToggleStateClass, setNavToggleStateClass] = useState(false);
@@ -24,7 +24,7 @@ export default function Header() {
   }, [navToggled]);
 
   return (
-    <header className="App__header RegistrationHeader">
+    <header className="Header Header--public">
       <nav className={`AppNav ${navToggleStateClass}`}>
         <div className="AppNav__Left Brand">
           <Link className="NavItem NavItem--Brand" to="/">
@@ -52,32 +52,9 @@ export default function Header() {
           </Link>
         </div>
         <div className="AppNav__Right">
-          {/* <Link class="NavItem NavItem--BtnIconOnly" to="#">
-            <FaUserAlt className="NavItem__Icon userAvatarIcon" />
-          </Link> */}
           {userLoggedIn() ? (
             <>
-              {/* <Link class="NavItem NavItem--BtnIconOnly" to="#">
-                <FaUserAlt className="NavItem__Icon userAvatarIcon" />
-              </Link> */}
-
-              <DropdownMenu>
-                <li>
-                  <Link className="SubNavItem" to="#">
-                    Profile
-                  </Link>
-                </li>
-                <li>
-                  <Link className="SubNavItem" to="/communities">
-                    MyCommunities
-                  </Link>
-                </li>
-                <li>
-                  <Link className="SubNavItem" to="#" onClick={logout}>
-                    Logout
-                  </Link>
-                </li>
-              </DropdownMenu>
+              <UserOptionsNavItem />
             </>
           ) : (
             <>
@@ -111,7 +88,6 @@ export default function Header() {
           </Link>
         </div>
       </nav>
-      {/* <div className="NavOverlay"></div> */}
     </header>
   );
 }

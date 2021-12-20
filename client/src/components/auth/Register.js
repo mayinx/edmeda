@@ -50,7 +50,7 @@ export default function Register(props) {
   };
 
   return (
-    <div className="ModalPage__bodyInner CommunityModalFormPage NewCommunityModalFormPage">
+    <div className="ModalPage__body--inner   RegisterPage">
       <FormProvider {...{ ...formMethods, ErrorMessage, errors }}>
         <form
           id={props.formId}

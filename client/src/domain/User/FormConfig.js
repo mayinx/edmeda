@@ -4,8 +4,13 @@ class FormConfig {
       valdiationMsgEmailRequired: "Please provide an Email-Address",
       valdiationMsgPasswordRequired: "Please provide a Password",
       valdiationMsgTypeRequired: "Please provide a valid User Type",
+      valdiationMsgGenderRequired: "Please provide a gender",
       valdiationMsgFullNameRequired:
         "Please provide your full name (between 3 and 60 characters long)",
+      valdiationMsgFirstNameRequired:
+        "Please provide a first name (between 3 and 60 characters long)",
+      valdiationMsgLastNameRequired:
+        "Please provide a last name (between 3 and 60 characters long)",
     };
     this.new = {
       type: {
@@ -72,6 +77,93 @@ class FormConfig {
           maxLength: {
             value: 60,
             message: this.shared.valdiationMsgFullNameRequired,
+          },
+        },
+      },
+    };
+    this.edit = {
+      firstName: {
+        type: "text",
+        label: "First name",
+        placeholder: "E.g. 'Jonny'",
+        validationRuleset: {
+          required: {
+            value: true,
+            message: this.shared.valdiationMsgFirstNameRequired,
+          },
+          minLength: {
+            value: 3,
+            message: this.shared.valdiationMsgFirstNameRequired,
+          },
+          maxLength: {
+            value: 60,
+            message: this.shared.valdiationMsgFirstNameRequired,
+          },
+        },
+      },
+      lastName: {
+        type: "text",
+        label: "Last name",
+        placeholder: "E.g. 'McGuire'",
+        validationRuleset: {
+          required: {
+            value: true,
+            message: this.shared.valdiationMsgLastNameRequired,
+          },
+          minLength: {
+            value: 3,
+            message: this.shared.valdiationMsgLastNameRequired,
+          },
+          maxLength: {
+            value: 60,
+            message: this.shared.valdiationMsgLastNameRequired,
+          },
+        },
+      },
+      gender: {
+        label: "Gender",
+        options: [
+          {
+            label: "-- Select Gender --",
+            value: "",
+            className: "default",
+          },
+          {
+            label: "Male",
+            value: "male",
+          },
+          {
+            label: "Female",
+            value: "female",
+          },
+          {
+            label: "Diverse",
+            value: "diverse",
+          },
+        ],
+        validationRuleset: {
+          required: {
+            value: true,
+            message: this.shared.valdiationMsgGenderRequired,
+          },
+        },
+      },
+      email: {
+        type: "email",
+        label: "E-Mail-Address",
+        placeholder: "E.g. 'jonny.mcguire@gmail.com'",
+        validationRuleset: {
+          required: {
+            value: true,
+            message: this.shared.valdiationMsgEmailRequired,
+          },
+          minLength: {
+            value: 6,
+            message: this.shared.valdiationMsgEmailRequired,
+          },
+          maxLength: {
+            value: 60,
+            message: this.shared.valdiationMsgEmailRequired,
           },
         },
       },

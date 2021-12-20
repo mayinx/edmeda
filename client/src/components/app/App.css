@@ -1,15 +1,45 @@
+/* APP BASE LAYOUT */
+
 .App {
+  display: flex;
+  overflow: auto;
+  overflow: initial;
+  height: 100vh;
+  flex-direction: column;
 }
 
 .App--modalOpened {
   filter: blur(4px);
+
   /* necessary to avoid trouble when using responsive-nav-overlay + modal side by side: */
   overflow-y: hidden;
 }
 
+.App .App__Page {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  padding: 1rem;
+  gap: 1rem;
+}
+
 .PageLoadingAnimation {
-  position: relative;
-  left: 50%;
+  position: absolute;
   top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.ErrorIndicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  left: 50%;
+
+  /* border: 2px solid #d95252; */
+  background-color: #d95252;
+  border-radius: 16px;
+  color: #fff;
+  font-weight: normal;
   transform: translateX(-50%) translateY(-50%);
 }

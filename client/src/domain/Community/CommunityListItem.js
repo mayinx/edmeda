@@ -3,18 +3,24 @@ import SchoolCommunityFbProfilePic from "../../assets/community/fb_profile_pics/
 import CommunitiesContext from "../../contexts/CommunitiesContext";
 import { useContext } from "react";
 import { useHistory } from "react-router";
-import { Link } from "react-router-dom";
-import { FaRegEdit, FaRegTrashAlt, FaUsersCog } from "react-icons/fa";
-import axios from "axios";
+import pluralize from "./../../lib/pluralize";
+
+import {
+  FaRegEdit,
+  FaRegTrashAlt,
+  FaUsersCog,
+  FaEllipsisV,
+} from "react-icons/fa";
 
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import "../../components/notifications/ReactConfirmAlertOverrides.css";
 
 import UserAvatar from "../../domain/User/UserAvatar";
-
 import useNotify from "../../components/notifications/useNotify";
-import AuthService from "../../services/auth";
+import CommunityDataService from "../../services/community";
+// import DropdownMenu from "../../components/misc/DropdownMenu";
+import { DropdownMenu, DropdownItem } from "../../components/misc/DropdownMenu";
 
 export default function Community({ community }) {
   const { communities, setCommunities } = useContext(CommunitiesContext);
@@ -22,6 +28,7 @@ export default function Community({ community }) {
   const history = useHistory();
   const { notifySuccess, notifyError } = useNotify();
 
+  // TODO: Move handlers 1 1evel up!
   const cofirmResourceRemoval = (e, resourceName, id) => {
     e.stopPropagation();
 
@@ -46,8 +53,7 @@ export default function Community({ community }) {
   const removeResource = (e, resourceName, id) => {
     e.stopPropagation();
 
-    axios
-      .delete(`/api/communities/${id}`, { headers: AuthService.authHeader() })
+    CommunityDataService.destroy(id)
       .then((res) => {
         setCommunities(
           communities.filter((resource) => {
@@ -61,17 +67,12 @@ export default function Community({ community }) {
         history.goBack();
       })
       .catch((err) => {
-        console.log(
-          `Failed to delete community ${
-            resourceName ?? id ?? null
-          } - something went wrong: `,
-          err
-        );
         notifyError({
           title: "Community not deleted",
           message: `Failed to delete community ${
             resourceName ?? id ?? null
           } - an unexpeted error occured`,
+          error: err,
         });
       });
   };
@@ -106,59 +107,70 @@ export default function Community({ community }) {
 
   return (
     <section
-      className={`ResourceListItem CommunityListItem CommunityListItem--${community.type} `}
+      className={`CommunityListItem CommunityListItem--${community.type} scalable-100 no-flicker`}
       key={community._id}
       id={community._id}
-      onClick={(e) => openCommunityPage(e, community._id)}
+      onClick={(e) => {
+        // Exit early if event has already been handled by dropdown menu toggler!
+        if (e.defaultPrevented) return;
+        openCommunityPage(e, community._id);
+      }}
     >
       <p className="Community__ProfilePic-wrapper">
         <img src={profilePicUrl} className="Community__ProfilePic" alt="" />
       </p>
 
-      <div className="community__meta">
-        <div className="community__name truncate">{community.name}</div>
-        <div className="community__owner truncate">
-          <UserAvatar
-            user={community?.creator}
-            wrapper={false}
-            avatarClassName="CommunityCreatorAvatar rounded"
-          />
+      <div className="community__meta no-flicker">
+        <div className="community__name truncate">
+          <span>{community.name} </span>
+          <span className="community__membersCount">
+            {pluralize(community?.members?.length || 0, "member")}
+          </span>{" "}
         </div>
-        <span
-          className={`community__type tag ${global.config.community.typeTagColorFor(
-            community?.type
-          )}`}
-        >
-          {global.config.community.typeTagCaptionFor(community?.type)}
-        </span>
+        <div className="community__labels">
+          <div className="community__owner truncate">
+            <UserAvatar
+              user={community?.creator}
+              wrapper={false}
+              className="CommunityCreatorAvatar rounded"
+              title={`Community creator ${community?.creator?.userName} (${community?.creator?.type})`}
+            />
+          </div>
+          <span className={`community__type tag`}>
+            {global.config.community.typeTagCaptionFor(community?.type)}
+          </span>
+        </div>
       </div>
 
       <div className="community__actions">
-        {community.type !== "Tenant" && (
-          <Link
-            className="community__action"
-            to="#"
-            onClick={(e) =>
-              cofirmResourceRemoval(e, community.name, community._id)
-            }
-          >
-            <FaRegTrashAlt className="actionIcon deleteIcon" />
-          </Link>
-        )}
-        <Link
-          className="community__action"
-          to="#"
-          onClick={(e) => openEditCommunityModal(e, community._id)}
+        <DropdownMenu
+          id={community._id}
+          toggleIcon={<FaEllipsisV />}
+          toggleLinkClassName="community__action"
+          caption="Community Actions "
         >
-          <FaRegEdit className="actionIcon editIcon" />
-        </Link>
-        <Link
-          className="community__action"
-          to="#"
-          onClick={(e) => openEditCommunityMembersModal(e, community._id)}
-        >
-          <FaUsersCog className="actionIcon editMembersIcon" />
-        </Link>
+          <DropdownItem
+            caption={"Members"}
+            icon={<FaUsersCog />}
+            onClick={(e) => openEditCommunityMembersModal(e, community._id)}
+          ></DropdownItem>
+
+          <DropdownItem
+            caption={"Edit"}
+            icon={<FaRegEdit />}
+            onClick={(e) => openEditCommunityModal(e, community._id)}
+          />
+
+          {community.type !== "Tenant" && (
+            <DropdownItem
+              caption={"Delete"}
+              icon={<FaRegTrashAlt />}
+              onClick={(e) =>
+                cofirmResourceRemoval(e, community.name, community._id)
+              }
+            />
+          )}
+        </DropdownMenu>
       </div>
     </section>
   );

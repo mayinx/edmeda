@@ -1,7 +1,7 @@
 form.NewMessageForm {
   display: flex;
   flex: 0 0 100px;
-  flex-direction: column;
+
   align-items: stretch;
   justify-content: flex-end;
   padding: 1rem;

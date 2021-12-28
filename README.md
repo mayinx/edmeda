@@ -47,6 +47,16 @@ If you are interested in utilizing Edmeda for your School, just drop me an [E-Ma
 ![Communities View_2](https://user-images.githubusercontent.com/126368/141141255-71854e50-0f54-4416-be34-b9e17e497fe9.png)
 *Communities View - another user's communities*
 
+
+![User Profile View 2) (4)](https://user-images.githubusercontent.com/126368/147591867-fb4e8cf9-c9d7-409a-bbed-047e1c6020b0.png)
+*User Profile View - Portrait*
+
+![User Profile View 1](https://user-images.githubusercontent.com/126368/147591865-773a5627-64d1-47af-b84d-c5c72056c273.png)
+*User Profile View - Landscape*
+
+
+
+
 ![Community_Members_View_1](https://user-images.githubusercontent.com/126368/141141260-d4d03854-f7de-4ca5-a4bb-90a87fc06611.png)
 *Community Members View*
 

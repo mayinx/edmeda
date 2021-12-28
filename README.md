@@ -95,5 +95,4 @@ If you are interested in utilizing Edmeda for your School, just drop me an [E-Ma
 ![Community View_2](https://user-images.githubusercontent.com/126368/147611561-1ac762f0-fecc-41b3-b59c-00c55ad37034.png)
 *Community view - dito - but with extended sidebar*
 
-![User Profile View (Parent)](https://user-images.githubusercontent.com/126368/147594140-eef3c39f-78a2-4b60-858c-174ba9829ca9.png)
-*User Profile View (Parent)*
+

@@ -100,7 +100,9 @@ export default function ShowPage(props) {
                 className="BannerImage"
                 alt="Member Page Banner"
               />
-              <div className="BannerImage__Overlay"> {user.fullName}</div>
+              <div className="BannerImage__Overlay">
+                {/* {user.fullName} */}
+              </div>
             </div>
             <div className="MemberPage__Main">
               <div className="MemberPage__Content">

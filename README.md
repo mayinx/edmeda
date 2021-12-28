@@ -89,10 +89,10 @@ If you are interested in utilizing Edmeda for your School, just drop me an [E-Ma
 ![New Community Member Form](https://user-images.githubusercontent.com/126368/147600172-2576a32c-8bc1-4666-867f-0c11d9c069b3.png)
 *Community Members View with extended bottom bar, holding a new community member form (Portrait)*
 
-![Community View_1](https://user-images.githubusercontent.com/126368/141141263-27abf2b4-e192-48fa-a842-ffc6f0032230.png)
+![Community View_1](https://user-images.githubusercontent.com/126368/147611524-fc6dcc8d-f34a-49a2-a7e6-64e7775ac299.png)
 *Community view - with a list of group chats on the left in an collapsed sidebar and the currently opened Group Chat on the right*
 
-![Community View_2](https://user-images.githubusercontent.com/126368/141141265-77490be3-a8ca-4592-bb84-4f74ef147a8d.png)
+![Community View_2](https://user-images.githubusercontent.com/126368/147611561-1ac762f0-fecc-41b3-b59c-00c55ad37034.png)
 *Community view - dito - but with extended sidebar*
 
 ![User Profile View (Parent)](https://user-images.githubusercontent.com/126368/147594140-eef3c39f-78a2-4b60-858c-174ba9829ca9.png)

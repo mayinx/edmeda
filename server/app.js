@@ -100,7 +100,10 @@ io.on("connection", async (socket) => {
         // query.user = userId;
       }
 
-      let roomMessages = await Message.roomMessages(query).limit(10);
+      // TODO: Implement scroll pagination + limit initial messages
+      // let roomMessages = await Message.roomMessages(query).limit(10);
+      let roomMessages = await Message.roomMessages(query);
+
       io.to(roomId).emit("init", roomMessages);
     } catch (e) {
       console.log("--- [error]", "Joining group failed:", e);
@@ -169,7 +172,7 @@ mongoose
     useUnifiedTopology: true,
     useNewUrlParser: true,
     useFindAndModify: false,
-    ignoreUndefined: true, // BSON serializer should ignore undefined fields (liek in query params).
+    ignoreUndefined: true, // BSON serializer should ignore undefined fields (like in query params).
   })
   .then(() => {
     console.log("--- Connected to MongoDB");

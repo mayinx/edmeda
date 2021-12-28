@@ -36,10 +36,7 @@ MessageSchema.statics.latest = (count) => {
   return Message.find({}).sort({ _id: "desc" }).limit(count);
 };
 MessageSchema.statics.roomMessages = (query) => {
-  return Message.find(query)
-    .sort("-createdAt")
-    .populate("creator")
-    .sort({ createdAt: 1 });
+  return Message.find(query).sort({ createdAt: 1 }).populate("creator");
 };
 
 // activate pagination plugin

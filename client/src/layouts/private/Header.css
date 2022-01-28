@@ -63,6 +63,10 @@
   gap: 0.5rem;
 }
 
+.Header.Header--private .AppNav .AppNav__Right .NavItem--NewCommunityBtn {
+  display: none;
+}
+
 .Header.Header--private .AppNav .NavItem {
   display: flex;
   align-items: center;
@@ -170,4 +174,10 @@
   font-weight: bold;
   letter-spacing: 1px;
   line-height: var(--nav-item-caption-line-height);
+}
+
+@media all and (min-width: 576px) {
+  .Header.Header--private .AppNav .AppNav__Right .NavItem--NewCommunityBtn {
+    display: flex;
+  }
 }

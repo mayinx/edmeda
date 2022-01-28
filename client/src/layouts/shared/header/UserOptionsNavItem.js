@@ -4,7 +4,7 @@ import {
   DropdownItem,
 } from "../../../components/misc/DropdownMenu";
 import UserAvatar from "../../../domain/User/UserAvatar";
-import { FaSignOutAlt, FaUsers, FaUserAlt } from "react-icons/fa";
+import { FaSignOutAlt, FaUsers, FaUserAlt, FaPlus } from "react-icons/fa";
 import useAuthActions from "../../../components/auth/useAuthActions";
 import { useHistory } from "react-router";
 import { useEffect, useState } from "react";
@@ -72,6 +72,12 @@ export default function UserOptionsNavItem(props) {
         caption={"MyCommunities"}
         icon={<FaUsers />}
         to="/communities"
+      ></DropdownItem>
+
+      <DropdownItem
+        caption={"New Community"}
+        icon={<FaPlus />}
+        to="/communities/new"
       ></DropdownItem>
 
       <DropdownItem

@@ -1,20 +1,29 @@
 .Form .DemoInfo {
-  background-color: #f5f5f5;
   display: flex;
+
+  width: 100%;
+  min-width: fit-content;
   flex-direction: column;
-  width: 75%;
-  align-self: center;
   align-items: center;
-  border: 1px solid #5d7889;
-  border-radius: 6px;
-  margin-top: 0.25rem;
+  align-self: center;
   padding: 1rem;
+  border: 1px solid #5d7889;
+  margin-top: 0.25rem;
+  background-color: #f5f5f5;
+  border-radius: 6px;
 }
 
 .Form .DemoInfo p {
   padding: 0.1rem 1rem;
   letter-spacing: 1px;
 }
+
 .Form .DemoInfo .DemoCrendentialsEntry {
   align-self: flex-start;
+}
+
+@media all and (min-width: 576px) {
+  .Form .DemoInfo {
+    width: 90%;
+  }
 }

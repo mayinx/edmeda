@@ -18,6 +18,9 @@ export default function Header() {
   const toggleNav = () => {
     setNavToggled(!navToggled);
   };
+  const hideNav = () => {
+    setNavToggled(false);
+  };
 
   useEffect(() => {
     setNavToggleStateClass(navToggled ? "toggled" : null);
@@ -27,7 +30,7 @@ export default function Header() {
     <header className="Header Header--public">
       <nav className={`AppNav ${navToggleStateClass}`}>
         <div className="AppNav__Left Brand">
-          <Link className="NavItem NavItem--Brand" to="/">
+          <Link onClick={hideNav} className="NavItem NavItem--Brand" to="/">
             <img
               id="app_logo"
               src={BrandLogo}
@@ -38,18 +41,44 @@ export default function Header() {
         </div>
         {/* <Counter /> */}
         <div className="AppNav__Center">
-          <Link className="NavItem NavItem--Link" to="#">
+          <Link onClick={hideNav} className="NavItem NavItem--Link" to="#">
             <span className="NavItem__Caption">Features</span>
           </Link>
-          <Link className="NavItem NavItem--Link" to="#">
+          <Link onClick={hideNav} className="NavItem NavItem--Link" to="#">
             <span className="NavItem__Caption">Use Cases</span>
           </Link>
-          <Link className="NavItem NavItem--Link" to="#">
+          <Link onClick={hideNav} className="NavItem NavItem--Link" to="#">
             <span className="NavItem__Caption">Praise</span>
           </Link>
-          <Link className="NavItem NavItem--Link" to="#">
+          <Link onClick={hideNav} className="NavItem NavItem--Link" to="#">
             <span className="NavItem__Caption">Plans</span>
           </Link>
+
+          {!userLoggedIn() && (
+            <div className="NavBtnGroup CtoBtns">
+              {" "}
+              <Link
+                className="NavItem NavItem--Btn NavItem--LoginBtn"
+                to="#"
+                onClick={() => {
+                  hideNav();
+                  login();
+                }}
+              >
+                <span className="NavItem__Caption">Login</span>
+              </Link>
+              <Link
+                className="NavItem NavItem--Btn NavItem--SignUpBtn"
+                to="#"
+                onClick={() => {
+                  hideNav();
+                  register();
+                }}
+              >
+                <span className="NavItem__Caption">Get Started</span>
+              </Link>
+            </div>
+          )}
         </div>
         <div className="AppNav__Right">
           {userLoggedIn() ? (

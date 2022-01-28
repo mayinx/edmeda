@@ -1,18 +1,5 @@
-.HeroCarousel {
-}
-
 .HeroCarousel .carousel .carousel-status {
   display: none;
-}
-
-.HeroCarousel .carousel.carousel-slider:hover .slide .legend {
-  opacity: 0.5;
-}
-
-.HeroCarousel .slide {
-  /* max-height: 87vh; */
-
-  /* background: yellow; */
 }
 
 .HeroCarousel .slide img {
@@ -28,7 +15,7 @@
   bottom: unset;
   left: 50%;
 
-  width: 90%;
+  width: 85%;
   padding: 10px;
   margin-left: 13px;
   background: #000;
@@ -36,10 +23,19 @@
   border-radius: 10px;
   color: #fff;
   font-size: 12px;
-  opacity: 0.25;
+  opacity: 0.4;
   text-align: center;
   transform: translate(-50%, -50%);
+
   transition: opacity 0.35s ease-in-out;
+}
+
+.HeroCarousel .carousel.carousel-slider:hover .slide .legend {
+  opacity: 0.5;
+}
+
+.HeroCarousel .carousel.carousel-slider .slide .legend:hover {
+  opacity: 0.65;
 }
 
 .HeroCarousel .slide .legend .inner {
@@ -57,11 +53,36 @@
 }
 
 .HeroCarousel .slide .legend .inner p {
-  width: 250px;
+  width: 100%;
   padding: 1rem 0;
   text-align: right;
 }
 
-.HeroCarousel .slide .legend:hover {
-  opacity: 1;
+@media all and (min-width: 576px) {
+  .HeroCarousel .slide .legend {
+    width: 70%;
+  }
+
+  .HeroCarousel .slide .legend .inner p {
+    width: 80%;
+  }
+}
+@media all and (min-width: 992px) {
+  .HeroCarousel .slide .legend {
+    width: 60%;
+  }
+
+  .HeroCarousel .slide .legend .inner p {
+    width: 70%;
+  }
+}
+
+@media all and (min-width: 1200px) {
+  .HeroCarousel .slide .legend {
+    width: 60%;
+  }
+
+  .HeroCarousel .slide .legend .inner p {
+    width: 50%;
+  }
 }

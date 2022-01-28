@@ -44,6 +44,11 @@ const logout = () => {
 const currentUser = () => {
   return JSON.parse(localStorage.getItem("current-user"));
 };
+
+const isCurrentUser = (otherId) => {
+  const user = currentUser();
+  return user && user.user && otherId && user.user.id === otherId;
+};
 const loggedIn = () => {
   const user = currentUser();
   return user && user.token && user.user ? true : false;
@@ -68,6 +73,7 @@ const AuthService = {
   login,
   logout,
   currentUser,
+  isCurrentUser,
   loggedIn,
   authHeader,
 };

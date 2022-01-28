@@ -42,7 +42,10 @@ export default function AppHeader() {
         </div>
 
         <div className="AppNav__Right">
-          <Link className="NavItem NavItem--BtnIconOnly " to="/communities/new">
+          <Link
+            className="NavItem NavItem--BtnIconOnly NavItem--NewCommunityBtn"
+            to="/communities/new"
+          >
             <FaPlus className="NavItem__Icon addIcon " />
           </Link>
 

@@ -53,8 +53,6 @@
 
 /* blwo we set the minimum font size as base font sze - and above the maximum font size */
 
-/*                                                                                                        */
-
 /* Below (until max-width of 399px) */
 @media all and (max-width: var(--xxs)) {
   :root {

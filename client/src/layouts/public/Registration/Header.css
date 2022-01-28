@@ -77,6 +77,7 @@
 
 .Header.Header--public .AppNav.toggled .AppNav__Center {
   display: flex;
+  min-width: fit-content;
   opacity: 1;
   visibility: visible;
 }
@@ -186,6 +187,7 @@
 }
 
 .Header.Header--public .AppNav .NavItem--LoginBtn {
+  display: none;
   border: 1px solid #466a81;
 
   background-color: #517a95;
@@ -209,6 +211,7 @@
 }
 
 .Header.Header--public .AppNav .NavItem--SignUpBtn {
+  display: none;
   border: 1px solid #9773a7;
   border: 1px solid #16878c;
   background-color: #9773a7;
@@ -284,6 +287,25 @@
   line-height: var(--nav-item-caption-line-height);
 }
 
+/* FYI: Holds signup + login-btns on tiny screens */
+.Header.Header--public .AppNav.toggled .AppNav__Center .NavBtnGroup.CtoBtns {
+  display: flex;
+  flex-direction: row;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.Header.Header--public
+  .AppNav.toggled
+  .AppNav__Center
+  .NavBtnGroup.CtoBtns
+  .NavItem--Btn {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  padding: 0.75rem 1.25rem;
+}
+
 .Header.Header--public .NavOverlay {
   position: fixed;
   z-index: 3;
@@ -337,5 +359,16 @@
     justify-content: flex-start;
 
     padding: var(--nav-item-center-padding);
+  }
+
+  /* FYI: Holds signup + login-btns on tiny screens in drop down hamburger menu  */
+  .Header.Header--public .AppNav.toggled .AppNav__Center .NavBtnGroup.CtoBtns {
+    display: none;
+  }
+
+  /* FYI: Holds signup + login-btns on larger screens in app nav bar right  */
+  .Header.Header--public .AppNav .AppNav__Right .NavItem--LoginBtn,
+  .Header.Header--public .AppNav .AppNav__Right .NavItem--SignUpBtn {
+    display: flex;
   }
 }

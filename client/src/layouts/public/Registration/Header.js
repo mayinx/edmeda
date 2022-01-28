@@ -50,6 +50,26 @@ export default function Header() {
           <Link className="NavItem NavItem--Link" to="#">
             <span className="NavItem__Caption">Plans</span>
           </Link>
+
+          {!userLoggedIn() && (
+            <div className="NavBtnGroup CtoBtns">
+              {" "}
+              <Link
+                className="NavItem NavItem--Btn NavItem--LoginBtn"
+                to="#"
+                onClick={login}
+              >
+                <span className="NavItem__Caption">Login</span>
+              </Link>
+              <Link
+                className="NavItem NavItem--Btn NavItem--SignUpBtn"
+                to="#"
+                onClick={register}
+              >
+                <span className="NavItem__Caption">Get Started</span>
+              </Link>
+            </div>
+          )}
         </div>
         <div className="AppNav__Right">
           {userLoggedIn() ? (

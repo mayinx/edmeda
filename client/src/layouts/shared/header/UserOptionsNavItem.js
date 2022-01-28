@@ -4,7 +4,14 @@ import {
   DropdownItem,
 } from "../../../components/misc/DropdownMenu";
 import UserAvatar from "../../../domain/User/UserAvatar";
-import { FaSignOutAlt, FaUsers, FaUserAlt, FaPlus } from "react-icons/fa";
+import {
+  FaSignOutAlt,
+  FaUsers,
+  FaUserAlt,
+  FaRegEdit,
+  FaPlus,
+} from "react-icons/fa";
+
 import useAuthActions from "../../../components/auth/useAuthActions";
 import { useHistory } from "react-router";
 import { useEffect, useState } from "react";
@@ -19,6 +26,13 @@ export default function UserOptionsNavItem(props) {
 
   const showUserProfile = (e, communityId, memberId) => {
     history.push(`/communities/${communityId}/members/${memberId}`);
+    e.stopPropagation();
+    e.preventDefault();
+  };
+
+  const editUserProfile = (e, communityId, memberId) => {
+    // TODO: Refactor this into a pathes-module - e.g. editCommunitiesMembersPath(communityId, memberId)
+    history.push(`/communities/${communityId}/members/${memberId}/edit`);
     e.stopPropagation();
     e.preventDefault();
   };
@@ -63,9 +77,17 @@ export default function UserOptionsNavItem(props) {
       <DropdownItem
         caption={"My Edmeda Profile"}
         icon={<FaUserAlt />}
-        to="/communities"
-        // onClick={(e) => showUserProfile(e, community._id, cUser?.id)}
+        // to="/communities"
+        to="#"
         onClick={(e) => showUserProfile(e, tenantCommunity._id, cUser?.id)}
+      ></DropdownItem>
+
+      <DropdownItem
+        caption={"Edit Profile"}
+        icon={<FaRegEdit />}
+        // to="/communities"
+        to="#"
+        onClick={(e) => editUserProfile(e, tenantCommunity._id, cUser?.id)}
       ></DropdownItem>
 
       <DropdownItem

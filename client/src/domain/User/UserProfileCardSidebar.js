@@ -3,16 +3,16 @@ import "./UserProfileCardSidebar.css";
 import { Link } from "react-router-dom";
 import { FaRegEdit, FaRegTrashAlt, FaUserMinus } from "react-icons/fa";
 import UserAvatar from "./UserAvatar";
+import AuthService from "../../services/auth";
 
 export default function UserProfileCard(props) {
-  const { user, community, onShow, onEdit, onRemove, onDelete } = props;
+  const { user, community, onEdit } = props;
 
   return (
     <section
       className={`UserProfileCardSidebar UserProfileCardSidebar--${user.type} `}
       key={user._id}
       id={user._id}
-      onClick={(e) => onShow(e, community._id, user._id)}
     >
       <div className="UserProfileCardSidebar--Inner">
         <UserAvatar user={user} />
@@ -61,29 +61,13 @@ export default function UserProfileCard(props) {
           </li>
         </ul>
         <div className="user__actions">
-          <Link
-            className="user__action"
-            to="#"
-            onClick={(e) => onDelete(e, user.fullName, user._id, community._id)}
-          >
-            <FaRegTrashAlt className="actionIcon deleteIcon" />
-          </Link>
-          <Link
-            className="user__action"
-            to="#"
-            onClick={(e) => onEdit(e, community._id, user._id)}
-          >
-            <FaRegEdit className="actionIcon editIcon" />
-          </Link>
-          {community.type !== "Tenant" && (
+          {AuthService.isCurrentUser(user._id) && (
             <Link
               className="user__action"
               to="#"
-              onClick={(e) =>
-                onRemove(e, user.fullName, user._id, community._id)
-              }
+              onClick={(e) => onEdit(e, community._id, user._id)}
             >
-              <FaUserMinus className="actionIcon editMembersIcon" />
+              <FaRegEdit className="actionIcon editIcon" />
             </Link>
           )}
         </div>

@@ -16,6 +16,8 @@ import CommunityList from "../../../domain/Community/CommunityList";
 import UserDataService from "../../../services/user";
 import ReactLoading from "react-loading";
 
+import { useHistory } from "react-router-dom";
+
 export default function ShowPage(props) {
   const { id, memberId } = useParams();
   const [user, setUser] = useState({});
@@ -27,6 +29,8 @@ export default function ShowPage(props) {
   const [communities, setCommunities] = useState([]);
   const { currentCommunity } = useContext(CommunityContext);
   const { notifyError } = useNotify();
+
+  const history = useHistory();
 
   useEffect(() => {
     setIsLoading(true);
@@ -79,6 +83,13 @@ export default function ShowPage(props) {
     // }, [user, userLoaded]);
   }, [user]);
 
+  const editUserProfile = (e, communityId, memberId) => {
+    // TODO: Refactor this into a pathes-module - e.g. editCommunitiesMembersPath(communityId, memberId)
+    history.push(`/communities/${communityId}/members/${memberId}/edit`);
+    e.stopPropagation();
+    e.preventDefault();
+  };
+
   return (
     <>
       <div className="ModalPage__body--inner CommunityModalPage MemberPage">
@@ -116,6 +127,9 @@ export default function ShowPage(props) {
                   <UserProfileCardSidebar
                     user={user}
                     community={currentCommunity}
+                    onEdit={(e) => {
+                      editUserProfile(e, id, user._id);
+                    }}
                   />
                 </div>
               </div>

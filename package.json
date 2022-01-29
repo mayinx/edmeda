@@ -14,7 +14,8 @@
     "build:client": "cd client && npm run build",
     "iall": "npm i && cd client && npm i",
     "startboth": "npm run server & npm run client",
-    "seed": "node ./server/scripts/seed.js"
+    "seed": "node ./server/scripts/seed.js",
+    "itest": "cd client && npx cypress open"
   },
   "keywords": [],
   "author": "",

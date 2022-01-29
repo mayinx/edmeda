@@ -37,6 +37,7 @@ export default function RegistrationLayout() {
             className="LoginModal"
             modalCaption="Login"
             crudActionBtnCaption="Login"
+            crudActionBtnId="loginBtn"
             crudAction="update"
             formId={LOGIN_ACTION_FORM_ID}
             goBackTo="/"

@@ -23,3 +23,26 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+// How awesome is this ?!
+Cypress.Commands.add("setViewport", (size) => {
+  if (Cypress._.isArray(size)) {
+    cy.viewport(size[0], size[1]);
+  } else {
+    cy.viewport(size);
+  }
+});
+
+Cypress.Commands.add("clickLoginBtn", ({ deviceType } = {}) => {
+  if (deviceType === "mobileIsh") {
+    // Toggle hamburger nav reveals login btn
+    cy.get(".NavItem--ToggleNavBtn").click();
+    cy.get(".AppNav__Center").within(() => {
+      cy.get(".NavItem--LoginBtn").click();
+    });
+  } else {
+    cy.get(".AppNav__Right").within(() => {
+      cy.get(".NavItem--LoginBtn").click();
+    });
+  }
+});

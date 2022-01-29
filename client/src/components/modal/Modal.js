@@ -87,6 +87,7 @@ export default function Modal(props) {
                   </button>
                   <button
                     form={props.formId || "newResource"}
+                    id={`${props.crudActionBtnId ?? "submitBtn"}`}
                     className="btn rounded green newResourceBtn"
                     type="submit"
                   >
@@ -101,6 +102,7 @@ export default function Modal(props) {
                   </button>
                   <button
                     form={props.formId || "updateResource"}
+                    id={`${props.crudActionBtnId ?? "submitBtn"}`}
                     className="btn rounded green updateResourceBtn"
                     type="submit"
                   >
